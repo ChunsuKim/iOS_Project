@@ -16,7 +16,7 @@ struct FeedResult: Codable {
     let artworkUrl100: String
 }
 
-let apiUrl = "https://rss.itunes.apple.com/api/v1/kr/ios-apps/new-games-we-love/all/50/explicit.json"
+let apiUrl = "https://rss.itunes.apple.com/api/v1/kr/ios-apps/top-grossing/all/50/explicit.json"
 
 let url = URL(string: apiUrl)!
 
@@ -44,15 +44,15 @@ let task = session.dataTask(with: url) { (data, response, error) in
     
     do {
         let decoder = JSONDecoder()
-        let games = try decoder.decode(AppGroup.self, from: data)
+        let topGroos = try decoder.decode(AppGroup.self, from: data)
         
-        games.feed.results
-        games.feed.title
+        topGroos.feed.results
+        topGroos.feed.title
         
-        games.feed.results.first?.id
-        games.feed.results.first?.name
-        games.feed.results.first?.artistName
-        games.feed.results.first?.artworkUrl100
+        topGroos.feed.results.first?.id
+        topGroos.feed.results.first?.name
+        topGroos.feed.results.first?.artistName
+        topGroos.feed.results.first?.artworkUrl100
         
     } catch {
         print(error)
@@ -60,3 +60,4 @@ let task = session.dataTask(with: url) { (data, response, error) in
 }
 
 task.resume()
+

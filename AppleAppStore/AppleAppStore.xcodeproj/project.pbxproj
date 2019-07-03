@@ -13,6 +13,7 @@
 		F31FD0D322CC77BC006C0F46 /* AppleAppStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F31FD0D122CC77BC006C0F46 /* AppleAppStore.xcdatamodeld */; };
 		F31FD0D522CC77BE006C0F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31FD0D422CC77BE006C0F46 /* Assets.xcassets */; };
 		F31FD0D822CC77BE006C0F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F31FD0D622CC77BE006C0F46 /* LaunchScreen.storyboard */; };
+		F31FD0E722CC85C8006C0F46 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31FD0E622CC85C8006C0F46 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,9 @@
 		F31FD0D722CC77BE006C0F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F31FD0D922CC77BE006C0F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F31FD0E322CC7860006C0F46 /* JsonParsingTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = JsonParsingTest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F31FD0E422CC84C4006C0F46 /* JsonParsingTopGross.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = JsonParsingTopGross.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F31FD0E522CC8545006C0F46 /* JsonParsingTopFree.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = JsonParsingTopFree.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F31FD0E622CC85C8006C0F46 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +78,10 @@
 		F31FD0DF22CC77DF006C0F46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F31FD0E622CC85C8006C0F46 /* Common.swift */,
 				F31FD0E322CC7860006C0F46 /* JsonParsingTest.playground */,
+				F31FD0E422CC84C4006C0F46 /* JsonParsingTopGross.playground */,
+				F31FD0E522CC8545006C0F46 /* JsonParsingTopFree.playground */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F31FD0E722CC85C8006C0F46 /* Common.swift in Sources */,
 				F31FD0CD22CC77BC006C0F46 /* ViewController.swift in Sources */,
 				F31FD0CB22CC77BC006C0F46 /* AppDelegate.swift in Sources */,
 				F31FD0D322CC77BC006C0F46 /* AppleAppStore.xcdatamodeld in Sources */,
