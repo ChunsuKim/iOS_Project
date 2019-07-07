@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27BE22D0AA10000656DD /* HomeViewController.swift */; };
+		F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */; };
+		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
+		F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DC22D0812200B01C6C /* AppDelegate.swift */; };
+		F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DE22D0812200B01C6C /* RegionViewController.swift */; };
+		F3B185E222D0812200B01C6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E022D0812200B01C6C /* Main.storyboard */; };
+		F3B185E522D0812200B01C6C /* Yanolja.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3B185E322D0812200B01C6C /* Yanolja.xcdatamodeld */; };
+		F3B185E722D0812300B01C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E622D0812300B01C6C /* Assets.xcassets */; };
+		F3B185EA22D0812300B01C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E822D0812300B01C6C /* LaunchScreen.storyboard */; };
+		F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185F422D081B500B01C6C /* CustomTabBarController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F33F27BE22D0AA10000656DD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLovcationViewController.swift; sourceTree = "<group>"; };
+		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		F3B185D922D0812200B01C6C /* Yanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B185DC22D0812200B01C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3B185DE22D0812200B01C6C /* RegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewController.swift; sourceTree = "<group>"; };
+		F3B185E122D0812200B01C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F3B185E422D0812200B01C6C /* Yanolja.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Yanolja.xcdatamodel; sourceTree = "<group>"; };
+		F3B185E622D0812300B01C6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3B185E922D0812300B01C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F3B185EB22D0812300B01C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3B185F422D081B500B01C6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3B185D622D0812200B01C6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F3B185D022D0812200B01C6C = {
+			isa = PBXGroup;
+			children = (
+				F3B185DB22D0812200B01C6C /* Yanolja */,
+				F3B185DA22D0812200B01C6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3B185DA22D0812200B01C6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3B185D922D0812200B01C6C /* Yanolja.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3B185DB22D0812200B01C6C /* Yanolja */ = {
+			isa = PBXGroup;
+			children = (
+				F3B185DC22D0812200B01C6C /* AppDelegate.swift */,
+				F3B185F322D0814000B01C6C /* Model */,
+				F3B185F222D0813A00B01C6C /* View */,
+				F3B185F122D0812D00B01C6C /* Controller */,
+				F3B185E022D0812200B01C6C /* Main.storyboard */,
+				F3B185E622D0812300B01C6C /* Assets.xcassets */,
+				F3B185E822D0812300B01C6C /* LaunchScreen.storyboard */,
+				F3B185EB22D0812300B01C6C /* Info.plist */,
+				F3B185E322D0812200B01C6C /* Yanolja.xcdatamodeld */,
+			);
+			path = Yanolja;
+			sourceTree = "<group>";
+		};
+		F3B185F122D0812D00B01C6C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F33F27BE22D0AA10000656DD /* HomeViewController.swift */,
+				F3B185DE22D0812200B01C6C /* RegionViewController.swift */,
+				F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */,
+				F33F27C222D0AA7C000656DD /* UserViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F3B185F222D0813A00B01C6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F3B185F422D081B500B01C6C /* CustomTabBarController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F3B185F322D0814000B01C6C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3B185D822D0812200B01C6C /* Yanolja */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3B185EE22D0812300B01C6C /* Build configuration list for PBXNativeTarget "Yanolja" */;
+			buildPhases = (
+				F3B185D522D0812200B01C6C /* Sources */,
+				F3B185D622D0812200B01C6C /* Frameworks */,
+				F3B185D722D0812200B01C6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Yanolja;
+			productName = Yanolja;
+			productReference = F3B185D922D0812200B01C6C /* Yanolja.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3B185D122D0812200B01C6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Chunsu Kim";
+				TargetAttributes = {
+					F3B185D822D0812200B01C6C = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F3B185D422D0812200B01C6C /* Build configuration list for PBXProject "Yanolja" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3B185D022D0812200B01C6C;
+			productRefGroup = F3B185DA22D0812200B01C6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3B185D822D0812200B01C6C /* Yanolja */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3B185D722D0812200B01C6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B185EA22D0812300B01C6C /* LaunchScreen.storyboard in Resources */,
+				F3B185E722D0812300B01C6C /* Assets.xcassets in Resources */,
+				F3B185E222D0812200B01C6C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3B185D522D0812200B01C6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */,
+				F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */,
+				F3B185E522D0812200B01C6C /* Yanolja.xcdatamodeld in Sources */,
+				F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */,
+				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
+				F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */,
+				F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F3B185E022D0812200B01C6C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3B185E122D0812200B01C6C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F3B185E822D0812300B01C6C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3B185E922D0812300B01C6C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F3B185EC22D0812300B01C6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3B185ED22D0812300B01C6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3B185EF22D0812300B01C6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Yanolja/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kr.chunsukim.MyApp.Yanolja;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3B185F022D0812300B01C6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Yanolja/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kr.chunsukim.MyApp.Yanolja;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3B185D422D0812200B01C6C /* Build configuration list for PBXProject "Yanolja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B185EC22D0812300B01C6C /* Debug */,
+				F3B185ED22D0812300B01C6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3B185EE22D0812300B01C6C /* Build configuration list for PBXNativeTarget "Yanolja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B185EF22D0812300B01C6C /* Debug */,
+				F3B185F022D0812300B01C6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F3B185E322D0812200B01C6C /* Yanolja.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F3B185E422D0812200B01C6C /* Yanolja.xcdatamodel */,
+			);
+			currentVersion = F3B185E422D0812200B01C6C /* Yanolja.xcdatamodel */;
+			path = Yanolja.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F3B185D122D0812200B01C6C /* Project object */;
+}
