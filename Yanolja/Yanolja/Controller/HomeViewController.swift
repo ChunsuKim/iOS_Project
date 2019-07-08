@@ -23,15 +23,22 @@ class HomeViewController: UIViewController {
     // ButtonView
     private let buttonView = UIView()
     private let couponButton = UIButton(type: .custom)
+    
     private let centerButtonBackView = UIView()
     private let buttonStackView = UIStackView()
     private let motelButton = UIButton(type: .custom)
     private let hotelButton = UIButton(type: .custom)
     private let pensionButton = UIButton(type: .custom)
     private let guestButton = UIButton(type: .custom)
+    
     private let eventButtonStackView = UIStackView()
     private let foreignButton = UIButton(type: .custom)
     private let ticketButton = UIButton(type: .custom)
+    
+    private let orderofCouponButton = UIButton(type: .custom)
+    private let infiniteCouponButton = UIButton(type: .custom)
+    private let specialCouponButton = UIButton(type: .custom)
+    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -103,6 +110,13 @@ class HomeViewController: UIViewController {
         ticketButton.setImage(#imageLiteral(resourceName: "ticket"), for: .normal)
         ticketButton.contentMode = .scaleAspectFit
         
+        orderofCouponButton.setImage(#imageLiteral(resourceName: "orderof"), for: .normal)
+        orderofCouponButton.contentMode = .scaleAspectFit
+        infiniteCouponButton.setImage(#imageLiteral(resourceName: "infinite"), for: .normal)
+        infiniteCouponButton.contentMode = .scaleAspectFit
+        specialCouponButton.setImage(#imageLiteral(resourceName: "spacial"), for: .normal)
+        specialCouponButton.contentMode = .scaleAspectFit
+        
         view.addSubview(backgroundScrollView)
         backgroundScrollView.addSubview(buttonView)
         buttonView.addSubview(couponButton)
@@ -115,7 +129,9 @@ class HomeViewController: UIViewController {
         centerButtonBackView.addSubview(eventButtonStackView)
         eventButtonStackView.addArrangedSubview(foreignButton)
         eventButtonStackView.addArrangedSubview(ticketButton)
-        
+        buttonView.addSubview(orderofCouponButton)
+        buttonView.addSubview(infiniteCouponButton)
+        buttonView.addSubview(specialCouponButton)
     }
     
     private func configureCollectionView() {
@@ -204,6 +220,25 @@ class HomeViewController: UIViewController {
         
         ticketButton.translatesAutoresizingMaskIntoConstraints = false
         ticketButton.widthAnchor.constraint(equalTo: eventButtonStackView.widthAnchor, multiplier: 0.5).isActive = true
+        
+        orderofCouponButton.translatesAutoresizingMaskIntoConstraints = false
+        orderofCouponButton.topAnchor.constraint(equalTo: centerButtonBackView.bottomAnchor, constant: 5).isActive = true
+        orderofCouponButton.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 20).isActive = true
+        orderofCouponButton.widthAnchor.constraint(equalTo: centerButtonBackView.widthAnchor, multiplier: 0.33).isActive = true
+        orderofCouponButton.heightAnchor.constraint(equalTo: buttonView.heightAnchor, multiplier: 0.36).isActive = true
+        
+        infiniteCouponButton.translatesAutoresizingMaskIntoConstraints = false
+        infiniteCouponButton.topAnchor.constraint(equalTo: centerButtonBackView.bottomAnchor, constant: 5).isActive = true
+        infiniteCouponButton.centerXAnchor.constraint(equalTo: centerButtonBackView.centerXAnchor).isActive = true
+        infiniteCouponButton.widthAnchor.constraint(equalTo: orderofCouponButton.widthAnchor).isActive = true
+        infiniteCouponButton.heightAnchor.constraint(equalTo: orderofCouponButton.heightAnchor).isActive = true
+        
+        specialCouponButton.translatesAutoresizingMaskIntoConstraints = false
+        specialCouponButton.topAnchor.constraint(equalTo: centerButtonBackView.bottomAnchor, constant: 5).isActive = true
+        specialCouponButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -20).isActive = true
+        specialCouponButton.widthAnchor.constraint(equalTo: orderofCouponButton.widthAnchor).isActive = true
+        specialCouponButton.heightAnchor.constraint(equalTo: orderofCouponButton.heightAnchor).isActive = true
+        
     }
     
 
