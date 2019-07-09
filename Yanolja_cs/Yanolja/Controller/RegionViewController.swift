@@ -1,5 +1,5 @@
 //
-//  UserViewController.swift
+//  ViewController.swift
 //  Yanolja
 //
 //  Created by Chunsu Kim on 06/07/2019.
@@ -8,12 +8,14 @@
 
 import UIKit
 
-class UserViewController: UIViewController {
+class RegionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.isNavigationBarHidden = true
     }
-    
+
 
 }
+
