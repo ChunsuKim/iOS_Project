@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    // MARK: - Properties
+    
     // HeaderView
     private let headerView = UIView()
     private let headerImageView = UIImageView()
@@ -34,6 +36,9 @@ class HomeViewController: UIViewController {
         configureTableViewConstraints()
     }
     
+    // MARK: - Configuration User Interface
+    
+    // configuration HeaderView
     private func configureHeaderView() {
         headerView.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
         
@@ -57,6 +62,7 @@ class HomeViewController: UIViewController {
         
     }
     
+    // configuration TableView
     private func configureTableView() {
         homeTableView.dataSource = self
         homeTableView.estimatedRowHeight = 50  // 대충의 높이값
@@ -72,9 +78,10 @@ class HomeViewController: UIViewController {
         view.addSubview(homeTableView)
     }
     
+    // MARK: - Configuration Constraints
     
+    // HeaderView Constraints
     private func configureHeaderViewConstraints() {
-        // HeaderView Constraints
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -98,10 +105,9 @@ class HomeViewController: UIViewController {
         headerSearchImageView.widthAnchor.constraint(equalToConstant: 17).isActive = true
         headerSearchImageView.centerYAnchor.constraint(equalTo: headerSearchLabel.centerYAnchor).isActive = true
         headerSearchImageView.trailingAnchor.constraint(equalTo: headerSearchLabel.trailingAnchor, constant: -10).isActive = true
-        
-        
     }
     
+    // TableView Constraints
     private func configureTableViewConstraints() {
         homeTableView.translatesAutoresizingMaskIntoConstraints = false
         homeTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
@@ -109,43 +115,31 @@ class HomeViewController: UIViewController {
         homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-    
-    
 }
 
+// MARK: - TableView Data Source Extension
 extension HomeViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        default:
-            return 1
-        }
-        
+
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            
+        switch indexPath.row {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTopButtonTableViewCell.identifier, for: indexPath) as! HomeTopButtonTableViewCell
-            
             return cell
+            
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeEventTableViewCell.identifier, for: indexPath) as! HomeEventTableViewCell
+            return cell
+            
+        default:
+            return UITableViewCell()
         }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: HomeEventTableViewCell.identifier, for: indexPath) as! HomeEventTableViewCell
-        
-        return cell
-        
     }
-    
-    
 }
 
 

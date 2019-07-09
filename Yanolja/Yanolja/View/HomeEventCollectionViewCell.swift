@@ -9,10 +9,14 @@
 import UIKit
 
 class HomeEventCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "HomeEventCollectionViewCell"
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
+    private let priceLabel = UILabel()
+    private let wonLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,22 +29,36 @@ class HomeEventCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
     private func configureViews() {
-        clipsToBounds = true
-        layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 7
         
         // imageView
         imageView.contentMode = .scaleAspectFill
         contentView.addSubview(imageView)
         
         // titleLabel
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        titleLabel.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = .black
+        titleLabel.backgroundColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         contentView.addSubview(titleLabel)
+        
+        priceLabel.textAlignment = .right
+        priceLabel.textColor = .black
+        priceLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        priceLabel.text = "340,000"
+        contentView.addSubview(priceLabel)
+        
+        wonLabel.textAlignment = .left
+        wonLabel.textColor = .black
+        wonLabel.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
+        wonLabel.text = "원"
+        contentView.addSubview(wonLabel)
     }
     
+    // MARK: - Configuration Constraints
     private func configureConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -48,16 +66,32 @@ class HomeEventCollectionViewCell: UICollectionViewCell {
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 50).isActive = true
         titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        
+        wonLabel.translatesAutoresizingMaskIntoConstraints = false
+        wonLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        wonLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        wonLabel.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        wonLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+        priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        priceLabel.trailingAnchor.constraint(equalTo: wonLabel.leadingAnchor).isActive = true
+        priceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        priceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
     }
     
-    func configureCellContent(image: UIImage?, title: String) {
+    // MARK: - configuration global method
+    func configureCellContent(image: UIImage?, title: String, price: String) {
         imageView.image = image
         titleLabel.text = title
+        priceLabel.text = price
     }
 }

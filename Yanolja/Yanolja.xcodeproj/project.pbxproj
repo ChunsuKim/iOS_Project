@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61E72F0622D31D49001B8A59 /* TopNaviCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E72F0522D31D49001B8A59 /* TopNaviCell.swift */; };
 		F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27BE22D0AA10000656DD /* HomeViewController.swift */; };
 		F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */; };
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
 		F3919B1922D45FB00093DB24 /* HomeEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */; };
+		F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1A22D4A17B0093DB24 /* fakeData.swift */; };
 		F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DC22D0812200B01C6C /* AppDelegate.swift */; };
 		F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DE22D0812200B01C6C /* RegionViewController.swift */; };
 		F3B185E222D0812200B01C6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E022D0812200B01C6C /* Main.storyboard */; };
@@ -23,10 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61E72F0522D31D49001B8A59 /* TopNaviCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNaviCell.swift; sourceTree = "<group>"; };
 		F33F27BE22D0AA10000656DD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLovcationViewController.swift; sourceTree = "<group>"; };
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventTableViewCell.swift; sourceTree = "<group>"; };
+		F3919B1A22D4A17B0093DB24 /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
 		F3B185D922D0812200B01C6C /* Yanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B185DC22D0812200B01C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3B185DE22D0812200B01C6C /* RegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61E72F0222D31CF3001B8A59 /* MyLocation */ = {
+			isa = PBXGroup;
+			children = (
+				61E72F0522D31D49001B8A59 /* TopNaviCell.swift */,
+			);
+			path = MyLocation;
+			sourceTree = "<group>";
+		};
 		F3B185D022D0812200B01C6C = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +98,7 @@
 		F3B185F122D0812D00B01C6C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F3B185F422D081B500B01C6C /* CustomTabBarController.swift */,
 				F33F27BE22D0AA10000656DD /* HomeViewController.swift */,
 				F3B185DE22D0812200B01C6C /* RegionViewController.swift */,
 				F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */,
@@ -97,7 +110,7 @@
 		F3B185F222D0813A00B01C6C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F3B185F422D081B500B01C6C /* CustomTabBarController.swift */,
+				61E72F0222D31CF3001B8A59 /* MyLocation */,
 				F3C8170F22D33294009CF7AC /* HomeEventCollectionViewCell.swift */,
 				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
 				F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */,
@@ -108,6 +121,7 @@
 		F3B185F322D0814000B01C6C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F3919B1A22D4A17B0093DB24 /* fakeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,10 +199,12 @@
 			files = (
 				F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */,
 				F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */,
+				F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */,
 				F3B185E522D0812200B01C6C /* Yanolja.xcdatamodeld in Sources */,
 				F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */,
 				F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */,
 				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
+				61E72F0622D31D49001B8A59 /* TopNaviCell.swift in Sources */,
 				F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */,
 				F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */,
 				F3C8171022D33294009CF7AC /* HomeEventCollectionViewCell.swift in Sources */,

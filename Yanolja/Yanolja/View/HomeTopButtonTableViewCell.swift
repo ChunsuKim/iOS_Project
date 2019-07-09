@@ -116,8 +116,6 @@ class HomeTopButtonTableViewCell: UITableViewCell {
     // MARK: - Configuration Constraints
     private func configureButtonConstraints() {
         
-        // ButtonView Constraints
-        
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         buttonView.heightAnchor.constraint(equalToConstant: 350).isActive = true
@@ -184,9 +182,6 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         specialCouponButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -20).isActive = true
         specialCouponButton.widthAnchor.constraint(equalTo: orderofCouponButton.widthAnchor).isActive = true
         specialCouponButton.heightAnchor.constraint(equalTo: orderofCouponButton.heightAnchor).isActive = true
-        
-        
-        
     }
 
 }
