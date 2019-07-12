@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HomeEventTableViewCell: UITableViewCell {
+class HomeThemeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    static let identifier = "HomeEventTableViewCell"
+    static let identifier = "HomeThemeTableViewCell"
     var poolList = DataManager.shared.pools
     
     // TitleView
@@ -82,7 +82,7 @@ class HomeEventTableViewCell: UITableViewCell {
         homeViewCollectionView.delegate = self
         homeViewCollectionView.isScrollEnabled = false
         
-        homeViewCollectionView.register(HomeEventCollectionViewCell.self, forCellWithReuseIdentifier: HomeEventCollectionViewCell.identifier)
+        homeViewCollectionView.register(HomeThemeCollectionViewCell.self, forCellWithReuseIdentifier: HomeThemeCollectionViewCell.identifier)
         
         contentView.addSubview(homeViewCollectionView)
     }
@@ -121,7 +121,7 @@ class HomeEventTableViewCell: UITableViewCell {
 }
 
 // MARK: - CollectionView Data Source Extension
-extension HomeEventTableViewCell: UICollectionViewDataSource {
+extension HomeThemeTableViewCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -131,7 +131,7 @@ extension HomeEventTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeEventCollectionViewCell.identifier, for: indexPath) as! HomeEventCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCollectionViewCell.identifier, for: indexPath) as! HomeThemeCollectionViewCell
         
         cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
 //        cell.configureCellContent(image: UIImage(named: "IU"), title: "아이유")
@@ -141,7 +141,7 @@ extension HomeEventTableViewCell: UICollectionViewDataSource {
 }
 
 // MARK: - CollectionView Delegate FlowLayout
-extension HomeEventTableViewCell: UICollectionViewDelegateFlowLayout {
+extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: 180, height: 190)

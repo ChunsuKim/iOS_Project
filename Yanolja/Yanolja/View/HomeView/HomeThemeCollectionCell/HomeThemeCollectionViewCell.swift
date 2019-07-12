@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HomeEventCollectionViewCell: UICollectionViewCell {
+class HomeThemeCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-    static let identifier = "HomeEventCollectionViewCell"
+    static let identifier = "HomeThemeCollectionViewCell"
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()

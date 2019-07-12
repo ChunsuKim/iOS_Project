@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyLovcationViewController: UIViewController {
+class MyLocationViewController: UIViewController {
 
     var topNaviCell = TopNaviCell()
     let ListView = UIScrollView()

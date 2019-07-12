@@ -72,7 +72,7 @@ class HomeViewController: UIViewController {
         
         homeTableView.register(HomeTopButtonTableViewCell.self, forCellReuseIdentifier: HomeTopButtonTableViewCell.identifier)
         
-        homeTableView.register(HomeEventTableViewCell.self, forCellReuseIdentifier: HomeEventTableViewCell.identifier)
+        homeTableView.register(HomeThemeTableViewCell.self, forCellReuseIdentifier: HomeThemeTableViewCell.identifier)
         
         
         view.addSubview(homeTableView)
@@ -133,7 +133,7 @@ extension HomeViewController: UITableViewDataSource {
             return cell
             
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeEventTableViewCell.identifier, for: indexPath) as! HomeEventTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
             return cell
             
         default:

@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		61E72F0622D31D49001B8A59 /* TopNaviCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E72F0522D31D49001B8A59 /* TopNaviCell.swift */; };
 		F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27BE22D0AA10000656DD /* HomeViewController.swift */; };
-		F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */; };
+		F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */; };
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
-		F3919B1922D45FB00093DB24 /* HomeEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */; };
+		F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */; };
 		F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1A22D4A17B0093DB24 /* fakeData.swift */; };
 		F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DC22D0812200B01C6C /* AppDelegate.swift */; };
 		F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DE22D0812200B01C6C /* RegionViewController.swift */; };
@@ -20,16 +20,16 @@
 		F3B185E722D0812300B01C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E622D0812300B01C6C /* Assets.xcassets */; };
 		F3B185EA22D0812300B01C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E822D0812300B01C6C /* LaunchScreen.storyboard */; };
 		F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185F422D081B500B01C6C /* CustomTabBarController.swift */; };
-		F3C8171022D33294009CF7AC /* HomeEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8170F22D33294009CF7AC /* HomeEventCollectionViewCell.swift */; };
+		F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */; };
 		F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		61E72F0522D31D49001B8A59 /* TopNaviCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNaviCell.swift; sourceTree = "<group>"; };
 		F33F27BE22D0AA10000656DD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLovcationViewController.swift; sourceTree = "<group>"; };
+		F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationViewController.swift; sourceTree = "<group>"; };
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
-		F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventTableViewCell.swift; sourceTree = "<group>"; };
+		F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeTableViewCell.swift; sourceTree = "<group>"; };
 		F3919B1A22D4A17B0093DB24 /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
 		F3B185D922D0812200B01C6C /* Yanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B185DC22D0812200B01C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		F3B185E922D0812300B01C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3B185EB22D0812300B01C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3B185F422D081B500B01C6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		F3C8170F22D33294009CF7AC /* HomeEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventCollectionViewCell.swift; sourceTree = "<group>"; };
+		F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopButtonTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +61,24 @@
 				61E72F0522D31D49001B8A59 /* TopNaviCell.swift */,
 			);
 			path = MyLocation;
+			sourceTree = "<group>";
+		};
+		F385B31922D5A82200F3B35E /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */,
+				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
+				F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */,
+			);
+			path = HomeThemeCollectionCell;
 			sourceTree = "<group>";
 		};
 		F3B185D022D0812200B01C6C = {
@@ -101,7 +119,7 @@
 				F3B185F422D081B500B01C6C /* CustomTabBarController.swift */,
 				F33F27BE22D0AA10000656DD /* HomeViewController.swift */,
 				F3B185DE22D0812200B01C6C /* RegionViewController.swift */,
-				F33F27C022D0AA6F000656DD /* MyLovcationViewController.swift */,
+				F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */,
 				F33F27C222D0AA7C000656DD /* UserViewController.swift */,
 			);
 			path = Controller;
@@ -110,10 +128,8 @@
 		F3B185F222D0813A00B01C6C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F385B31922D5A82200F3B35E /* HomeView */,
 				61E72F0222D31CF3001B8A59 /* MyLocation */,
-				F3C8170F22D33294009CF7AC /* HomeEventCollectionViewCell.swift */,
-				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
-				F3919B1822D45FB00093DB24 /* HomeEventTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,10 +221,10 @@
 				F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */,
 				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
 				61E72F0622D31D49001B8A59 /* TopNaviCell.swift in Sources */,
-				F33F27C122D0AA6F000656DD /* MyLovcationViewController.swift in Sources */,
+				F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */,
 				F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */,
-				F3C8171022D33294009CF7AC /* HomeEventCollectionViewCell.swift in Sources */,
-				F3919B1922D45FB00093DB24 /* HomeEventTableViewCell.swift in Sources */,
+				F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */,
+				F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

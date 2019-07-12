@@ -16,7 +16,7 @@ class CustomTabBarController: UITabBarController {
         viewControllers = [
             createNaviController(viewController: HomeViewController(), title: "홈", imageName: "homed"),
             createNaviController(viewController: RegionViewController(), title: "지역", imageName: "regiond"),
-            createNaviController(viewController: MyLovcationViewController(), title: "내주변", imageName: "mylocad"),
+            createNaviController(viewController: MyLocationViewController(), title: "내주변", imageName: "mylocad"),
             createNaviController(viewController: UserViewController(), title: "MY 야놀자", imageName: "userd")
         ]
     }
