@@ -12,12 +12,14 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     static let identifier = "HomeThemeTableViewCell"
-    var poolList = DataManager.shared.pools
+    
     
     // TitleView
     private let titleView = UIView()
     private let titleLabel = UILabel()
     private let titleButton = UIButton(type: .custom)
+    private let menuBar = MenuBar()
+    private let themeButton = HomeThemeButton()
     
     // CollectionView
     private let homeViewCollectionView : UICollectionView = {
@@ -31,11 +33,17 @@ class HomeThemeTableViewCell: UITableViewCell {
         return collectionView
     }()
     
+    var poolList = themeMenus[0].items
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        menuBar.delegate = self
+        
         configureTitleView()
+        configureMenuBar()
         configureCollectionView()
+        configureThemeButton()
         configureTitleViewConstraints()
         configureCollectionViewConstraints()
     }
@@ -75,6 +83,29 @@ class HomeThemeTableViewCell: UITableViewCell {
         titleView.addSubview(titleButton)
     }
     
+    private func configureMenuBar() {
+        contentView.addSubview(menuBar)
+        
+        menuBar.menuCollectionView.register(HomeThemeMenuCollectionCell.self, forCellWithReuseIdentifier: HomeThemeMenuCollectionCell.identifier)
+        
+        menuBar.translatesAutoresizingMaskIntoConstraints = false
+        menuBar.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
+        menuBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        menuBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 33).isActive = true
+    }
+    
+    private func configureThemeButton() {
+        contentView.addSubview(themeButton)
+        
+        themeButton.translatesAutoresizingMaskIntoConstraints = false
+        themeButton.topAnchor.constraint(equalTo: homeViewCollectionView.bottomAnchor).isActive = true
+        themeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        themeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        themeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        themeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+    
     // configuration collectionView
     private func configureCollectionView() {
         
@@ -112,22 +143,22 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     private func configureCollectionViewConstraints() {
         homeViewCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        homeViewCollectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor).isActive = true
+        homeViewCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
         homeViewCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         homeViewCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        homeViewCollectionView.heightAnchor.constraint(equalToConstant: 450).isActive = true
-        homeViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        homeViewCollectionView.heightAnchor.constraint(equalToConstant: 430).isActive = true
+//        homeViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 }
 
 // MARK: - CollectionView Data Source Extension
 extension HomeThemeTableViewCell: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DataManager.shared.pools.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -144,7 +175,7 @@ extension HomeThemeTableViewCell: UICollectionViewDataSource {
 extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 180, height: 190)
+        return CGSize(width: frame.maxX * 0.43, height: 190)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -161,4 +192,15 @@ extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
         
         return 5
     }
+}
+
+extension HomeThemeTableViewCell: MenuBarDelegate {
+    func menuBarDidSelected(_ indexPath: IndexPath) {
+        homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        
+        poolList = themeMenus[indexPath.row].items
+        homeViewCollectionView.reloadData()
+    }
+    
+    
 }

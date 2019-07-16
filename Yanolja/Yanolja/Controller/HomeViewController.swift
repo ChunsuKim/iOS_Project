@@ -21,8 +21,6 @@ class HomeViewController: UIViewController {
     // TableView
     private let homeTableView = UITableView()
     
-    
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +112,18 @@ class HomeViewController: UIViewController {
         homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    // MARK: - Action Method
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let touch = touches.first else { return }
+        let touchPoint = touch.location(in: touch.view)
+        if headerSearchLabel.frame.contains(touchPoint) {
+            let vc = SearchController()
+            vc.modalPresentationStyle = .overCurrentContext
+            present(vc, animated: true, completion: nil)
+        }
     }
 }
 
