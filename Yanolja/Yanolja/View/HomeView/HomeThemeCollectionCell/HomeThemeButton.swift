@@ -37,6 +37,7 @@ class HomeThemeButton: UIView {
         themeButtonStackView.spacing = 5
         
         refleshImageView.image = UIImage(named: "refresh")
+        refleshImageView.contentMode = .scaleAspectFit
         refleshLabel.text = "다른 테마 보기"
         refleshLabel.textAlignment = .left
         refleshLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
@@ -65,21 +66,21 @@ class HomeThemeButton: UIView {
         themeButtonViewBottomLine.trailingAnchor.constraint(equalTo: themeButtonViewTopLine.trailingAnchor).isActive = true
         
         themeButtonStackView.translatesAutoresizingMaskIntoConstraints = false
-        themeButtonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        themeButtonStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+//        themeButtonStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+//        themeButtonStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         themeButtonStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         themeButtonStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         refleshImageView.translatesAutoresizingMaskIntoConstraints = false
-        refleshImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        refleshImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        refleshImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        refleshImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
         
         refleshLabel.translatesAutoresizingMaskIntoConstraints = false
-        refleshLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        refleshLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
         refleshLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
         
         pageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        pageNumberLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        pageNumberLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
         pageNumberLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
 

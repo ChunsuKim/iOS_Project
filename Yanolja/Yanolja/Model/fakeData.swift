@@ -58,3 +58,19 @@ let themeMenus: [ThemeMenu] = [
     )
 ]
 
+
+struct PopData {
+    let imageName: String
+}
+
+struct PopDataManager {
+    static let shared = PopDataManager()
+    init() {}
+    
+    let pops: [PopData] = [
+        PopData(imageName: "pool1"),
+        PopData(imageName: "pool2"),
+        PopData(imageName: "pool3"),
+        PopData(imageName: "pool4")
+    ]
+}

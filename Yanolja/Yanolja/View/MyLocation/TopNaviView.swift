@@ -31,7 +31,7 @@ class TopNaviView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "강남구 대치동"
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 27, weight: .bold)
         
         return label
     }()
@@ -75,6 +75,7 @@ class TopNaviView: UIView {
         button.setTitle("쿠폰 할인 가능한 숙소", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.black, for: .selected)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setImage(#imageLiteral(resourceName: "is-checked_false"), for: .normal)
         button.setImage(#imageLiteral(resourceName: "is-checked_true"), for: .selected)
         button.addTarget(self, action: #selector(checkboxTap), for: .touchUpInside)
@@ -138,28 +139,29 @@ class TopNaviView: UIView {
             searchButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             searchButton.widthAnchor.constraint(equalToConstant: 20),
             searchButton.heightAnchor.constraint(equalToConstant: 20),
-            locationText.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            locationText.topAnchor.constraint(equalTo: self.topAnchor, constant: 45),
             locationText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             selectLocationButton.centerYAnchor.constraint(equalTo: locationText.centerYAnchor),
             selectLocationButton.leadingAnchor.constraint(equalTo: locationText.trailingAnchor, constant: 10),
-            selectDateButton.topAnchor.constraint(equalTo: locationText.bottomAnchor, constant: 20),
+            selectDateButton.topAnchor.constraint(equalTo: locationText.bottomAnchor, constant: 15),
             selectDateButton.leadingAnchor.constraint(equalTo: locationText.leadingAnchor),
             selectDateButton.widthAnchor.constraint(equalToConstant: 190),
+            selectDateButton.heightAnchor.constraint(equalToConstant: 30),
             selectHumanCountButton.centerYAnchor.constraint(equalTo: selectDateButton.centerYAnchor),
             selectHumanCountButton.leadingAnchor.constraint(equalTo: selectDateButton.trailingAnchor, constant: 10),
             selectHumanCountButton.widthAnchor.constraint(equalToConstant: 120),
             possibleChkButton.leadingAnchor.constraint(equalTo: selectDateButton.leadingAnchor),
-            possibleChkButton.topAnchor.constraint(equalTo: selectDateButton.bottomAnchor, constant: 30),
-            possibleChkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            possibleChkButton.topAnchor.constraint(equalTo: selectDateButton.bottomAnchor, constant: 20),
+            possibleChkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -17),
             mapButton.centerYAnchor.constraint(equalTo: possibleChkButton.centerYAnchor, constant: -5),
             mapButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            mapButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            mapButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -17),
             filterButton.centerYAnchor.constraint(equalTo: possibleChkButton.centerYAnchor),
             filterButton.trailingAnchor.constraint(equalTo: mapButton.leadingAnchor, constant: -20),
-            filterButton.bottomAnchor.constraint(equalTo: divideLine.topAnchor, constant: -20),
+            filterButton.bottomAnchor.constraint(equalTo: divideLine.topAnchor, constant: -17),
             divideLine.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             divideLine.widthAnchor.constraint(equalTo: self.widthAnchor),
-            divideLine.heightAnchor.constraint(equalToConstant: 2),
+            divideLine.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
     

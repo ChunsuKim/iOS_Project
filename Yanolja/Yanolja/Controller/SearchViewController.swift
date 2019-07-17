@@ -34,6 +34,10 @@ class SearchController: UIViewController{
     
     // 서치 텍스트 필드
     private let searchTextField = UITextField()
+    
+    
+// 서치 텍스트 필드 탑 엥커 잡아야함
+    var searchTextFieldTopAnchor :NSLayoutConstraint!
     private var dateLabel = UILabel()
     private var numberOfPeopleLabel = UILabel()
     private var resultButton = UIButton()
@@ -48,6 +52,33 @@ class SearchController: UIViewController{
     private let recommendViewFirst = RecommendView()
     private let recommendViewSecond = RecommendView()
     private let recommendViewThird = RecommendView()
+    
+    
+    // 지하철 /.지역/숙소 버튼 누른후 나타나는 뷰들
+    private let dismissButton = UIButton()
+    private let keyWordLabel = UILabel()
+    private let recentlyKeyWordLable = UILabel()
+    private let allRemoveButton = UIButton()
+    
+    func keyWordUIAppearFunc() {
+        let tempArr = [mainTitleLabel,domesticButton,foreignButton,ticketButton,barView,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,tableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
+        tempArr.map{$0.isHidden = true}
+        
+        UIView.animate(withDuration: 0.4) {
+            let temp = [self.dismissButton,self.keyWordLabel,self.recentlyKeyWordLable,self.allRemoveButton]
+            temp.map{$0.isHidden = false}
+            self.searchTextField.topAnchor.constraint(equalTo: self.dismissButton.bottomAnchor,constant: UISetting.padding.rawValue/3)
+            self.view.layoutIfNeeded()
+        }
+        
+        
+        
+    }
+    
+    func dismissAndAppearFunc() {
+        
+    }
+    
     
     
     
@@ -83,12 +114,54 @@ class SearchController: UIViewController{
         researchedTableView()
         //추천 검색
         recommendViewUI()
-    }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         
-        //결과 4.6666666667 4와2/3 = 14/3
+        //검색 텍스트 필드 누른후!!!
+        keyWordUI()
+    }
+   
+    
+    func keyWordUI() {
+        let temp = [dismissButton,keyWordLabel,recentlyKeyWordLable,allRemoveButton]
+        for x in temp {
+            view.addSubview(x)
+            x.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        dismissButton.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.padding.rawValue).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
+        dismissButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        dismissButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        dismissButton.setImage(UIImage(named: "dismiss"), for: .normal)
+        dismissButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        
+        
+        keyWordLabel.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.padding.rawValue).isActive = true
+        keyWordLabel.leadingAnchor.constraint(equalTo: dismissButton.trailingAnchor).isActive = true
+        keyWordLabel.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
+        keyWordLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        keyWordLabel.text = "키워드 검색"
+        keyWordLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        
+        recentlyKeyWordLable.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.padding.rawValue).isActive = true
+        recentlyKeyWordLable.leadingAnchor.constraint(equalTo: dismissButton.trailingAnchor).isActive = true
+        recentlyKeyWordLable.heightAnchor.constraint(equalToConstant: UISetting.viewHeight.rawValue/2).isActive = true
+        
+        
+        
+        allRemoveButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        allRemoveButton.firstBaselineAnchor.constraint(equalTo: recentlyKeyWordLable.firstBaselineAnchor).isActive = true
+        allRemoveButton.trailingAnchor.constraint(equalTo: dismissButton.trailingAnchor).isActive = true
+        allRemoveButton.setTitle("전체 삭제", for: .normal)
+        allRemoveButton.addTarget(self, action: #selector(removeAction), for: .touchUpInside)
+        
+        
+        temp.map{$0.isHidden = true}
+    }
+    
+    
+    
     
     func gestureAction() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(a))
@@ -104,9 +177,12 @@ class SearchController: UIViewController{
     }
     
     @objc func a() {
-        let vc = KeyWordViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true) 
+        UIView.transition(with: mainView, duration: 0.2, options: .transitionCrossDissolve, animations: {
+            self.keyWordUIAppearFunc()
+            self.mainView.layoutIfNeeded()
+        }, completion: nil)
+      
+       
     }
     @objc func b() {
         self.scrollView.endEditing(true)
@@ -231,6 +307,8 @@ class SearchController: UIViewController{
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.addSubview(searchTextField)
+        
+        
         searchTextField.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: UISetting.padding.rawValue/2).isActive = true
         searchTextField.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
         

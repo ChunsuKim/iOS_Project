@@ -72,6 +72,8 @@ class HomeViewController: UIViewController {
         
         homeTableView.register(HomeThemeTableViewCell.self, forCellReuseIdentifier: HomeThemeTableViewCell.identifier)
         
+        homeTableView.register(HomePopTableViewCell.self, forCellReuseIdentifier: HomePopTableViewCell.identifier)
+        
         
         view.addSubview(homeTableView)
     }
@@ -132,7 +134,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,6 +146,10 @@ extension HomeViewController: UITableViewDataSource {
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
+            return cell
+            
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomePopTableViewCell.identifier, for: indexPath) as! HomePopTableViewCell
             return cell
             
         default:

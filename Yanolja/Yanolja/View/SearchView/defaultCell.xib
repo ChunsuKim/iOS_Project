@@ -40,7 +40,7 @@
             <connections>
                 <outlet property="defaultLabel" destination="QV0-uP-KVE" id="W58-dG-Ruu"/>
             </connections>
-            <point key="canvasLocation" x="176.81159420289856" y="101.78571428571428"/>
+            <point key="canvasLocation" x="-165" y="46"/>
         </tableViewCell>
     </objects>
 </document>

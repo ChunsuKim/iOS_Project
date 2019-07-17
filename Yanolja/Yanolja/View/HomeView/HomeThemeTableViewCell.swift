@@ -102,7 +102,7 @@ class HomeThemeTableViewCell: UITableViewCell {
         themeButton.topAnchor.constraint(equalTo: homeViewCollectionView.bottomAnchor).isActive = true
         themeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         themeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        themeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        themeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         themeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
