@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = .white
         window?.rootViewController = CustomTabBarController()
-//        window?.rootViewController = SearchController()
+//        window?.rootViewController = CalendarViewController()
         window?.makeKeyAndVisible()
         
         return true

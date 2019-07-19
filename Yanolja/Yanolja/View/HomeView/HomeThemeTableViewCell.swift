@@ -10,16 +10,21 @@ import UIKit
 
 class HomeThemeTableViewCell: UITableViewCell {
     
+    private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
+    
     // MARK: - Properties
     static let identifier = "HomeThemeTableViewCell"
-    
     
     // TitleView
     private let titleView = UIView()
     private let titleLabel = UILabel()
     private let titleButton = UIButton(type: .custom)
     private let menuBar = MenuBar()
-    private let themeButton = HomeThemeButton()
+    
+    private var isState = true
+    
+    private var poolList = themeMenus[0].items
+    private var poolListDiff = themeMenusDiff[0].items
     
     // CollectionView
     private let homeViewCollectionView : UICollectionView = {
@@ -33,8 +38,6 @@ class HomeThemeTableViewCell: UITableViewCell {
         return collectionView
     }()
     
-    var poolList = themeMenus[0].items
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -43,9 +46,9 @@ class HomeThemeTableViewCell: UITableViewCell {
         configureTitleView()
         configureMenuBar()
         configureCollectionView()
-        configureThemeButton()
         configureTitleViewConstraints()
         configureCollectionViewConstraints()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,6 +69,23 @@ class HomeThemeTableViewCell: UITableViewCell {
     // MARK: - Configuration
     
     // configuration titleView
+    func reloadCollectionView() {
+        isState.toggle()
+        homeViewCollectionView.reloadData()
+    }
+    
+    func reloadMenuBar() {
+        menuBar.reloadMenuCollectionView()
+    }
+    
+    func reloadTitleLabel() {
+        if isState {
+            titleLabel.text = themeTitle
+        } else {
+            titleLabel.text = themeTitleDiff
+        }
+    }
+    
     private func configureTitleView() {
         
         titleView.backgroundColor = .white
@@ -83,6 +103,7 @@ class HomeThemeTableViewCell: UITableViewCell {
         titleView.addSubview(titleButton)
     }
     
+    // configuration menuBar(CollectionView)
     private func configureMenuBar() {
         contentView.addSubview(menuBar)
         
@@ -93,17 +114,6 @@ class HomeThemeTableViewCell: UITableViewCell {
         menuBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: 33).isActive = true
-    }
-    
-    private func configureThemeButton() {
-        contentView.addSubview(themeButton)
-        
-        themeButton.translatesAutoresizingMaskIntoConstraints = false
-        themeButton.topAnchor.constraint(equalTo: homeViewCollectionView.bottomAnchor).isActive = true
-        themeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        themeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        themeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        themeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
     // configuration collectionView
@@ -147,26 +157,32 @@ class HomeThemeTableViewCell: UITableViewCell {
         homeViewCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         homeViewCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         homeViewCollectionView.heightAnchor.constraint(equalToConstant: 430).isActive = true
-//        homeViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        homeViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 }
 
 // MARK: - CollectionView Data Source Extension
 extension HomeThemeTableViewCell: UICollectionViewDataSource {
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCollectionViewCell.identifier, for: indexPath) as! HomeThemeCollectionViewCell
         
-        cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
-//        cell.configureCellContent(image: UIImage(named: "IU"), title: "아이유")
+        if isState {
+            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
+            homeThemeCollectionViewCell = cell
+        } else {
+            cell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
+            homeThemeCollectionViewCell = cell
+        }
         
+//        cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
+//        tempCollectionCell = cell
+//        print(poolList[indexPath.row].title)
         return cell
     }
 }
@@ -194,11 +210,13 @@ extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - MenuBar Delegate
 extension HomeThemeTableViewCell: MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath) {
         homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
         poolList = themeMenus[indexPath.row].items
+        poolListDiff = themeMenusDiff[indexPath.row].items
         homeViewCollectionView.reloadData()
     }
     

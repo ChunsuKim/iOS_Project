@@ -63,6 +63,7 @@
 		F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185F422D081B500B01C6C /* CustomTabBarController.swift */; };
 		F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */; };
 		F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */; };
+		F3D5D27022E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D5D26F22E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		F3B185F422D081B500B01C6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopButtonTableViewCell.swift; sourceTree = "<group>"; };
+		F3D5D26F22E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeDiffTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,8 @@
 				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
 				F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */,
 				F339FDFD22DF13A2003D5F71 /* HomePopTableViewCell.swift */,
+				F31F334622DDC679003A2C06 /* HomeThemeButton.swift */,
+				F3D5D26F22E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift */,
 				F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */,
 				F339FE0122DF275A003D5F71 /* HomePopCollectionCell */,
 			);
@@ -283,7 +287,6 @@
 				F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */,
 				F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */,
 				F31F334422DDC4FE003A2C06 /* HomeThemeDiffCollectionViewCell.swift */,
-				F31F334622DDC679003A2C06 /* HomeThemeButton.swift */,
 			);
 			path = HomeThemeCollectionCell;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */,
 				1FB5C85022DDCF7C00044D94 /* FSCalendarHeaderView.m in Sources */,
 				610423DE22DE61480087E719 /* CustomMenuView.swift in Sources */,
+				F3D5D27022E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift in Sources */,
 				1FB5A8B822DC5AAC009057F4 /* defaultCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

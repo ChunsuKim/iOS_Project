@@ -10,6 +10,9 @@ import UIKit
 
 class ListCollectionView: UIView {
     
+    var sum: CGFloat = 0
+    var space: CGFloat = 10
+    
     let pageCollectionView: UICollectionView = {
         // flow layout
         let flowLayout = UICollectionViewFlowLayout()
@@ -52,11 +55,12 @@ class ListCollectionView: UIView {
     
     private func configureCustomTabBar(){
         
-        customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(customMenuBar)
         addSubview(pageCollectionView)
+        
+        customMenuBar.delegate = self
         
         customMenuBar.topAnchor.constraint(equalTo: topAnchor).isActive = true
         customMenuBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -80,13 +84,6 @@ class ListCollectionView: UIView {
     
 }
 
-
-extension ListCollectionView: CustomMenuBarDelegate{
-    func menuBarDidSelected(_ indexPath: IndexPath) {
-        pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-    }
-}
-
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return menuTitles.count
@@ -106,9 +103,8 @@ extension ListCollectionView: UICollectionViewDelegate{
         customMenuBar.indicatorBarLeadingConstraint.constant = scrollView.contentOffset.x / CGFloat(menuTitles.count)
     }
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(targetContentOffset.pointee.x)
         let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
-        print(itemAt)
+//        print(itemAt)
         customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
 }
@@ -125,5 +121,13 @@ extension ListCollectionView: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+// 메뉴 클릭시 뷰 스크롤 이동
+extension ListCollectionView: CustomMenuBarDelegate{
+    func menuBarDidSelected(_ indexPath: IndexPath) {
+        print(1111)
+        pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
 }

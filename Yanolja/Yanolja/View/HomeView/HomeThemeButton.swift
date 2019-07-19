@@ -66,8 +66,6 @@ class HomeThemeButton: UIView {
         themeButtonViewBottomLine.trailingAnchor.constraint(equalTo: themeButtonViewTopLine.trailingAnchor).isActive = true
         
         themeButtonStackView.translatesAutoresizingMaskIntoConstraints = false
-//        themeButtonStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-//        themeButtonStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         themeButtonStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         themeButtonStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         

@@ -10,6 +10,18 @@ import UIKit
 
 class CustomMenuBar: UIView {
     
+    var sum: CGFloat = 0
+    var space: CGFloat = 10
+    
+    let label: UILabel = {
+        let label = UILabel()
+        label.text = "Text"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .lightGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // MARK: - Properties
     
     let menuCollectionView: UICollectionView = {
@@ -38,14 +50,40 @@ class CustomMenuBar: UIView {
     var menuTitles = [String]()
     var menuTitlesSize = [CGFloat]()
     var indicatorBarLeadingConstraint: NSLayoutConstraint!
+    var indicatorBarWidthConstraint: NSLayoutConstraint!
     
     var delegate: CustomMenuBarDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        widthArray()
         configureCollectionView()
         autolayout()
+        
+    }
+    
+    var widths = [CGFloat]()
+    func widthArray() {
+        for i in listMenuTitles {
+            let tempWidth = i.size(withAttributes: [NSAttributedString.Key.strokeWidth : UIFont.systemFont(ofSize: 16)]).width
+            let sumWidth = tempWidth + CGFloat(20)
+            widths.append(sumWidth)
+        }
+    }
+    
+    func sumWidth(indexPath index: Int) -> CGFloat {
+        if index == 0 {
+            sum = 0
+        } else {
+            for i in 0...(index - 1) {
+                sum += widths[i]
+            }
+            sum += (CGFloat(index) * space + 20)
+            print(sum)
+        }
+        
+        return sum
     }
     
     private func configureCollectionView(){
@@ -66,12 +104,16 @@ class CustomMenuBar: UIView {
         menuCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         menuCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor)
-        indicatorBarLeadingConstraint.isActive = true
-        
         indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
         indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
+        indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        indicatorBarLeadingConstraint.isActive = true
+        
+        indicatorBarWidthConstraint = indicatorBar.widthAnchor.constraint(equalToConstant: widths[0])
+        indicatorBarWidthConstraint.isActive = true
+        
+//        indicatorBar.widthAnchor.constraint(equalTo: menuCollectionView.widthAnchor, multiplier: 0.1).isActive = true
         
     }
     
@@ -93,7 +135,6 @@ extension CustomMenuBar: UICollectionViewDataSource{
         return cell
     }
     
-    
 }
 
 extension CustomMenuBar: UICollectionViewDelegate{
@@ -101,9 +142,19 @@ extension CustomMenuBar: UICollectionViewDelegate{
         
         delegate?.menuBarDidSelected(indexPath)
         
-        indicatorBarLeadingConstraint.constant = (self.frame.width / CGFloat(menuTitles.count)) * CGFloat((indexPath.item))
+//        indicatorBarLeadingConstraint.constant = (self.frame.width / CGFloat(menuTitles.count)) * CGFloat((indexPath.item))
+        
+        sum = 0
+        print("### :", sumWidth(indexPath: indexPath.row))
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            if indexPath.row == 0 {
+                self.indicatorBarLeadingConstraint.constant = 20
+                self.indicatorBarWidthConstraint.constant = self.widths[indexPath.row]
+            } else {
+                self.indicatorBarLeadingConstraint.constant = self.sum
+                self.indicatorBarWidthConstraint.constant = self.widths[indexPath.row]
+            }
             self.layoutIfNeeded()
         }, completion: nil)
         
@@ -112,8 +163,11 @@ extension CustomMenuBar: UICollectionViewDelegate{
 }
 
 extension CustomMenuBar: UICollectionViewDelegateFlowLayout{
+    // FIXME: - width값만 적용됨
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 50)
+
+        return CGSize(width: widths[indexPath.item], height: 50)
+
     }
     
     

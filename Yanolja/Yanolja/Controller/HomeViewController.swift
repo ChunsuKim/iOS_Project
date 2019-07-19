@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    private var homeThemeCollectionView = HomeThemeTableViewCell()
     
     // HeaderView
     private let headerView = UIView()
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController {
         
         configureHeaderViewConstraints()
         configureTableViewConstraints()
+        
     }
     
     // MARK: - Configuration User Interface
@@ -63,14 +65,17 @@ class HomeViewController: UIViewController {
     // configuration TableView
     private func configureTableView() {
         homeTableView.dataSource = self
-        homeTableView.estimatedRowHeight = 50  // 대충의 높이값
+        homeTableView.delegate = self
+        homeTableView.estimatedRowHeight = 20  // 대충의 높이값
         homeTableView.rowHeight = UITableView.automaticDimension
-        homeTableView.allowsSelection = false
+//        homeTableView.allowsSelection = true
         homeTableView.separatorStyle = .none
         
         homeTableView.register(HomeTopButtonTableViewCell.self, forCellReuseIdentifier: HomeTopButtonTableViewCell.identifier)
         
         homeTableView.register(HomeThemeTableViewCell.self, forCellReuseIdentifier: HomeThemeTableViewCell.identifier)
+        
+        homeTableView.register(HomeThemeDiffTableViewCell.self, forCellReuseIdentifier: HomeThemeDiffTableViewCell.identifier)
         
         homeTableView.register(HomePopTableViewCell.self, forCellReuseIdentifier: HomePopTableViewCell.identifier)
         
@@ -127,6 +132,8 @@ class HomeViewController: UIViewController {
             present(vc, animated: true, completion: nil)
         }
     }
+    
+    
 }
 
 // MARK: - TableView Data Source Extension
@@ -134,7 +141,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,9 +153,16 @@ extension HomeViewController: UITableViewDataSource {
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
+            
+            homeThemeCollectionView = cell
+            
             return cell
             
         case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeDiffTableViewCell.identifier, for: indexPath) as! HomeThemeDiffTableViewCell
+            return cell
+            
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomePopTableViewCell.identifier, for: indexPath) as! HomePopTableViewCell
             return cell
             
@@ -158,4 +172,23 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("click cell")
+        
+        if indexPath.row == 2 {
+            homeThemeCollectionView.reloadCollectionView()
+            homeThemeCollectionView.reloadMenuBar()
+            homeThemeCollectionView.reloadTitleLabel()
+            
+            
+            
+//            tempTableCell.tempCollectionCell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
+//            print(poolListDiff[indexPath.row].title)
+            
+//            let gghm = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+//            tableView.reloadRows(at: [gghm], with: .none)
+        }
+    }
+}
 

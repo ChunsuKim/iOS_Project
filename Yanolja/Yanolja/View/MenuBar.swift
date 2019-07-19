@@ -14,6 +14,9 @@ protocol MenuBarDelegate {
 
 class MenuBar: UIView {
     
+    private var isState = true
+    var tempMenuCell = HomeThemeMenuCollectionCell()
+    
     var delegate: MenuBarDelegate?
 
     let menuCollectionView: UICollectionView = {
@@ -38,6 +41,7 @@ class MenuBar: UIView {
         
         configureCollectionView()
         configureLineViews()
+        setSelectedMenuBar()
         configureConstraints()
     }
     
@@ -45,10 +49,20 @@ class MenuBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func reloadMenuCollectionView() {
+        isState.toggle()
+        menuCollectionView.reloadData()
+        setSelectedMenuBar()
+        
+    }
+    
+    private func setSelectedMenuBar() {
+        menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    }
+    
     private func configureCollectionView() {
         menuCollectionView.delegate = self
         menuCollectionView.dataSource = self
-        menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
         
         menuCollectionView.register(HomeThemeMenuCollectionCell.self, forCellWithReuseIdentifier: HomeThemeMenuCollectionCell.identifier)
     }
@@ -108,11 +122,18 @@ extension MenuBar: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeMenuCollectionCell.identifier, for: indexPath) as! HomeThemeMenuCollectionCell
-        print(themeMenus[indexPath.row].menu)
-        cell.menuLabel.text = themeMenus[indexPath.row].menu
-        let textSize = cell.menuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular)]).width
         
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeMenuCollectionCell.identifier, for: indexPath) as! HomeThemeMenuCollectionCell
+
+        if isState {
+            cell.menuLabel.text = themeMenus[indexPath.row].menu
+            tempMenuCell = cell
+        } else {
+            cell.menuLabel.text = themeMenusDiff[indexPath.row].menu
+            tempMenuCell = cell
+        }
+        
+        let textSize = cell.menuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular)]).width
         
         
         if indexPath.row == 0 {

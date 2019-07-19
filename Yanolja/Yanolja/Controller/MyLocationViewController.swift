@@ -25,7 +25,7 @@ class MyLocationViewController: UIViewController {
         view.addSubview(topNaviView)
         view.addSubview(listCollectionView)
         
-        listCollectionView.menuTitles = menuTitles
+        listCollectionView.menuTitles = listMenuTitles
         listCollectionView.customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
         
         topNaviView.delegate = self

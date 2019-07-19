@@ -53,7 +53,7 @@ class KeyWordViewController: UIViewController {
         
         mainView.addSubview(dismissButton)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
-        dismissButton.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.padding.rawValue).isActive = true
+        dismissButton.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.basicPadding.rawValue).isActive = true
         dismissButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
         dismissButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         dismissButton.setImage(UIImage(named: "dismiss"), for: .normal)

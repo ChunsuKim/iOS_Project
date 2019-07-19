@@ -49,7 +49,7 @@ class CustomMenuView: UIView {
     
     private func configureCustomTabBar(){
         
-        customMenuBar.delegate = self
+//        customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(customMenuBar)
@@ -78,11 +78,11 @@ class CustomMenuView: UIView {
 }
 
 
-extension CustomMenuView: CustomMenuBarDelegate{
-    func menuBarDidSelected(_ indexPath: IndexPath) {
-        pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-    }
-}
+//extension CustomMenuView: CustomMenuBarDelegate{
+//    func menuBarDidSelected(_ indexPath: IndexPath) {
+//        pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+//    }
+//}
 
 extension CustomMenuView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -100,27 +100,26 @@ extension CustomMenuView: UICollectionViewDataSource {
 
 extension CustomMenuView: UICollectionViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(1111)
         customMenuBar.indicatorBarLeadingConstraint.constant = scrollView.contentOffset.x / CGFloat(menuTitles.count)
     }
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print(targetContentOffset.pointee.x)
         let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
-        print(itemAt)
+//        print(itemAt)
         customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        
+        customMenuBar.indicatorBarLeadingConstraint.constant = targetContentOffset.pointee.x
     }
 }
 
 extension CustomMenuView: UICollectionViewDelegateFlowLayout{
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: self.frame.height - customMenuBar.frame.height )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 550, left: 0, bottom: 0, right: 0)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
 }

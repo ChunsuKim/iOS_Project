@@ -10,6 +10,7 @@ import UIKit
 
 class HomeThemeMenuCollectionCell: UICollectionViewCell {
     
+    // MARK: - Properties
     static let identifier = "HomeThemeMenuCollectionCell"
     
     let menuLabel = UILabel()
@@ -31,6 +32,7 @@ class HomeThemeMenuCollectionCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Configuration Label and Constraints
     private func configureLabel() {
         menuLabel.text = "text"
         menuLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
