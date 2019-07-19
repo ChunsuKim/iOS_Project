@@ -273,7 +273,6 @@
 				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
 				F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */,
 				F339FDFD22DF13A2003D5F71 /* HomePopTableViewCell.swift */,
-				F31F334622DDC679003A2C06 /* HomeThemeButton.swift */,
 				F3D5D26F22E08A2D00AABE06 /* HomeThemeDiffTableViewCell.swift */,
 				F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */,
 				F339FE0122DF275A003D5F71 /* HomePopCollectionCell */,
@@ -284,6 +283,7 @@
 		F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				F31F334622DDC679003A2C06 /* HomeThemeButton.swift */,
 				F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */,
 				F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */,
 				F31F334422DDC4FE003A2C06 /* HomeThemeDiffCollectionViewCell.swift */,
