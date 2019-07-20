@@ -62,6 +62,7 @@ let themeMenus: [ThemeMenu] = [
     )
 ]
 
+
 struct ThemeMenuDiff {
     let menu: String
     let items: [PoolDiff]
@@ -107,7 +108,6 @@ let themeMenusDiff: [ThemeMenuDiff] = [
         ]
     )
 ]
-
 
 struct PopData {
     let imageName: String

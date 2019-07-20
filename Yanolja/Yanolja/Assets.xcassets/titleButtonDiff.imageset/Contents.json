@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "titleButtonDiff.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "599d0c8f87c5e4.00486075.jpg",
       "scale" : "2x"
     },
     {

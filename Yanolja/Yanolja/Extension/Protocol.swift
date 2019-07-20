@@ -11,3 +11,7 @@ import Foundation
 protocol CustomMenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath)
 }
+
+protocol ListDetailDelegate {
+    func listDidSelected(_ indexPath: IndexPath)
+}

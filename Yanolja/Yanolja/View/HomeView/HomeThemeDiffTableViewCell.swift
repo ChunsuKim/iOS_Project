@@ -2,14 +2,15 @@
 //  HomeThemeDiffTableViewCell.swift
 //  Yanolja
 //
-//  Created by Chunsu Kim on 18/07/2019.
+//  Created by Chunsu Kim on 19/07/2019.
 //  Copyright © 2019 Chunsu Kim. All rights reserved.
 //
 
 import UIKit
 
 class HomeThemeDiffTableViewCell: UITableViewCell {
-    
+
+    // MARK: - Properties
     static let identifier = "HomeThemeDiffTableViewCell"
     
     private let themeDiffButton = HomeThemeButton()
@@ -19,6 +20,7 @@ class HomeThemeDiffTableViewCell: UITableViewCell {
         
         self.selectionStyle = .none
         configureThemeDiffButton()
+        configureDefaltPageNumber()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,11 +31,17 @@ class HomeThemeDiffTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
+    }
+    
+    // MARK: - Configuration
+    private func configureDefaltPageNumber() {
+        themeDiffButton.currentPageNumberLabel.text = "1"
+        themeDiffButton.totalPageNumberLabel.text = "2"
     }
     
     private func configureThemeDiffButton() {
@@ -46,5 +54,11 @@ class HomeThemeDiffTableViewCell: UITableViewCell {
         themeDiffButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         themeDiffButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-
+    
+    // MARK: - Value setting global method
+    func changePageNumberLabel(currentPageNumber: String, totalPageNumber: String) {
+        themeDiffButton.currentPageNumberLabel.text = currentPageNumber
+        themeDiffButton.totalPageNumberLabel.text = totalPageNumber
+    }
+    
 }

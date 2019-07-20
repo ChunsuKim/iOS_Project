@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     private var homeThemeCollectionView = HomeThemeTableViewCell()
+    private var isThemeDiffClicked = true
     
     // HeaderView
     private let headerView = UIView()
@@ -33,7 +34,6 @@ class HomeViewController: UIViewController {
         
         configureHeaderViewConstraints()
         configureTableViewConstraints()
-        
     }
     
     // MARK: - Configuration User Interface
@@ -68,7 +68,6 @@ class HomeViewController: UIViewController {
         homeTableView.delegate = self
         homeTableView.estimatedRowHeight = 20  // 대충의 높이값
         homeTableView.rowHeight = UITableView.automaticDimension
-//        homeTableView.allowsSelection = true
         homeTableView.separatorStyle = .none
         
         homeTableView.register(HomeTopButtonTableViewCell.self, forCellReuseIdentifier: HomeTopButtonTableViewCell.identifier)
@@ -133,7 +132,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
+    private func isThemeDiffStateToggle() {
+        isThemeDiffClicked.toggle()
+    }
 }
 
 // MARK: - TableView Data Source Extension
@@ -160,6 +161,7 @@ extension HomeViewController: UITableViewDataSource {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeDiffTableViewCell.identifier, for: indexPath) as! HomeThemeDiffTableViewCell
+            
             return cell
             
         case 3:
@@ -172,6 +174,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - TableView Delegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("click cell")
@@ -180,14 +183,15 @@ extension HomeViewController: UITableViewDelegate {
             homeThemeCollectionView.reloadCollectionView()
             homeThemeCollectionView.reloadMenuBar()
             homeThemeCollectionView.reloadTitleLabel()
-            
-            
-            
-//            tempTableCell.tempCollectionCell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
-//            print(poolListDiff[indexPath.row].title)
-            
-//            let gghm = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-//            tableView.reloadRows(at: [gghm], with: .none)
+            homeThemeCollectionView.reloadTitleButton()
+            isThemeDiffStateToggle()
+            if let cell = homeTableView.cellForRow(at: indexPath) as? HomeThemeDiffTableViewCell {
+                if isThemeDiffClicked {
+                    cell.changePageNumberLabel(currentPageNumber: "1", totalPageNumber: "2")
+                } else {
+                    cell.changePageNumberLabel(currentPageNumber: "2", totalPageNumber: "2")
+                }
+            }
         }
     }
 }

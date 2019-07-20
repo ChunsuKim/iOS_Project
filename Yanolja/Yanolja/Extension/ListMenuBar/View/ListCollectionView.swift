@@ -43,8 +43,6 @@ class ListCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .red
-        
         configureCustomTabBar()
     }
     
@@ -72,7 +70,10 @@ class ListCollectionView: UIView {
         pageCollectionView.delegate = self
         
         // register
-        pageCollectionView.register(ListTableViewCell.self, forCellWithReuseIdentifier: ListTableViewCell.reusableIdentifier)
+        //Custom CollectionView Cell
+        pageCollectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.reusableIdentifier)
+        // default CollectionView Cell
+        pageCollectionView.register(DefaultCollectionViewCell.self, forCellWithReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier)
         
         // layout
         pageCollectionView.topAnchor.constraint(equalTo: customMenuBar.bottomAnchor).isActive = true
@@ -90,9 +91,16 @@ extension ListCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListTableViewCell.reusableIdentifier, for: indexPath) as! ListTableViewCell
-//        cell.label.text = menuTitles[indexPath.row]
-        return cell
+        switch indexPath.item {
+            case 2...4:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
+                //        cell.label.text = menuTitles[indexPath.row]
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                //        cell.label.text = menuTitles[indexPath.row]
+                return cell
+        }
     }
     
     
@@ -127,7 +135,6 @@ extension ListCollectionView: UICollectionViewDelegateFlowLayout{
 // 메뉴 클릭시 뷰 스크롤 이동
 extension ListCollectionView: CustomMenuBarDelegate{
     func menuBarDidSelected(_ indexPath: IndexPath) {
-        print(1111)
         pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
 }

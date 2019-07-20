@@ -10,8 +10,6 @@ import UIKit
 
 class HomeThemeTableViewCell: UITableViewCell {
     
-    private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
-    
     // MARK: - Properties
     static let identifier = "HomeThemeTableViewCell"
     
@@ -21,8 +19,8 @@ class HomeThemeTableViewCell: UITableViewCell {
     private let titleButton = UIButton(type: .custom)
     private let menuBar = MenuBar()
     
+    private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
     private var isState = true
-    
     private var poolList = themeMenus[0].items
     private var poolListDiff = themeMenusDiff[0].items
     
@@ -41,6 +39,7 @@ class HomeThemeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .none
         menuBar.delegate = self
         
         configureTitleView()
@@ -48,7 +47,6 @@ class HomeThemeTableViewCell: UITableViewCell {
         configureCollectionView()
         configureTitleViewConstraints()
         configureCollectionViewConstraints()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,23 +67,6 @@ class HomeThemeTableViewCell: UITableViewCell {
     // MARK: - Configuration
     
     // configuration titleView
-    func reloadCollectionView() {
-        isState.toggle()
-        homeViewCollectionView.reloadData()
-    }
-    
-    func reloadMenuBar() {
-        menuBar.reloadMenuCollectionView()
-    }
-    
-    func reloadTitleLabel() {
-        if isState {
-            titleLabel.text = themeTitle
-        } else {
-            titleLabel.text = themeTitleDiff
-        }
-    }
-    
     private func configureTitleView() {
         
         titleView.backgroundColor = .white
@@ -130,6 +111,7 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     // MARK: - Configuration Constraints
     
+    // constraints TitleView
     private func configureTitleViewConstraints() {
         titleView.translatesAutoresizingMaskIntoConstraints = false
         titleView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -151,6 +133,7 @@ class HomeThemeTableViewCell: UITableViewCell {
         
     }
     
+    // constraints CollectionView
     private func configureCollectionViewConstraints() {
         homeViewCollectionView.translatesAutoresizingMaskIntoConstraints = false
         homeViewCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
@@ -158,6 +141,33 @@ class HomeThemeTableViewCell: UITableViewCell {
         homeViewCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         homeViewCollectionView.heightAnchor.constraint(equalToConstant: 430).isActive = true
         homeViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+    
+    // MARK: - reload global methods
+    
+    func reloadCollectionView() {
+        isState.toggle()
+        homeViewCollectionView.reloadData()
+    }
+    
+    func reloadMenuBar() {
+        menuBar.reloadMenuCollectionView()
+    }
+    
+    func reloadTitleLabel() {
+        if isState {
+            titleLabel.text = themeTitle
+        } else {
+            titleLabel.text = themeTitleDiff
+        }
+    }
+    
+    func reloadTitleButton() {
+        if isState {
+            titleButton.setImage(UIImage(named: "titleButton"), for: .normal)
+        } else {
+            titleButton.setImage(UIImage(named: "titleButtonDiff"), for: .normal)
+        }
     }
 }
 
@@ -174,15 +184,14 @@ extension HomeThemeTableViewCell: UICollectionViewDataSource {
         
         if isState {
             cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
+            
             homeThemeCollectionViewCell = cell
         } else {
             cell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
+            
             homeThemeCollectionViewCell = cell
         }
         
-//        cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
-//        tempCollectionCell = cell
-//        print(poolList[indexPath.row].title)
         return cell
     }
 }
@@ -219,6 +228,4 @@ extension HomeThemeTableViewCell: MenuBarDelegate {
         poolListDiff = themeMenusDiff[indexPath.row].items
         homeViewCollectionView.reloadData()
     }
-    
-    
 }

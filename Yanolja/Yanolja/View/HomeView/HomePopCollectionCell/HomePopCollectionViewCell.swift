@@ -9,6 +9,8 @@
 import UIKit
 
 class HomePopCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "HomePopCollectionViewCell"
     
     private let imageView = UIImageView()
@@ -28,29 +30,25 @@ class HomePopCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
     private func configureImageView() {
         
         imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 7
-        
         imageView.contentMode = .scaleAspectFill
 
         contentView.addSubview(imageView)
     }
     
+    // MARK: - Configuration Constraints
     private func configureImageViewConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-//        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-//        imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-//        imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
     }
     
+    // MARK: - Configuration global method
     func configureCellContent(image: UIImage?) {
         imageView.image = image
     }

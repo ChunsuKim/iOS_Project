@@ -14,9 +14,7 @@ protocol MenuBarDelegate {
 
 class MenuBar: UIView {
     
-    private var isState = true
-    var tempMenuCell = HomeThemeMenuCollectionCell()
-    
+    var homeThemeMenuCollectionView = HomeThemeMenuCollectionCell()
     var delegate: MenuBarDelegate?
 
     let menuCollectionView: UICollectionView = {
@@ -32,6 +30,7 @@ class MenuBar: UIView {
         return collectionView
     }()
     
+    private var isState = true
     private let indicatorBar = UIView()
     private let lineViewTop = UIView()
     private let lineViewBottom = UIView()
@@ -49,20 +48,10 @@ class MenuBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadMenuCollectionView() {
-        isState.toggle()
-        menuCollectionView.reloadData()
-        setSelectedMenuBar()
-        
-    }
-    
-    private func setSelectedMenuBar() {
-        menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-    }
-    
     private func configureCollectionView() {
         menuCollectionView.delegate = self
         menuCollectionView.dataSource = self
+        
         
         menuCollectionView.register(HomeThemeMenuCollectionCell.self, forCellWithReuseIdentifier: HomeThemeMenuCollectionCell.identifier)
     }
@@ -71,6 +60,16 @@ class MenuBar: UIView {
         indicatorBar.backgroundColor = .black
         lineViewTop.backgroundColor = #colorLiteral(red: 0.934979856, green: 0.9322634339, blue: 0.931660831, alpha: 1)
         lineViewBottom.backgroundColor = #colorLiteral(red: 0.934979856, green: 0.9322634339, blue: 0.931660831, alpha: 1)
+    }
+    
+    private func setSelectedMenuBar() {
+        menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    }
+    
+    func reloadMenuCollectionView() {
+        isState.toggle()
+        menuCollectionView.reloadData()
+        setSelectedMenuBar()
     }
     
     var indicatorBarLeadingConstraint: NSLayoutConstraint!
@@ -122,19 +121,17 @@ extension MenuBar: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeMenuCollectionCell.identifier, for: indexPath) as! HomeThemeMenuCollectionCell
-
+        
         if isState {
             cell.menuLabel.text = themeMenus[indexPath.row].menu
-            tempMenuCell = cell
+            homeThemeMenuCollectionView = cell
         } else {
             cell.menuLabel.text = themeMenusDiff[indexPath.row].menu
-            tempMenuCell = cell
+            homeThemeMenuCollectionView = cell
         }
         
         let textSize = cell.menuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .regular)]).width
-        
         
         if indexPath.row == 0 {
             let leadingConst: CGFloat = (UIScreen.main.bounds.width - 40) * 0.25 * 0.5

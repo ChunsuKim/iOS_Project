@@ -45,12 +45,14 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         contentView.addSubview(titleLabel)
         
+        // priceLabel
         priceLabel.textAlignment = .right
         priceLabel.textColor = .black
         priceLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         priceLabel.text = "340,000"
         contentView.addSubview(priceLabel)
         
+        // wonLabel
         wonLabel.textAlignment = .left
         wonLabel.textColor = .black
         wonLabel.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
@@ -77,7 +79,6 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
         wonLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         wonLabel.widthAnchor.constraint(equalToConstant: 15).isActive = true
         wonLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        
         
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true

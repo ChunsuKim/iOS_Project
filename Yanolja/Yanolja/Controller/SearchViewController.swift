@@ -18,6 +18,10 @@ enum UISetting: CGFloat {
 //애니메이션에 UIViewControllerAnimatedTransitioning
 // 애니메이션에는 트리거!?
 
+
+// 질문 1. 스크롤뷰 위에 오토레이아웃 잡으면 위드값 안주면 트레일링 안먹힘..;;
+// 질문 2. 애니메이션 이상하게 들어감..'''
+// 질문 3. 
 class SearchController: UIViewController{
     
     
@@ -25,13 +29,10 @@ class SearchController: UIViewController{
     private let mainView = UIView()
     private let mainTitleLabel = UILabel()
     private let dismissButton = UIButton()
-
+    
     private let scrollView = UIScrollView()
     var scrollViewTopAnchor :NSLayoutConstraint!
-    var scrollViewAnimateTopAnchor :NSLayoutConstraint!
-
-    var scrollViewBottomAnchor :NSLayoutConstraint!
-
+    
     //텝
     private var stackView :UIStackView!
     private let domesticButton = UIButton()
@@ -42,7 +43,7 @@ class SearchController: UIViewController{
     
     // 서치 텍스트 필드
     private let searchTextField = UITextField()
-// 서치 텍스트 필드 탑 엥커 잡아야함
+    // 서치 텍스트 필드 탑 엥커 잡아야함
     var searchTextFieldTopAnchor :NSLayoutConstraint!
     var searchTextFieldAnimateTopAnchor :NSLayoutConstraint!
     
@@ -54,7 +55,7 @@ class SearchController: UIViewController{
     //최근 검색 조건
     private let recentlyLabel = UILabel()
     private let removeButton = UIButton(type: .system)
-    private let tableView = UITableView()
+    private let mainTableView = UITableView()
     
     //추천 검색어
     private let recommendKeyWordLabel = UILabel()
@@ -67,25 +68,28 @@ class SearchController: UIViewController{
     private let backButton = UIButton()
     private let keyWordLabel = UILabel()
     private let recentlyKeyWordLable = UILabel()
-    private let allRemoveButton = UIButton()
+    private let allRemoveButton = UIButton(type: .system)
+    private let subTableView = UITableView()
     
-
     func keyWordUIAppearFunc() {
-        let tempArr = [mainTitleLabel,dismissButton,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,tableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
-        tempArr.map{$0.isHidden = true}
-        let temp = [self.backButton,self.keyWordLabel,self.recentlyKeyWordLable,self.allRemoveButton]
-        temp.map{$0.isHidden = false}
+        let tempArr = [mainTitleLabel,dismissButton,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,mainTableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
+        tempArr.forEach { $0.isHidden = true }
+        let temp = [self.backButton,self.keyWordLabel,self.recentlyKeyWordLable,self.allRemoveButton,self.subTableView]
+        temp.forEach{$0.isHidden = false}
         
         UIView.animate(withDuration: 0.4) {
-            self.scrollViewAnimateTopAnchor = self.scrollView.topAnchor.constraint(equalTo: self.mainTitleLabel.bottomAnchor)
-            self.scrollViewAnimateTopAnchor.priority = .defaultHigh
-            self.scrollViewAnimateTopAnchor.isActive = true
+            self.scrollViewTopAnchor = self.scrollView.topAnchor.constraint(equalTo: self.mainTitleLabel.bottomAnchor)
+            self.scrollViewTopAnchor.priority = .defaultHigh
+            self.scrollViewTopAnchor.isActive = true
             self.searchTextFieldAnimateTopAnchor = self.searchTextField.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
             self.searchTextFieldAnimateTopAnchor.priority = .defaultHigh
             self.searchTextFieldAnimateTopAnchor.isActive = true
             
             self.view.layoutIfNeeded()
-        }
+
+            }
+        
+        scrollView.isScrollEnabled = false
     }
     
     func dismissAndAppearFunc() {
@@ -96,9 +100,10 @@ class SearchController: UIViewController{
     
     
     //뭔가 스트럭트 만들어서 넣어야될듯???
-    private var recentlyArr:[SearchClass] = []
+    private var recentlyArrInMainView:[SearchClass] = []
     //        [SearchClass(searchPointName: "노원역", date: "7월7일 ~ 7월 12일", adultsNumber: 2, kidsNumber: 1), SearchClass(searchPointName: "건대", date: "7월17일 ~ 7월 22일", adultsNumber: 3, kidsNumber: 0), SearchClass(searchPointName: "성수역", date: "7월27일 ~ 7월 30일", adultsNumber: 3, kidsNumber: 3),SearchClass(searchPointName: "성수역", date: "7월27일 ~ 7월 30일", adultsNumber: 3, kidsNumber: 3),SearchClass(searchPointName: "성수역", date: "7월27일 ~ 7월 30일", adultsNumber: 3, kidsNumber: 3)]
     
+    private var recentlyArrInSubView:[SearchClass] = []
     
     
     override func viewDidLoad() {
@@ -119,7 +124,7 @@ class SearchController: UIViewController{
         numberOfPeopleUI()
         // 검색 결과 보기 버튼
         resultButtonUI()
-    
+        
         //최근 검색 조건 UI
         recentlySearchPointUI()
         //제스쳐
@@ -131,14 +136,16 @@ class SearchController: UIViewController{
         recommendViewUI()
         
         //검색 텍스트 필드 누른후!!!
-        keyWordUI()
+        keyWordUIAutoLayOut()
+
     }
-   
     
-    func keyWordUI() {
-        let temp = [backButton,keyWordLabel,recentlyKeyWordLable,allRemoveButton]
+    
+    func keyWordUIAutoLayOut() {
+        let temp = [backButton,keyWordLabel,recentlyKeyWordLable,allRemoveButton,subTableView]
         for x in temp {
             view.addSubview(x)
+            view.bringSubviewToFront(x)
             x.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -150,71 +157,69 @@ class SearchController: UIViewController{
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         
         
-//        keyWordLabel.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.topPadding.rawValue).isActive = true
+        //        keyWordLabel.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.topPadding.rawValue).isActive = true
         keyWordLabel.lastBaselineAnchor.constraint(equalTo: backButton.lastBaselineAnchor).isActive = true
         keyWordLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor,constant: -2).isActive = true
         keyWordLabel.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
         keyWordLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         keyWordLabel.text = "키워드 검색"
-        keyWordLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        keyWordLabel.font = UIFont.systemFont(ofSize: 20)
         
         
-        recentlyKeyWordLable.topAnchor.constraint(equalTo: mainView.topAnchor,constant: UISetting.basicPadding.rawValue).isActive = true
-        recentlyKeyWordLable.leadingAnchor.constraint(equalTo: dismissButton.trailingAnchor).isActive = true
+        recentlyKeyWordLable.topAnchor.constraint(equalTo: searchTextField.bottomAnchor,constant: UISetting.basicPadding.rawValue).isActive = true
+        recentlyKeyWordLable.leadingAnchor.constraint(equalTo: backButton.leadingAnchor,constant: 10).isActive = true
         recentlyKeyWordLable.heightAnchor.constraint(equalToConstant: UISetting.viewHeight.rawValue/2).isActive = true
+        recentlyKeyWordLable.text = "최근 검색 키워드"
+        recentlyKeyWordLable.font = UIFont.systemFont(ofSize: 15)
         
-        
-        
-        allRemoveButton.translatesAutoresizingMaskIntoConstraints = false
         
         allRemoveButton.firstBaselineAnchor.constraint(equalTo: recentlyKeyWordLable.firstBaselineAnchor).isActive = true
         allRemoveButton.trailingAnchor.constraint(equalTo: dismissButton.trailingAnchor).isActive = true
         allRemoveButton.setTitle("전체 삭제", for: .normal)
         allRemoveButton.addTarget(self, action: #selector(removeAction), for: .touchUpInside)
         
+        subTableView.dataSource = self
+        subTableView.register(RecentlyCustomCell.self, forCellReuseIdentifier: "subCell")
+        subTableView.register(DefaultCell.self, forCellReuseIdentifier: "subDefault")
+        subTableView.topAnchor.constraint(equalTo: recentlyKeyWordLable.bottomAnchor).isActive = true
+        subTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        subTableView.leadingAnchor.constraint(equalTo: backButton.leadingAnchor).isActive = true
+        subTableView.trailingAnchor.constraint(equalTo: allRemoveButton.trailingAnchor).isActive = true
         
-        temp.map{$0.isHidden = true}
+        temp.forEach{$0.isHidden = true}
+
     }
     
     @objc func backAction() {
         searchTextField.endEditing(true)
+        scrollView.isScrollEnabled = true
 
-        let tempArr = [mainTitleLabel,dismissButton,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,tableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
-       
-        let temp = [self.backButton,self.keyWordLabel,self.recentlyKeyWordLable,self.allRemoveButton]
-        
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
-            UIView.animate(withDuration: 0.4) {
-              
-                
-                self.scrollViewAnimateTopAnchor.priority = .defaultLow
+        UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: [], animations: {
+            UIView.animate(withDuration: 1) {
+                self.scrollViewTopAnchor.priority = .defaultLow
                 self.searchTextFieldAnimateTopAnchor.priority = .defaultLow
-                
+//                self.scrollViewBottomAnchor.priority = .defaultLow
                 self.mainView.layoutIfNeeded()
                 self.scrollView.layoutIfNeeded()
             }
-        }) { (bool) in
-            tempArr.map{$0.isHidden = false}
-            temp.map{$0.isHidden = true}
-            self.scrollView.layoutIfNeeded()
-        }
-        
-        
-        
-        
+        }) { (bool) in}
+        hidden()
+        scrollView.isScrollEnabled = true
     }
     
+    func hidden() {
+        let tempArr = [mainTitleLabel,dismissButton,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,mainTableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
+        
+        let temp = [self.backButton,self.keyWordLabel,self.recentlyKeyWordLable,self.allRemoveButton,self.subTableView]
+        tempArr.forEach{$0.isHidden = false}
+        temp.forEach{$0.isHidden = true}
 
+    }
+ 
     func gestureAction() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(a))
-        let gesture2 = UITapGestureRecognizer(target: self, action: #selector(b))
         let gesture3 = UITapGestureRecognizer(target: self, action: #selector(c))
-        gesture.numberOfTouchesRequired = 1
-        searchTextField.addGestureRecognizer(gesture)
         dateLabel.isUserInteractionEnabled = true
-        scrollView.addGestureRecognizer(gesture2)
         //        mainView.addGestureRecognizer(gesture2)
-        gesture2.numberOfTapsRequired = 1
         scrollView.isUserInteractionEnabled = true
         mainView.isUserInteractionEnabled = true
         
@@ -222,18 +227,7 @@ class SearchController: UIViewController{
         dateLabel.addGestureRecognizer(gesture3)
     }
     
-    @objc func a() {
-        
-        UIView.transition(with: mainView, duration: 0.2, options: .transitionCrossDissolve, animations: {
-            self.keyWordUIAppearFunc()
-            self.mainView.layoutIfNeeded()
-        }, completion: nil)
-      
-       
-    }
-    @objc func b() {
-//        self.scrollView.endEditing(true)
-    }
+    
     @objc func c() {
         let vc = CalendarViewController()
         present(vc,animated: false)
@@ -284,12 +278,6 @@ class SearchController: UIViewController{
         ticketButton.addTarget(self, action: #selector(infor), for: .touchUpInside)
         
         
-        
-      
-//        barView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
-        
-        
-    
     }
     //국내숙소 관련 애니메이션
     @objc private func infor(sender:UIButton) {
@@ -308,7 +296,7 @@ class SearchController: UIViewController{
     
     private func searchViewUI() {
         searchTextField.backgroundColor = #colorLiteral(red: 0.9759308696, green: 0.9800482392, blue: 0.982830584, alpha: 1)
-     
+        searchTextField.addTarget(self, action: #selector(textFieldBegin), for: .editingDidBegin)
         searchTextField.layer.masksToBounds = true
         searchTextField.layer.cornerRadius = UISetting.viewHeight.rawValue/2
         searchTextField.placeholder = "지역,지하철,숙소를 찾아보세요."
@@ -319,6 +307,15 @@ class SearchController: UIViewController{
         searchTextField.leftView?.frame = CGRect(x: 20, y: 0, width: 40, height: 40)
         searchTextField.leftViewMode = .always
     }
+    
+    @objc func textFieldBegin() {
+        UIView.transition(with: mainView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.keyWordUIAppearFunc()
+            
+            self.mainView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     
     private func dateViewUI() {
         dateLabel.backgroundColor = #colorLiteral(red: 0.9759308696, green: 0.9800482392, blue: 0.982830584, alpha: 1)
@@ -349,19 +346,19 @@ class SearchController: UIViewController{
         //테이블뷰 총 5개까지만 나타남.
     }
     @objc private func removeAction() {
-        recentlyArr = []
+        recentlyArrInMainView = []
     }
     
     
     private func basicTableView() {
-        tableView.register(UINib(nibName: "RecentlyCell", bundle: nil), forCellReuseIdentifier: "cell")
-        tableView.register(UINib(nibName: "defaultCell", bundle: nil), forCellReuseIdentifier: "default")
-        tableView.dataSource = self
+        mainTableView.register(UINib(nibName: "RecentlyCell", bundle: nil), forCellReuseIdentifier: "cell")
+        mainTableView.register(DefaultCell.self, forCellReuseIdentifier: "default")
+        mainTableView.dataSource = self
     }
     
     
     private func researchedTableView() {
-        tableView.isScrollEnabled = false
+        mainTableView.isScrollEnabled = false
     }
     
     private func recommendViewUI() {
@@ -369,7 +366,7 @@ class SearchController: UIViewController{
         recommendViewSecond.label.text = "건대입구역 주변 제휴점"
         recommendViewThird.label.text = "군자역 주변 제휴점"
     }
-   //레이아웃 짠 함수코드는 제일 밑으로.
+    //레이아웃 짠 함수코드는 제일 밑으로.
     private func onlyLayoutMethod() {
         // 제일 위
         view.addSubview(mainView)
@@ -420,9 +417,12 @@ class SearchController: UIViewController{
         scrollViewTopAnchor.priority = UILayoutPriority(rawValue: 350)
         scrollViewTopAnchor.isActive = true
         
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        let scrollViewBottomAnchor = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        scrollViewBottomAnchor.priority = UILayoutPriority(rawValue: 350)
+        scrollViewBottomAnchor.isActive = true
+        
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         scrollView.backgroundColor = .white
         scrollView.isScrollEnabled = true
         scrollView.alwaysBounceVertical = true
@@ -435,8 +435,9 @@ class SearchController: UIViewController{
         searchTextFieldTopAnchor.priority = UILayoutPriority(rawValue: 350)
         searchTextFieldTopAnchor.isActive = true
         
-        searchTextField.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
+        searchTextField.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
         searchTextField.widthAnchor.constraint(equalToConstant: view.frame.width - (UISetting.leadingTrailingPadding.rawValue * 2)).isActive = true
+        //        searchTextField.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -UISetting.leadingTrailingPadding.rawValue).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: UISetting.viewHeight.rawValue).isActive = true
         // 캘린더 레이블
         scrollView.addSubview(dateLabel)
@@ -482,24 +483,24 @@ class SearchController: UIViewController{
         removeButton.trailingAnchor.constraint(equalTo: resultButton.trailingAnchor).isActive = true
         
         // 테이블 뷰
-        scrollView.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(mainTableView)
+        mainTableView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.topAnchor.constraint(equalTo: recentlyLabel.bottomAnchor,constant: 5).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -UISetting.leadingTrailingPadding.rawValue).isActive = true
-        tableView.widthAnchor.constraint(equalToConstant: view.frame.width - (UISetting.leadingTrailingPadding.rawValue * 2) ).isActive = true
-        if recentlyArr.isEmpty {
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(90)).isActive = true
+        mainTableView.topAnchor.constraint(equalTo: recentlyLabel.bottomAnchor,constant: 5).isActive = true
+        mainTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
+        mainTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -UISetting.leadingTrailingPadding.rawValue).isActive = true
+        mainTableView.widthAnchor.constraint(equalToConstant: view.frame.width - (UISetting.leadingTrailingPadding.rawValue * 2) ).isActive = true
+        if recentlyArrInMainView.isEmpty {
+            mainTableView.heightAnchor.constraint(equalToConstant: CGFloat(90)).isActive = true
         } else {
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(recentlyArr.count * 90)).isActive = true
+            mainTableView.heightAnchor.constraint(equalToConstant: CGFloat(recentlyArrInMainView.count * 90)).isActive = true
         }
-        tableView.rowHeight = 90
+        mainTableView.rowHeight = 90
         
         //추천 검색어 제일 밑
         scrollView.addSubview(recommendKeyWordLabel)
         recommendKeyWordLabel.translatesAutoresizingMaskIntoConstraints = false
-        recommendKeyWordLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor,constant: 30).isActive = true
+        recommendKeyWordLabel.topAnchor.constraint(equalTo: mainTableView.bottomAnchor,constant: 30).isActive = true
         recommendKeyWordLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
         recommendKeyWordLabel.text = "추천검색어"
         
@@ -521,35 +522,64 @@ class SearchController: UIViewController{
         
         recommendViewThird.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
     }
-
+    
 }
 extension SearchController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if recentlyArr.count == 0 {
-            return 1
+        if tableView == self.mainTableView {
+            if recentlyArrInMainView.count == 0 {
+                return 1
+            } else {
+                return recentlyArrInMainView.count
+            }
         } else {
-            return recentlyArr.count
+            if recentlyArrInSubView.count == 0 {
+                return 1
+            } else {
+                return recentlyArrInSubView.count
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if recentlyArr.count == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath) as! defaultCell
-            // 셀라인 삭제
-            tableView.separatorStyle = .none
-            return cell
+        if tableView == self.mainTableView {
+            if recentlyArrInMainView.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath) as! DefaultCell
+                // 셀라인 삭제
+                tableView.separatorStyle = .none
+        //셀 선택 안되게..
+                tableView.allowsSelection = false
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecentlyCell
+                cell.search = recentlyArrInMainView[indexPath.row]
+                return cell
+            }
+            
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecentlyCell
-            cell.search = recentlyArr[indexPath.row]
-            return cell
+            if recentlyArrInSubView.count == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "subDefault", for: indexPath) as! DefaultCell
+                tableView.rowHeight = 300
+        //셀 선택 안되게..
+                tableView.allowsSelection = false
+                // 셀라인 삭제
+                tableView.separatorStyle = .none
+                tableView.isScrollEnabled = false
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "subCell", for: indexPath) as! RecentlyCustomCell
+                cell.search = recentlyArrInSubView[indexPath.row]
+                tableView.isScrollEnabled = true
+
+                return cell
+            }
         }
-        
     }
     
-    
+    func a() {
+        print(123123)
+    }
 }
-
 
 
 

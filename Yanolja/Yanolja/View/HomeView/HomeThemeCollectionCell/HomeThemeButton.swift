@@ -10,9 +10,14 @@ import UIKit
 
 class HomeThemeButton: UIView {
 
+    // MARK: - Properties
+    
+    let currentPageNumberLabel = UILabel()
+    let totalPageNumberLabel = UILabel()
+    
     private let refleshImageView = UIImageView()
     private let refleshLabel = UILabel()
-    private let pageNumberLabel = UILabel()
+    private let dashPageNumberLabel = UILabel()
     private let themeButtonStackView = UIStackView()
     private let themeButtonViewTopLine = UIView()
     private let themeButtonViewBottomLine = UIView()
@@ -28,6 +33,7 @@ class HomeThemeButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
     private func configureViews() {
         themeButtonViewTopLine.backgroundColor = #colorLiteral(red: 0.934979856, green: 0.9322634339, blue: 0.931660831, alpha: 1)
         themeButtonViewBottomLine.backgroundColor = #colorLiteral(red: 0.934979856, green: 0.9322634339, blue: 0.931660831, alpha: 1)
@@ -41,17 +47,25 @@ class HomeThemeButton: UIView {
         refleshLabel.text = "다른 테마 보기"
         refleshLabel.textAlignment = .left
         refleshLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
-        pageNumberLabel.text = "1 / 2"
-        pageNumberLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        currentPageNumberLabel.text = ""
+        currentPageNumberLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        dashPageNumberLabel.text = " /"
+        dashPageNumberLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        totalPageNumberLabel.text = ""
+        totalPageNumberLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        
         
         addSubview(themeButtonViewTopLine)
         addSubview(themeButtonViewBottomLine)
         addSubview(themeButtonStackView)
         themeButtonStackView.addArrangedSubview(refleshImageView)
         themeButtonStackView.addArrangedSubview(refleshLabel)
-        themeButtonStackView.addArrangedSubview(pageNumberLabel)
+        themeButtonStackView.addArrangedSubview(currentPageNumberLabel)
+        themeButtonStackView.addArrangedSubview(dashPageNumberLabel)
+        themeButtonStackView.addArrangedSubview(totalPageNumberLabel)
     }
     
+    // MARK: - configuration Constraints
     private func configureThemeButtonConstraints() {
         themeButtonViewTopLine.translatesAutoresizingMaskIntoConstraints = false
         themeButtonViewTopLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
@@ -77,9 +91,17 @@ class HomeThemeButton: UIView {
         refleshLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
         refleshLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
         
-        pageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        pageNumberLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        pageNumberLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        currentPageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentPageNumberLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        currentPageNumberLabel.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        
+        dashPageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        dashPageNumberLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        dashPageNumberLabel.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        
+        totalPageNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        totalPageNumberLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        totalPageNumberLabel.widthAnchor.constraint(equalToConstant: 10).isActive = true
     }
-
+    
 }

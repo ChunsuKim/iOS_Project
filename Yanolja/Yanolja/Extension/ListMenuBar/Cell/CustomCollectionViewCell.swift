@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ListTableViewCell: UICollectionViewCell {
+class CustomCollectionViewCell: UICollectionViewCell {
+    
+    var refreshControl: UIRefreshControl!
     
     let motelListTableView: UITableView = {
         let tableView = UITableView()
@@ -29,9 +31,14 @@ class ListTableViewCell: UICollectionViewCell {
     
     private func configureTableView() {
         self.addSubview(motelListTableView)
+        refreshControl = UIRefreshControl()
+        motelListTableView.addSubview(refreshControl)
+        
+        motelListTableView.refreshControl?.addTarget(self, action: #selector(refreshList(_:)), for: .valueChanged)
         
         motelListTableView.dataSource = self
         motelListTableView.register(MotelTableViewCell.self, forCellReuseIdentifier: MotelTableViewCell.identifier)
+        motelListTableView.register(HotelTableViewCell.self, forCellReuseIdentifier: HotelTableViewCell.reusableIdentifier)
         motelListTableView.allowsSelection = false
         motelListTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -42,13 +49,17 @@ class ListTableViewCell: UICollectionViewCell {
             motelListTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
+    
+    @objc private func refreshList(_ sender: Any) {
+        
+    }
 
 }
 
-extension ListTableViewCell: UITableViewDataSource {
+extension CustomCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
