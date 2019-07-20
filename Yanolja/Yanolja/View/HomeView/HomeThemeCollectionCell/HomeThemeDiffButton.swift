@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeThemeButton: UIView {
+class HomeThemeDiffButton: UIView {
 
     // MARK: - Properties
     

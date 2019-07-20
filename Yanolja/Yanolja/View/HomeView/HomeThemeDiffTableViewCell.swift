@@ -13,7 +13,7 @@ class HomeThemeDiffTableViewCell: UITableViewCell {
     // MARK: - Properties
     static let identifier = "HomeThemeDiffTableViewCell"
     
-    private let themeDiffButton = HomeThemeButton()
+    private let themeDiffButton = HomeThemeDiffButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
