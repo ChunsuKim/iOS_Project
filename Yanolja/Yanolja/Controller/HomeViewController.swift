@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     private func configureTableView() {
         homeTableView.dataSource = self
         homeTableView.delegate = self
-        homeTableView.estimatedRowHeight = 20  // 대충의 높이값
+        homeTableView.estimatedRowHeight = 50  // 대충의 높이값
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.separatorStyle = .none
         
@@ -168,6 +168,31 @@ extension HomeViewController: UITableViewDataSource {
             
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomePopSearchTableViewCell.identifier, for: indexPath) as! HomePopSearchTableViewCell
+            
+            cell.popInputData(numberOne: numberOne, numberTwo: numberTwo, numberThree: numberThree, numberFour: numberFour, numberFive: numberFive)
+            
+            cell.buttonAction = {
+                
+                cell.popDownButton.isSelected.toggle()
+                
+                if cell.popDownButton.isSelected {
+                    UIView.animate(withDuration: 0.3) {
+                        self.homeTableView.beginUpdates()
+                        cell.isSelectedHiddenViewState(state: false)
+                        cell.popBackgroundViewBottomPriority?.isActive = false
+                        cell.popHidddenViewBottomPriority?.isActive = true
+                        self.homeTableView.endUpdates()
+                    }
+                } else {
+                    UIView.animate(withDuration: 0.3) {
+                        self.homeTableView.beginUpdates()
+                        cell.isSelectedHiddenViewState(state: true)
+                        cell.popBackgroundViewBottomPriority?.isActive = true
+                        cell.popHidddenViewBottomPriority?.isActive = false
+                        self.homeTableView.endUpdates()
+                    }
+                }
+            }
             return cell
             
         case 4:

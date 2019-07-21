@@ -124,3 +124,9 @@ struct PopDataManager {
         PopData(imageName: "pool4")
     ]
 }
+
+let numberOne = "서울호캉스"
+let numberTwo = "서울수영장호텔"
+let numberThree = "전은석"
+let numberFour = "징배공기배"
+let numberFive = "코타키나발루호텔"
