@@ -63,6 +63,7 @@
 		F3B185E722D0812300B01C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E622D0812300B01C6C /* Assets.xcassets */; };
 		F3B185EA22D0812300B01C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E822D0812300B01C6C /* LaunchScreen.storyboard */; };
 		F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185F422D081B500B01C6C /* CustomTabBarController.swift */; };
+		F3B822D122E4ADF200562467 /* HomePopWordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B822D022E4ADF200562467 /* HomePopWordsTableViewCell.swift */; };
 		F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */; };
 		F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */; };
 		F3D6790022E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D678FF22E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift */; };
@@ -145,6 +146,7 @@
 		F3B185E922D0812300B01C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3B185EB22D0812300B01C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3B185F422D081B500B01C6C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		F3B822D022E4ADF200562467 /* HomePopWordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopWordsTableViewCell.swift; sourceTree = "<group>"; };
 		F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopButtonTableViewCell.swift; sourceTree = "<group>"; };
 		F3D678FF22E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeDiffTableViewCell.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */,
 				F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */,
 				F39C843422DC64C50024BBDB /* ThemeMenuBar.swift */,
+				F3B822D022E4ADF200562467 /* HomePopWordsTableViewCell.swift */,
 			);
 			path = HomeThemeCollectionCell;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				1FB5C85122DDCF7C00044D94 /* FSCalendarTransitionCoordinator.m in Sources */,
 				F3D6790022E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift in Sources */,
 				1FB5C8A122E19A1500044D94 /* regionData.swift in Sources */,
+				F3B822D122E4ADF200562467 /* HomePopWordsTableViewCell.swift in Sources */,
 				1FB5C89F22E0EA4B00044D94 /* DefaultCell.swift in Sources */,
 				F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */,
 				1FB5C85022DDCF7C00044D94 /* FSCalendarHeaderView.m in Sources */,
