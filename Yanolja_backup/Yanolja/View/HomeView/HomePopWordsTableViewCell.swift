@@ -11,10 +11,9 @@ import UIKit
 class HomePopWordsTableViewCell: UITableViewCell {
     
     static let identifier = "HomePopWordsTableViewCell"
-
+    
     var buttonAction: (() -> ())?
     
-//    private let popScrollView = UIScrollView()
     private let popBackgroundView = UIView()
     private let popHiddenView = UIView()
     
@@ -125,7 +124,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
         popDownButton.contentMode = .scaleAspectFit
         popDownButton.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
         
-//        contentView.addSubview(popScrollView)
+        
         contentView.addSubview(popBackgroundView)
         popBackgroundView.addSubview(popNowdaysLabel)
         popBackgroundView.addSubview(popUpArrowImageView)
@@ -154,18 +153,13 @@ class HomePopWordsTableViewCell: UITableViewCell {
     var popHidddenViewBottomPriority: NSLayoutConstraint?
     
     private func configurePopBackgroundViewConstraints() {
-//        popScrollView.translatesAutoresizingMaskIntoConstraints = false
-//        popScrollView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-//        popScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-//        popScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-//        popScrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         popBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        popBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        popBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         popBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         popBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         popBackgroundView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        popBackgroundViewBottomPriority = popBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        popBackgroundViewBottomPriority = popBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         popBackgroundViewBottomPriority?.priority = UILayoutPriority(1000)
         popBackgroundViewBottomPriority?.isActive = true
         
@@ -209,9 +203,8 @@ class HomePopWordsTableViewCell: UITableViewCell {
         popHiddenView.topAnchor.constraint(equalTo: popBackgroundView.bottomAnchor).isActive = true
         popHiddenView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         popHiddenView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        
         popHiddenView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        popHidddenViewBottomPriority = popHiddenView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        popHidddenViewBottomPriority = popHiddenView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         popHidddenViewBottomPriority?.priority = UILayoutPriority(750)
         popHidddenViewBottomPriority?.isActive = true
         

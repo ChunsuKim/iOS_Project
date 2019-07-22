@@ -144,7 +144,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -176,21 +176,17 @@ extension HomeViewController: UITableViewDataSource {
                 cell.popDownButton.isSelected.toggle()
                 
                 if cell.popDownButton.isSelected {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.homeTableView.beginUpdates()
-                        cell.isSelectedHiddenViewState(state: false)
-                        cell.popBackgroundViewBottomPriority?.isActive = false
-                        cell.popHidddenViewBottomPriority?.isActive = true
-                        self.homeTableView.endUpdates()
-                    })
+                    self.homeTableView.beginUpdates()
+                    cell.isSelectedHiddenViewState(state: false)
+                    cell.popBackgroundViewBottomPriority?.isActive = false
+                    cell.popHidddenViewBottomPriority?.isActive = true
+                    self.homeTableView.endUpdates()
                 } else {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.homeTableView.beginUpdates()
-                        cell.isSelectedHiddenViewState(state: true)
-                        cell.popBackgroundViewBottomPriority?.isActive = true
-                        cell.popHidddenViewBottomPriority?.isActive = false
-                        self.homeTableView.endUpdates()
-                    })
+                    self.homeTableView.beginUpdates()
+                    cell.popHidddenViewBottomPriority?.isActive = false
+                    cell.popBackgroundViewBottomPriority?.isActive = true
+                    cell.isSelectedHiddenViewState(state: true)
+                    self.homeTableView.endUpdates()
                 }
             }
             
@@ -204,14 +200,10 @@ extension HomeViewController: UITableViewDataSource {
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
             
-            homeThemeCollectionView = cell
-            
             return cell
             
         case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
-            
-            homeThemeCollectionView = cell
             
             return cell
             
