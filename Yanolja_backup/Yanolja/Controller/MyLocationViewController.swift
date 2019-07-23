@@ -12,6 +12,7 @@ class MyLocationViewController: UIViewController {
 
     var topNaviView = TopNaviView()
     var listCollectionView = ListCollectionView()
+    let notiCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,22 @@ class MyLocationViewController: UIViewController {
             listCollectionView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
         ])
         
+        moveDetailVC()
+    }
+    
+    // MARK: - addObserver
+    private func moveDetailVC(){
+        notiCenter.addObserver(self, selector: #selector(moveDetailEvent(_:)), name: Notification.Name("moveDetailVC"), object: nil)
+    }
+    
+    @objc private func moveDetailEvent(_ sender: Any) {
+        let detailVC = DetailViewController()
+        
+        show(detailVC, sender: nil)
+    }
+    
+    deinit {
+        notiCenter.removeObserver(self)
     }
     
 }
@@ -59,7 +76,7 @@ extension MyLocationViewController: checkBoxDelegate {
     }
     
     func searchButton() {
-        let vc = SearchController()
+        let vc = SearchViewController()
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true, completion: nil)
     }

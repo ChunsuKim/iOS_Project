@@ -97,23 +97,11 @@ class CustomMenuBar: UIView {
     private func autolayout(){
         
         addSubview(menuCollectionView)
-        addSubview(indicatorBar)
         
         menuCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         menuCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         menuCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         menuCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-        indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
-        indicatorBarLeadingConstraint.isActive = true
-        
-        indicatorBarWidthConstraint = indicatorBar.widthAnchor.constraint(equalToConstant: widths[0])
-        indicatorBarWidthConstraint.isActive = true
-        
-//        indicatorBar.widthAnchor.constraint(equalTo: menuCollectionView.widthAnchor, multiplier: 0.1).isActive = true
         
     }
     
@@ -142,22 +130,9 @@ extension CustomMenuBar: UICollectionViewDelegate{
         
         delegate?.menuBarDidSelected(indexPath)
         
-//        indicatorBarLeadingConstraint.constant = (self.frame.width / CGFloat(menuTitles.count)) * CGFloat((indexPath.item))
+        menuCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
-        sum = 0
-        print("### :", sumWidth(indexPath: indexPath.row))
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            if indexPath.row == 0 {
-                self.indicatorBarLeadingConstraint.constant = 20
-                self.indicatorBarWidthConstraint.constant = self.widths[indexPath.row]
-            } else {
-                self.indicatorBarLeadingConstraint.constant = self.sum
-                self.indicatorBarWidthConstraint.constant = self.widths[indexPath.row]
-            }
-            self.layoutIfNeeded()
-        }, completion: nil)
-        
+        print(menuCollectionView)
     }
     
 }

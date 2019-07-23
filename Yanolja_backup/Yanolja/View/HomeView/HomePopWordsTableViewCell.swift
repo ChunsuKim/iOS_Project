@@ -11,7 +11,7 @@ import UIKit
 class HomePopWordsTableViewCell: UITableViewCell {
     
     static let identifier = "HomePopWordsTableViewCell"
-    
+
     var buttonAction: (() -> ())?
     
     private let popBackgroundView = UIView()

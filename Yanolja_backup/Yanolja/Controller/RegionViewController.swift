@@ -111,7 +111,7 @@ class RegionViewController: UIViewController {
         regionButton.isSelected = true
         regionButton.setTitle("지역별", for: .normal)
         regionButton.setTitleColor(.lightGray, for: .normal)
-        regionButton.addTarget(self, action: #selector(infor), for: .touchUpInside)
+        regionButton.addTarget(self, action: #selector(categoryButtonAnimateAction), for: .touchUpInside)
         regionButton.setTitleColor(.darkGray, for: .selected)
         regionButton.setTitle("지역별", for: .selected)
         regionButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 19)
@@ -122,7 +122,7 @@ class RegionViewController: UIViewController {
         stationButton.setTitle("역주변", for: .selected)
         stationButton.setTitleColor(.darkGray, for: .selected)
         stationButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        stationButton.addTarget(self, action: #selector(infor), for: .touchUpInside)
+        stationButton.addTarget(self, action: #selector(categoryButtonAnimateAction), for: .touchUpInside)
         
         
         mapButton.setTitle("지도검색", for: .normal)
@@ -130,9 +130,9 @@ class RegionViewController: UIViewController {
         mapButton.setTitle("지도검색", for: .selected)
         mapButton.setTitleColor(.darkGray, for: .selected)
         mapButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        mapButton.addTarget(self, action: #selector(infor), for: .touchUpInside)
+        mapButton.addTarget(self, action: #selector(categoryButtonAnimateAction), for: .touchUpInside)
     }
-    @objc private func infor(sender:UIButton) {
+    @objc private func categoryButtonAnimateAction(sender:UIButton) {
         regionButton.isSelected = false
         stationButton.isSelected = false
         mapButton.isSelected = false

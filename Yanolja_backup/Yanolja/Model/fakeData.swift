@@ -126,6 +126,21 @@ struct PopDataManager {
 }
 
 
+struct keyWord {
+    let rank: String
+    let word: String
+}
+
+let keyWords: [keyWord] = [
+    keyWord(rank: "1", word: "서울호캉스"),
+    keyWord(rank: "2", word: "서울수영장호텔"),
+    keyWord(rank: "3", word: "전은석"),
+    keyWord(rank: "4", word: "징배공기배"),
+    keyWord(rank: "5", word: "코타키나발루호텔")
+    ]
+
+let loginMenuTitle = ["야놀자 로그인", "간편 로그인"]
+
 let numberOne = "서울호캉스"
 let numberTwo = "서울수영장호텔"
 let numberThree = "전은석"

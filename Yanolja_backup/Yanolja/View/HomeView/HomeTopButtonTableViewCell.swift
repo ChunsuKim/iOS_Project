@@ -18,6 +18,8 @@ class HomeTopButtonTableViewCell: UITableViewCell {
     private let couponButton = UIButton(type: .custom)
     
     private let centerButtonBackView = UIView()
+    private let buttonHorizontalLine = UIView()
+    private let buttonVerticalLine = UIView()
     private let buttonStackView = UIStackView()
     private let motelButton = UIButton(type: .custom)
     private let hotelButton = UIButton(type: .custom)
@@ -78,6 +80,9 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         eventButtonStackView.distribution = .fill
         eventButtonStackView.spacing = 0
         
+        buttonHorizontalLine.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
+        buttonVerticalLine.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
+        
         motelButton.setImage(#imageLiteral(resourceName: "moteld"), for: .normal)
         motelButton.contentMode = .scaleAspectFit
         hotelButton.setImage(#imageLiteral(resourceName: "hoteld"), for: .normal)
@@ -103,11 +108,13 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         buttonView.addSubview(couponButton)
         buttonView.addSubview(centerButtonBackView)
         centerButtonBackView.addSubview(buttonStackView)
+        centerButtonBackView.addSubview(buttonHorizontalLine)
         buttonStackView.addArrangedSubview(motelButton)
         buttonStackView.addArrangedSubview(hotelButton)
         buttonStackView.addArrangedSubview(pensionButton)
         buttonStackView.addArrangedSubview(guestButton)
         centerButtonBackView.addSubview(eventButtonStackView)
+        centerButtonBackView.addSubview(buttonVerticalLine)
         eventButtonStackView.addArrangedSubview(foreignButton)
         eventButtonStackView.addArrangedSubview(ticketButton)
         buttonView.addSubview(orderofCouponButton)
@@ -143,6 +150,12 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         buttonStackView.trailingAnchor.constraint(equalTo: centerButtonBackView.trailingAnchor, constant: 0).isActive = true
         buttonStackView.heightAnchor.constraint(equalTo: centerButtonBackView.heightAnchor, multiplier: 0.6).isActive = true
         
+        buttonHorizontalLine.translatesAutoresizingMaskIntoConstraints = false
+        buttonHorizontalLine.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor).isActive = true
+        buttonHorizontalLine.centerXAnchor.constraint(equalTo: centerButtonBackView.centerXAnchor).isActive = true
+        buttonHorizontalLine.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.95).isActive = true
+        buttonHorizontalLine.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
         motelButton.translatesAutoresizingMaskIntoConstraints = false
         motelButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.25).isActive = true
         
@@ -156,10 +169,16 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         guestButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.25).isActive = true
         
         eventButtonStackView.translatesAutoresizingMaskIntoConstraints = false
-        eventButtonStackView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor).isActive = true
+        eventButtonStackView.topAnchor.constraint(equalTo: buttonHorizontalLine.bottomAnchor).isActive = true
         eventButtonStackView.leadingAnchor.constraint(equalTo: centerButtonBackView.leadingAnchor, constant: 0).isActive = true
         eventButtonStackView.trailingAnchor.constraint(equalTo: centerButtonBackView.trailingAnchor, constant: 0).isActive = true
         eventButtonStackView.heightAnchor.constraint(equalTo: centerButtonBackView.heightAnchor, multiplier: 0.4).isActive = true
+        
+        buttonVerticalLine.translatesAutoresizingMaskIntoConstraints = false
+        buttonVerticalLine.centerXAnchor.constraint(equalTo: centerButtonBackView.centerXAnchor).isActive = true
+        buttonVerticalLine.centerYAnchor.constraint(equalTo: eventButtonStackView.centerYAnchor).isActive = true
+        buttonVerticalLine.heightAnchor.constraint(equalTo: eventButtonStackView.heightAnchor, multiplier: 0.6).isActive = true
+        buttonVerticalLine.widthAnchor.constraint(equalToConstant: 2).isActive = true
         
         foreignButton.translatesAutoresizingMaskIntoConstraints = false
         foreignButton.widthAnchor.constraint(equalTo: eventButtonStackView.widthAnchor, multiplier: 0.5).isActive = true

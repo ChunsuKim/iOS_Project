@@ -248,11 +248,11 @@ class MotelTableViewCell: UITableViewCell {
     private let eventCont: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "대실/숙박 1만원 쿠폰 + 스타일러, 안마의자, 세탁기"
+        label.text = "대실/숙박 1만원 쿠폰 + 스타일러, 안마의자, 세탁기aaaaaaa"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.numberOfLines = 2 
+        label.numberOfLines = 2
         
         return label
     }()
@@ -379,8 +379,11 @@ class MotelTableViewCell: UITableViewCell {
             
             eventTitle.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
             eventTitle.bottomAnchor.constraint(equalTo: eventCont.bottomAnchor),
+            eventTitle.widthAnchor.constraint(equalToConstant: 50),
+            eventCont.topAnchor.constraint(equalTo: eventTitle.topAnchor),
             eventCont.leadingAnchor.constraint(equalTo: eventTitle.trailingAnchor, constant: 10),
-            eventCont.bottomAnchor.constraint(equalTo: hotelCellArea.bottomAnchor, constant: -10)
+            eventCont.bottomAnchor.constraint(equalTo: hotelCellArea.bottomAnchor, constant: -10),
+            eventCont.trailingAnchor.constraint(equalTo: hotelCellArea.trailingAnchor),
         ])
         
         switch rentableRoomCancelPrice.text!.count > 0 {

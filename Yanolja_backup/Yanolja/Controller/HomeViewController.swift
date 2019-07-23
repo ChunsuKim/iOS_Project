@@ -128,9 +128,10 @@ class HomeViewController: UIViewController {
         guard let touch = touches.first else { return }
         let touchPoint = touch.location(in: touch.view)
         if headerSearchLabel.frame.contains(touchPoint) {
-            let vc = SearchController()
-            vc.modalPresentationStyle = .overCurrentContext
-            present(vc, animated: true, completion: nil)
+            let vc = SearchViewController()
+            vc.view.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
+
+            present(vc, animated: false, completion: nil)
         }
     }
     
@@ -141,10 +142,14 @@ class HomeViewController: UIViewController {
 
 // MARK: - TableView Data Source Extension
 extension HomeViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 8
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,6 +157,7 @@ extension HomeViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTopButtonTableViewCell.identifier, for: indexPath) as! HomeTopButtonTableViewCell
+            
             return cell
             
         case 1:
@@ -169,7 +175,7 @@ extension HomeViewController: UITableViewDataSource {
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomePopWordsTableViewCell.identifier, for: indexPath) as! HomePopWordsTableViewCell
             
-            cell.popInputData(numberOne: numberOne, numberTwo: numberTwo, numberThree: numberThree, numberFour: numberFour, numberFive: numberFive)
+            cell.popInputData(numberOne: keyWords[0].word, numberTwo: keyWords[1].word, numberThree: keyWords[2].word, numberFour: keyWords[3].word, numberFive: keyWords[4].word)
             
             cell.buttonAction = {
                 
@@ -177,9 +183,9 @@ extension HomeViewController: UITableViewDataSource {
                 
                 if cell.popDownButton.isSelected {
                     self.homeTableView.beginUpdates()
-                    cell.isSelectedHiddenViewState(state: false)
                     cell.popBackgroundViewBottomPriority?.isActive = false
                     cell.popHidddenViewBottomPriority?.isActive = true
+                    cell.isSelectedHiddenViewState(state: false)
                     self.homeTableView.endUpdates()
                 } else {
                     self.homeTableView.beginUpdates()

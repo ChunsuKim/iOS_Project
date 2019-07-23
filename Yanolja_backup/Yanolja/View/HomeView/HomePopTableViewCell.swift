@@ -69,7 +69,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
     
     private func configureCollectionViewConstraints() {
         popViewCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        popViewCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        popViewCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
         popViewCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         popViewCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         popViewCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
@@ -102,7 +102,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
         } else {
             scrollStartNumber = 0
             let indexPath = IndexPath(item: 0, section: 0)
-            popViewCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+            popViewCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
 //            popViewCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
             pagecontrols.currentPage = indexPath.item
         }
@@ -127,7 +127,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
 extension HomePopTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: contentView.frame.width - 40, height: contentView.frame.height - 40)
+        return CGSize(width: contentView.frame.width - 40, height: contentView.frame.height - 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

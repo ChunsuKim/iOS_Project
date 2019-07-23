@@ -107,14 +107,13 @@ extension ListCollectionView: UICollectionViewDataSource {
 }
 
 extension ListCollectionView: UICollectionViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        customMenuBar.indicatorBarLeadingConstraint.constant = scrollView.contentOffset.x / CGFloat(menuTitles.count)
-    }
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
-//        print(itemAt)
+        print("##### : ", itemAt)
         customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
+    
 }
 
 extension ListCollectionView: UICollectionViewDelegateFlowLayout{

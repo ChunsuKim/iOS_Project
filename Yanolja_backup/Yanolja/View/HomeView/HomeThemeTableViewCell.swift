@@ -17,7 +17,7 @@ class HomeThemeTableViewCell: UITableViewCell {
     private let titleView = UIView()
     private let titleLabel = UILabel()
     private let titleButton = UIButton(type: .custom)
-    private let menuBar = MenuBar()
+    private let menuBar = HomeThemeCollectionViewMenuBar()
     
     private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
     private var isState = true
@@ -219,7 +219,7 @@ extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - MenuBar Delegate
+// MARK: - HomeThemeCollectionViewMenuBar Delegate
 extension HomeThemeTableViewCell: MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath) {
         homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)

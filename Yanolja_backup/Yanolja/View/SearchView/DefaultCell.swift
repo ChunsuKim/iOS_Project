@@ -18,8 +18,8 @@ class DefaultCell: UITableViewCell {
     func configure() {
         self.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: self.topAnchor,constant: 50).isActive = true
+        label.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -50).isActive = true
         label.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         label.textAlignment = .center

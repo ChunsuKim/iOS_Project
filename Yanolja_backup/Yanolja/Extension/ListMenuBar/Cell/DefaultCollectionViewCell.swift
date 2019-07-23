@@ -11,6 +11,7 @@ import UIKit
 class DefaultCollectionViewCell: UICollectionViewCell {
     
     var refreshControl = UIRefreshControl()
+    let notiCenter = NotificationCenter.default
     
     let motelListTableView: UITableView = {
         let tableView = UITableView()
@@ -35,9 +36,10 @@ class DefaultCollectionViewCell: UICollectionViewCell {
         
         motelListTableView.refreshControl?.addTarget(self, action: #selector(refreshList(_:)), for: .valueChanged)
         
+        motelListTableView.delegate = self
         motelListTableView.dataSource = self
         motelListTableView.register(HotelTableViewCell.self, forCellReuseIdentifier: HotelTableViewCell.reusableIdentifier)
-        motelListTableView.allowsSelection = false
+        motelListTableView.allowsSelection = true
         
         NSLayoutConstraint.activate([
             motelListTableView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -47,11 +49,19 @@ class DefaultCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    // MARK: - @objc
+    
     @objc private func refreshList(_ sender: Any) {
         motelListTableView.refreshControl?.endRefreshing()
         motelListTableView.reloadData()
     }
     
+}
+
+extension DefaultCollectionViewCell: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        notiCenter.post(name: Notification.Name("moveDetailVC"), object: nil)
+    }
 }
 
 extension DefaultCollectionViewCell: UITableViewDataSource {
@@ -62,6 +72,7 @@ extension DefaultCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
+        cell.selectionStyle = .none
         return cell
     }
     

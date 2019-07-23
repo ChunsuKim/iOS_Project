@@ -1,5 +1,5 @@
 //
-//  MenuBar.swift
+//  HomeThemeCollectionViewMenuBar.swift
 //  Yanolja
 //
 //  Created by Chunsu Kim on 15/07/2019.
@@ -12,7 +12,7 @@ protocol MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath)
 }
 
-class MenuBar: UIView {
+class HomeThemeCollectionViewMenuBar: UIView {
     
     var homeThemeMenuCollectionView = HomeThemeMenuCollectionCell()
     var delegate: MenuBarDelegate?
@@ -115,7 +115,7 @@ class MenuBar: UIView {
     
 }
 
-extension MenuBar: UICollectionViewDataSource {
+extension HomeThemeCollectionViewMenuBar: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -148,7 +148,7 @@ extension MenuBar: UICollectionViewDataSource {
     }
 }
 
-extension MenuBar: UICollectionViewDelegate {
+extension HomeThemeCollectionViewMenuBar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelect")
         delegate?.menuBarDidSelected(indexPath)
@@ -174,7 +174,7 @@ extension MenuBar: UICollectionViewDelegate {
     }
 }
 
-extension MenuBar: UICollectionViewDelegateFlowLayout {
+extension HomeThemeCollectionViewMenuBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width / CGFloat(4), height: 30)
     }

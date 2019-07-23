@@ -11,6 +11,7 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     
     var refreshControl: UIRefreshControl!
+    let notiCenter = NotificationCenter.default
     
     let motelListTableView: UITableView = {
         let tableView = UITableView()
@@ -36,10 +37,11 @@ class CustomCollectionViewCell: UICollectionViewCell {
         
         motelListTableView.refreshControl?.addTarget(self, action: #selector(refreshList(_:)), for: .valueChanged)
         
+        motelListTableView.delegate = self
         motelListTableView.dataSource = self
         motelListTableView.register(MotelTableViewCell.self, forCellReuseIdentifier: MotelTableViewCell.identifier)
         motelListTableView.register(HotelTableViewCell.self, forCellReuseIdentifier: HotelTableViewCell.reusableIdentifier)
-        motelListTableView.allowsSelection = false
+        motelListTableView.allowsSelection = true
         motelListTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         NSLayoutConstraint.activate([
@@ -56,6 +58,12 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
 }
 
+extension CustomCollectionViewCell: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        notiCenter.post(name: Notification.Name("moveDetailVC"), object: nil)
+    }
+}
+
 extension CustomCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,12 +71,15 @@ extension CustomCollectionViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch indexPath.row {
         case 0...5:
             let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! MotelTableViewCell
+            cell.selectionStyle = .none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
+            cell.selectionStyle = .none
             return cell
         }
     }
