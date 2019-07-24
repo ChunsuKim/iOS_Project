@@ -110,6 +110,24 @@ class LoginMenuBar: UIView {
         indicatorBarLeadingConstraint.isActive = true
     }
     
+    var widthArray = [CGFloat]()
+    
+    func moveIndicator(index: Int) {
+        let cellWdth = self.frame.width / 2
+        
+        var tempSpace = (cellWdth - widthArray[index]) / 2
+        
+        if index != 0 {
+            tempSpace += cellWdth
+        }
+        
+        indicatorBarLeadingConstraint.constant = tempSpace
+        indicatorBarWidthConst.constant = widthArray[index]
+        
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
 
 extension LoginMenuBar: UICollectionViewDataSource {
@@ -123,6 +141,8 @@ extension LoginMenuBar: UICollectionViewDataSource {
             cell.loginMenuLabel.text = loginMenuTitle[indexPath.row]
         
         let textSize = cell.loginMenuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]).width
+        
+        widthArray.insert(textSize, at: indexPath.row)
         
         if indexPath.row == 0 {
             let leadingConst: CGFloat = (UIScreen.main.bounds.width) * 0.5 * 0.5
@@ -144,24 +164,28 @@ extension LoginMenuBar: UICollectionViewDelegate {
         print("didSelect")
         delegate?.loginMenuBarDidSelected(indexPath)
         
-        let cell = collectionView.cellForItem(at: indexPath) as! LoginMenuCollectionViewCell
+        print(indexPath)
         
-        let textSize = cell.loginMenuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]).width
+        moveIndicator(index: indexPath.row)
         
-        //        indicatorBar.frame.size.width = textSize
-        
-        let cellWidth = (self.frame.width / CGFloat(2))
-        let size = (self.frame.width / CGFloat(2)) * CGFloat(indexPath.row)
-        
-        indicatorBarLeadingConstraint.constant = size + ((cellWidth - textSize) / 2)
-        indicatorBarWidthConst.constant = textSize
-        
-        
-        print("textSize: ", textSize)
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+//        let cell = collectionView.cellForItem(at: indexPath) as! LoginMenuCollectionViewCell
+//
+//        let textSize = cell.loginMenuLabel.text!.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]).width
+//
+//        //        indicatorBar.frame.size.width = textSize
+//
+//        let cellWidth = (self.frame.width / CGFloat(2))
+//        let size = (self.frame.width / CGFloat(2)) * CGFloat(indexPath.row)
+//
+//        indicatorBarLeadingConstraint.constant = size + ((cellWidth - textSize) / 2)
+//        indicatorBarWidthConst.constant = textSize
+//
+//
+//        print("textSize: ", textSize)
+//        print("leading: ", indicatorBarLeadingConstraint.constant)
+//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//            self.layoutIfNeeded()
+//        }, completion: nil)
     }
 }
 

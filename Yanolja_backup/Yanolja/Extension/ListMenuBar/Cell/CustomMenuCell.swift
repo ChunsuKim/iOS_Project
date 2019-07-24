@@ -15,7 +15,7 @@ class CustomMenuCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel()
         label.text = "Text"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

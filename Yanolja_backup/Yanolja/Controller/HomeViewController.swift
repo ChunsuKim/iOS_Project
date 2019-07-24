@@ -69,6 +69,7 @@ class HomeViewController: UIViewController {
         homeTableView.estimatedRowHeight = 20  // 대충의 높이값
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.separatorStyle = .none
+        homeTableView.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
         
         homeTableView.register(HomeTopButtonTableViewCell.self, forCellReuseIdentifier: HomeTopButtonTableViewCell.identifier)
         

@@ -51,8 +51,8 @@ class SearchViewController: UIViewController{
     var searchTextFieldAnimateTopAnchor :NSLayoutConstraint!
     
     
-    private var dateLabel = UILabel()
-    private var numberOfPeopleLabel = UILabel()
+     var dateLabel = UILabel()
+     var numberOfPeopleLabel = UILabel()
     private var resultButton = UIButton()
     
     //최근 검색 조건
@@ -75,6 +75,8 @@ class SearchViewController: UIViewController{
     private let allRemoveButton = UIButton(type: .system)
     private let subTableView = UITableView()
     var infoSingleTon = SingleTon.standard
+    var calendarTitle :String = ""
+    
     
     func mainSearchViewHiddenAndDetailSearchViewAppear() {
         let mainSearchTempArr = [mainTitleLabel,dismissButton,dateLabel,numberOfPeopleLabel,resultButton,recentlyLabel,removeButton,mainTableView,recommendKeyWordLabel,recommendViewFirst,recommendViewSecond,recommendViewThird]
@@ -119,8 +121,7 @@ class SearchViewController: UIViewController{
         
 
     }
-    
-    
+
     func detailSearchUI() {
         let detailSearchTempArr = [backButton,keyWordLabel,recentlyKeyWordLable,allRemoveButton,subTableView]
         detailSearchTempArr.forEach{view.addSubview($0)

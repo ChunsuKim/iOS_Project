@@ -71,7 +71,7 @@ class LoginEasyCollectionViewCell: UICollectionViewCell {
     
     private func configureConstraints() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 11).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         descriptionLabel.heightAnchor.constraint(equalToConstant: 55).isActive = true

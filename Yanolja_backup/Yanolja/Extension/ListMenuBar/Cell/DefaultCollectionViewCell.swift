@@ -13,6 +13,26 @@ class DefaultCollectionViewCell: UICollectionViewCell {
     var refreshControl = UIRefreshControl()
     let notiCenter = NotificationCenter.default
     
+    let topBandNavi: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
+        
+        return view
+    }()
+    
+    let bandNaviButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("야놀자 추천순", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.imageView?.image = #imageLiteral(resourceName: "downArrow")
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        return button
+    }()
+    
     let motelListTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +51,9 @@ class DefaultCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureTableView() {
+        self.addSubview(topBandNavi)
         self.addSubview(motelListTableView)
+        topBandNavi.addSubview(bandNaviButton)
         motelListTableView.addSubview(refreshControl)
         
         motelListTableView.refreshControl?.addTarget(self, action: #selector(refreshList(_:)), for: .valueChanged)
@@ -42,7 +64,13 @@ class DefaultCollectionViewCell: UICollectionViewCell {
         motelListTableView.allowsSelection = true
         
         NSLayoutConstraint.activate([
-            motelListTableView.topAnchor.constraint(equalTo: self.topAnchor),
+            topBandNavi.topAnchor.constraint(equalTo: self.topAnchor),
+            topBandNavi.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            topBandNavi.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            topBandNavi.bottomAnchor.constraint(equalTo: motelListTableView.topAnchor),
+            topBandNavi.heightAnchor.constraint(equalToConstant: 40),
+            bandNaviButton.centerYAnchor.constraint(equalTo: topBandNavi.centerYAnchor),
+            bandNaviButton.trailingAnchor.constraint(equalTo: topBandNavi.trailingAnchor, constant: -20),
             motelListTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             motelListTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             motelListTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),

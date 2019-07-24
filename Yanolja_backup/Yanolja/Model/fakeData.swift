@@ -16,7 +16,7 @@ struct ThemeMenu {
 
 struct Pool {
     let title: String
-    let imageName: String
+    let imageUrl: String
     let price: String
 }
 
@@ -27,36 +27,36 @@ let themeTitleDiff = "핫썸머 핫캉스"
 
 let themeMenus: [ThemeMenu] = [
     ThemeMenu(menu: "풀빌라", items: [
-        Pool(title: "가평 하버하우스풀빌라", imageName: "pool1", price: "180,000"),
-        Pool(title: "경주 에디스풀빌라펜션", imageName: "pool2", price: "69,000"),
-        Pool(title: "여수 까사413펜션", imageName: "pool3", price: "100,000"),
-        Pool(title: "경주 비버리힐펜션", imageName: "pool4", price: "80,000")
+        Pool(title: "가평 하버하우스풀빌라", imageUrl: "pool1", price: "180,000"),
+        Pool(title: "경주 에디스풀빌라펜션", imageUrl: "pool2", price: "69,000"),
+        Pool(title: "여수 까사413펜션", imageUrl: "pool3", price: "100,000"),
+        Pool(title: "경주 비버리힐펜션", imageUrl: "pool4", price: "80,000")
         ]
     ),
     
     ThemeMenu(menu: "해수욕장", items: [
-        Pool(title: "강릉 진배네", imageName: "pool4", price: "150,000"),
-        Pool(title: "속초 은석이네", imageName: "pool3", price: "180,000"),
-        Pool(title: "대천 천수네", imageName: "pool2", price: "300,000"),
-        Pool(title: "울산 업스네", imageName: "pool1", price: "210,000")
+        Pool(title: "강릉 진배네", imageUrl: "pool4", price: "150,000"),
+        Pool(title: "속초 은석이네", imageUrl: "pool3", price: "180,000"),
+        Pool(title: "대천 천수네", imageUrl: "pool2", price: "300,000"),
+        Pool(title: "울산 업스네", imageUrl: "pool1", price: "210,000")
         
         ]
     ),
     
     ThemeMenu(menu: "수영장", items: [
-        Pool(title: "엠버서드 해운대", imageName: "pool2", price: "210,000"),
-        Pool(title: "콘티넨탈 삼성", imageName: "pool1", price: "160,000"),
-        Pool(title: "라마다 경주", imageName: "pool4", price: "200,000"),
-        Pool(title: "휘슬락 호텔", imageName: "pool3", price: "270,000")
+        Pool(title: "엠버서드 해운대", imageUrl: "pool2", price: "210,000"),
+        Pool(title: "콘티넨탈 삼성", imageUrl: "pool1", price: "160,000"),
+        Pool(title: "라마다 경주", imageUrl: "pool4", price: "200,000"),
+        Pool(title: "휘슬락 호텔", imageUrl: "pool3", price: "270,000")
         
         ]
     ),
     
     ThemeMenu(menu: "계곡핫플", items: [
-        Pool(title: "히든베이", imageName: "pool4", price: "190,000"),
-        Pool(title: "강릉 세인트존스호텔", imageName: "pool3", price: "230,000"),
-        Pool(title: "스카이베이", imageName: "pool2", price: "300,000"),
-        Pool(title: "마리나 베이 서울", imageName: "pool1", price: "210,000")
+        Pool(title: "히든베이", imageUrl: "pool4", price: "190,000"),
+        Pool(title: "강릉 세인트존스호텔", imageUrl: "pool3", price: "230,000"),
+        Pool(title: "스카이베이", imageUrl: "pool2", price: "300,000"),
+        Pool(title: "마리나 베이 서울", imageUrl: "pool1", price: "210,000")
         
         ]
     )

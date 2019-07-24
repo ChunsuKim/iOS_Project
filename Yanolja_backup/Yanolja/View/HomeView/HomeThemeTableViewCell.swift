@@ -183,7 +183,7 @@ extension HomeThemeTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCollectionViewCell.identifier, for: indexPath) as! HomeThemeCollectionViewCell
         
         if isState {
-            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageName), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
+            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageUrl), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
             
             homeThemeCollectionViewCell = cell
         } else {

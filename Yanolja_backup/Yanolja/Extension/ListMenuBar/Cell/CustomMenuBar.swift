@@ -37,7 +37,16 @@ class CustomMenuBar: UIView {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
+        
         return collectionView
+    }()
+    
+    let divideLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        
+        return view
     }()
     
     let indicatorBar: UIView = {
@@ -97,11 +106,17 @@ class CustomMenuBar: UIView {
     private func autolayout(){
         
         addSubview(menuCollectionView)
+        addSubview(divideLine)
         
         menuCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         menuCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         menuCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        menuCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        divideLine.topAnchor.constraint(equalTo: menuCollectionView.bottomAnchor).isActive = true
+        divideLine.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        divideLine.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        divideLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divideLine.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
     }
     
@@ -141,13 +156,13 @@ extension CustomMenuBar: UICollectionViewDelegateFlowLayout{
     // FIXME: - width값만 적용됨
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: widths[indexPath.item], height: 50)
+        return CGSize(width: widths[indexPath.item], height: 40)
 
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
