@@ -58,6 +58,7 @@
 		F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27BE22D0AA10000656DD /* HomeViewController.swift */; };
 		F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */; };
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
+		F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */; };
 		F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */; };
 		F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */; };
 		F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1A22D4A17B0093DB24 /* fakeData.swift */; };
@@ -149,6 +150,7 @@
 		F33F27BE22D0AA10000656DD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationViewController.swift; sourceTree = "<group>"; };
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginStampTableViewCell.swift; sourceTree = "<group>"; };
 		F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeTableViewCell.swift; sourceTree = "<group>"; };
 		F3919B1A22D4A17B0093DB24 /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */,
+				F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */,
 			);
 			path = UserView;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				F339FE0022DF1CFC003D5F71 /* HomePopCollectionViewCell.swift in Sources */,
 				61F91F1F22E6C4320090ED8F /* CALayerBorder.swift in Sources */,
 				610423D222DE4AA20087E719 /* CustomMenuBar.swift in Sources */,
+				F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */,
 				1FB5C85122DDCF7C00044D94 /* FSCalendarTransitionCoordinator.m in Sources */,
 				F3D6790022E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift in Sources */,
 				1FB5C8A122E19A1500044D94 /* regionData.swift in Sources */,

@@ -149,17 +149,7 @@ extension LoginViewController: UICollectionViewDataSource {
 extension LoginViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / view.frame.width)
-        loginMenuBar.moveIndicator(index: page)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print("scrollViewDidScroll")
-//        let page = Int(scrollView.contentSize.width / view.frame.width)
-//        loginMenuBar.moveto(index: page)
-        
-//        loginMenuBar.indicatorBarLeadingConstraint.constant = 62
-//        loginMenuBar.indicatorBarLeadingConstraint.constant = scrollView.contentOffset.x / CGFloat(2)
-        
+        loginMenuBar.calculateIndicatorLeadingAndWidth(index: page)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
