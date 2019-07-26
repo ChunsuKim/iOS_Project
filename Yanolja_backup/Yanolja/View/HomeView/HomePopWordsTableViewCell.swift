@@ -13,7 +13,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
     // MARK: - Properties
     static let identifier = "HomePopWordsTableViewCell"
 
-    var buttonAction: (() -> ())?
+    var downButtonAction: (() -> ())?
     
     // popBackgroundView
     private let popBackgroundView = UIView()
@@ -294,6 +294,6 @@ class HomePopWordsTableViewCell: UITableViewCell {
     
     // MARK: - Action Method
     @objc func buttonDidTap(_ sender: Any) {
-        buttonAction?()
+        downButtonAction?()
     }
 }

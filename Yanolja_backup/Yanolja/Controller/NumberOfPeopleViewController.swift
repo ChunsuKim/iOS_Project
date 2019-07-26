@@ -90,7 +90,7 @@ class NumberOfPeopleViewController: UIViewController {
         let plusButton = UIButton(type: .system)
         mainView.addSubview(plusButton)
         plusButton.translatesAutoresizingMaskIntoConstraints = false
-       plusButton.contentHorizontalAlignment
+//       plusButton.contentHorizontalAlignment
         plusButton.topAnchor.constraint(equalTo: frameView.topAnchor,constant: 15).isActive = true
         plusButton.trailingAnchor.constraint(equalTo: frameView.trailingAnchor,constant: -15).isActive = true
         plusButton.backgroundColor = .red

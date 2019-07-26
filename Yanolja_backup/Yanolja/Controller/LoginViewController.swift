@@ -144,6 +144,13 @@ extension LoginViewController: UICollectionViewDataSource {
             
             let cell = loginViewCollectionView.dequeueReusableCell(withReuseIdentifier: LoginCollectionViewCell.identifier, for: indexPath) as! LoginCollectionViewCell
             
+            cell.registerButtonAction = {
+                if cell.registerButton.isTouchInside {
+                    let registerViewController = RegisterViewController()
+                    self.present(registerViewController, animated: true, completion: nil)
+                }
+            }
+            
             return cell
             
         case 1:

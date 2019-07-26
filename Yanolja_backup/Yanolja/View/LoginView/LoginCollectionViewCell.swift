@@ -12,6 +12,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "LoginCollectionViewCell"
+    var registerButtonAction: (() -> ())?
     
     // textField
     private let idTextField = UITextField()
@@ -24,7 +25,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
     private let loginButton = UIButton(type: .system)
     private let passwordResetButton = UIButton(type: .system)
     private let passwordResetButtonLineView = UIView()
-    private let registerButton = UIButton(type: .system)
+    let registerButton = UIButton(type: .system)
     
     // MARK: - Init Method
     override init(frame: CGRect) {
@@ -87,6 +88,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         registerButton.setTitle("야놀자 회원가입", for: .normal)
         registerButton.setTitleColor(#colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1), for: .normal)
+        registerButton.addTarget(self, action: #selector(registerButtonDidTap(_:)), for: .touchUpInside)
         
         contentView.addSubview(loginButton)
         contentView.addSubview(passwordResetButton)
@@ -149,5 +151,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
         registerButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor).isActive = true
         registerButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor).isActive = true
         registerButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor).isActive = true
+    }
+    
+    @objc private func registerButtonDidTap(_ sender: UIButton) {
+        registerButtonAction?()
     }
 }

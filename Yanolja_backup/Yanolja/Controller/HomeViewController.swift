@@ -174,7 +174,7 @@ extension HomeViewController: UITableViewDataSource {
             
             cell.popInputData(numberOne: keyWords[0].word, numberTwo: keyWords[1].word, numberThree: keyWords[2].word, numberFour: keyWords[3].word, numberFive: keyWords[4].word)
             
-            cell.buttonAction = {
+            cell.downButtonAction = {
                 
                 cell.popDownButton.isSelected.toggle()
                 // FIXME: - If we have time, will fix it

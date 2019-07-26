@@ -65,6 +65,7 @@
 		F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1A22D4A17B0093DB24 /* fakeData.swift */; };
 		F39C843522DC64C50024BBDB /* HomeThemeCollectionViewMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C843422DC64C50024BBDB /* HomeThemeCollectionViewMenuBar.swift */; };
 		F39C843722DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */; };
+		F39ED29322EB794300205974 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39ED29222EB794200205974 /* RegisterViewController.swift */; };
 		F3B185DD22D0812200B01C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DC22D0812200B01C6C /* AppDelegate.swift */; };
 		F3B185DF22D0812200B01C6C /* RegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B185DE22D0812200B01C6C /* RegionViewController.swift */; };
 		F3B185E222D0812200B01C6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3B185E022D0812200B01C6C /* Main.storyboard */; };
@@ -158,6 +159,7 @@
 		F3919B1A22D4A17B0093DB24 /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
 		F39C843422DC64C50024BBDB /* HomeThemeCollectionViewMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeCollectionViewMenuBar.swift; sourceTree = "<group>"; };
 		F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeMenuCollectionCell.swift; sourceTree = "<group>"; };
+		F39ED29222EB794200205974 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F3B185D922D0812200B01C6C /* Yanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B185DC22D0812200B01C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3B185DE22D0812200B01C6C /* RegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				F33F27C222D0AA7C000656DD /* UserViewController.swift */,
 				61CDB9F722E1954900C6C21B /* DetailViewController.swift */,
 				F3DB557D22E6E89F002C3041 /* LoginViewController.swift */,
+				F39ED29222EB794200205974 /* RegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				61CDB9F622E0436400C6C21B /* DefaultCollectionViewCell.swift in Sources */,
 				F339FE0022DF1CFC003D5F71 /* HomePopCollectionViewCell.swift in Sources */,
 				61F91F1F22E6C4320090ED8F /* CALayerBorder.swift in Sources */,
+				F39ED29322EB794300205974 /* RegisterViewController.swift in Sources */,
 				610423D222DE4AA20087E719 /* CustomMenuBar.swift in Sources */,
 				F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */,
 				1FB5C85122DDCF7C00044D94 /* FSCalendarTransitionCoordinator.m in Sources */,
