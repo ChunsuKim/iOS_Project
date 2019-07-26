@@ -10,11 +10,17 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    // navigationView
     private let navigationView = UIView()
     private let dismissButton = UIButton(type: .custom)
     private let loginTitleLabel = UILabel()
+    
+    // menuBar
     private let loginMenuBar = LoginMenuBar()
     
+    // collectionView
     private let loginViewCollectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
@@ -27,6 +33,7 @@ class LoginViewController: UIViewController {
         return collectionView
     }()
 
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +46,9 @@ class LoginViewController: UIViewController {
         configureLoginViewCollectionViewConstraints()
     }
     
+    // MARK: - Configuration
+    
+    // navigationView
     private func configureNavigationView() {
         navigationView.backgroundColor = .white
         
@@ -56,6 +66,7 @@ class LoginViewController: UIViewController {
         navigationView.addSubview(loginTitleLabel)
     }
     
+    // menuBar
     private func configureLoginMenuBar() {
         loginMenuBar.delegate = self
         loginMenuBar.loginMenuCollectionView.register(LoginMenuCollectionViewCell.self, forCellWithReuseIdentifier: LoginMenuCollectionViewCell.identifier)
@@ -69,6 +80,7 @@ class LoginViewController: UIViewController {
         
     }
     
+    // collectionView
     private func configureLoginViewCollectionView() {
         loginViewCollectionView.dataSource = self
         loginViewCollectionView.delegate = self
@@ -80,6 +92,7 @@ class LoginViewController: UIViewController {
         
     }
     
+    // MARK: - Configuration Constraints
     private func configureNavigationViewConstraints() {
         navigationView.translatesAutoresizingMaskIntoConstraints = false
         navigationView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -103,7 +116,6 @@ class LoginViewController: UIViewController {
     }
     
     private func configureLoginViewCollectionViewConstraints() {
-        
         loginViewCollectionView.translatesAutoresizingMaskIntoConstraints = false
         loginViewCollectionView.topAnchor.constraint(equalTo: loginMenuBar.bottomAnchor).isActive = true
         loginViewCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -111,12 +123,14 @@ class LoginViewController: UIViewController {
         loginViewCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
+    // MARK: - Action Method
     @objc private func dismissButtonDidTap(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
 }
 
+// MARK: - CollectionView DataSource
 extension LoginViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -145,7 +159,7 @@ extension LoginViewController: UICollectionViewDataSource {
     }
 }
 
-
+// MARK: - CollectionView Delegate
 extension LoginViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / view.frame.width)
@@ -159,6 +173,7 @@ extension LoginViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - CollectionView Delegate FlowLayout
 extension LoginViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -181,14 +196,10 @@ extension LoginViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
+// MARK: - MenuBar Delegate
 extension LoginViewController: LoginMenuBarDelegate {
     func loginMenuBarDidSelected(_ indexPath: IndexPath) {
         
         loginViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        
-        
     }
-    
-    
 }

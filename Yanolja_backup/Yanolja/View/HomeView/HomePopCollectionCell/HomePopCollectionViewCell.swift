@@ -15,6 +15,7 @@ class HomePopCollectionViewCell: UICollectionViewCell {
     
     private let imageView = UIImageView()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         

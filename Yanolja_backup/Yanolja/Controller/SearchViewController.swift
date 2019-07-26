@@ -196,10 +196,15 @@ class SearchViewController: UIViewController{
     }
  
     func gestureAction() {
+        let gesture2 = UITapGestureRecognizer(target: self, action: #selector(numberOfPeopleViewAppearFunction))
+        numberOfPeopleLabel.addGestureRecognizer(gesture2)
+        gesture2.numberOfTapsRequired = 1
+
         let gesture3 = UITapGestureRecognizer(target: self, action: #selector(calendarViewAppearFunction))
         dateLabel.isUserInteractionEnabled = true
         scrollView.isUserInteractionEnabled = true
         mainView.isUserInteractionEnabled = true
+    numberOfPeopleLabel.isUserInteractionEnabled = true
         
         gesture3.numberOfTapsRequired = 1
         dateLabel.addGestureRecognizer(gesture3)
@@ -209,6 +214,11 @@ class SearchViewController: UIViewController{
     @objc func calendarViewAppearFunction() {
         let vc = CalendarViewController()
         present(vc,animated: false)
+    }
+    @objc func numberOfPeopleViewAppearFunction() {
+        
+        let vc = NumberOfPeopleViewController()
+        present(vc, animated: false)
     }
     
     private func mainFeatUI() {

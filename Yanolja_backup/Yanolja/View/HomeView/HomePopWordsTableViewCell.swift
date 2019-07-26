@@ -10,12 +10,13 @@ import UIKit
 
 class HomePopWordsTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     static let identifier = "HomePopWordsTableViewCell"
 
     var buttonAction: (() -> ())?
     
+    // popBackgroundView
     private let popBackgroundView = UIView()
-    private let popHiddenView = UIView()
     
     private let popNowdaysLabel = UILabel()
     private let popUpArrowImageView = UIImageView()
@@ -23,6 +24,9 @@ class HomePopWordsTableViewCell: UITableViewCell {
     private let popFirstLabelStackView = UIStackView()
     private let popFirstNumberLabel = UILabel()
     private let popNumberOneLabel = UILabel()
+    
+    // popHiddenView
+    private let popHiddenView = UIView()
     
     private let popSecondLabelStackView = UIStackView()
     private let popSecondNumberLabel = UILabel()
@@ -42,6 +46,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
     
     let popDownButton = UIButton(type: .custom)
     
+    // MARK: - Init Method
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -66,6 +71,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Configuration
     private func configureViews() {
         
         popHiddenView.isHidden = true
@@ -149,9 +155,12 @@ class HomePopWordsTableViewCell: UITableViewCell {
         
     }
     
+    // MARK: - Configuration Constraints
+    
     var popBackgroundViewBottomPriority: NSLayoutConstraint?
     var popHidddenViewBottomPriority: NSLayoutConstraint?
     
+    // popBackgroundView
     private func configurePopBackgroundViewConstraints() {
         
         popBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -197,6 +206,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
         popDownButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
+    // popHiddenView
     private func configurePopHiddenViewConstraints() {
         
         popHiddenView.translatesAutoresizingMaskIntoConstraints = false
@@ -269,6 +279,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
         popNumberFiveLabel.trailingAnchor.constraint(equalTo: popFifthLabelStackView.trailingAnchor).isActive = true
     }
     
+    // MARK: - Global Input Method
     func popInputData(numberOne: String, numberTwo: String, numberThree: String, numberFour:String, numberFive: String) {
         popNumberOneLabel.text = numberOne
         popNumberTwoLabel.text = numberTwo
@@ -281,6 +292,7 @@ class HomePopWordsTableViewCell: UITableViewCell {
         popHiddenView.isHidden = state
     }
     
+    // MARK: - Action Method
     @objc func buttonDidTap(_ sender: Any) {
         buttonAction?()
     }

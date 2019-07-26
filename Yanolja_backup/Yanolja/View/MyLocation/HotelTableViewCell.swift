@@ -10,6 +10,7 @@ import UIKit
 
 class HotelTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     let totalWrap: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false

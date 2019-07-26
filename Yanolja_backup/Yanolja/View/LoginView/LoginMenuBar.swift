@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+// MARK: - Protocol
 protocol LoginMenuBarDelegate {
     func loginMenuBarDidSelected(_ indexPath: IndexPath)
 }
@@ -16,7 +16,7 @@ protocol LoginMenuBarDelegate {
 
 class LoginMenuBar: UIView {
     
-    var homeThemeMenuCollectionView = HomeThemeMenuCollectionCell()
+    // MARK: - Properties
     var delegate: LoginMenuBarDelegate?
     
     let loginMenuCollectionView: UICollectionView = {
@@ -37,6 +37,7 @@ class LoginMenuBar: UIView {
     
     private let lineViewBottom = UIView()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -50,17 +51,17 @@ class LoginMenuBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
+    
     private func configureCollectionView() {
         loginMenuCollectionView.delegate = self
         loginMenuCollectionView.dataSource = self
-        
         
         loginMenuCollectionView.register(LoginMenuCollectionViewCell.self, forCellWithReuseIdentifier: LoginMenuCollectionViewCell.identifier)
     }
     
     private func configureLineViews() {
         indicatorBar.backgroundColor = .black
-        
         lineViewBottom.backgroundColor = .lightGray
     }
     
@@ -68,18 +69,13 @@ class LoginMenuBar: UIView {
         loginMenuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
     
-    func reloadMenuCollectionView() {
-        isState.toggle()
-        loginMenuCollectionView.reloadData()
-        setSelectedMenuBar()
-    }
+    // MARK: - Configuration Constraints
     
     var indicatorBarLeadingConstraint: NSLayoutConstraint!
     var indicatorBarWidthConst: NSLayoutConstraint!
     
     private func configureConstraints() {
         addSubview(loginMenuCollectionView)
-        
         addSubview(lineViewBottom)
         addSubview(indicatorBar)
         
@@ -98,7 +94,6 @@ class LoginMenuBar: UIView {
         indicatorBar.translatesAutoresizingMaskIntoConstraints = false
         indicatorBar.heightAnchor.constraint(equalToConstant: 1.25).isActive = true
         indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        //        indicatorBar.widthAnchor.constraint(equalTo: menuCollectionView.widthAnchor, multiplier: 0.25).isActive = true
         
         indicatorBarWidthConst = indicatorBar.widthAnchor.constraint(equalTo: loginMenuCollectionView.widthAnchor, multiplier: 0.001)
         indicatorBarWidthConst.isActive = true
@@ -106,8 +101,14 @@ class LoginMenuBar: UIView {
         
         
         indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor)
-        //        indicatorBarLeadingConstraint = indicatorBar.centerXAnchor.constraint(equalTo: self.leadingAnchor, constant: leadingConst)
         indicatorBarLeadingConstraint.isActive = true
+    }
+    
+    // MARK: - Global Method
+    func reloadMenuCollectionView() {
+        isState.toggle()
+        loginMenuCollectionView.reloadData()
+        setSelectedMenuBar()
     }
     
     var savingWidthArray = [CGFloat]()
@@ -130,6 +131,7 @@ class LoginMenuBar: UIView {
     }
 }
 
+// MARK: - CollectionView DataSource
 extension LoginMenuBar: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -159,6 +161,7 @@ extension LoginMenuBar: UICollectionViewDataSource {
     }
 }
 
+// MARK: - CollectionView Delegate
 extension LoginMenuBar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -169,6 +172,7 @@ extension LoginMenuBar: UICollectionViewDelegate {
     }
 }
 
+// MARK: - CollectionView Delegate FlowLayout
 extension LoginMenuBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width / CGFloat(2), height: 30)

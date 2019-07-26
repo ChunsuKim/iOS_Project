@@ -10,19 +10,23 @@ import UIKit
 
 class LoginCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
     static let identifier = "LoginCollectionViewCell"
     
+    // textField
     private let idTextField = UITextField()
     private let passwordTextField = UITextField()
     
     private let idLineView = UIView()
     private let passwordLineView = UIView()
     
+    // Buttons
     private let loginButton = UIButton(type: .system)
     private let passwordResetButton = UIButton(type: .system)
     private let passwordResetButtonLineView = UIView()
     private let registerButton = UIButton(type: .system)
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -36,6 +40,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
+    
+    // textField
     private func configureTextField() {
         idTextField.font = UIFont.systemFont(ofSize: 16, weight: .light)
         idTextField.placeholder = "아이디 또는 이메일"
@@ -62,6 +69,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(passwordLineView)
     }
     
+    // button
     private func configureButton() {
         
         loginButton.setTitle("로그인", for: .normal)
@@ -86,6 +94,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(registerButton)
     }
     
+    // MARK: - Configuration Constraints
+    
+    // textField
     private func configureTextFieldConstraints() {
         
         idTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -113,6 +124,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         passwordLineView.trailingAnchor.constraint(equalTo: idLineView.trailingAnchor).isActive = true
     }
     
+    // button
     private func configureButtonConstraints() {
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +136,6 @@ class LoginCollectionViewCell: UICollectionViewCell {
         passwordResetButton.translatesAutoresizingMaskIntoConstraints = false
         passwordResetButton.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor).isActive = true
         passwordResetButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
-        passwordResetButton.widthAnchor.constraint(equalTo: loginButton.widthAnchor, multiplier: 0.3).isActive = true
         passwordResetButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         passwordResetButtonLineView.translatesAutoresizingMaskIntoConstraints = false

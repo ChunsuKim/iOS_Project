@@ -57,8 +57,6 @@ class KeyWordViewController: UIViewController {
         dismissButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor,constant: UISetting.leadingTrailingPadding.rawValue).isActive = true
         dismissButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         dismissButton.setImage(UIImage(named: "dismiss"), for: .normal)
-        
-        
         dismissButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         

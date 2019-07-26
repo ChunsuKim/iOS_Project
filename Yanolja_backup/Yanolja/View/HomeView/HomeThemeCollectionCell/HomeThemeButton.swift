@@ -22,6 +22,7 @@ class HomeThemeButton: UIView {
     private let themeButtonViewTopLine = UIView()
     private let themeButtonViewBottomLine = UIView()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         

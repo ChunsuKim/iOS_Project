@@ -29,6 +29,8 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
         return collectionView
     }()
     
+    
+    // MARK: - Init Method
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -109,6 +111,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
         
     }
 
+    
     // MARK: - UICollection View DataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

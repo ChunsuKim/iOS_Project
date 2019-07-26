@@ -8,12 +8,14 @@
 
 import UIKit
 
+// MARK: - Protocol
 protocol MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath)
 }
 
 class HomeThemeCollectionViewMenuBar: UIView {
     
+    // MARK: - Properties
     var homeThemeMenuCollectionView = HomeThemeMenuCollectionCell()
     var delegate: MenuBarDelegate?
 
@@ -35,6 +37,7 @@ class HomeThemeCollectionViewMenuBar: UIView {
     private let lineViewTop = UIView()
     private let lineViewBottom = UIView()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -48,6 +51,7 @@ class HomeThemeCollectionViewMenuBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
     private func configureCollectionView() {
         menuCollectionView.delegate = self
         menuCollectionView.dataSource = self
@@ -66,11 +70,8 @@ class HomeThemeCollectionViewMenuBar: UIView {
         menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
     
-    func reloadMenuCollectionView() {
-        isState.toggle()
-        menuCollectionView.reloadData()
-        setSelectedMenuBar()
-    }
+    
+    // MARK: - Configuration Constraints
     
     var indicatorBarLeadingConstraint: NSLayoutConstraint!
     var indicatorBarWidthConst: NSLayoutConstraint!
@@ -113,8 +114,16 @@ class HomeThemeCollectionViewMenuBar: UIView {
         indicatorBarLeadingConstraint.isActive = true
     }
     
+    // MARK: - Global Method
+    func reloadMenuCollectionView() {
+        isState.toggle()
+        menuCollectionView.reloadData()
+        setSelectedMenuBar()
+    }
+    
 }
 
+// MARK: - CollectionView DataSource
 extension HomeThemeCollectionViewMenuBar: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
@@ -148,6 +157,7 @@ extension HomeThemeCollectionViewMenuBar: UICollectionViewDataSource {
     }
 }
 
+// MARK: - CollectionView Delegate
 extension HomeThemeCollectionViewMenuBar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelect")
@@ -174,6 +184,7 @@ extension HomeThemeCollectionViewMenuBar: UICollectionViewDelegate {
     }
 }
 
+// MARK: - CollectionView Delegate FlowLayout
 extension HomeThemeCollectionViewMenuBar: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.frame.width / CGFloat(4), height: 30)

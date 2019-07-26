@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     private func configureTableView() {
         homeTableView.dataSource = self
         homeTableView.delegate = self
-        homeTableView.estimatedRowHeight = 20  // 대충의 높이값
+//        homeTableView.estimatedRowHeight = 20  // 대충의 높이값
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.separatorStyle = .none
         homeTableView.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
@@ -143,10 +143,6 @@ class HomeViewController: UIViewController {
 
 // MARK: - TableView Data Source Extension
 extension HomeViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -181,7 +177,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.buttonAction = {
                 
                 cell.popDownButton.isSelected.toggle()
-                
+                // FIXME: - If we have time, will fix it
                 if cell.popDownButton.isSelected {
                     self.homeTableView.beginUpdates()
                     cell.popBackgroundViewBottomPriority?.isActive = false

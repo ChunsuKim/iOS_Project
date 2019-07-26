@@ -18,6 +18,7 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
     private let priceLabel = UILabel()
     private let wonLabel = UILabel()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -10,10 +10,13 @@ import UIKit
 
 class UserViewLoginStampTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     static let identifier = "UserViewLoginStampTableViewCell"
     
     private let stampImageView = UIImageView()
     
+    
+    // MARK: - Init Method
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -37,6 +40,7 @@ class UserViewLoginStampTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Configuration
     private func configureStampImageView() {
         stampImageView.contentMode = .scaleAspectFill
         
@@ -50,6 +54,7 @@ class UserViewLoginStampTableViewCell: UITableViewCell {
         stampImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
+    // MARK: - Globar Input Method
     func configureStampImageInput(image: UIImage?) {
         stampImageView.image = image
     }

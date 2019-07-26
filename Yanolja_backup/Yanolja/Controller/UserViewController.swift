@@ -10,23 +10,25 @@ import UIKit
 
 class UserViewController: UIViewController {
     
+    // MARK: - Properties
     private let userViewTableView = UITableView()
     
-
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUserViewTableView()
     }
     
-    
+    // MARK: - Configuration
     private func configureUserViewTableView() {
      
         userViewTableView.estimatedRowHeight = 50
         userViewTableView.rowHeight = UITableView.automaticDimension
         userViewTableView.dataSource = self
         userViewTableView.delegate = self
-//        userViewTableView.separatorStyle = 
+        
         userViewTableView.register(UserViewLoginTableViewCell.self, forCellReuseIdentifier: UserViewLoginTableViewCell.identifier)
         userViewTableView.register(UserViewLoginStampTableViewCell.self, forCellReuseIdentifier: UserViewLoginStampTableViewCell.identifier)
         
@@ -42,6 +44,7 @@ class UserViewController: UIViewController {
 
 }
 
+// MARK: - TableView DataSource
 extension UserViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -68,18 +71,22 @@ extension UserViewController: UITableViewDataSource {
                 if let couponCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewLoginStampTableViewCell.identifier, for: indexPath) as? UserViewLoginStampTableViewCell {
                     
                     couponCell.configureStampImageInput(image: UIImage(named: "couponregister"))
+                    couponCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
                     
                     return couponCell
                 }
                 
             case 3:
                 cell.configureInputValue(text: "비회원 국내숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
                 
             case 4:
                 cell.configureInputValue(text: "비회원 해외숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
                 
             case 5:
                 cell.configureInputValue(text: "비회원 레저/티켓 구매내역", textColor: .black, image: UIImage(named: "right"))
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
                 
             default:
                 cell.configureInputValue(text: "default", textColor: .black, image: nil)
@@ -91,6 +98,7 @@ extension UserViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - TableView Delegate
 extension UserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let loginViewController = LoginViewController()

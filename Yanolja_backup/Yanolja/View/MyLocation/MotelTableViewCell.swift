@@ -11,6 +11,7 @@ import UIKit
 class MotelTableViewCell: UITableViewCell {
     
     // MARK: - Properties
+    
     static let identifier = "MotelTableViewCell"
     
     private let wrapMotel: UIView = {

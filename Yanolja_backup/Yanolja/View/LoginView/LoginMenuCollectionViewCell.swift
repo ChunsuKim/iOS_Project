@@ -15,6 +15,7 @@ class LoginMenuCollectionViewCell: UICollectionViewCell {
     
     let loginMenuLabel = UILabel()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         

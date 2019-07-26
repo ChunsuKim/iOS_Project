@@ -208,7 +208,7 @@ class CalendarViewController: UIViewController {
         
         return "\(month)"+"월 "+"\(date)"+"일 "+"("+day(of: dayInt)+")"
     }
-    func oenPickSendString(input:Date) -> String {
+    func onePickSendString(input:Date) -> String {
         let selectDateComponets = defaultCal.dateComponents([.month,.day], from: input)
         let month = selectDateComponets.month!
         let date = selectDateComponets.day!
@@ -273,7 +273,7 @@ extension CalendarViewController :FSCalendarDelegate {
 
 
         bottomCheckInSearchButton.setTitle(
-            oenPickSendString(input: date)+"체크인 검색", for: .normal)
+            onePickSendString(input: date)+"체크인 검색", for: .normal)
 
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)

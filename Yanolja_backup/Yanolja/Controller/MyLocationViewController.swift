@@ -54,6 +54,7 @@ class MyLocationViewController: UIViewController {
         notiCenter.addObserver(self, selector: #selector(moveDetailEvent(_:)), name: Notification.Name("moveDetailVC"), object: nil)
     }
     
+    // MARK: - Action Method
     @objc private func moveDetailEvent(_ sender: Any) {
         let detailVC = DetailViewController()
         
@@ -66,6 +67,7 @@ class MyLocationViewController: UIViewController {
     
 }
 
+// MARK: - checkBoxDelegate Extension
 extension MyLocationViewController: checkBoxDelegate {
     func possibleChkButton() {
         if topNaviView.possibleChkButton.isSelected == false {

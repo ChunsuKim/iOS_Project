@@ -10,16 +10,20 @@ import UIKit
 
 class LoginEasyCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
     static let identifier = "LoginEasyCollectionViewCell"
     
+    // label
     private let descriptionLabel = UILabel()
     private let descriptionBottonLabel = UILabel()
     
+    // button
     private let faceIdLoginButton = UIButton(type: .custom)
     private let cellphoneLoginButton = UIButton(type: .custom)
     private let naverLoginButton = UIButton(type: .custom)
     private let paycoLoginButton = UIButton(type: .custom)
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,6 +36,9 @@ class LoginEasyCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configuration
+    
+    // label
     private func configureLabel() {
         descriptionLabel.backgroundColor = #colorLiteral(red: 0.9452576041, green: 0.9459609389, blue: 0.9487840533, alpha: 1)
         descriptionLabel.textAlignment = .center
@@ -46,6 +53,7 @@ class LoginEasyCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(descriptionBottonLabel)
     }
     
+    // buttons
     private func configureButtons() {
         faceIdLoginButton.setImage(UIImage(named: "faceid"), for: .normal)
         faceIdLoginButton.contentMode = .scaleAspectFit
@@ -69,6 +77,7 @@ class LoginEasyCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(paycoLoginButton)
     }
     
+    // MARK: - Configuration Constraints
     private func configureConstraints() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 11).isActive = true

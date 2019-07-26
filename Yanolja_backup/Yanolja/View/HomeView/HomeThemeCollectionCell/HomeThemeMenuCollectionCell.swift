@@ -15,6 +15,7 @@ class HomeThemeMenuCollectionCell: UICollectionViewCell {
     
     let menuLabel = UILabel()
     
+    // MARK: - Init Method
     override init(frame: CGRect) {
         super.init(frame: frame)
         

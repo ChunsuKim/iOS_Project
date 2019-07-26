@@ -10,11 +10,14 @@ import UIKit
 
 class UserViewLoginTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     static let identifier = "UserViewLoginTableViewCell"
     
     private let loginOrRegisterLabel = UILabel()
     private let rightImageView = UIImageView()
     
+    
+    // MARK: - Init Method
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -37,6 +40,7 @@ class UserViewLoginTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Configuration
     private func configureViews() {
         loginOrRegisterLabel.text = "로그인 및 회원가입"
         loginOrRegisterLabel.textColor = #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1)
@@ -60,6 +64,7 @@ class UserViewLoginTableViewCell: UITableViewCell {
         rightImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     }
     
+    // MARK: - Globar Input Method
     func configureInputValue(text: String, textColor: UIColor, image: UIImage?) {
         loginOrRegisterLabel.text = text
         loginOrRegisterLabel.textColor = textColor

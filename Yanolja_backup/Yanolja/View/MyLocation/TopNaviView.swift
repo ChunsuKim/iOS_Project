@@ -15,6 +15,8 @@ protocol checkBoxDelegate {
 
 class TopNaviView: UIView {
     
+    // MARK: - Properties
+    
     var delegate: checkBoxDelegate?
     
     let searchButton: UIButton = {

@@ -59,6 +59,7 @@
 		F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */; };
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
 		F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */; };
+		F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B942422E9CDC0002E999A /* SampleViewController.swift */; };
 		F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */; };
 		F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */; };
 		F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1A22D4A17B0093DB24 /* fakeData.swift */; };
@@ -151,6 +152,7 @@
 		F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationViewController.swift; sourceTree = "<group>"; };
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginStampTableViewCell.swift; sourceTree = "<group>"; };
+		F36B942422E9CDC0002E999A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeTableViewCell.swift; sourceTree = "<group>"; };
 		F3919B1A22D4A17B0093DB24 /* fakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeData.swift; sourceTree = "<group>"; };
@@ -358,8 +360,9 @@
 		F3B185DB22D0812200B01C6C /* Yanolja */ = {
 			isa = PBXGroup;
 			children = (
-				610423C922DE44CE0087E719 /* Extension */,
+				F36B942422E9CDC0002E999A /* SampleViewController.swift */,
 				F3B185DC22D0812200B01C6C /* AppDelegate.swift */,
+				610423C922DE44CE0087E719 /* Extension */,
 				F3B185F322D0814000B01C6C /* Model */,
 				F3B185F222D0813A00B01C6C /* View */,
 				F3B185F122D0812D00B01C6C /* Controller */,
@@ -536,6 +539,7 @@
 				F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */,
 				610423CB22DE44EB0087E719 /* CustomCollectionViewCell.swift in Sources */,
 				1FB5C89D22E0E29100044D94 /* RecentlyCustomCell.swift in Sources */,
+				F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */,
 				1FB5C84C22DDCF7C00044D94 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				F313EEEE22E5793000880ACD /* HomePopWordsTableViewCell.swift in Sources */,
 				610423DC22DE61270087E719 /* CustomMenuCell.swift in Sources */,
