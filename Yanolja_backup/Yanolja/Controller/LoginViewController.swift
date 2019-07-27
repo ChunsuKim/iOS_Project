@@ -44,6 +44,7 @@ class LoginViewController: UIViewController {
         configureLoginMenuBar()
         configureLoginViewCollectionView()
         configureLoginViewCollectionViewConstraints()
+        hideKeyboard()
     }
     
     // MARK: - Configuration
@@ -208,5 +209,20 @@ extension LoginViewController: LoginMenuBarDelegate {
     func loginMenuBarDidSelected(_ indexPath: IndexPath) {
         
         loginViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+    }
+}
+
+// MARK: - Hide Keyboard Extension
+extension LoginViewController {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

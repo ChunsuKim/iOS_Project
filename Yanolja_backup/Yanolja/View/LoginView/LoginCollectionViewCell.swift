@@ -52,6 +52,9 @@ class LoginCollectionViewCell: UICollectionViewCell {
         idTextField.returnKeyType = .next
         idTextField.autocorrectionType = .no
         idTextField.autocapitalizationType = .none
+        idTextField.clearButtonMode = UITextField.ViewMode.always
+        idTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        idTextField.delegate = self
         
         passwordTextField.font = UIFont.systemFont(ofSize: 16, weight: .light)
         passwordTextField.placeholder = "비밀번호"
@@ -59,6 +62,11 @@ class LoginCollectionViewCell: UICollectionViewCell {
         passwordTextField.borderStyle = .none
         passwordTextField.autocorrectionType = .no
         passwordTextField.autocapitalizationType = .none
+        passwordTextField.clearButtonMode = UITextField.ViewMode.always
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        passwordTextField.delegate = self
+        
         
         idLineView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         passwordLineView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -76,6 +84,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         loginButton.setTitle("로그인", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.backgroundColor = .lightGray
+        loginButton.isEnabled = false
         
         passwordResetButton.setTitle("비밀번호 재설정", for: .normal)
         passwordResetButton.setTitleColor(#colorLiteral(red: 0.2375472188, green: 0.4117342234, blue: 0.9218910933, alpha: 1), for: .normal)
@@ -156,4 +165,30 @@ class LoginCollectionViewCell: UICollectionViewCell {
     @objc private func registerButtonDidTap(_ sender: UIButton) {
         registerButtonAction?()
     }
+    
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        let id = idTextField.text
+        let string = String()
+        if !(id!.isEmpty) && (passwordTextField.text?.count)! + string.count > 4 {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1)
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .lightGray
+        }
+    }
 }
+
+extension LoginCollectionViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        idTextField.resignFirstResponder()
+        if textField == idTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
+    }
+}
+
+
