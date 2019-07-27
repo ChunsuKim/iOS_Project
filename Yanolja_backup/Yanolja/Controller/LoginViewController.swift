@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
+        
         configureNavigationView()
         configureNavigationViewConstraints()
         configureLoginMenuBar()
