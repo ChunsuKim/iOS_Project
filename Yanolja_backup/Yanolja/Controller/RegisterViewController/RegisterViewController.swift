@@ -448,6 +448,7 @@ class RegisterViewController: UIViewController {
         } else {
             nextButton.isEnabled = false
             nextButton.backgroundColor = .lightGray
+            totalCheckBox.isSelected = false
         }
     }
     
