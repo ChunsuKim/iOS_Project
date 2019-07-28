@@ -58,11 +58,13 @@ extension UserViewController: UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.configureInputValue(text: "로그인 및 회원가입", textColor: #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1), image: nil)
+                cell.separatorInset = UIEdgeInsets(top: 0, left: view.frame.midX, bottom: 0, right: view.frame.midX)
                 
             case 1:
                 if let stampCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewLoginStampTableViewCell.identifier, for: indexPath) as? UserViewLoginStampTableViewCell {
                     
                     stampCell.configureStampImageInput(image: UIImage(named: "stamp"))
+                    stampCell.separatorInset = UIEdgeInsets(top: 0, left: view.frame.midX, bottom: 0, right: view.frame.midX)
                     
                     return stampCell
                 }
@@ -72,7 +74,6 @@ extension UserViewController: UITableViewDataSource {
                     
                     couponCell.configureStampImageInput(image: UIImage(named: "couponregister"))
                     couponCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-                    
                     return couponCell
                 }
                 

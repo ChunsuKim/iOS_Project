@@ -299,8 +299,8 @@ class RegisterViewController: UIViewController {
         lineView.backgroundColor = #colorLiteral(red: 0.8774518967, green: 0.8826429248, blue: 0.8780108094, alpha: 1)
         view.addSubview(lineView)
         
-        descriptionLabel.numberOfLines = 2
-        descriptionLabel.text = "※ 선택 항목에 동의하지 않으셔도 계속 가입을 진행하실 수 있습 \n 니다."
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.text = "※ 선택 항목에 동의하지 않으셔도 계속 가입을 진행하실 수 있습니다."
         descriptionLabel.font = UIFont.systemFont(ofSize: 12, weight: .ultraLight)
         descriptionLabel.textColor = #colorLiteral(red: 0.5646031499, green: 0.5648178458, blue: 0.5603218079, alpha: 1)
         view.addSubview(descriptionLabel)

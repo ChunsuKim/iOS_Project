@@ -10,6 +10,8 @@ import UIKit
 
 class RegisterSecondViewController: UIViewController {
     
+    // MARK: - Properties
+    
     // navigationView
     private let navigationView = UIView()
     private let dismissButton = UIButton(type: .custom)
@@ -33,6 +35,8 @@ class RegisterSecondViewController: UIViewController {
     private let nextButton = UIButton()
 
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +48,9 @@ class RegisterSecondViewController: UIViewController {
         configureNextButton()
         hideKeyboard()
     }
+    
+    
+    // MARK: - Configuration
     
     // configuration navigationView
     private func configureNavigationView() {
@@ -90,6 +97,7 @@ class RegisterSecondViewController: UIViewController {
         navigationViewBottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
+    // imageView
     private func configureDescriptionImageView() {
         descriptionImageView.image = UIImage(named: "description")
         descriptionImageView.contentMode = .scaleAspectFit
@@ -276,6 +284,7 @@ class RegisterSecondViewController: UIViewController {
     }
 }
 
+// MARK: - TextField Delegate
 extension RegisterSecondViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         idTextField.resignFirstResponder()
