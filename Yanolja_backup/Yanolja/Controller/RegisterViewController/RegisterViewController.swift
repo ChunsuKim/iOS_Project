@@ -51,6 +51,7 @@ class RegisterViewController: UIViewController {
     private let lineView = UIView()
     private let descriptionLabel = UILabel()
     
+    private let notificationCenter = NotificationCenter.default
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -63,6 +64,7 @@ class RegisterViewController: UIViewController {
         configureNextButton()
         configureCheckBox()
         configureLabels()
+        isSelectedTotalCheckbox()
     }
     
     // MARK: - Configuration
@@ -75,7 +77,7 @@ class RegisterViewController: UIViewController {
         dismissButton.contentMode = .scaleAspectFit
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTap(_:)), for: .touchUpInside)
         
-        naviTitleLabel.text = "회원가입 (1/3)"
+        naviTitleLabel.text = "회원가입 (1/2)"
         naviTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         naviTitleLabel.textColor = .black
         naviTitleLabel.textAlignment = .center
@@ -449,6 +451,24 @@ class RegisterViewController: UIViewController {
             nextButton.isEnabled = false
             nextButton.backgroundColor = .lightGray
             totalCheckBox.isSelected = false
+        }
+    }
+    
+    private func isSelectedTotalCheckbox() {
+        notificationCenter.addObserver(self, selector: #selector(selectedTotalCheckbox(_:)), name: Notification.Name("isSelectedTotalCheckbox"), object: nil)
+    }
+    
+    @objc private func selectedTotalCheckbox(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+
+        if ageCheckBox.isSelected && serviceCheckBox.isSelected && privacyCheckBox.isSelected && locationCheckBox.isSelected && privacySelectiveCheckBox.isSelected && longTermIdPossessionCheckBox.isSelected {
+            totalCheckBox.isSelected = true
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1)
+        } else {
+            totalCheckBox.isSelected = false
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = .lightGray
         }
     }
     

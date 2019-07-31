@@ -53,7 +53,6 @@
 		F3144F9C22E772BF00F72E6D /* LoginEasyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3144F9B22E772BF00F72E6D /* LoginEasyCollectionViewCell.swift */; };
 		F31F334722DDC679003A2C06 /* HomeThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F334622DDC679003A2C06 /* HomeThemeButton.swift */; };
 		F337396122ECC49900049676 /* RegisterSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F337396022ECC49900049676 /* RegisterSecondViewController.swift */; };
-		F337396322ECCB2300049676 /* RegisterThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F337396222ECCB2300049676 /* RegisterThirdViewController.swift */; };
 		F339FDFC22DEFF86003D5F71 /* MenuTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339FDFB22DEFF86003D5F71 /* MenuTitles.swift */; };
 		F339FDFE22DF13A2003D5F71 /* HomePopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339FDFD22DF13A2003D5F71 /* HomePopTableViewCell.swift */; };
 		F339FE0022DF1CFC003D5F71 /* HomePopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339FDFF22DF1CFC003D5F71 /* HomePopCollectionViewCell.swift */; };
@@ -149,7 +148,6 @@
 		F3144F9B22E772BF00F72E6D /* LoginEasyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEasyCollectionViewCell.swift; sourceTree = "<group>"; };
 		F31F334622DDC679003A2C06 /* HomeThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeButton.swift; sourceTree = "<group>"; };
 		F337396022ECC49900049676 /* RegisterSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSecondViewController.swift; sourceTree = "<group>"; };
-		F337396222ECCB2300049676 /* RegisterThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterThirdViewController.swift; sourceTree = "<group>"; };
 		F339FDFB22DEFF86003D5F71 /* MenuTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitles.swift; sourceTree = "<group>"; };
 		F339FDFD22DF13A2003D5F71 /* HomePopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopTableViewCell.swift; sourceTree = "<group>"; };
 		F339FDFF22DF1CFC003D5F71 /* HomePopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 			children = (
 				F39ED29222EB794200205974 /* RegisterViewController.swift */,
 				F337396022ECC49900049676 /* RegisterSecondViewController.swift */,
-				F337396222ECCB2300049676 /* RegisterThirdViewController.swift */,
 			);
 			path = RegisterViewController;
 			sourceTree = "<group>";
@@ -580,7 +577,6 @@
 				61F91F1F22E6C4320090ED8F /* CALayerBorder.swift in Sources */,
 				F39ED29322EB794300205974 /* RegisterViewController.swift in Sources */,
 				610423D222DE4AA20087E719 /* CustomMenuBar.swift in Sources */,
-				F337396322ECCB2300049676 /* RegisterThirdViewController.swift in Sources */,
 				F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */,
 				1FB5C85122DDCF7C00044D94 /* FSCalendarTransitionCoordinator.m in Sources */,
 				F3D6790022E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift in Sources */,
