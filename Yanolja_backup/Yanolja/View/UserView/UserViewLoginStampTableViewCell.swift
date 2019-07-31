@@ -42,7 +42,7 @@ class UserViewLoginStampTableViewCell: UITableViewCell {
     
     // MARK: - Configuration
     private func configureStampImageView() {
-        stampImageView.contentMode = .scaleAspectFit
+        stampImageView.contentMode = .scaleAspectFill
         
         contentView.addSubview(stampImageView)
         

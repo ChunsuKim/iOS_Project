@@ -78,8 +78,9 @@ class TopNaviView: UIView {
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.black, for: .selected)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.setImage(#imageLiteral(resourceName: "is-checked_false"), for: .normal)
-        button.setImage(#imageLiteral(resourceName: "is-checked_true"), for: .selected)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setImage(#imageLiteral(resourceName: "box"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "checkbox"), for: .selected)
         button.addTarget(self, action: #selector(checkboxTap), for: .touchUpInside)
         button.isSelected = false
         
@@ -155,6 +156,8 @@ class TopNaviView: UIView {
             possibleChkButton.leadingAnchor.constraint(equalTo: selectDateButton.leadingAnchor),
             possibleChkButton.topAnchor.constraint(equalTo: selectDateButton.bottomAnchor, constant: 20),
             possibleChkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -17),
+//            possibleChkButton.widthAnchor.constraint(equalToConstant: 20),
+            possibleChkButton.heightAnchor.constraint(equalToConstant: 20),
             mapButton.centerYAnchor.constraint(equalTo: possibleChkButton.centerYAnchor, constant: -5),
             mapButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             mapButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -17),
