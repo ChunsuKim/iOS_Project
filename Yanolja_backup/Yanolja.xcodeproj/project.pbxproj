@@ -74,6 +74,8 @@
 		F33F27BF22D0AA10000656DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27BE22D0AA10000656DD /* HomeViewController.swift */; };
 		F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */; };
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
+		F344C03722F8A88400D41442 /* HomeThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F344C03622F8A88400D41442 /* HomeThemeData.swift */; };
+		F344C03922F8A89E00D41442 /* HomeThemeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F344C03822F8A89E00D41442 /* HomeThemeNetwork.swift */; };
 		F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */; };
 		F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B942422E9CDC0002E999A /* SampleViewController.swift */; };
 		F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */; };
@@ -191,6 +193,8 @@
 		F33F27BE22D0AA10000656DD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F33F27C022D0AA6F000656DD /* MyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationViewController.swift; sourceTree = "<group>"; };
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		F344C03622F8A88400D41442 /* HomeThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeData.swift; sourceTree = "<group>"; };
+		F344C03822F8A89E00D41442 /* HomeThemeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeNetwork.swift; sourceTree = "<group>"; };
 		F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginStampTableViewCell.swift; sourceTree = "<group>"; };
 		F36B942422E9CDC0002E999A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 			children = (
 				1F37D05322F02F71006D397A /* NetworkRegister.swift */,
 				F3B2A09522F1D3D9003997AF /* CommonAPIKey.swift */,
+				F344C03822F8A89E00D41442 /* HomeThemeNetwork.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				F339FDFB22DEFF86003D5F71 /* MenuTitles.swift */,
 				1FB5C8A022E19A1500044D94 /* regionData.swift */,
 				1FD3A45622E58D7E00417F1C /* fakeSingleTon.swift */,
+				F344C03622F8A88400D41442 /* HomeThemeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -792,6 +798,7 @@
 				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
 				61E72F0622D31D49001B8A59 /* TopNaviView.swift in Sources */,
 				1F37D05A22F05AE7006D397A /* ReservationCollectionFirstViewCell.swift in Sources */,
+				F344C03722F8A88400D41442 /* HomeThemeData.swift in Sources */,
 				6104239222DAE4750087E719 /* SearchViewController.swift in Sources */,
 				1FD3A47A22EB19CD00417F1C /* NumberOfPeopleCollectionViewCell.swift in Sources */,
 				1FB5C84722DDCF7C00044D94 /* FSCalendarCell.m in Sources */,
@@ -813,6 +820,7 @@
 				F39C843522DC64C50024BBDB /* HomeThemeCollectionViewMenuBar.swift in Sources */,
 				1FD3A45722E58D7E00417F1C /* fakeSingleTon.swift in Sources */,
 				F31F334722DDC679003A2C06 /* HomeThemeButton.swift in Sources */,
+				F344C03922F8A89E00D41442 /* HomeThemeNetwork.swift in Sources */,
 				F3DB558322E6EB55002C3041 /* LoginMenuBar.swift in Sources */,
 				614F669F22F1B5F4007BDA03 /* IntroduceStayTableViewCell.swift in Sources */,
 				614F669B22F1909C007BDA03 /* ConvenienceTableViewCell.swift in Sources */,

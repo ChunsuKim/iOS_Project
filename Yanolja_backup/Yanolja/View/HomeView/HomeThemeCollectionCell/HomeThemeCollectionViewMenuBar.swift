@@ -133,7 +133,8 @@ extension HomeThemeCollectionViewMenuBar: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeMenuCollectionCell.identifier, for: indexPath) as! HomeThemeMenuCollectionCell
         
         if isState {
-            cell.menuLabel.text = themeMenus[indexPath.row].menu
+            cell.menuLabel.text = menubarData[indexPath.row]
+//            cell.menuLabel.text = themeMenus[indexPath.row].menu
             homeThemeMenuCollectionView = cell
         } else {
             cell.menuLabel.text = themeMenusDiff[indexPath.row].menu

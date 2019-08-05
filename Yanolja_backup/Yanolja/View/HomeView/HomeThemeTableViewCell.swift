@@ -24,6 +24,8 @@ class HomeThemeTableViewCell: UITableViewCell {
     private var poolList = themeMenus[0].items
     private var poolListDiff = themeMenusDiff[0].items
     
+    private var groups = [HomeThemeGroup]()
+    
     // CollectionView
     private let homeViewCollectionView : UICollectionView = {
         
@@ -47,6 +49,8 @@ class HomeThemeTableViewCell: UITableViewCell {
         configureCollectionView()
         configureTitleViewConstraints()
         configureCollectionViewConstraints()
+        
+        fetchData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -62,6 +66,52 @@ class HomeThemeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func fetchData() {
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        HomeThemeDataSource.shared.fetchBigSale { (dataGroup, error) in
+            dispatchGroup.leave()
+            self.groups = dataGroup ?? []
+//            print("dataGroup:", dataGroup)
+            
+            DispatchQueue.main.async {
+                self.homeViewCollectionView.reloadData()
+            }
+        }
+        
+        dispatchGroup.enter()
+        HomeThemeDataSource.shared.fetchPartyRoom { (dataGroup, error) in
+            dispatchGroup.leave()
+            self.groups = dataGroup ?? []
+            
+            DispatchQueue.main.async {
+                self.homeViewCollectionView.reloadData()
+            }
+        }
+        
+        dispatchGroup.enter()
+        HomeThemeDataSource.shared.fetchSwimmingPool { (dataGroup, error) in
+            dispatchGroup.leave()
+            self.groups = dataGroup ?? []
+            
+            DispatchQueue.main.async {
+                self.homeViewCollectionView.reloadData()
+            }
+        }
+        
+        dispatchGroup.enter()
+        HomeThemeDataSource.shared.fetchSpa { (dataGroup, error) in
+            dispatchGroup.leave()
+            self.groups = dataGroup ?? []
+            
+            DispatchQueue.main.async {
+                self.homeViewCollectionView.reloadData()
+            }
+        }
     }
     
     // MARK: - Configuration
@@ -175,19 +225,24 @@ class HomeThemeTableViewCell: UITableViewCell {
 extension HomeThemeTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 4
+        print(groups.count)
+        return groups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCollectionViewCell.identifier, for: indexPath) as! HomeThemeCollectionViewCell
         
         if isState {
-            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageUrl), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
+            
+            let themeGroup = groups[indexPath.item]
+            cell.configureCellContent(image: themeGroup.mainImage, title: themeGroup.stay, price: themeGroup.saleDaysPrice)
+            
+            print(themeGroup.stay)
+//            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageUrl), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
             
             homeThemeCollectionViewCell = cell
         } else {
-            cell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
+//            cell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
             
             homeThemeCollectionViewCell = cell
         }
@@ -224,8 +279,9 @@ extension HomeThemeTableViewCell: MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath) {
         homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
-        poolList = themeMenus[indexPath.row].items
-        poolListDiff = themeMenusDiff[indexPath.row].items
+        
+//        poolList = themeMenus[indexPath.row].items
+//        poolListDiff = themeMenusDiff[indexPath.row].items
         homeViewCollectionView.reloadData()
     }
 }
