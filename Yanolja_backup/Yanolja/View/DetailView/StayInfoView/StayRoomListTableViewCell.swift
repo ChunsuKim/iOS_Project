@@ -318,4 +318,18 @@ class StayRoomListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func fetchStayData(
+        name: String,
+        averageGrade: Double,
+        totalComment: Int,
+        ownerComments: Int,
+        directions: String
+        ) {
+        stayTitle.text = name
+        stayGradeLabel.text = "\(averageGrade)"
+        reviewCont.text = "\(totalComment)"
+        bossReviewCont.text = "\(ownerComments)"
+        locationCont.text = directions
+    }
+    
 }

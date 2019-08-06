@@ -65,7 +65,7 @@ class IntroduceStayTableViewCell: UITableViewCell {
             title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             cont.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20),
-            cont.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            cont.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cont.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             cont.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             

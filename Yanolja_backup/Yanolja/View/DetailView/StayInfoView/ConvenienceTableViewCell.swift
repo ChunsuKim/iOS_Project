@@ -44,6 +44,14 @@ class ConvenienceTableViewCell: UITableViewCell {
         return collectionView
     }()
     
+    let cont: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -51,6 +59,7 @@ class ConvenienceTableViewCell: UITableViewCell {
         
         contentView.addSubview(title)
         contentView.addSubview(facilitiesList)
+        contentView.addSubview(cont)
         
         facilitiesList.dataSource = self
         facilitiesList.delegate = self
@@ -70,8 +79,12 @@ class ConvenienceTableViewCell: UITableViewCell {
             title.bottomAnchor.constraint(equalTo: facilitiesList.topAnchor, constant: -20),
             title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             facilitiesList.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            facilitiesList.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            facilitiesList.bottomAnchor.constraint(equalTo: cont.topAnchor, constant: -20),
+            facilitiesList.heightAnchor.constraint(equalToConstant: 100),
             facilitiesList.trailingAnchor.constraint(equalTo: title.trailingAnchor),
+            cont.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            cont.trailingAnchor.constraint(equalTo: title.trailingAnchor),
+            cont.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
     }
     
@@ -86,7 +99,6 @@ extension ConvenienceTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FacilitiesCollectionViewCell.reusableIdentifier, for: indexPath) as! FacilitiesCollectionViewCell
         
         cell.icon.image = UIImage(named: "star")
-        cell.cont.text = "test"
         
         return cell
     }
@@ -99,7 +111,7 @@ extension ConvenienceTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: (contentView.frame.width - 40) / 5, height: 90)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 26
+        return 0
     }
 }
 

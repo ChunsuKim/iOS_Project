@@ -13,6 +13,14 @@ class ListCollectionView: UIView {
     var sum: CGFloat = 0
     var space: CGFloat = 10
     
+    var listSenderData = [StayListElement]() {
+        didSet {
+            //            pageCollectionView.cellForItem(at: IndexPath(item: 0, section: 0) as? )
+            reloadData()
+        }
+    }
+    
+    
     let pageCollectionView: UICollectionView = {
         // flow layout
         let flowLayout = UICollectionViewFlowLayout()
@@ -44,6 +52,10 @@ class ListCollectionView: UIView {
         super.init(frame: frame)
         
         configureCustomTabBar()
+    }
+    
+    func reloadData() {
+        pageCollectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,30 +99,60 @@ class ListCollectionView: UIView {
 
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return menuTitles.count
+        //        return menuTitles.count
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // 여기서 카테고리 나눠야할듯?
         switch indexPath.item {
-            case 2...4:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
-                //        cell.label.text = menuTitles[indexPath.row]
-                return cell
-            default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
-                //        cell.label.text = menuTitles[indexPath.row]
-                return cell
+        case 0...1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+            if !listSenderData.isEmpty {
+                cell.configureObject(data: listSenderData)
+            }
+            return cell
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+            if !listSenderData.isEmpty {
+                cell.configureObject(data: listSenderData)
+            }
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
+            
+            if !listSenderData.isEmpty {
+                cell.configureObject(data: listSenderData)
+            }
+            
+            return cell
         }
     }
     
     
 }
 
-extension ListCollectionView: UICollectionViewDelegate{
+enum StayType: Int {
+    case 모든숙소 = 0
+    case 모텔
+    case 호텔리조트
+    case 펜션풀빌라
+    case 게스트하우스
+    case 무한쿠폰룸
+    case 프렌차이즈
+    case 신축리모델링
+    case 초특가호텔
+    case 인기숙소
+    case 파티룸
+    case 무료영화
+    case 스파펜션
+}
 
+extension ListCollectionView: UICollectionViewDelegate{
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
-        print("##### : ", itemAt)
         customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
     

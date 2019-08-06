@@ -8,10 +8,12 @@
 
 import UIKit
 
-protocol forthCellCheckBoxDelegate {
+protocol ForthCellCheckBoxDelegate {
     func forthCellCheckBox(sender:UIButton)
 }
-
+protocol ForthCellCompleteDelegate {
+    func resultButton(sender:UIButton)
+}
 
 class ReservationCollectionForthViewCell: UICollectionViewCell {
    
@@ -22,8 +24,11 @@ class ReservationCollectionForthViewCell: UICollectionViewCell {
     let lookFirstButton = UIButton()
     let lookSecondButton = UIButton()
 
-    var delegate: forthCellCheckBoxDelegate?
-
+    var delegate: ForthCellCheckBoxDelegate?
+    var completeDelegate: ForthCellCompleteDelegate?
+    
+    
+    
     let paymentButton = UIButton()
     
     let cautionInfoBottomLabel = UILabel()
@@ -84,6 +89,7 @@ class ReservationCollectionForthViewCell: UICollectionViewCell {
         paymentButton.setTitleColor(.white, for: .normal)
         paymentButton.backgroundColor = #colorLiteral(red: 0.9996150136, green: 0.2039119303, blue: 0.471554637, alpha: 1)
         paymentButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        paymentButton.addTarget(self, action: #selector(resultButton(sender:)), for: .touchUpInside)
 
         cautionInfoBottomLabel.topAnchor.constraint(equalTo: paymentButton.bottomAnchor,constant: 45).isActive = true
         cautionInfoBottomLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 15).isActive = true
@@ -99,6 +105,10 @@ class ReservationCollectionForthViewCell: UICollectionViewCell {
     
     @objc private func checkboxTap(sender:UIButton) {
         delegate?.forthCellCheckBox(sender: sender)
+    }
+    
+    @objc private func resultButton(sender:UIButton) {
+        completeDelegate?.resultButton(sender:sender)
     }
     
     required init?(coder aDecoder: NSCoder) {

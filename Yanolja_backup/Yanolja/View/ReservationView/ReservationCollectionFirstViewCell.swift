@@ -108,6 +108,7 @@ class ReservationCollectionFirstViewCell: UICollectionViewCell {
         checkInTime.text = "20:00"
         checkOutDate.text = "2019.07.30 (화)"
         checkOutTime.text = "22:00"
+    
 
     }
     
@@ -117,14 +118,21 @@ class ReservationCollectionFirstViewCell: UICollectionViewCell {
         
     }
     
-    func stayAndRoomTitleSender(stayTitle:String, roomTitle:String ,checkInDate:String,checkInTime:String,checkOutDate:String, chekoutTime:String ) {
+    func stayAndRoomTitleAndInOutTimeSender(stayTitle:String, roomTitle:String ,checkInDate:String,checkInTime:String,checkOutDate:String, checkOutTime:String ) {
         self.stayTitle.text = stayTitle
         self.roomTitle.text = roomTitle
+        self.checkInDate.text = checkInDate
+        self.checkInTime.text = checkInTime
+        self.checkOutDate.text = checkOutDate
+        self.checkOutTime.text = checkOutTime
+
         self.stayTitle.font = UIFont.boldSystemFont(ofSize: 32)
         self.roomTitle.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        
-        
-        
+        self.checkInDate.font = UIFont.systemFont(ofSize: font)
+        self.checkInTime.font = UIFont.boldSystemFont(ofSize: 25)
+        self.checkOut.font = UIFont.systemFont(ofSize: font)
+        self.checkOutTime.font = UIFont.boldSystemFont(ofSize: 25)
+
         
 
     }

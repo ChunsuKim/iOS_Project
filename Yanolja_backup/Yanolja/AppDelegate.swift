@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = .white
         window?.rootViewController = CustomTabBarController()
-//        window?.rootViewController = ReservationViewController()
+//        window?.rootViewController = RegisterSecondViewController()
         window?.makeKeyAndVisible()
         
         return true

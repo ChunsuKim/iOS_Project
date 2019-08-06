@@ -9,6 +9,9 @@
 import UIKit
 
 class DetailImageCollectionViewCell: UICollectionViewCell {
+    
+    let detailVC = DetailViewController()
+    
     private let imageView = UIImageView()
     
     override init(frame: CGRect) {

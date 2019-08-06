@@ -8,11 +8,13 @@
 
 import UIKit
 
-protocol checkBoxDelegate {
+@objc protocol checkBoxDelegate {
     func possibleChkButton()
     func searchButton()
+    @objc optional func backButton()
+    @objc optional func calendarButton()
+    @objc optional func selectPeopleButton()
 }
-
 class TopNaviView: UIView {
     
     // MARK: - Properties
@@ -25,6 +27,16 @@ class TopNaviView: UIView {
         button.setImage(#imageLiteral(resourceName: "grasses"), for: .normal)
         button.tintColor = UIColor.gray
         button.addTarget(self, action: #selector(searchButtonEvent), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(backButtonEvent(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -55,6 +67,7 @@ class TopNaviView: UIView {
         button.layer.cornerRadius = 15
         button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(calendarButton(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -67,6 +80,7 @@ class TopNaviView: UIView {
         button.layer.cornerRadius = 15
         button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(selectPeopleButton(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -122,6 +136,7 @@ class TopNaviView: UIView {
     }
     
     private func configureNavi() {
+        self.addSubview(backButton)
         self.addSubview(searchButton)
         self.addSubview(locationText)
         self.addSubview(selectLocationButton)
@@ -142,6 +157,10 @@ class TopNaviView: UIView {
             searchButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             searchButton.widthAnchor.constraint(equalToConstant: 20),
             searchButton.heightAnchor.constraint(equalToConstant: 20),
+            backButton.topAnchor.constraint(equalTo: searchButton.topAnchor),
+            backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            backButton.widthAnchor.constraint(equalToConstant: 20),
+            backButton.heightAnchor.constraint(equalToConstant: 20),
             locationText.topAnchor.constraint(equalTo: self.topAnchor, constant: 45),
             locationText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             selectLocationButton.centerYAnchor.constraint(equalTo: locationText.centerYAnchor),
@@ -176,6 +195,18 @@ class TopNaviView: UIView {
     
     @objc private func searchButtonEvent() {
         delegate?.searchButton()
+    }
+    
+    @objc private func backButtonEvent(_ sender: UIButton) {
+        delegate?.backButton!()
+    }
+    
+    @objc private func calendarButton(_ sender: UIButton) {
+        self.delegate?.calendarButton!()
+    }
+    
+    @objc private func selectPeopleButton(_ sender: UIButton) {
+        self.delegate?.selectPeopleButton!()
     }
 
 }

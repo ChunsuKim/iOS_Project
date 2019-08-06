@@ -15,3 +15,4 @@ protocol CustomMenuBarDelegate {
 protocol ListDetailDelegate {
     func listDidSelected(_ indexPath: IndexPath)
 }
+

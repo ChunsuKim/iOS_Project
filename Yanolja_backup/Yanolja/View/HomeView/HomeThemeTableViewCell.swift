@@ -11,7 +11,16 @@ import UIKit
 class HomeThemeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
+    
+    enum ThemeCategory: Int {
+        case bigSale = 0
+        case partyRoom
+        case swimmingPool
+        case spa
+    }
+    
     static let identifier = "HomeThemeTableViewCell"
+    
     
     // TitleView
     private let titleView = UIView()
@@ -21,10 +30,17 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
     private var isState = true
-    private var poolList = themeMenus[0].items
-    private var poolListDiff = themeMenusDiff[0].items
     
-    private var groups = [HomeThemeGroup]()
+    private var groupBigSale = [HomeThemeGroup]()
+    private var groupPartyRoom = [HomeThemeGroup]()
+    private var groupSwimmingPool = [HomeThemeGroup]()
+    private var groupSpa = [HomeThemeGroup]()
+    private var themeBigSaleArray = [HomeThemeGroup]()
+    private var themePartyRoomArray = [HomeThemeGroup]()
+    private var themeSwimmingPoolArray = [HomeThemeGroup]()
+    private var themeSpaArray = [HomeThemeGroup]()
+    
+    
     
     // CollectionView
     private let homeViewCollectionView : UICollectionView = {
@@ -41,8 +57,10 @@ class HomeThemeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        
         self.selectionStyle = .none
         menuBar.delegate = self
+        fetchData()
         
         configureTitleView()
         configureMenuBar()
@@ -50,7 +68,6 @@ class HomeThemeTableViewCell: UITableViewCell {
         configureTitleViewConstraints()
         configureCollectionViewConstraints()
         
-        fetchData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,15 +85,15 @@ class HomeThemeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    private func fetchData() {
+    func fetchData() {
         
         let dispatchGroup = DispatchGroup()
-        
+
         dispatchGroup.enter()
         HomeThemeDataSource.shared.fetchBigSale { (dataGroup, error) in
             dispatchGroup.leave()
-            self.groups = dataGroup ?? []
-//            print("dataGroup:", dataGroup)
+            self.groupBigSale = dataGroup ?? []
+            self.themeBigSaleArray = dataGroup ?? []
             
             DispatchQueue.main.async {
                 self.homeViewCollectionView.reloadData()
@@ -86,7 +103,8 @@ class HomeThemeTableViewCell: UITableViewCell {
         dispatchGroup.enter()
         HomeThemeDataSource.shared.fetchPartyRoom { (dataGroup, error) in
             dispatchGroup.leave()
-            self.groups = dataGroup ?? []
+            self.groupPartyRoom = dataGroup ?? []
+            self.themePartyRoomArray = dataGroup ?? []
             
             DispatchQueue.main.async {
                 self.homeViewCollectionView.reloadData()
@@ -96,7 +114,8 @@ class HomeThemeTableViewCell: UITableViewCell {
         dispatchGroup.enter()
         HomeThemeDataSource.shared.fetchSwimmingPool { (dataGroup, error) in
             dispatchGroup.leave()
-            self.groups = dataGroup ?? []
+            self.groupSwimmingPool = dataGroup ?? []
+            self.themeSwimmingPoolArray = dataGroup ?? []
             
             DispatchQueue.main.async {
                 self.homeViewCollectionView.reloadData()
@@ -106,7 +125,8 @@ class HomeThemeTableViewCell: UITableViewCell {
         dispatchGroup.enter()
         HomeThemeDataSource.shared.fetchSpa { (dataGroup, error) in
             dispatchGroup.leave()
-            self.groups = dataGroup ?? []
+            self.groupSpa = dataGroup ?? []
+            self.themeSpaArray = dataGroup ?? []
             
             DispatchQueue.main.async {
                 self.homeViewCollectionView.reloadData()
@@ -121,7 +141,7 @@ class HomeThemeTableViewCell: UITableViewCell {
         
         titleView.backgroundColor = .white
         
-        titleLabel.text = "첨벙첨벙 물놀이하러 Go!"
+        titleLabel.text = "핫썸머 핫캉스"
         titleLabel.textAlignment = .left
         titleLabel.textColor = #colorLiteral(red: 0.1794605851, green: 0.184564501, blue: 0.1800470352, alpha: 1)
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -204,11 +224,11 @@ class HomeThemeTableViewCell: UITableViewCell {
         menuBar.reloadMenuCollectionView()
     }
     
-    func reloadTitleLabel() {
+    func reloadTitleLabel(themeTitle: String, themeTitleDiff: String) {
         if isState {
-            titleLabel.text = themeTitle
+            titleLabel.text = themeTitleFirst
         } else {
-            titleLabel.text = themeTitleDiff
+            titleLabel.text = themeTitleSecond
         }
     }
     
@@ -225,8 +245,12 @@ class HomeThemeTableViewCell: UITableViewCell {
 extension HomeThemeTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(groups.count)
-        return groups.count
+        
+        if isState {
+            return themeBigSaleArray.count / 2
+        } else {
+            return themeSwimmingPoolArray.count / 2
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -234,15 +258,14 @@ extension HomeThemeTableViewCell: UICollectionViewDataSource {
         
         if isState {
             
-            let themeGroup = groups[indexPath.item]
+            let themeGroup = themeBigSaleArray[indexPath.item]
             cell.configureCellContent(image: themeGroup.mainImage, title: themeGroup.stay, price: themeGroup.saleDaysPrice)
-            
-            print(themeGroup.stay)
-//            cell.configureCellContent(image: UIImage(named: poolList[indexPath.row].imageUrl), title: poolList[indexPath.row].title, price: poolList[indexPath.row].price)
             
             homeThemeCollectionViewCell = cell
         } else {
-//            cell.configureCellContent(image: UIImage(named: poolListDiff[indexPath.row].imageName), title: poolListDiff[indexPath.row].title, price: poolListDiff[indexPath.row].price)
+
+            let themeGroup = themeSwimmingPoolArray[indexPath.item]
+            cell.configureCellContent(image: themeGroup.mainImage, title: themeGroup.stay, price: themeGroup.saleDaysPrice)
             
             homeThemeCollectionViewCell = cell
         }
@@ -279,9 +302,14 @@ extension HomeThemeTableViewCell: MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath) {
         homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
+        let totalFirstThemeGroup = [groupBigSale, groupPartyRoom, groupSwimmingPool, groupSpa]
+        let firstTheme = totalFirstThemeGroup[indexPath.item]
+        themeBigSaleArray = firstTheme
         
-//        poolList = themeMenus[indexPath.row].items
-//        poolListDiff = themeMenusDiff[indexPath.row].items
+        let totalSecondThemeGroup = [groupSwimmingPool, groupSpa, groupBigSale, groupPartyRoom]
+        let secondTheme = totalSecondThemeGroup[indexPath.item]
+        themeSwimmingPoolArray = secondTheme
+        
         homeViewCollectionView.reloadData()
     }
 }

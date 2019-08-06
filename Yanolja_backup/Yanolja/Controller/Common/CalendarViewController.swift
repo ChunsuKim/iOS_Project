@@ -32,8 +32,11 @@ class CalendarViewController: UIViewController {
     private let bottomCheckInSearchButton = UIButton()
     
     let defaultCal = Calendar(identifier: .gregorian)
-
+    
     var saveDate: [Date] = []
+    
+    var count = 1
+    
     
     
     
@@ -43,9 +46,11 @@ class CalendarViewController: UIViewController {
         
         configureUI()
         calenderFeat()
-        calendar.placeholderType = .none
-
+        calenderInitSelectDates()
+        print("viewDidLoad :",singleTon.saveDate)
     }
+    
+    
     private func configureUI() {
         view.addSubview(mainView)
         mainView.translatesAutoresizingMaskIntoConstraints = false
@@ -131,35 +136,31 @@ class CalendarViewController: UIViewController {
         bottomCheckInSearchButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor,constant: 10).isActive = true
         bottomCheckInSearchButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor,constant: -10).isActive = true
         bottomCheckInSearchButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor,constant: -40).isActive = true
-        bottomCheckInSearchButton.backgroundColor = .lightGray
-        bottomCheckInSearchButton.setTitle("날짜를 선택해 주세요.", for: .normal)
-        bottomCheckInSearchButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        bottomCheckInSearchButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         bottomCheckInSearchButton.setTitleColor(.white, for: .normal)
         bottomCheckInSearchButton.layer.cornerRadius = 25
-        bottomCheckInSearchButton.isEnabled = false
+        bottomCheckInSearchButton.isEnabled = true
         bottomCheckInSearchButton.addTarget(self, action: #selector(sendDate), for: .touchUpInside)
-
+        
     }
-    @objc private func removeAll() {
-        for _ in 0 ..< calendar.selectedDates.count {
-            calendar.deselect(calendar.selectedDates[0])
+    private func calenderInitSelectDates() {
+        if !singleTon.saveDate.isEmpty {
+            calendar.select(singleTon.saveDate[0])
+        } else {
+            calendar.select(date)
+            calendar.select(date+86400)
         }
-        bottomCheckInSearchButton.setTitle("날짜를 선택해 주세요.", for: .normal)
-        bottomCheckInSearchButton.backgroundColor = .lightGray
-        bottomCheckInSearchButton.isEnabled = false
-        removeButton.isEnabled = false
-
-    }
-    @objc private func sendDate() {
-        guard let vc = presentingViewController as? SearchViewController else { return }
-        saveDate = calendar.selectedDates
-        print("saveDate : ",saveDate)
-        vc.dismiss(animated: true) {
-            guard let title = self.bottomCheckInSearchButton.currentTitle else {return}
-            vc.dateLabel.text = "             "+title
-            vc.dateLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        
+        if singleTon.saveDate.count > 1 {
+            calendar.select(singleTon.saveDate[1])
+            selectBetweenSelectedDatesFirstAndSecond()
         }
+        
+        print(calendar.selectedDates[0])
+        buttonSetTitle(button: bottomCheckInSearchButton)
+        
     }
+    
     
     private func calenderFeat() {
         calendar.delegate = self
@@ -183,22 +184,12 @@ class CalendarViewController: UIViewController {
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
         calendar.allowsMultipleSelection = true
+        
+        //이걸 해야 31일 지나고 다음달꺼 안뜸..
+        calendar.placeholderType = .none
+        
     }
     
-    @objc private func dismissAction() {
-        dismiss(animated: true, completion: nil) }
-    
-    func day(of:Int) -> String {
-        switch of {
-        case 2: return "월"
-        case 3: return "화"
-        case 4: return "수"
-        case 5: return "목"
-        case 6: return "금"
-        case 7: return "토"
-        default:return "일"
-        }
-    }
     // MARK: 코드 너무드러워 이 함수코드는 bottomCheckInSearchButton 의 setTilte 정해주는 코드...
     // 어려움은 selectedDates 가 배열인데 첫번재 선택한것은 배열[0] 에 들어가고 두번째 선택한건 배열[1]에 들어가는 상황.
     //첫번째 선택한 날짜보다 두번째 날짜보다 작으면 selectedDates[0] 의 날짜를 삭제시키고 selectedDates[1]의 날짜가 selectedDates[0]이 되면서 날짜가 하루 전껄로 되는 오류가 나타남... 그래서 함수를 2개 만들어서 진행.
@@ -223,6 +214,65 @@ class CalendarViewController: UIViewController {
         return "\(month)"+"월 "+"\(date)"+"일 "+"("+day(of: dayInt)+")"
     }
     
+    
+    func buttonSetTitle(button:UIButton) {
+        if calendar.selectedDates.count == 1 {
+            button.setTitle(onePickSendString(input: calendar.selectedDates[0])+"체크인 검색", for: .normal)
+        } else if calendar.selectedDates.count > 1 {
+            button.setTitle(sendString(input: calendar.selectedDates[0], num: 0)+"~"+sendString(input: calendar.selectedDates[1], num: 1)+"▪︎"+"\(count)박" , for: .normal)
+        } else {
+           button.setTitle(singleTon.todayString+"~"+singleTon.tomorrowString+",1박", for: .normal)
+        }
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+    }
+    
+    func selectBetweenSelectedDatesFirstAndSecond() {
+        var startTemp: Date!
+        startTemp = calendar.selectedDates[0]
+        while startTemp < calendar.selectedDates[1]-86400{
+            startTemp += 86400
+            calendar.select(startTemp)
+            count += 1
+        }
+        buttonSetTitle(button: bottomCheckInSearchButton)
+        startTemp = nil
+    }
+    
+    
+    
+    // MARK: - Action Method
+    @objc private func removeAll() {
+        for _ in 0 ..< calendar.selectedDates.count {
+            calendar.deselect(calendar.selectedDates[0])
+        }
+        bottomCheckInSearchButton.setTitle("날짜를 선택해 주세요.", for: .normal)
+        bottomCheckInSearchButton.backgroundColor = .lightGray
+        bottomCheckInSearchButton.isEnabled = false
+        removeButton.isEnabled = false
+        
+    }
+    @objc private func sendDate() {
+        singleTon.saveDate = calendar.selectedDates
+        print("저장되는 날짜들",self.formatter.string(from: calendar.selectedDates[0]))
+        if let vc = presentingViewController as? SearchViewController {
+            vc.dismiss(animated: true) {
+                guard let title = self.bottomCheckInSearchButton.currentTitle else {return}
+                vc.dateLabel.text = title
+                vc.dateLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+                vc.saveStringDate = title
+            }
+        } else if let vc = presentingViewController as? SearchDetailViewController {
+            vc.dismiss(animated: true) {
+                
+                self.buttonSetTitle(button: vc.calendarButton)
+                vc.calendarButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
+            }
+        }
+        
+    }
+    
+    @objc private func dismissAction() {
+        dismiss(animated: true, completion: nil) }
     
     
     
@@ -260,6 +310,7 @@ extension CalendarViewController :FSCalendarDataSource {
     
     
     
+    
 }
 
 // MARK:- FSCalendarDelegate
@@ -269,52 +320,48 @@ extension CalendarViewController :FSCalendarDelegate {
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         print("change page to \(self.formatter.string(from: calendar.currentPage))")
     }
-   
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        print("shouldSelect :",self.formatter.string(from: date))
+//        calendar.appearance.titleDefaultColor
+return true
+    }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("calendar did select date \(self.formatter.string(from: date))")
+        
         removeButton.isEnabled = true
         bottomCheckInSearchButton.isEnabled = true
         bottomCheckInSearchButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-
-
-        bottomCheckInSearchButton.setTitle(
-            onePickSendString(input: date)+"체크인 검색", for: .normal)
-
-        //요일 구하기.
         
         
-        
+        bottomCheckInSearchButton.setTitle(onePickSendString(input: date)+"체크인 검색", for: .normal)
+     
         //// 첫번째 라스트 선택시..
         if calendar.selectedDates.count > 2{
             for i in (0 ..< calendar.selectedDates.count - 1).reversed(){
                 calendar.deselect(calendar.selectedDates[i])
             }
         }
-        if calendar.selectedDates.count == 1 {
-        }
-        var startTemp: Date!
-        var count = 1
+      
+        
         if calendar.selectedDates.count == 2{
             if calendar.selectedDates[0] < calendar.selectedDates[1]{
-                startTemp = calendar.selectedDates[0]
-                while startTemp < calendar.selectedDates[1]-86400{
-                    startTemp += 86400
-                    calendar.select(startTemp)
-                    count += 1
+                if calendar.selectedDates[0]+(86400 * 9) >= calendar.selectedDates[1] {
+                    selectBetweenSelectedDatesFirstAndSecond()
+                } else {
+                    calendar.deselect(calendar.selectedDates[1])
+                    buttonSetTitle(button: bottomCheckInSearchButton)
                 }
-                bottomCheckInSearchButton.setTitle(sendString(input: calendar.selectedDates[0], num: 0)+"~"+sendString(input: calendar.selectedDates[1], num: 1)+"▪︎"+"\(count)박" , for: .normal)
-                startTemp = nil
             } else {
-              // 디셀렉트 되면서 뭔가 셀렉트된 날짜가 하루 앞서게 됨? 그래서 86400 초 더함..
+                // 디셀렉트 되면서 뭔가 셀렉트된 날짜가 하루 앞서게 됨? 그래서 86400 초 더함..
                 calendar.deselect(calendar.selectedDates[0])
-                print(calendar.selectedDates[0]+86400,12313123213)
                 
             }
         }
+        count = 1
     }
+    //여기함수는 같은 날짜 한번 더 누를 때
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        //선택날짜 한번 더 누를 때
         print("didDeselect")
         for _ in 0 ..< calendar.selectedDates.count {
             calendar.deselect(calendar.selectedDates[0])
@@ -324,7 +371,7 @@ extension CalendarViewController :FSCalendarDelegate {
             sendString(input: date,num: 0)+"체크인 검색", for: .normal)
     }
     
-  
+    
 }
 
 

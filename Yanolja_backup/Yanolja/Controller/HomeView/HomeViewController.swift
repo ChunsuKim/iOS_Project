@@ -12,7 +12,9 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     private var homeThemeCollectionView = HomeThemeTableViewCell()
+    private var homeThemeSecondCollectionView = HomeThemeSecondTableViewCell()
     private var isThemeDiffClicked = true
+    private var isSecondThemeDiffClicked = true
     
     // HeaderView
     private let headerView = UIView()
@@ -75,7 +77,11 @@ class HomeViewController: UIViewController {
         
         homeTableView.register(HomeThemeTableViewCell.self, forCellReuseIdentifier: HomeThemeTableViewCell.identifier)
         
+        homeTableView.register(HomeThemeSecondTableViewCell.self, forCellReuseIdentifier: HomeThemeSecondTableViewCell.identifier)
+        
         homeTableView.register(HomeThemeDiffTableViewCell.self, forCellReuseIdentifier: HomeThemeDiffTableViewCell.identifier)
+        
+        homeTableView.register(HomeThemeDiffSecondTableViewCell.self, forCellReuseIdentifier: HomeThemeDiffSecondTableViewCell.identifier)
         
         homeTableView.register(HomePopWordsTableViewCell.self, forCellReuseIdentifier: HomePopWordsTableViewCell.identifier)
         
@@ -139,6 +145,10 @@ class HomeViewController: UIViewController {
     private func isThemeDiffStateToggle() {
         isThemeDiffClicked.toggle()
     }
+    
+    private func isThemeSecondDiffStateToggle() {
+        isSecondThemeDiffClicked.toggle()
+    }
 }
 
 // MARK: - TableView Data Source Extension
@@ -146,7 +156,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,11 +211,18 @@ extension HomeViewController: UITableViewDataSource {
             return cell
             
         case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeSecondTableViewCell.identifier, for: indexPath) as! HomeThemeSecondTableViewCell
+            
+            homeThemeSecondCollectionView = cell
             
             return cell
             
         case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeDiffSecondTableViewCell.identifier, for: indexPath) as! HomeThemeDiffSecondTableViewCell
+            
+            return cell
+            
+        case 7:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
             
             return cell
@@ -221,10 +238,12 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("click cell")
         
-        if indexPath.row == 2 {
+        switch indexPath.row {
+        case 2:
+            
             homeThemeCollectionView.reloadCollectionView()
             homeThemeCollectionView.reloadMenuBar()
-            homeThemeCollectionView.reloadTitleLabel()
+            homeThemeCollectionView.reloadTitleLabel(themeTitle: themeTitleFirst, themeTitleDiff: themeTitleSecond)
             homeThemeCollectionView.reloadTitleButton()
             isThemeDiffStateToggle()
             if let cell = homeTableView.cellForRow(at: indexPath) as? HomeThemeDiffTableViewCell {
@@ -234,6 +253,24 @@ extension HomeViewController: UITableViewDelegate {
                     cell.changePageNumberLabel(currentPageNumber: "2", totalPageNumber: "2")
                 }
             }
+
+        case 6:
+            
+            homeThemeSecondCollectionView.reloadCollectionView()
+            homeThemeSecondCollectionView.reloadMenuBar()
+            homeThemeSecondCollectionView.reloadTitleLabel(themeTitle: themeTitleThird, themeTitleDiff: themeTitleFourth)
+            homeThemeSecondCollectionView.reloadTitleButton()
+            isThemeSecondDiffStateToggle()
+            if let cell = homeTableView.cellForRow(at: indexPath) as? HomeThemeDiffSecondTableViewCell {
+                if isSecondThemeDiffClicked {
+                    cell.changeSecondCollectionViewPageNumberLabel(currentPageNumber: "1", totalPageNumber: "2")
+                } else {
+                    cell.changeSecondCollectionViewPageNumberLabel(currentPageNumber: "2", totalPageNumber: "2")
+                }
+            }
+
+        default:
+            break
         }
     }
 }

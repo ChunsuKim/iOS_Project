@@ -145,10 +145,24 @@ extension LoginViewController: UICollectionViewDataSource {
             
             let cell = loginViewCollectionView.dequeueReusableCell(withReuseIdentifier: LoginCollectionViewCell.identifier, for: indexPath) as! LoginCollectionViewCell
             
+            
+            
             cell.registerButtonAction = {
                 if cell.registerButton.isTouchInside {
                     let registerViewController = RegisterViewController()
                     self.present(registerViewController, animated: true, completion: nil)
+                }
+            }
+            
+            cell.loginButtonAction = {
+                if cell.loginButton.isTouchInside {
+                    print(11232131)
+                    print(cell.idTextField.text!)
+                    print(cell.passwordTextField.text!)
+                    getToken(email: cell.idTextField.text! , password: cell.passwordTextField.text!, completion: { (token) -> (String) in
+                        print("token :", token)
+                        return token
+                    })
                 }
             }
             

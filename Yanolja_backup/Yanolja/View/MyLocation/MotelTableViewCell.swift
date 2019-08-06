@@ -268,17 +268,26 @@ class MotelTableViewCell: UITableViewCell {
         
         wrapMotel.backgroundColor = .white
         
-//        self.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        //        self.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
         
-//        self.layer.shadowOpacity = 0.18
-//        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        self.layer.shadowRadius = 2
-//        self.layer.shadowColor = UIColor.black.cgColor
-//        self.layer.masksToBounds = false
+        //        self.layer.shadowOpacity = 0.18
+        //        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        //        self.layer.shadowRadius = 2
+        //        self.layer.shadowColor = UIColor.black.cgColor
+        //        self.layer.masksToBounds = false
         
         configureHotelCell()
         configureAutoLayout()
+
+        
+        self.selectionStyle = .none
     }
+    
+    
+    func configureObject(data: StayListElement) {
+        put(mainImage: data.mainImage , stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice)
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -323,7 +332,7 @@ class MotelTableViewCell: UITableViewCell {
             hotelImage.leadingAnchor.constraint(equalTo: wrapMotel.leadingAnchor),
             hotelImage.trailingAnchor.constraint(equalTo: wrapMotel.trailingAnchor),
             hotelImage.bottomAnchor.constraint(equalTo: hotelCellArea.topAnchor, constant: -20),
-            hotelImage.heightAnchor.constraint(equalToConstant: 230),
+           hotelImage.widthAnchor.constraint(equalTo: wrapMotel.widthAnchor), hotelImage.heightAnchor.constraint(equalToConstant: 230),
             hotelCellArea.leadingAnchor.constraint(equalTo: wrapMotel.leadingAnchor, constant: 10),
             hotelCellArea.trailingAnchor.constraint(equalTo: wrapMotel.trailingAnchor, constant: -10),
             hotelCellArea.bottomAnchor.constraint(equalTo: wrapMotel.bottomAnchor),
@@ -372,7 +381,7 @@ class MotelTableViewCell: UITableViewCell {
             stayRoomPrice.leadingAnchor.constraint(equalTo: stayRoomPercent.trailingAnchor, constant: 5),
             stayRoomWon.bottomAnchor.constraint(equalTo: stayRoomPercent.bottomAnchor),
             stayRoomWon.leadingAnchor.constraint(equalTo: rentableRoomPrice.trailingAnchor),
-
+            
             divideLine.widthAnchor.constraint(equalTo: hotelCellArea.widthAnchor),
             divideLine.heightAnchor.constraint(equalToConstant: 1),
             divideLine.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
@@ -385,7 +394,7 @@ class MotelTableViewCell: UITableViewCell {
             eventCont.leadingAnchor.constraint(equalTo: eventTitle.trailingAnchor, constant: 10),
             eventCont.bottomAnchor.constraint(equalTo: hotelCellArea.bottomAnchor, constant: -10),
             eventCont.trailingAnchor.constraint(equalTo: hotelCellArea.trailingAnchor),
-        ])
+            ])
         
         switch rentableRoomCancelPrice.text!.count > 0 {
         case true:
@@ -393,5 +402,14 @@ class MotelTableViewCell: UITableViewCell {
         case false:
             print("false")
         }
+    }
+    func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String) {
+        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+        self.hotelTitle.text = stay
+        gradeRate.text = "\(averageGrade)"
+        commentLabel.text = "\(totalComments)"
+        bossComment.text = "\(ownerComments)"
+        hotelLocation.text = directions
+        stayRoomPrice.text = daysPrice
     }
 }

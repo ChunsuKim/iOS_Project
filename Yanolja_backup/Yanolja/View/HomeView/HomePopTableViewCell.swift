@@ -79,7 +79,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
     }
     
     private func configurePagecontrols() {
-        pagecontrols.numberOfPages = 4
+        pagecontrols.numberOfPages = 8
         popViewCollectionView.addSubview(pagecontrols)
         
         pagecontrols.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
     // MARK: - Action Method
     @objc private func startTimer() {
         pagecontrols.currentPage = scrollStartNumber
-        if scrollStartNumber < 4 {
+        if scrollStartNumber < 8 {
             let indexPath = IndexPath(item: scrollStartNumber, section: 0)
             popViewCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
 //            popViewCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)

@@ -12,6 +12,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     var refreshControl: UIRefreshControl!
     let notiCenter = NotificationCenter.default
+    let detailVC = DetailViewController()
     
     let topBandNavi: UIView = {
         let view = UIView()
@@ -49,6 +50,13 @@ class CustomCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    var saveStayList: [StayListElement] = []
+    
+    func configureObject(data: [StayListElement]) {
+        saveStayList = data
+        
+        motelListTableView.reloadData()
+    }
     
     private func configureTableView() {
         self.addSubview(topBandNavi)
@@ -77,38 +85,53 @@ class CustomCollectionViewCell: UICollectionViewCell {
             motelListTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             motelListTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             motelListTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-        ])
+            ])
     }
     
     @objc private func refreshList(_ sender: Any) {
         
     }
-
+    
 }
 
 extension CustomCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notiCenter.post(name: Notification.Name("moveDetailVC"), object: nil)
+//        detailVC.stayID = saveStayList[indexPath.row].stayID
+        singleTon.stayID = saveStayList[indexPath.row].stayID
+        print("@@@@@ :", singleTon.stayID)
     }
 }
 
 extension CustomCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return saveStayList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = saveStayList[indexPath.row]
+        let category = data.category
         
-        switch indexPath.row {
-        case 0...5:
+        switch category {
+        case .모텔:
             let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! MotelTableViewCell
             cell.selectionStyle = .none
+            cell.configureObject(data: data)
+            /// VIEW ->
+            
             return cell
-        default:
+        case .호텔리조트:
+            print("##### :", data.stay)
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
+            cell.configureObject(data: data)
+            /// VIEW ->
+            
             return cell
+            
+        default:
+            return UITableViewCell()
         }
     }
     

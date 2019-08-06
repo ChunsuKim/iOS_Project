@@ -6,6 +6,7 @@ target 'Yanolja' do
   use_frameworks!
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'Alamofire', '~> 5.0.0-beta.5'
   # Pods for Yanolja
 
 end

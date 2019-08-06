@@ -20,7 +20,7 @@ struct Pool {
     let price: String
 }
 
-var listMenuTitles = ["선착순 쿠폰","모텔","호텔/리조트", "펜션/풀빌라", "게스트하우스", "#무한쿠폰룸", "프랜차이즈", "#신축/리모델링", "#초특가호텔", "#인기숙소", "#파티룸", "#무료영화", "#스파펜션"]
+var listMenuTitles = ["모든 숙소","모텔","호텔", "펜션/풀빌라", "게스트하우스", "#무한쿠폰룸", "프랜차이즈", "#신축/리모델링", "#초특가호텔", "#인기숙소", "#파티룸", "#무료영화", "#스파펜션"]
 
 let themeTitle = "첨벙첨벙 물놀이하러 Go!"
 let themeTitleDiff = "핫썸머 핫캉스"
@@ -118,10 +118,14 @@ struct PopDataManager {
     init() {}
     
     let pops: [PopData] = [
-        PopData(imageName: "pool1"),
-        PopData(imageName: "pool2"),
-        PopData(imageName: "pool3"),
-        PopData(imageName: "pool4")
+        PopData(imageName: "pop1"),
+        PopData(imageName: "pop2"),
+        PopData(imageName: "pop3"),
+        PopData(imageName: "pop4"),
+        PopData(imageName: "pop5"),
+        PopData(imageName: "pop6"),
+        PopData(imageName: "pop7"),
+        PopData(imageName: "pop8")
     ]
 }
 

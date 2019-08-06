@@ -13,16 +13,17 @@ class LoginCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier = "LoginCollectionViewCell"
     var registerButtonAction: (() -> ())?
+    var loginButtonAction: (() -> ())?
     
     // textField
-    private let idTextField = UITextField()
-    private let passwordTextField = UITextField()
+    let idTextField = UITextField()
+    let passwordTextField = UITextField()
     
     private let idLineView = UIView()
     private let passwordLineView = UIView()
     
     // Buttons
-    private let loginButton = UIButton(type: .system)
+    let loginButton = UIButton(type: .system)
     private let passwordResetButton = UIButton(type: .system)
     private let passwordResetButtonLineView = UIView()
     let registerButton = UIButton(type: .system)
@@ -85,6 +86,7 @@ class LoginCollectionViewCell: UICollectionViewCell {
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.backgroundColor = .lightGray
         loginButton.isEnabled = false
+        loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
         
         passwordResetButton.setTitle("비밀번호 재설정", for: .normal)
         passwordResetButton.setTitleColor(#colorLiteral(red: 0.2375472188, green: 0.4117342234, blue: 0.9218910933, alpha: 1), for: .normal)
@@ -166,10 +168,14 @@ class LoginCollectionViewCell: UICollectionViewCell {
         registerButtonAction?()
     }
     
+    @objc private func loginButtonDidTap(_ sender: UIButton) {
+        loginButtonAction?()
+    }
+    
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
         let id = idTextField.text
         let string = String()
-        if !(id!.isEmpty) && (passwordTextField.text?.count)! + string.count > 4 {
+        if !(id!.isEmpty) && (passwordTextField.text?.count)! + string.count > 3 {
             loginButton.isEnabled = true
             loginButton.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1)
         } else {

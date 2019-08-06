@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import Alamofire
 
 class MyLocationViewController: UIViewController {
-
+    
     var topNaviView = TopNaviView()
     var listCollectionView = ListCollectionView()
     let notiCenter = NotificationCenter.default
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationController?.isNavigationBarHidden = true
         
+        WebAPI.shared.getTestAPI { [weak self] (listData) in
+            self?.reloadCollectionView()
+            self?.listCollectionView.listSenderData = listData
+        }
+        
+        navigationController?.isNavigationBarHidden = true
         configureViewComponents()
+    }
+    
+    private func reloadCollectionView() {
+        listCollectionView.reloadData()
     }
     
     private func configureViewComponents() {
@@ -44,7 +54,7 @@ class MyLocationViewController: UIViewController {
             listCollectionView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             listCollectionView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
             listCollectionView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-        ])
+            ])
         
         moveDetailVC()
     }
@@ -81,5 +91,18 @@ extension MyLocationViewController: checkBoxDelegate {
         let vc = SearchViewController()
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true, completion: nil)
+    }
+    
+    func backButton() {
+        navigationController?.popViewController(animated: true)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func calendarButton() {
+        self.present(CalendarViewController(), animated: true)
+    }
+    
+    func selectPeopleButton() {
+        self.present(NumberOfPeopleViewController(), animated: true)
     }
 }

@@ -53,6 +53,8 @@ class RegionViewController: UIViewController {
         searchButton.setImage(UIImage(named: "grasses"), for: .normal)
         searchButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
         searchButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        searchButton.addTarget(self, action: #selector(presentSearchViewController), for: .touchUpInside)
+        
         
         regionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 25).isActive = true
         regionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 55).isActive = true
@@ -132,6 +134,14 @@ class RegionViewController: UIViewController {
         mapButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         mapButton.addTarget(self, action: #selector(categoryButtonAnimateAction), for: .touchUpInside)
     }
+    
+    @objc private func presentSearchViewController() {
+        let vc = SearchViewController()
+        vc.view.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
     @objc private func categoryButtonAnimateAction(sender:UIButton) {
         regionButton.isSelected = false
         stationButton.isSelected = false

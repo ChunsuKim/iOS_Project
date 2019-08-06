@@ -11,9 +11,22 @@ import UIKit
 class DetailViewController: UIViewController {
     
     // MARK: - Properties
+    
+    var listSenderData = [StayDetailElement]() {
+        didSet {
+            self.two = 2
+            self.hotelRoomCount = 2
+            self.eight = 8
+            detailView.reloadData()
+        }
+    }
+    
     let customTab = CustomTabBarController()
     
-    let hotelRoomCount = 2
+    var hotelRoomCount = 0
+    var two = 0
+    var eight = 0
+    
     let introContCount = 5
     let convenienceContCount = 5
     
@@ -42,7 +55,9 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "선릉 호텔 발리"
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.isHidden = true
         
         return label
     }()
@@ -106,6 +121,12 @@ class DetailViewController: UIViewController {
         detailView.rowHeight = UITableView.automaticDimension
         
         view.addSubview(detailView)
+        print(2222)
+        WebAPI.shared.locationStayAPI(stayId: singleTon.stayID) { (response) in
+          
+            self.listSenderData = [response]
+            print("#### :", self.listSenderData)
+        }
         
         view.addSubview(topNaviCustom)
         topNaviCustom.addSubview(backButton)
@@ -160,6 +181,12 @@ class DetailViewController: UIViewController {
         
         // 편의 시설 cell
         detailView.register(ConvenienceTableViewCell.self, forCellReuseIdentifier: ConvenienceTableViewCell.reusableIdentifier)
+        
+        // 이용안내 cell
+        detailView.register(ServiceNoticeTableViewCell.self, forCellReuseIdentifier: ServiceNoticeTableViewCell.reusableIdentifier)
+        
+        // 지도
+        detailView.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.reusableIdentifier)
     }
     
     // MARK: - Configure Constraints
@@ -170,20 +197,20 @@ class DetailViewController: UIViewController {
             topNaviCustom.topAnchor.constraint(equalTo: view.topAnchor),
             topNaviCustom.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             topNaviCustom.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            topNaviCustom.heightAnchor.constraint(equalToConstant: 140),
+            topNaviCustom.heightAnchor.constraint(equalToConstant: 100),
             backButton.leadingAnchor.constraint(equalTo: topNaviCustom.leadingAnchor, constant: 20),
-            backButton.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor),
+            backButton.bottomAnchor.constraint(equalTo: topNaviCustom.bottomAnchor, constant: -20),
             backButton.widthAnchor.constraint(equalToConstant: 20),
             backButton.heightAnchor.constraint(equalToConstant: 20),
-            stayNaviTitle.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor),
+            stayNaviTitle.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             stayNaviTitle.centerXAnchor.constraint(equalTo: topNaviCustom.centerXAnchor),
             stayNaviTitle.heightAnchor.constraint(equalToConstant: 20),
             stayNaviTitle.widthAnchor.constraint(equalTo: topNaviCustom.widthAnchor, multiplier: 0.3),
-            favoriteButton.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor),
+            favoriteButton.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor, constant: -30),
             favoriteButton.widthAnchor.constraint(equalToConstant: 20),
             favoriteButton.heightAnchor.constraint(equalToConstant: 20),
-            shareButton.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor),
+            shareButton.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             shareButton.trailingAnchor.constraint(equalTo: topNaviCustom.trailingAnchor, constant: -20),
             shareButton.widthAnchor.constraint(equalToConstant: 20),
             shareButton.heightAnchor.constraint(equalToConstant: 20),
@@ -215,17 +242,42 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 0 이하로 스크롤할 때 애니메이션
-        
+        if scrollView.contentOffset.y > 200 {
+            UIView.animate(withDuration: 0.3) {
+                self.topNaviCustom.backgroundColor = .white
+                self.backButton.tintColor = .black
+                self.stayNaviTitle.isHidden = false
+                self.favoriteButton.tintColor = .black
+                self.shareButton.tintColor = .black
+            }
+//            topNaviCustom
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.topNaviCustom.backgroundColor = .clear
+                self.backButton.tintColor = .white
+                self.stayNaviTitle.isHidden = true
+                self.favoriteButton.tintColor = .white
+                self.shareButton.tintColor = .white
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.row {
+        case 1:
+            present(CalendarViewController(), animated: true)
+        case 2 ... (2 + hotelRoomCount):
+            show(RoomDetailViewController(), sender: nil)
+        default:
+            print(1)
+        }
     }
 }
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 + hotelRoomCount + 6
+        
+        return two + hotelRoomCount + eight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -233,12 +285,14 @@ extension DetailViewController: UITableViewDataSource {
             // 이미지 컬렉션뷰
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ImageCollectionView.reusableIdentifier, for: indexPath) as! ImageCollectionView
-                
                 return cell
             
             // 숙소 정보 (체크인, 체크아웃 포함)
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomListTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomListTableViewCell
+                cell.fetchStayData(name: listSenderData[0].name, averageGrade: listSenderData[0].averageGrade, totalComment: listSenderData[0].totalComments, ownerComments: listSenderData[0].ownerComments, directions: listSenderData[0].directions)
+                
+                print("$$$$$ : ", listSenderData)
                 
                 return cell
             
@@ -312,13 +366,37 @@ extension DetailViewController: UITableViewDataSource {
                 return cell
             
             // 편의시설 및 서비스
-            case (2 + hotelRoomCount + 5) ... (2 + hotelRoomCount + 6):
+            case (2 + hotelRoomCount + 5):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ConvenienceTableViewCell.reusableIdentifier, for: indexPath) as! ConvenienceTableViewCell
+                cell.cont.text = """
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                """
+                
+                return cell
             
-                detailView.beginUpdates()
-                
-                detailView.endUpdates()
-                
+            // 이용안내
+            case (2 + hotelRoomCount + 6):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ServiceNoticeTableViewCell.reusableIdentifier, for: indexPath) as! ServiceNoticeTableViewCell
+                cell.cont.text = """
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                    \("﹒") test
+                """
+            
+                return cell
+            case (2 + hotelRoomCount + 7):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.reusableIdentifier, for: indexPath) as! MapTableViewCell
+            
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: UITableView.reusableIdentifier, for: indexPath)

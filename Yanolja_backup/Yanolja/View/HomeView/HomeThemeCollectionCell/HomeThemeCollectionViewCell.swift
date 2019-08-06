@@ -47,10 +47,16 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         // priceLabel
+        // 3자리마다 컴마 찍어주기
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .decimal
+        let number: Int = 123000
+        let result: String = currencyFormatter.string(from: NSNumber(value: number)) ?? ""
+        priceLabel.text = result
+        //
         priceLabel.textAlignment = .right
         priceLabel.textColor = .black
         priceLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        priceLabel.text = "340,000"
         contentView.addSubview(priceLabel)
         
         // wonLabel
@@ -95,19 +101,5 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
         imageView.downloadImageFrom(image, contentMode: .scaleAspectFill)
         titleLabel.text = title
         priceLabel.text = price
-    }
-}
-
-
-extension UIImageView {
-    func downloadImageFrom(_ link:String, contentMode: UIView.ContentMode) {
-        guard let url = URL(string: link) else {return print("link 가 없어서 함수에서 guard 문에 걸린듯?")}
-        URLSession.shared.dataTask( with: url, completionHandler: {
-            (data, response, error) -> Void in
-            DispatchQueue.main.async {
-                self.contentMode =  contentMode
-                if let data = data { self.image = UIImage(data: data) }
-            }
-        }).resume()
     }
 }

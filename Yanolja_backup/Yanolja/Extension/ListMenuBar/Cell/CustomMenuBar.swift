@@ -89,7 +89,6 @@ class CustomMenuBar: UIView {
                 sum += widths[i]
             }
             sum += (CGFloat(index) * space + 20)
-            print(sum)
         }
         
         return sum
@@ -146,8 +145,6 @@ extension CustomMenuBar: UICollectionViewDelegate{
         delegate?.menuBarDidSelected(indexPath)
         
         menuCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
-        print(menuCollectionView)
     }
     
 }

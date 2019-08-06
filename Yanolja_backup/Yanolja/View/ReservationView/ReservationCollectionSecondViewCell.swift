@@ -127,10 +127,12 @@ class ReservationCollectionSecondViewCell: UICollectionViewCell {
         walkButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         walkButton.setTitle("도보", for: .normal)
         walkButton.setTitleColor(#colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1), for: .normal)
-        walkButton.layer.borderWidth = 2
+        walkButton.setTitle("도보", for: .selected)
+        walkButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .selected)
+        walkButton.layer.borderWidth = 1
         walkButton.layer.borderColor = #colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1)
         walkButton.layer.cornerRadius = 25
-        
+        walkButton.addTarget(self, action: #selector(buttonSelectAction(of:)), for: .touchUpInside)
         
         carButton.topAnchor.constraint(equalTo: checkBox.bottomAnchor,constant: 15).isActive = true
         carButton.leadingAnchor.constraint(equalTo: walkButton.trailingAnchor,constant: 10).isActive = true
@@ -138,15 +140,32 @@ class ReservationCollectionSecondViewCell: UICollectionViewCell {
         carButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         carButton.setTitle("차량", for: .normal)
         carButton.setTitleColor(#colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1), for: .normal)
+        carButton.setTitle("차량", for: .selected)
+        carButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .selected)
+
         carButton.layer.borderWidth = 1
         carButton.layer.borderColor = #colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1)
         carButton.layer.cornerRadius = 25
         carButton.widthAnchor.constraint(equalTo: walkButton.widthAnchor).isActive = true
+        carButton.addTarget(self, action: #selector(buttonSelectAction(of:)), for: .touchUpInside)
+
         
     }
     
     @objc private func checkboxTap() {
         delegate?.possibleChkButton()
+    }
+    
+    @objc private func buttonSelectAction(of button:UIButton) {
+        carButton.isSelected = false
+        walkButton.isSelected = false
+        
+        carButton.backgroundColor = .white
+        walkButton.backgroundColor = .white
+
+        button.isSelected = true
+        button.backgroundColor = #colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

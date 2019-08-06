@@ -51,12 +51,11 @@ class ReservationViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.leadingAnchor.constraint(equalTo: topNaviCustom.leadingAnchor, constant: 20).isActive = true
         backButton.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        let backButtonImage = #imageLiteral(resourceName: "back").withRenderingMode(.alwaysTemplate)
-        backButton.setImage(backButtonImage, for: .normal)
+        backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        backButton.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
         backButton.addTarget(self, action: #selector(backEvent(_:)), for: .touchUpInside)
-        
+    
         
         
         topNaviCustom.addSubview(stayNaviTitle)
@@ -64,7 +63,7 @@ class ReservationViewController: UIViewController {
         
         stayNaviTitle.centerYAnchor.constraint(equalTo: topNaviCustom.centerYAnchor).isActive = true
         stayNaviTitle.centerXAnchor.constraint(equalTo: topNaviCustom.centerXAnchor).isActive = true
-        stayNaviTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        stayNaviTitle.heightAnchor.constraint(equalToConstant: 40).isActive = true
         stayNaviTitle.widthAnchor.constraint(equalTo: topNaviCustom.widthAnchor, multiplier: 0.3).isActive = true
         
         stayNaviTitle.text = "숙소 예약"
@@ -99,7 +98,10 @@ class ReservationViewController: UIViewController {
     
     // MARK: - Action Method
     @objc private func backEvent(_ sender: UIButton) {
-        navigationController? .popViewController(animated: true)
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let costomView = UIView()
+//        alert.view.addSubview(costomView)
+        navigationController?.popViewController(animated: true)
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
@@ -130,10 +132,9 @@ extension ReservationViewController :UICollectionViewDataSource {
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "forth", for: indexPath) as! ReservationCollectionForthViewCell
             self.indexPathForthCell = indexPath
-
+            cell.backgroundColor = .white
             cell.delegate = self
-
-            cell.backgroundColor = .yellow
+            cell.completeDelegate = self
             return cell
         }
         
@@ -177,7 +178,7 @@ extension ReservationViewController: checkBoxDelegate {
     
 }
 
-extension ReservationViewController: forthCellCheckBoxDelegate {
+extension ReservationViewController: ForthCellCheckBoxDelegate {
     func forthCellCheckBox(sender: UIButton) {
         guard let indexPath = indexPathForthCell else {return print("indexPath4번째 셀관련 오류인가?")}
         let cell = collectionView.cellForItem(at: indexPath) as! ReservationCollectionForthViewCell
@@ -195,5 +196,16 @@ extension ReservationViewController: forthCellCheckBoxDelegate {
             sender.isSelected.toggle()
         }
     }
+    
+}
+
+extension ReservationViewController: ForthCellCompleteDelegate {
+    func resultButton(sender: UIButton) {
+        guard let indexPath = indexPathForthCell else {return print("indexPath4번째 셀관련 오류인가?")}
+        let cell = collectionView.cellForItem(at: indexPath) as! ReservationCollectionForthViewCell
+//        reserve(roomNumber: 50, booker: <#T##String#>, phoneNumber: <#T##String#>, wayToGo: <#T##String#>, requestCheckIn: <#T##String#>, requestCheckOut: <#T##String#>, requestHours: <#T##Bool#>, requestDays: <#T##Bool#>, finalPrice: <#T##Int#>, completion: <#T##() -> ()#>)
+        
+    }
+    
     
 }

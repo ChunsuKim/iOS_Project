@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol RemoveCell {
+    func removeCell(sender:UIButton)
+}
+
+
 class RecentlyCustomCell: UITableViewCell {
     let customImageView = UIImageView()
     var searchResultLabel = UILabel()
     var dateLabel = UILabel()
     var numberOfPeopleLabel = UILabel()
-    var cancel = UIButton()
+    var cancel = UIButton(type: .system)
     
     
     var search :SearchClass? {
@@ -25,11 +30,13 @@ class RecentlyCustomCell: UITableViewCell {
         }
     }
     
+    var delegate :RemoveCell?
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
+        self.selectionStyle = .none
         featUI()
     }
     func configureUI() {
@@ -44,6 +51,14 @@ class RecentlyCustomCell: UITableViewCell {
         customImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         customImageView.image = UIImage(named: "cellIcon")
         
+        cancel.topAnchor.constraint(equalTo: self.topAnchor,constant: 5).isActive = true
+        cancel.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -5).isActive = true
+        cancel.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        cancel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        cancel.contentMode = .scaleAspectFill
+        cancel.setImage(#imageLiteral(resourceName: "dismisslog"), for: .normal)
+        cancel.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        cancel.addTarget(self, action: #selector(cellRemove(sender:)), for: .touchUpInside)
         
         searchResultLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 5).isActive = true
         searchResultLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor,constant: 10).isActive = true
@@ -62,7 +77,7 @@ class RecentlyCustomCell: UITableViewCell {
         numberOfPeopleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5).isActive = true
         
     }
-    func featUI() {
+    private func featUI() {
         searchResultLabel.font = UIFont.systemFont(ofSize: 15)
         dateLabel.font = UIFont.systemFont(ofSize: 12)
         dateLabel.textColor = .lightGray
@@ -70,6 +85,10 @@ class RecentlyCustomCell: UITableViewCell {
         numberOfPeopleLabel.textColor = .lightGray
 
         
+    }
+    
+    @objc private func cellRemove(sender:UIButton) {
+        delegate?.removeCell(sender: sender)
     }
     
     

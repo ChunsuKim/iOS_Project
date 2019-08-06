@@ -50,6 +50,14 @@ class DefaultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var saveStayList: [StayListElement] = []
+    
+    func configureObject(data: [StayListElement]) {
+        saveStayList = data
+        
+        motelListTableView.reloadData()
+    }
+    
     private func configureTableView() {
         self.addSubview(topBandNavi)
         self.addSubview(motelListTableView)
@@ -95,13 +103,29 @@ extension DefaultCollectionViewCell: UITableViewDelegate {
 extension DefaultCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        // 해당 카테고리의 카운트 개수
+        var cnt = saveStayList.filter({ $0.category.rawValue == "호텔" })
+        print("$$$$ :", cnt.count)
+        return cnt.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
-        cell.selectionStyle = .none
-        return cell
+        let data = saveStayList[indexPath.row]
+        let category = data.category
+        
+        switch category {
+        case .모텔:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
+            cell.selectionStyle = .none
+            cell.configureObject(data: data)
+            /// VIEW ->
+            
+            return cell
+            
+            
+        default:
+            return UITableViewCell()
+        }
     }
     
 }

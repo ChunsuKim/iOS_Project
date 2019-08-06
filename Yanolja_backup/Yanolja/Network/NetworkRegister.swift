@@ -9,7 +9,7 @@
 import UIKit
 
 // 회원가입
-func loginPost(realname:String, phoneNumber:String, email:String, password:String) {
+func loginRegister(realname:String, phoneNumber:String, email:String, password:String, completion: @escaping () -> ()) {
     print("\n---------- [ Post Method ] ----------\n")
     let todoEndpoint = "http://yanoljamvp.com/api/accounts/signup/"
     let urlComp = URLComponents(string: todoEndpoint)
@@ -41,12 +41,13 @@ func loginPost(realname:String, phoneNumber:String, email:String, password:Strin
             print("Error: did not receive data")
             return
         }
-        guard let todo = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else {
+        guard let todo = try? JSONSerialization.jsonObject(with: data) as? [String:String] else {
             print("Could not get parsed data")
             return
         }
         print(response.statusCode) // print 201 나옴.
-        print(todo)
+        print("nickname",todo["nickname"])
+        completion()
     }
     task.resume()
 }
@@ -87,7 +88,7 @@ func getToken(email:String, password:String, completion: @escaping (String) -> (
         
         let tokenInfo = tokenJson["token"] as? String
         token = "Token \(tokenInfo!)"
-        print(token)
+//        print(token)
         completion(token)
     }
     task.resume()

@@ -24,16 +24,8 @@ class HotelTableViewCell: UITableViewCell {
         imageView.image = UIImage(named: "hotelImage")
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
-        imageView.contentMode = .scaleAspectFill
         
         return imageView
-    }()
-    
-    let hotelContentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
     }()
     
     let hotelGrade: UILabel = {
@@ -229,8 +221,17 @@ class HotelTableViewCell: UITableViewCell {
     let stayRoomPrice: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "100,000원"
+        label.text = "100,000"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        
+        return label
+    }()
+    
+    let stayRoomPriceWon: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "원"
+        label.font = UIFont.systemFont(ofSize: 13)
         
         return label
     }()
@@ -238,16 +239,22 @@ class HotelTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        self.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        //        self.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
         
-//        self.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
-//        totalWrap.backgroundColor = .white
-//        totalWrap.layer.borderWidth = 1
-//        totalWrap.layer.cornerRadius = 10
-//        totalWrap.layer.borderColor = #colorLiteral(red: 0.9122421116, green: 0.9154485914, blue: 0.9250680308, alpha: 1)
-//        totalWrap.layer.masksToBounds = true
+        //        self.backgroundColor = #colorLiteral(red: 0.9677450061, green: 0.9726848006, blue: 0.9768208861, alpha: 1)
+        //        totalWrap.backgroundColor = .white
+        //        totalWrap.layer.borderWidth = 1
+        //        totalWrap.layer.cornerRadius = 10
+        //        totalWrap.layer.borderColor = #colorLiteral(red: 0.9122421116, green: 0.9154485914, blue: 0.9250680308, alpha: 1)
+        //        totalWrap.layer.masksToBounds = true
+        
+        cellImage.contentMode = .scaleAspectFill
         
         configureDefaultCell()
+    }
+    
+    func configureObject(data: StayListElement) {
+        put(mainImage: data.mainImage , stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -257,28 +264,21 @@ class HotelTableViewCell: UITableViewCell {
     private func configureDefaultCell() {
         addSubview(totalWrap)
         totalWrap.addSubview(cellImage)
-        totalWrap.addSubview(hotelContentView)
-        hotelContentView.addSubview(hotelGrade)
-        hotelContentView.addSubview(hotelTitle)
-        hotelContentView.addSubview(starImage)
-        hotelContentView.addSubview(commentImage)
-        hotelContentView.addSubview(ratingLabel)
-        hotelContentView.addSubview(commentLabel)
-        hotelContentView.addSubview(locationIcon)
-        hotelContentView.addSubview(locationLabel)
-        hotelContentView.addSubview(reservationView)
-        reservationView.addSubview(reservationRentalRoom)
-        reservationRentalRoom.addSubview(rentalRoomLabel)
-        reservationRentalRoom.addSubview(rentalRoomTimeLabel)
-        reservationRentalRoom.addSubview(rentalRoomCancelPrice)
-        reservationRentalRoom.addSubview(rentalRoomPercentLabel)
-        reservationRentalRoom.addSubview(rentalRoomPrice)
-        reservationView.addSubview(reservationStayRoom)
+        totalWrap.addSubview(hotelGrade)
+        totalWrap.addSubview(hotelTitle)
+        totalWrap.addSubview(starImage)
+        totalWrap.addSubview(commentImage)
+        totalWrap.addSubview(ratingLabel)
+        totalWrap.addSubview(commentLabel)
+        totalWrap.addSubview(locationIcon)
+        totalWrap.addSubview(locationLabel)
+        totalWrap.addSubview(reservationStayRoom)
         reservationStayRoom.addSubview(stayRoomLabel)
         reservationStayRoom.addSubview(stayRoomTimeLabel)
         reservationStayRoom.addSubview(stayRoomCancelPrice)
         reservationStayRoom.addSubview(stayRoomPercentLabel)
         reservationStayRoom.addSubview(stayRoomPrice)
+        reservationStayRoom.addSubview(stayRoomPriceWon)
         
         configureDefaultCellAutoLayout()
     }
@@ -291,78 +291,62 @@ class HotelTableViewCell: UITableViewCell {
             totalWrap.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
             cellImage.topAnchor.constraint(equalTo: totalWrap.topAnchor),
             cellImage.leadingAnchor.constraint(equalTo: totalWrap.leadingAnchor, constant: 20),
-            cellImage.heightAnchor.constraint(equalTo: hotelContentView.heightAnchor),
+            cellImage.heightAnchor.constraint(equalToConstant: 200),
             cellImage.bottomAnchor.constraint(equalTo: totalWrap.bottomAnchor),
             cellImage.widthAnchor.constraint(equalTo: totalWrap.widthAnchor, multiplier: 0.35),
+            cellImage.trailingAnchor.constraint(equalTo: hotelGrade.leadingAnchor, constant: -10),
             
-            hotelContentView.leadingAnchor.constraint(equalTo: cellImage.trailingAnchor, constant: 10),
-            hotelContentView.topAnchor.constraint(equalTo: cellImage.topAnchor),
-            hotelContentView.trailingAnchor.constraint(equalTo: totalWrap.trailingAnchor),
-            
-            hotelContentView.bottomAnchor.constraint(equalTo: totalWrap.bottomAnchor),
-            hotelGrade.topAnchor.constraint(equalTo: hotelContentView.topAnchor),
-            hotelGrade.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
-            hotelGrade.trailingAnchor.constraint(equalTo: hotelContentView.trailingAnchor),
+            hotelGrade.topAnchor.constraint(equalTo: totalWrap.topAnchor),
             hotelGrade.bottomAnchor.constraint(equalTo: hotelTitle.topAnchor),
-            hotelTitle.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
-            hotelTitle.trailingAnchor.constraint(equalTo: hotelContentView.trailingAnchor),
+            hotelTitle.leadingAnchor.constraint(equalTo: hotelGrade.leadingAnchor),
             hotelTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor),
-            
-            starImage.topAnchor.constraint(equalTo: hotelTitle.bottomAnchor),
-            starImage.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
+            starImage.leadingAnchor.constraint(equalTo: hotelGrade.leadingAnchor),
+            starImage.trailingAnchor.constraint(equalTo: ratingLabel.leadingAnchor, constant: -3),
+            starImage.bottomAnchor.constraint(equalTo: locationIcon.topAnchor),
             starImage.widthAnchor.constraint(equalToConstant: 15),
             starImage.heightAnchor.constraint(equalToConstant: 15),
-            starImage.bottomAnchor.constraint(equalTo: locationIcon.topAnchor, constant: -5),
-            ratingLabel.leadingAnchor.constraint(equalTo: starImage.trailingAnchor, constant: 5),
             ratingLabel.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
-            commentImage.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 10),
+            ratingLabel.trailingAnchor.constraint(equalTo: commentImage.leadingAnchor, constant: -10),
+            commentImage.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
+            commentImage.trailingAnchor.constraint(equalTo: commentLabel.leadingAnchor, constant: -3),
             commentImage.widthAnchor.constraint(equalToConstant: 15),
             commentImage.heightAnchor.constraint(equalToConstant: 15),
-            commentImage.centerYAnchor.constraint(equalTo: ratingLabel.centerYAnchor),
-            commentLabel.leadingAnchor.constraint(equalTo: commentImage.trailingAnchor, constant: 5),
-            commentLabel.centerYAnchor.constraint(equalTo: commentImage.centerYAnchor),
-            
-            locationIcon.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
+            commentLabel.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
+            locationIcon.leadingAnchor.constraint(equalTo: hotelGrade.leadingAnchor),
             locationIcon.trailingAnchor.constraint(equalTo: locationLabel.leadingAnchor),
-            locationIcon.widthAnchor.constraint(equalToConstant: 13),
-            locationIcon.heightAnchor.constraint(equalToConstant: 13),
+            locationIcon.widthAnchor.constraint(equalToConstant: 15),
+            locationIcon.heightAnchor.constraint(equalToConstant: 15),
             locationLabel.centerYAnchor.constraint(equalTo: locationIcon.centerYAnchor),
             
-            reservationView.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
-            reservationView.bottomAnchor.constraint(equalTo: hotelContentView.bottomAnchor),
-            reservationView.trailingAnchor.constraint(equalTo: hotelContentView.trailingAnchor),
-            reservationView.heightAnchor.constraint(equalTo: hotelContentView.heightAnchor, multiplier: 0.45),
-            
-            reservationStayRoom.bottomAnchor.constraint(equalTo: hotelContentView.bottomAnchor),
-            reservationStayRoom.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
-            reservationStayRoom.trailingAnchor.constraint(equalTo: hotelContentView.trailingAnchor),
-            reservationStayRoom.heightAnchor.constraint(equalTo: reservationView.heightAnchor, multiplier: 0.5),
-            stayRoomLabel.topAnchor.constraint(equalTo: stayRoomCancelPrice.topAnchor),
+            reservationStayRoom.leadingAnchor.constraint(equalTo: hotelGrade.leadingAnchor),
+            reservationStayRoom.bottomAnchor.constraint(equalTo: totalWrap.bottomAnchor),
+            reservationStayRoom.trailingAnchor.constraint(equalTo: totalWrap.trailingAnchor),
+            stayRoomLabel.topAnchor.constraint(equalTo: reservationStayRoom.topAnchor),
             stayRoomLabel.leadingAnchor.constraint(equalTo: reservationStayRoom.leadingAnchor),
-            stayRoomTimeLabel.topAnchor.constraint(equalTo: stayRoomLabel.bottomAnchor, constant: 5),
-            stayRoomTimeLabel.leadingAnchor.constraint(equalTo: reservationStayRoom.leadingAnchor),
-            stayRoomPrice.bottomAnchor.constraint(equalTo: reservationStayRoom.bottomAnchor),
-            stayRoomPrice.trailingAnchor.constraint(equalTo: reservationStayRoom.trailingAnchor),
-            stayRoomPercentLabel.trailingAnchor.constraint(equalTo: stayRoomPrice.leadingAnchor, constant: -5),
-            stayRoomPercentLabel.bottomAnchor.constraint(equalTo: reservationStayRoom.bottomAnchor),
-            stayRoomCancelPrice.bottomAnchor.constraint(equalTo: stayRoomPrice.topAnchor),
+            stayRoomLabel.bottomAnchor.constraint(equalTo: stayRoomTimeLabel.topAnchor, constant: -5),
+            stayRoomCancelPrice.bottomAnchor.constraint(equalTo: stayRoomLabel.bottomAnchor),
             stayRoomCancelPrice.trailingAnchor.constraint(equalTo: reservationStayRoom.trailingAnchor),
+            stayRoomTimeLabel.leadingAnchor.constraint(equalTo: reservationStayRoom.leadingAnchor),
+            stayRoomTimeLabel.bottomAnchor.constraint(equalTo: reservationStayRoom.bottomAnchor, constant: -5),
+            stayRoomPriceWon.trailingAnchor.constraint(equalTo: reservationStayRoom.trailingAnchor),
+            stayRoomPriceWon.bottomAnchor.constraint(equalTo: reservationStayRoom.bottomAnchor),
+            stayRoomPrice.trailingAnchor.constraint(equalTo: stayRoomPriceWon.leadingAnchor, constant: -2),
+            stayRoomPrice.bottomAnchor.constraint(equalTo: stayRoomPriceWon.bottomAnchor),
+            stayRoomPercentLabel.trailingAnchor.constraint(equalTo: stayRoomPrice.leadingAnchor, constant: -5),
+            stayRoomPercentLabel.bottomAnchor.constraint(equalTo: stayRoomPriceWon.bottomAnchor),
             
-            reservationRentalRoom.bottomAnchor.constraint(equalTo: reservationStayRoom.topAnchor),
-            reservationRentalRoom.leadingAnchor.constraint(equalTo: hotelContentView.leadingAnchor),
-            reservationRentalRoom.trailingAnchor.constraint(equalTo: hotelContentView.trailingAnchor),
-            reservationRentalRoom.heightAnchor.constraint(equalTo: reservationView.heightAnchor, multiplier: 0.5),
-            rentalRoomLabel.topAnchor.constraint(equalTo: rentalRoomCancelPrice.topAnchor),
-            rentalRoomLabel.leadingAnchor.constraint(equalTo: reservationRentalRoom.leadingAnchor),
-            rentalRoomTimeLabel.topAnchor.constraint(equalTo: rentalRoomLabel.bottomAnchor, constant: 5),
-            rentalRoomTimeLabel.leadingAnchor.constraint(equalTo: reservationRentalRoom.leadingAnchor),
-            rentalRoomPrice.bottomAnchor.constraint(equalTo: reservationRentalRoom.bottomAnchor),
-            rentalRoomPrice.trailingAnchor.constraint(equalTo: reservationRentalRoom.trailingAnchor),
-            rentalRoomPercentLabel.trailingAnchor.constraint(equalTo: rentalRoomPrice.leadingAnchor, constant: -5),
-            rentalRoomPercentLabel.bottomAnchor.constraint(equalTo: reservationRentalRoom.bottomAnchor),
-            rentalRoomCancelPrice.bottomAnchor.constraint(equalTo: rentalRoomPrice.topAnchor),
-            rentalRoomCancelPrice.trailingAnchor.constraint(equalTo: reservationRentalRoom.trailingAnchor),
             
-        ])
+            ])
     }
+    
+    func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String) {
+        cellImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+        self.hotelTitle.text = stay
+        ratingLabel.text = "\(averageGrade)"
+        commentLabel.text = "\(totalComments)"
+        commentLabel.text = "\(ownerComments)"
+        locationLabel.text = directions
+        stayRoomPrice.text = daysPrice
+    }
+    
 }

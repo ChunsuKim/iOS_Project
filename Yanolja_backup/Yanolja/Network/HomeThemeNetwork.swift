@@ -2,18 +2,18 @@
 //  HomeThemeNetwork.swift
 //  Yanolja
 //
-//  Created by Chunsu Kim on 06/08/2019.
+//  Created by Chunsu Kim on 02/08/2019.
 //  Copyright © 2019 Chunsu Kim. All rights reserved.
 //
 
 import UIKit
 
 class HomeThemeDataSource {
-    
+
     static let shared = HomeThemeDataSource()
     private init() {}
     
-    
+
     func fetchBigSale(completion: @escaping([HomeThemeGroup]?, Error?) -> ()) {
         let apiUrl = "http://www.yanoljamvp.com/api/?bigSale=True"
         fetchThemeGroup(apiUrl: apiUrl, completion: completion)
@@ -62,7 +62,7 @@ class HomeThemeDataSource {
             }
         }
         task.resume()
-        
+
     }
     
     

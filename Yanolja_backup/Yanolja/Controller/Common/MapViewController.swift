@@ -22,6 +22,9 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager.delegate = self
+        mapView?.delegate = self
+        
         checkAuthorizationStatus()
         configureGoogleMap()
         configureViews()
@@ -29,9 +32,6 @@ class MapViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        locationManager.delegate = self
-        mapView?.delegate = self
         
     }
 
