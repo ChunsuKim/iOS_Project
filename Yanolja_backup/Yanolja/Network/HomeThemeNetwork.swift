@@ -15,23 +15,23 @@ class HomeThemeDataSource {
     
 
     func fetchBigSale(completion: @escaping([HomeThemeGroup]?, Error?) -> ()) {
-        let apiUrl = "http://www.yanoljamvp.com/api/?bigSale=True"
+        let apiUrl = "http://api.yanoljamvp.com/api/?bigSale=True"
         fetchThemeGroup(apiUrl: apiUrl, completion: completion)
     }
     
     func fetchPartyRoom(completion: @escaping([HomeThemeGroup]?, Error?) -> ()) {
-        let apiUrl = "http://www.yanoljamvp.com/api/?partyRoom=True"
+        let apiUrl = "http://api.yanoljamvp.com/api/?partyRoom=True"
         fetchThemeGroup(apiUrl: apiUrl, completion: completion)
     }
     
     
     func fetchSwimmingPool(completion: @escaping([HomeThemeGroup]?, Error?) -> ()) {
-        let apiUrl = "http://www.yanoljamvp.com/api/?swimmingPool=True"
+        let apiUrl = "http://api.yanoljamvp.com/api/?swimmingPool=True"
         fetchThemeGroup(apiUrl: apiUrl, completion: completion)
     }
     
     func fetchSpa(completion: @escaping([HomeThemeGroup]?, Error?) -> ()) {
-        let apiUrl = "http://www.yanoljamvp.com/api/?spa=True"
+        let apiUrl = "http://api.yanoljamvp.com/api/?spa=True"
         fetchThemeGroup(apiUrl: apiUrl, completion: completion)
     }
     
@@ -67,7 +67,3 @@ class HomeThemeDataSource {
     
     
 }
-
-
-
-

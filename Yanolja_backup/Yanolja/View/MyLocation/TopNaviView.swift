@@ -62,7 +62,8 @@ class TopNaviView: UIView {
     let selectDateButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("7월 9일 ~ 7월 10일, 1박", for: .normal)
+        button.setTitle(singleTon.selectDateButtonCurrentTitle, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 15
         button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -75,7 +76,8 @@ class TopNaviView: UIView {
     let selectHumanCountButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("성인 2, 아동 0", for: .normal)
+        button.setTitle(singleTon.selectNumberOfPeopleButtonCurrentTitle, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 15
         button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)

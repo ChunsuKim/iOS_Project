@@ -101,6 +101,9 @@ class ReservationViewController: UIViewController {
 //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
 //        let costomView = UIView()
 //        alert.view.addSubview(costomView)
+        
+        
+        
         navigationController?.popViewController(animated: true)
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -203,7 +206,31 @@ extension ReservationViewController: ForthCellCompleteDelegate {
     func resultButton(sender: UIButton) {
         guard let indexPath = indexPathForthCell else {return print("indexPath4번째 셀관련 오류인가?")}
         let cell = collectionView.cellForItem(at: indexPath) as! ReservationCollectionForthViewCell
-//        reserve(roomNumber: 50, booker: <#T##String#>, phoneNumber: <#T##String#>, wayToGo: <#T##String#>, requestCheckIn: <#T##String#>, requestCheckOut: <#T##String#>, requestHours: <#T##Bool#>, requestDays: <#T##Bool#>, finalPrice: <#T##Int#>, completion: <#T##() -> ()#>)
+        reserve(roomNumber: singleTon.roomID, booker: singleTon.loginUser.last!.email, phoneNumber: singleTon.loginUser.last!.phoneNumber, wayToGo: singleTon.walkToGo, requestCheckIn: singleTon.checkInDate+singleTon.checkInTime, requestCheckOut: singleTon.checkOutDate+singleTon.checkOutTime, requestHours: false, requestDays: true, finalPrice: Int(singleTon.money)!) {(boolValue) in
+            print("예약 :",boolValue)
+            DispatchQueue.main.async {
+                if boolValue {
+                    let alertController = UIAlertController(
+                        title: "예약 완료하였습니다.", message: nil , preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+                        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+                    })
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true)
+                } else {
+                    let alertController = UIAlertController(
+                        title: "예약이 꽉 찼습니다.", message: nil , preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "확인", style: .cancel)
+                    
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true)
+                    
+                }
+
+            }
+            
+            
+        }
         
     }
     

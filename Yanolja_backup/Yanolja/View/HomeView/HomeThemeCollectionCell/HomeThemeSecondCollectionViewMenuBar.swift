@@ -14,7 +14,7 @@ protocol SecondMenuBarDelegate {
 }
 
 class HomeThemeSecondCollectionViewMenuBar: UIView {
-        
+    
     // MARK: - Properties
     var homeThemeMenuCollectionView = HomeThemeMenuCollectionCell()
     var delegate: SecondMenuBarDelegate?

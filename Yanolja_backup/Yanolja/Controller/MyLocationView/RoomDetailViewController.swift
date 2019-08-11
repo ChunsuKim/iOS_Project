@@ -6,12 +6,34 @@
 //  Copyright © 2019 Chunsu Kim. All rights reserved.
 //
 
+// roomDetailApi
+
 import UIKit
 
 class RoomDetailViewController: UIViewController {
 
     // MARK: - Properites
+    var roomListData = [RoomDetailElement]() {
+        didSet {
+            self.count = 5
+            roomDetailView.reloadData()
+            
+            self.activityIndicatorView.stopAnimating()
+        }
+    }
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = .black
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
     let customTab = CustomTabBarController()
+    
+    var count = 0
     
     let topNaviCustom: UIView = {
         let view = UIView()
@@ -126,14 +148,21 @@ class RoomDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tabBarController?.tabBar.isHidden = true
-        customTab.tabBar.isHidden = true
+        fetchRoomDetailData()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-        customTab.tabBar.isHidden = false
+    
+    private func fetchRoomDetailData() {
+        WebAPI.shared.roomDetailApi(roomId: singleTon.roomID, requestCheckInDate: singleTon.checkInDate, requestCheckOutDate: singleTon.checkOutDate, completed: { (result) in
+            self.roomListData = [result]
+            self.roomDetailView.reloadData()
+        })
     }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.tabBarController?.tabBar.isHidden = false
+//        customTab.tabBar.isHidden = false
+//    }
     
     private func configureTopNavi() {
         view.addSubview(topNaviCustom)
@@ -210,45 +239,54 @@ class RoomDetailViewController: UIViewController {
     }
     
     @objc private func stayReservation(_ sender: UIButton) {
-        present(ReservationViewController(), animated: true)
+        if singleTon.token == "" {
+            present(LoginViewController(), animated: true, completion: nil)
+        } else {
+            present(ReservationViewController(), animated: true)
+        }
     }
 }
 
 extension RoomDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: RoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! RoomInfoTableViewCell
-            cell.title.text = "Standard mini"
-            cell.hotelName.text = "선릉 호텔 발리"
+            cell.title.text = roomListData[0].name
+            cell.hotelName.text = roomListData[0].stay
             
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: DetailRoomImageTableViewCell.reusableIdentifier, for: indexPath) as! DetailRoomImageTableViewCell
+            cell.saveImageList = roomListData[0].urlImage
             
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: CheckInOutTableViewCell.reusableIdentifier, for: indexPath) as! CheckInOutTableViewCell
-            cell.checkInDate.text = "7월 26일(금)"
-            cell.checkOutDate.text = "7월 26일(금)"
+            cell.checkInDate.text = singleTon.checkInDateString
+            cell.checkOutDate.text = singleTon.checkOutDateString
             
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReservationButtonviewTableViewCell.reusableIdentifier, for: indexPath) as! ReservationButtonviewTableViewCell
-            cell.hoursAvailableCont.text = "최대 \(5)시간"
+            
+            cell.hoursAvailableCont.text = "최대 \(roomListData[0].hoursAvailable)시간"
             cell.opertationTimeCont.text = "13:00 ~ 22:00"
-            cell.defaultRentablePrice.text = "30000원"
-            cell.rentablePrice.text = "25000"
+            cell.defaultRentablePrice.text = "\(roomListData[0].hoursPrice)원"
+            cell.rentablePrice.text = "\(roomListData[0].saleHoursPrice)"
             
             cell.checkInCont.text = "15:00 부터"
             cell.checkOutCont.text = "14:00 까지"
-            cell.defaultStayPrice.text = "70000원"
-            cell.stayPrice.text = "48000"
-            
+            cell.defaultStayPrice.text = "\(roomListData[0].daysPrice)원"
+            cell.stayPrice.text = "\(roomListData[0].saleDaysPrice)"
+            singleTon.money = "\(roomListData[0].saleDaysPrice)"
+            if singleTon.saveDate.count > 0 {
+            singleTon.money = "\(Int(singleTon.money)! * (singleTon.saveDate.count - 1))"
+            }
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReservationNoticeTableViewCell.reusableIdentifier, for: indexPath) as! ReservationNoticeTableViewCell

@@ -47,16 +47,10 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         // priceLabel
-        // 3자리마다 컴마 찍어주기
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .decimal
-        let number: Int = 123000
-        let result: String = currencyFormatter.string(from: NSNumber(value: number)) ?? ""
-        priceLabel.text = result
-        //
         priceLabel.textAlignment = .right
         priceLabel.textColor = .black
         priceLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        priceLabel.text = "340,000"
         contentView.addSubview(priceLabel)
         
         // wonLabel

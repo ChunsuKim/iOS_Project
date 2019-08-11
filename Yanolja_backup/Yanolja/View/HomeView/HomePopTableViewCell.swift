@@ -13,6 +13,8 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
     // MARK: - Properties
     static let identifier = "HomePopTableViewCell"
     
+    var collectionViewTouchAction: (() -> ())?
+    
     private var popList = PopDataManager.shared.pops
     private var scrollStartNumber = 1
     private let pagecontrols = UIPageControl()
@@ -64,6 +66,9 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
         popViewCollectionView.layer.cornerRadius = 10
         popViewCollectionView.isPagingEnabled = true
         
+        let collectionViewTouchGesture = UITapGestureRecognizer(target: self, action: #selector(touchesCollectionView(_:)))
+        popViewCollectionView.addGestureRecognizer(collectionViewTouchGesture)
+        
         popViewCollectionView.register(HomePopCollectionViewCell.self, forCellWithReuseIdentifier: HomePopCollectionViewCell.identifier)
         
         contentView.addSubview(popViewCollectionView)
@@ -109,6 +114,10 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
             pagecontrols.currentPage = indexPath.item
         }
         
+    }
+    
+    @objc func touchesCollectionView(_ sender: UICollectionView) {
+        collectionViewTouchAction?()
     }
 
     

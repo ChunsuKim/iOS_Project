@@ -14,18 +14,37 @@ class DetailViewController: UIViewController {
     
     var listSenderData = [StayDetailElement]() {
         didSet {
-            self.two = 2
-            self.hotelRoomCount = 2
-            self.eight = 8
-            detailView.reloadData()
+            self.topCellCount = 2
+            self.hotelRoomCount = roomListData.count - 2
+            self.bottomCellCount = 8
+            detailTableView.reloadData()
+            
+            self.activityIndicatorView.stopAnimating()
         }
     }
+    
+    var roomListData = [StayDetailRoomElement]() {
+        didSet {
+            detailTableView.reloadData()
+            
+            self.activityIndicatorView.stopAnimating()
+        }
+    }
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = .black
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
     
     let customTab = CustomTabBarController()
     
     var hotelRoomCount = 0
-    var two = 0
-    var eight = 0
+    var topCellCount = 0
+    var bottomCellCount = 0
     
     let introContCount = 5
     let convenienceContCount = 5
@@ -84,7 +103,7 @@ class DetailViewController: UIViewController {
         return button
     }()
     
-    let detailView: UITableView = {
+    let detailTableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -114,19 +133,15 @@ class DetailViewController: UIViewController {
         
         return button
     }()
-
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailView.rowHeight = UITableView.automaticDimension
+        detailTableView.rowHeight = UITableView.automaticDimension
         
-        view.addSubview(detailView)
-        print(2222)
-        WebAPI.shared.locationStayAPI(stayId: singleTon.stayID) { (response) in
-          
-            self.listSenderData = [response]
-            print("#### :", self.listSenderData)
-        }
+        view.addSubview(detailTableView)
+        
+        view.addSubview(activityIndicatorView)
         
         view.addSubview(topNaviCustom)
         topNaviCustom.addSubview(backButton)
@@ -144,49 +159,56 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tabBarController?.tabBar.isHidden = true
-        customTab.tabBar.isHidden = true
+        fetchDetailData()
+        // FIXME: - 뷰윌 어피어라... 시점 찾자
+        detailTableView.reloadData()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-        customTab.tabBar.isHidden = false
+    
+    private func fetchDetailData() {
+        WebAPI.shared.locationStayAPI(stayId: singleTon.stayID) { (response) in
+            
+            self.listSenderData = [response]
+        }
+        
+        WebAPI.shared.roomListApi(stayId: singleTon.stayID) { (result) in
+            self.roomListData = result
+        }
     }
     
     // MARK: - Configure DetailView
     private func configureDetailView() {
-        detailView.dataSource = self
-        detailView.delegate = self
+        detailTableView.dataSource = self
+        detailTableView.delegate = self
         
         // collectionView safeArea 무시
-        detailView.contentInsetAdjustmentBehavior = .never
+        detailTableView.contentInsetAdjustmentBehavior = .never
         
         // imageCollectionView cell
-        detailView.register(ImageCollectionView.self, forCellReuseIdentifier: ImageCollectionView.reusableIdentifier)
+        detailTableView.register(ImageCollectionView.self, forCellReuseIdentifier: ImageCollectionView.reusableIdentifier)
         
         // info stayRoom cell
-        detailView.register(StayRoomListTableViewCell.self, forCellReuseIdentifier: StayRoomListTableViewCell.reusableIdentifier)
+        detailTableView.register(StayRoomListTableViewCell.self, forCellReuseIdentifier: StayRoomListTableViewCell.reusableIdentifier)
         
         // RoomList cell
-        detailView.register(RoomListTableViewCell.self, forCellReuseIdentifier: RoomListTableViewCell.reusableIdentifier)
+        detailTableView.register(RoomListTableViewCell.self, forCellReuseIdentifier: RoomListTableViewCell.reusableIdentifier)
         
         // 요금정보, 질문&답변 cell
-        detailView.register(StayRoomInfoTableViewCell.self, forCellReuseIdentifier: StayRoomInfoTableViewCell.reusableIdentifier)
+        detailTableView.register(StayRoomInfoTableViewCell.self, forCellReuseIdentifier: StayRoomInfoTableViewCell.reusableIdentifier)
         
         // 이벤트 cell
-        detailView.register(StayRoomEventTableViewCell.self, forCellReuseIdentifier: StayRoomEventTableViewCell.reusableIdentifier)
+        detailTableView.register(StayRoomEventTableViewCell.self, forCellReuseIdentifier: StayRoomEventTableViewCell.reusableIdentifier)
         
         // 숙소 소개 cell
-        detailView.register(IntroduceStayTableViewCell.self, forCellReuseIdentifier: IntroduceStayTableViewCell.reusableIdentifier)
+        detailTableView.register(IntroduceStayTableViewCell.self, forCellReuseIdentifier: IntroduceStayTableViewCell.reusableIdentifier)
         
         // 편의 시설 cell
-        detailView.register(ConvenienceTableViewCell.self, forCellReuseIdentifier: ConvenienceTableViewCell.reusableIdentifier)
+        detailTableView.register(ConvenienceTableViewCell.self, forCellReuseIdentifier: ConvenienceTableViewCell.reusableIdentifier)
         
         // 이용안내 cell
-        detailView.register(ServiceNoticeTableViewCell.self, forCellReuseIdentifier: ServiceNoticeTableViewCell.reusableIdentifier)
+        detailTableView.register(ServiceNoticeTableViewCell.self, forCellReuseIdentifier: ServiceNoticeTableViewCell.reusableIdentifier)
         
         // 지도
-        detailView.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.reusableIdentifier)
+        detailTableView.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.reusableIdentifier)
     }
     
     // MARK: - Configure Constraints
@@ -194,6 +216,11 @@ class DetailViewController: UIViewController {
         let guide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicatorView.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicatorView.heightAnchor.constraint(equalToConstant: 50),
+            
             topNaviCustom.topAnchor.constraint(equalTo: view.topAnchor),
             topNaviCustom.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             topNaviCustom.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
@@ -215,10 +242,10 @@ class DetailViewController: UIViewController {
             shareButton.widthAnchor.constraint(equalToConstant: 20),
             shareButton.heightAnchor.constraint(equalToConstant: 20),
             
-            detailView.topAnchor.constraint(equalTo: view.topAnchor),
-            detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            detailView.bottomAnchor.constraint(equalTo: selectRoomButtonView.topAnchor),
+            detailTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            detailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            detailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            detailTableView.bottomAnchor.constraint(equalTo: selectRoomButtonView.topAnchor),
             
             selectRoomButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             selectRoomButtonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -229,7 +256,7 @@ class DetailViewController: UIViewController {
             selectRoomButton.leadingAnchor.constraint(equalTo: selectRoomButtonView.leadingAnchor, constant: 10),
             selectRoomButton.bottomAnchor.constraint(equalTo: selectRoomButtonView.bottomAnchor, constant: -35),
             selectRoomButton.trailingAnchor.constraint(equalTo: selectRoomButtonView.trailingAnchor, constant: -10),
-        ])
+            ])
     }
     
     // MARK: - Action Method
@@ -250,7 +277,7 @@ extension DetailViewController: UITableViewDelegate {
                 self.favoriteButton.tintColor = .black
                 self.shareButton.tintColor = .black
             }
-//            topNaviCustom
+            //            topNaviCustom
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.topNaviCustom.backgroundColor = .clear
@@ -267,7 +294,10 @@ extension DetailViewController: UITableViewDelegate {
         case 1:
             present(CalendarViewController(), animated: true)
         case 2 ... (2 + hotelRoomCount):
-            show(RoomDetailViewController(), sender: nil)
+            print("!!!! :", roomListData[indexPath.row - 2].roomID)
+            singleTon.roomID = roomListData[indexPath.row - 2].roomID
+            present(RoomDetailViewController(), animated: true, completion: nil)
+        //            show(RoomDetailViewController(), sender: nil)
         default:
             print(1)
         }
@@ -276,132 +306,131 @@ extension DetailViewController: UITableViewDelegate {
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return two + hotelRoomCount + eight
+        return topCellCount + hotelRoomCount + bottomCellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-            // 이미지 컬렉션뷰
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ImageCollectionView.reusableIdentifier, for: indexPath) as! ImageCollectionView
-                return cell
+        // 이미지 컬렉션뷰
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ImageCollectionView.reusableIdentifier, for: indexPath) as! ImageCollectionView
+            cell.saveImageList = roomListData[0].urlImage
+            return cell
             
-            // 숙소 정보 (체크인, 체크아웃 포함)
-            case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomListTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomListTableViewCell
-                cell.fetchStayData(name: listSenderData[0].name, averageGrade: listSenderData[0].averageGrade, totalComment: listSenderData[0].totalComments, ownerComments: listSenderData[0].ownerComments, directions: listSenderData[0].directions)
-                
-                print("$$$$$ : ", listSenderData)
-                
-                return cell
+        // 숙소 정보 (체크인, 체크아웃 포함)
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomListTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomListTableViewCell
+            cell.fetchStayData(name: listSenderData[0].name, averageGrade: listSenderData[0].averageGrade, totalComment: listSenderData[0].totalComments, ownerComments: listSenderData[0].ownerComments, directions: listSenderData[0].directions)
             
-            // 룸 리스트
-            case 2 ... (2 + hotelRoomCount):
-                let cell = tableView.dequeueReusableCell(withIdentifier: RoomListTableViewCell.reusableIdentifier, for: indexPath) as! RoomListTableViewCell
-                cell.roomImage.image = #imageLiteral(resourceName: "hotelImage")
-                cell.roomTitle.text = "Deluxe"
-                cell.roomPeople.text = "기준 \(2)명 / 최대 \(2)명"
-                
-                cell.rentableRoomTitle.text = "대실"
-                cell.rentableRoomTimeLabel.text = "최대 \(6)시간"
-                cell.rentableRoomDefaultPrice.text = "\(30000)원"
-                cell.rentableRoomPercent.text = "25%"
-                cell.rentableRoomPrice.text = "\(65000)"
-                
-                cell.stayRoomTitle.text = "숙박"
-                cell.stayRoomTimeLabel.text = "최대 \(7)시간"
-                cell.stayRoomDefaultPrice.text = "\(40000)원"
-                cell.stayRoomPercent.text = "5%"
-                cell.stayRoomPrice.text = "\(55000)"
-                
-                return cell
+            return cell
             
-            // 요금 정보, 질문&답변, 이벤트 버튼
-            case (2 + hotelRoomCount + 1) ... (2 + hotelRoomCount + 3):
-                switch indexPath.row {
-                    case (2 + hotelRoomCount + 1):
-                        let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomInfoTableViewCell
-                        cell.accessoryType = .disclosureIndicator
-                        cell.cellTitle.text = "요금 정보"
-                        
-                        return cell
-                    case (2 + hotelRoomCount + 2):
-                        let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomInfoTableViewCell
-                        cell.accessoryType = .disclosureIndicator
-                        cell.cellTitle.text = "질문&답변"
-                        
-                        return cell
-                    case (2 + hotelRoomCount + 3):
-                        let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomEventTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomEventTableViewCell
-                        
-                        return cell
-                default:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: UITableView.reusableIdentifier, for: indexPath)
-                    
-                    return cell
-                }
+        // 룸 리스트
+        case 2 ... (2 + hotelRoomCount):
+            let cell = tableView.dequeueReusableCell(withIdentifier: RoomListTableViewCell.reusableIdentifier, for: indexPath) as! RoomListTableViewCell
             
-            // 숙소 소개
-            case (2 + hotelRoomCount + 4):
-                let cell = tableView.dequeueReusableCell(withIdentifier: IntroduceStayTableViewCell.reusableIdentifier, for: indexPath) as! IntroduceStayTableViewCell
-                
-                cell.cont.text = """
-                    test
-                    test
-                    test
-                    test
-                    test
-                    test
-                    test
-                """
-                
-                cell.buttonAction = {
-                    self.detailView.beginUpdates()
-                    cell.cont.numberOfLines = 0
-                    cell.moreButton.isHidden = true
-                    self.detailView.endUpdates()
-                }
+            if roomListData[indexPath.row - 2].hoursPrice == "0" {
+               roomListData[indexPath.row - 2].hoursPrice = "예약완료"
+            }
+            
+            if roomListData[indexPath.row - 2].daysPrice == "0" {
+                roomListData[indexPath.row - 2].daysPrice = "예약완료"
+            }
+            
+            cell.fetchRoomListData(name: roomListData[indexPath.row - 2].name, standardPersonnel: roomListData[indexPath.row - 2].standardPersonnel, maximumPersonnel: roomListData[indexPath.row - 2].maximumPersonnel, hoursAvailable: roomListData[indexPath.row - 2].hoursAvailable, daysCheckIn: roomListData[indexPath.row - 2].daysCheckIn, hoursPrice: roomListData[indexPath.row - 2].hoursPrice, saleHoursPrice: roomListData[indexPath.row - 2].saleHoursPrice, daysPrice: roomListData[indexPath.row - 2].daysPrice, saleDaysPrice: roomListData[indexPath.row - 2].saleDaysPrice, basicInfo: roomListData[indexPath.row - 2].basicInfo, urlImage: roomListData[indexPath.row - 2].urlImage[0])
+//            cell.roomImage.image = roomListData[indexPath.row - 2].urlImage[0]
+    
+            cell.roomPeople.text = "기준 \(2)명 / 최대 \(2)명"
+            
+            cell.rentableRoomTitle.text = "대실"
+            cell.rentableRoomPercent.text = String(Int((Double(roomListData[indexPath.row - 2].daysPrice)!-Double(roomListData[indexPath.row - 2].saleDaysPrice)!)/Double(roomListData[indexPath.row - 2].daysPrice)! * 100)) + "%~"
+            
+            cell.stayRoomTitle.text = "숙박"
+            cell.stayRoomPercent.text = "5%"
+//            cell.stayRoomPercent.text = String(Int((Double(roomListData[indexPath.row - 2].hoursPrice)!-Double(roomListData[indexPath.row - 2].saleHoursPrice)!)/Double(roomListData[indexPath.row - 2].hoursPrice)! * 100)) + "%~"
+            
+            return cell
+            
+        // 요금 정보, 질문&답변, 이벤트 버튼
+        case (2 + hotelRoomCount + 1) ... (2 + hotelRoomCount + 3):
+            switch indexPath.row {
+            case (2 + hotelRoomCount + 1):
+                let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomInfoTableViewCell
+                cell.accessoryType = .disclosureIndicator
+                cell.cellTitle.text = "요금 정보"
                 
                 return cell
-            
-            // 편의시설 및 서비스
-            case (2 + hotelRoomCount + 5):
-                let cell = tableView.dequeueReusableCell(withIdentifier: ConvenienceTableViewCell.reusableIdentifier, for: indexPath) as! ConvenienceTableViewCell
-                cell.cont.text = """
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                """
+            case (2 + hotelRoomCount + 2):
+                let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomInfoTableViewCell
+                cell.accessoryType = .disclosureIndicator
+                cell.cellTitle.text = "질문&답변"
                 
                 return cell
-            
-            // 이용안내
-            case (2 + hotelRoomCount + 6):
-                let cell = tableView.dequeueReusableCell(withIdentifier: ServiceNoticeTableViewCell.reusableIdentifier, for: indexPath) as! ServiceNoticeTableViewCell
-                cell.cont.text = """
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                    \("﹒") test
-                """
-            
-                return cell
-            case (2 + hotelRoomCount + 7):
-                let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.reusableIdentifier, for: indexPath) as! MapTableViewCell
-            
+            case (2 + hotelRoomCount + 3):
+                let cell = tableView.dequeueReusableCell(withIdentifier: StayRoomEventTableViewCell.reusableIdentifier, for: indexPath) as! StayRoomEventTableViewCell
+                
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: UITableView.reusableIdentifier, for: indexPath)
                 
                 return cell
+            }
+            
+        // 숙소 소개
+        case (2 + hotelRoomCount + 4):
+            let cell = tableView.dequeueReusableCell(withIdentifier: IntroduceStayTableViewCell.reusableIdentifier, for: indexPath) as! IntroduceStayTableViewCell
+            
+            for i in 0..<listSenderData[0].introduce.count {
+                
+                cell.cont.text = listSenderData[0].introduce[i]
+            }
+            
+            cell.buttonAction = {
+                self.detailTableView.beginUpdates()
+                cell.cont.numberOfLines = 0
+                cell.moreButton.isHidden = true
+                self.detailTableView.endUpdates()
+            }
+            
+            return cell
+            
+        // 편의시설 및 서비스
+        case (2 + hotelRoomCount + 5):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConvenienceTableViewCell.reusableIdentifier, for: indexPath) as! ConvenienceTableViewCell
+            
+            cell.cont.text = """
+            \("﹒") 트윈베드 객실 보유(싱글침대 + 더블침대)
+            \("﹒") (디럭스 1호라인 커플 PC)
+            \("﹒") 무료 Wi-Fi(설치(1대 설치)
+            \("﹒") 전 객실 고급 에이스침대 설치
+            \("﹒") 디럭스 이상 월풀 욕조 및 소프트 욕조 설치
+            \("﹒") 전 객실 SK 셋탑박스 설치
+            \("﹒") 객실 당 차량 1대만 주차 가능
+            \("﹒") 30대 이상 대규모 주차장 완비, 발렛파킹 가능
+            \("﹒") 주차는 입실과 동시에 가능하고 퇴실시 주차는 불가
+            \("﹒") 무료 주차
+            """
+            
+            return cell
+            
+        // 이용안내
+        case (2 + hotelRoomCount + 6):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ServiceNoticeTableViewCell.reusableIdentifier, for: indexPath) as! ServiceNoticeTableViewCell
+            cell.cont.text = """
+            \("﹒") 2인 이상 객실 이용안내
+            \("﹒") Twin(Double + Single) 2인기준, 최대 3인까지 이용가능
+            \("﹒") 호텔 내규상 혼숙은 금하고 있으니 이점 양해 부탁드립니다
+            \("﹒") 촛불 및 풍선이벤트는 되지 않습니다
+            """
+            
+            return cell
+        case (2 + hotelRoomCount + 7):
+            let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.reusableIdentifier, for: indexPath) as! MapTableViewCell
+            
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: UITableView.reusableIdentifier, for: indexPath)
+            
+            return cell
         }
     }
 }

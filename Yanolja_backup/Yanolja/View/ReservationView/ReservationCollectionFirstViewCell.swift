@@ -97,17 +97,17 @@ class ReservationCollectionFirstViewCell: UICollectionViewCell {
     }
     
 //레이블에 이값 없으면 크기 안잡히는데!!!??
-   private func fakeData() {
-        stayTitle.text = "건대 호텔 K WORLD"
+    private func fakeData(Title:String = "건대 호텔 K WORLD",roomTitle:String = "DELUXE DOUBLE", checkInDate:String = singleTon.checkInDate, checkOutDate:String = singleTon.checkOutDate ) {
+        stayTitle.text = Title
         stayTitle.font = UIFont.boldSystemFont(ofSize: 32)
 
-        roomTitle.text = "DELUXE DOUBLE"
-        roomTitle.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        self.roomTitle.text = roomTitle
+        self.roomTitle.font = UIFont.systemFont(ofSize: 20, weight: .regular)
 
-        checkInDate.text = "2019.07.30 (화)"
-        checkInTime.text = "20:00"
-        checkOutDate.text = "2019.07.30 (화)"
-        checkOutTime.text = "22:00"
+        self.checkInDate.text = checkInDate
+        checkInTime.text = "22:00"
+        self.checkOutDate.text = checkOutDate
+        checkOutTime.text = "11:00"
     
 
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F11FF2C22FA73A600148BA3 /* RegionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */; };
 		1F37D05422F02F71006D397A /* NetworkRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05322F02F71006D397A /* NetworkRegister.swift */; };
 		1F37D05822F054B8006D397A /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05722F054B8006D397A /* ReservationViewController.swift */; };
 		1F37D05A22F05AE7006D397A /* ReservationCollectionFirstViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */; };
@@ -92,6 +93,8 @@
 		F33F27C322D0AA7C000656DD /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F27C222D0AA7C000656DD /* UserViewController.swift */; };
 		F344C03B22F8C31E00D41442 /* HomeThemeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F344C03A22F8C31E00D41442 /* HomeThemeGroup.swift */; };
 		F3535EC822E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */; };
+		F364AE4122FC2FAF00665C4E /* MapNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364AE4022FC2FAF00665C4E /* MapNetwork.swift */; };
+		F364AE4322FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364AE4222FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift */; };
 		F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B942422E9CDC0002E999A /* SampleViewController.swift */; };
 		F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */; };
 		F37D6E4522F44CDA007E4D59 /* HomeThemeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D6E4422F44CDA007E4D59 /* HomeThemeNetwork.swift */; };
@@ -121,15 +124,18 @@
 		F3DB558122E6EB29002C3041 /* LoginCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DB558022E6EB29002C3041 /* LoginCollectionViewCell.swift */; };
 		F3DB558322E6EB55002C3041 /* LoginMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DB558222E6EB55002C3041 /* LoginMenuBar.swift */; };
 		F3DB558522E6EF25002C3041 /* LoginMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DB558422E6EF25002C3041 /* LoginMenuCollectionViewCell.swift */; };
-		F3E2EA5C22F9E79A0021239E /* HomeThemeSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA5B22F9E79A0021239E /* HomeThemeSecondTableViewCell.swift */; };
-		F3E2EA5E22F9EE660021239E /* HomeThemeDiffSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA5D22F9EE660021239E /* HomeThemeDiffSecondTableViewCell.swift */; };
-		F3E2EA6022F9F7290021239E /* HomeThemeSecondCollectionViewMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA5F22F9F7290021239E /* HomeThemeSecondCollectionViewMenuBar.swift */; };
-		F3E2EA6422FA03000021239E /* HomePopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6322FA03000021239E /* HomePopDetailViewController.swift */; };
-		F3E2EA6622FA04C80021239E /* HomePopDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6522FA04C80021239E /* HomePopDetailTableViewCell.swift */; };
+		F3E20AD122FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E20AD022FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift */; };
+		F3E20AD322FAA8D0002DF2D4 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E20AD222FAA8D0002DF2D4 /* LaunchViewController.swift */; };
+		F3E2EA6822FA15FA0021239E /* HomeThemeSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6722FA15FA0021239E /* HomeThemeSecondTableViewCell.swift */; };
+		F3E2EA6A22FA163F0021239E /* HomeThemeDiffSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6922FA163F0021239E /* HomeThemeDiffSecondTableViewCell.swift */; };
+		F3E2EA6C22FA16BF0021239E /* HomePopDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6B22FA16BF0021239E /* HomePopDetailTableViewCell.swift */; };
+		F3E2EA6E22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6D22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift */; };
+		F3E2EA7022FA18730021239E /* HomePopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2EA6F22FA18730021239E /* HomePopDetailViewController.swift */; };
 		F3E9655322F304B5002ECF1D /* CommonApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E9655222F304B5002ECF1D /* CommonApiKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDetailViewController.swift; sourceTree = "<group>"; };
 		1F37D05322F02F71006D397A /* NetworkRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRegister.swift; sourceTree = "<group>"; };
 		1F37D05722F054B8006D397A /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCollectionFirstViewCell.swift; sourceTree = "<group>"; };
@@ -235,6 +241,8 @@
 		F33F27C222D0AA7C000656DD /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F344C03A22F8C31E00D41442 /* HomeThemeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeGroup.swift; sourceTree = "<group>"; };
 		F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginStampTableViewCell.swift; sourceTree = "<group>"; };
+		F364AE4022FC2FAF00665C4E /* MapNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNetwork.swift; sourceTree = "<group>"; };
+		F364AE4222FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewAfterLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F36B942422E9CDC0002E999A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F37D6E4422F44CDA007E4D59 /* HomeThemeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeNetwork.swift; sourceTree = "<group>"; };
@@ -266,11 +274,13 @@
 		F3DB558022E6EB29002C3041 /* LoginCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCollectionViewCell.swift; sourceTree = "<group>"; };
 		F3DB558222E6EB55002C3041 /* LoginMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuBar.swift; sourceTree = "<group>"; };
 		F3DB558422E6EF25002C3041 /* LoginMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		F3E2EA5B22F9E79A0021239E /* HomeThemeSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeSecondTableViewCell.swift; sourceTree = "<group>"; };
-		F3E2EA5D22F9EE660021239E /* HomeThemeDiffSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeDiffSecondTableViewCell.swift; sourceTree = "<group>"; };
-		F3E2EA5F22F9F7290021239E /* HomeThemeSecondCollectionViewMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeSecondCollectionViewMenuBar.swift; sourceTree = "<group>"; };
-		F3E2EA6322FA03000021239E /* HomePopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopDetailViewController.swift; sourceTree = "<group>"; };
-		F3E2EA6522FA04C80021239E /* HomePopDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopDetailTableViewCell.swift; sourceTree = "<group>"; };
+		F3E20AD022FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopSecondTableViewCell.swift; sourceTree = "<group>"; };
+		F3E20AD222FAA8D0002DF2D4 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		F3E2EA6722FA15FA0021239E /* HomeThemeSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeSecondTableViewCell.swift; sourceTree = "<group>"; };
+		F3E2EA6922FA163F0021239E /* HomeThemeDiffSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeDiffSecondTableViewCell.swift; sourceTree = "<group>"; };
+		F3E2EA6B22FA16BF0021239E /* HomePopDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopDetailTableViewCell.swift; sourceTree = "<group>"; };
+		F3E2EA6D22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeSecondCollectionViewMenuBar.swift; sourceTree = "<group>"; };
+		F3E2EA6F22FA18730021239E /* HomePopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePopDetailViewController.swift; sourceTree = "<group>"; };
 		F3E9655222F304B5002ECF1D /* CommonApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApiKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,6 +321,7 @@
 				1F37D07D22F7E9AF006D397A /* NetworkSerchList.swift */,
 				F3E9655222F304B5002ECF1D /* CommonApiKey.swift */,
 				F37D6E4422F44CDA007E4D59 /* HomeThemeNetwork.swift */,
+				F364AE4022FC2FAF00665C4E /* MapNetwork.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -532,6 +543,7 @@
 			children = (
 				F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */,
 				F3535EC722E8E48F00EDA352 /* UserViewLoginStampTableViewCell.swift */,
+				F364AE4222FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift */,
 			);
 			path = UserView;
 			sourceTree = "<group>";
@@ -541,12 +553,13 @@
 			children = (
 				F3C8171122D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift */,
 				F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */,
-				F3E2EA5B22F9E79A0021239E /* HomeThemeSecondTableViewCell.swift */,
+				F3E2EA6722FA15FA0021239E /* HomeThemeSecondTableViewCell.swift */,
 				F3D678FF22E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift */,
-				F3E2EA5D22F9EE660021239E /* HomeThemeDiffSecondTableViewCell.swift */,
+				F3E2EA6922FA163F0021239E /* HomeThemeDiffSecondTableViewCell.swift */,
 				F313EEED22E5793000880ACD /* HomePopWordsTableViewCell.swift */,
 				F339FDFD22DF13A2003D5F71 /* HomePopTableViewCell.swift */,
-				F3E2EA6522FA04C80021239E /* HomePopDetailTableViewCell.swift */,
+				F3E20AD022FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift */,
+				F3E2EA6B22FA16BF0021239E /* HomePopDetailTableViewCell.swift */,
 				F385B31A22D5AA5300F3B35E /* HomeThemeCollectionCell */,
 				F339FE0122DF275A003D5F71 /* HomePopCollectionCell */,
 			);
@@ -557,7 +570,7 @@
 			isa = PBXGroup;
 			children = (
 				F39C843422DC64C50024BBDB /* HomeThemeCollectionViewMenuBar.swift */,
-				F3E2EA5F22F9F7290021239E /* HomeThemeSecondCollectionViewMenuBar.swift */,
+				F3E2EA6D22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift */,
 				F39C843622DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift */,
 				F3C8170F22D33294009CF7AC /* HomeThemeCollectionViewCell.swift */,
 				F31F334622DDC679003A2C06 /* HomeThemeButton.swift */,
@@ -670,7 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				F33F27BE22D0AA10000656DD /* HomeViewController.swift */,
-				F3E2EA6322FA03000021239E /* HomePopDetailViewController.swift */,
+				F3E2EA6F22FA18730021239E /* HomePopDetailViewController.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -690,6 +703,7 @@
 			isa = PBXGroup;
 			children = (
 				F3B185DE22D0812200B01C6C /* RegionViewController.swift */,
+				1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */,
 			);
 			path = RegionView;
 			sourceTree = "<group>";
@@ -713,6 +727,7 @@
 				1FB5C85522DDD0C300044D94 /* CalendarViewController.swift */,
 				F3B2A08E22F1976A003997AF /* MapViewController.swift */,
 				6179322822F42BC900B2AE13 /* ParsingTimeViewController.swift */,
+				F3E20AD222FAA8D0002DF2D4 /* LaunchViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -890,6 +905,7 @@
 				1F37D07E22F7E9AF006D397A /* NetworkSerchList.swift in Sources */,
 				614F66AA22F2065A007BDA03 /* DetailRoomImageCollectionViewCell.swift in Sources */,
 				1FB5C84922DDCF7C00044D94 /* FSCalendar.m in Sources */,
+				F3E20AD322FAA8D0002DF2D4 /* LaunchViewController.swift in Sources */,
 				1F37D05E22F06789006D397A /* ReservationCollectionSecondViewCell.swift in Sources */,
 				6104239722DAE4EF0087E719 /* searchStruct.swift in Sources */,
 				6104239D22DC78CC0087E719 /* HotelTableViewCell.swift in Sources */,
@@ -898,19 +914,21 @@
 				F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */,
 				F3919B1B22D4A17B0093DB24 /* fakeData.swift in Sources */,
 				F3E9655322F304B5002ECF1D /* CommonApiKey.swift in Sources */,
-				F3E2EA5E22F9EE660021239E /* HomeThemeDiffSecondTableViewCell.swift in Sources */,
+				F3E2EA6A22FA163F0021239E /* HomeThemeDiffSecondTableViewCell.swift in Sources */,
 				610423E022DE61C00087E719 /* Protocol.swift in Sources */,
 				F39B7F2F22F6E9C100186E61 /* HomeThemeSwimmingPool.swift in Sources */,
 				1F37D05822F054B8006D397A /* ReservationViewController.swift in Sources */,
 				1FB5C84822DDCF7C00044D94 /* FSCalendarStickyHeader.m in Sources */,
 				1FB5C84F22DDCF7C00044D94 /* FSCalendarCalculator.m in Sources */,
 				614F66AC22F248B3007BDA03 /* CheckInOutTableViewCell.swift in Sources */,
+				F364AE4122FC2FAF00665C4E /* MapNetwork.swift in Sources */,
 				1FB5C85322DDCF7C00044D94 /* FSCalendarAppearance.m in Sources */,
 				6107A7EA22EF77D5008BEF7A /* StretchyHeaderLayout.swift in Sources */,
 				F3B2A08F22F1976A003997AF /* MapViewController.swift in Sources */,
 				F3B185E522D0812200B01C6C /* Yanolja.xcdatamodeld in Sources */,
 				F3DB558522E6EF25002C3041 /* LoginMenuCollectionViewCell.swift in Sources */,
 				1FB5C84622DDCF7C00044D94 /* FSCalendarDelegationFactory.m in Sources */,
+				F3E2EA6C22FA16BF0021239E /* HomePopDetailTableViewCell.swift in Sources */,
 				614F66B222F29967007BDA03 /* StayListModel.swift in Sources */,
 				1FB5C84D22DDCF7C00044D94 /* FSCalendarExtensions.m in Sources */,
 				1FD3A45922E8865600417F1C /* NumberOfPeopleViewController.swift in Sources */,
@@ -926,6 +944,7 @@
 				F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */,
 				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
 				61E72F0622D31D49001B8A59 /* TopNaviView.swift in Sources */,
+				F3E20AD122FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift in Sources */,
 				614F66B422F2CDE7007BDA03 /* ReservationNoticeTableViewCell.swift in Sources */,
 				614F66A622F1F976007BDA03 /* RoomInfoTableViewCell.swift in Sources */,
 				1F37D05A22F05AE7006D397A /* ReservationCollectionFirstViewCell.swift in Sources */,
@@ -938,15 +957,14 @@
 				F3144F9C22E772BF00F72E6D /* LoginEasyCollectionViewCell.swift in Sources */,
 				F33F27C122D0AA6F000656DD /* MyLocationViewController.swift in Sources */,
 				610423CB22DE44EB0087E719 /* CustomCollectionViewCell.swift in Sources */,
+				F364AE4322FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift in Sources */,
 				1FB5C89D22E0E29100044D94 /* RecentlyCustomCell.swift in Sources */,
 				614F669922F182E6007BDA03 /* StayRoomEventTableViewCell.swift in Sources */,
-				F3E2EA6422FA03000021239E /* HomePopDetailViewController.swift in Sources */,
 				1F37D05422F02F71006D397A /* NetworkRegister.swift in Sources */,
 				F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */,
 				614F66A122F1EF67007BDA03 /* ServiceNoticeTableViewCell.swift in Sources */,
 				1FB5C84C22DDCF7C00044D94 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				614F66B022F2910E007BDA03 /* NetworkStayList.swift in Sources */,
-				F3E2EA6022F9F7290021239E /* HomeThemeSecondCollectionViewMenuBar.swift in Sources */,
 				F313EEEE22E5793000880ACD /* HomePopWordsTableViewCell.swift in Sources */,
 				610423DC22DE61270087E719 /* CustomMenuCell.swift in Sources */,
 				F37D6E4522F44CDA007E4D59 /* HomeThemeNetwork.swift in Sources */,
@@ -964,22 +982,24 @@
 				F3DB557E22E6E89F002C3041 /* LoginViewController.swift in Sources */,
 				1F37D08722F9325B006D397A /* SearchDetailDefaultTableViewCell.swift in Sources */,
 				1F37D06222F067A6006D397A /* ReservationCollectionForthViewCell.swift in Sources */,
+				1F11FF2C22FA73A600148BA3 /* RegionDetailViewController.swift in Sources */,
 				6179322922F42BC900B2AE13 /* ParsingTimeViewController.swift in Sources */,
 				1FB5C84422DDCF7C00044D94 /* FSCalendarCollectionView.m in Sources */,
+				F3E2EA7022FA18730021239E /* HomePopDetailViewController.swift in Sources */,
 				610423D622DE4C100087E719 /* reusableIdentifier.swift in Sources */,
 				F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */,
 				F344C03B22F8C31E00D41442 /* HomeThemeGroup.swift in Sources */,
 				F3C47F4E22F0452A00E722D4 /* RegisterSecondViewController.swift in Sources */,
-				F3E2EA5C22F9E79A0021239E /* HomeThemeSecondTableViewCell.swift in Sources */,
+				F3E2EA6822FA15FA0021239E /* HomeThemeSecondTableViewCell.swift in Sources */,
 				F39C843722DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift in Sources */,
 				F39B7F2D22F6E9A900186E61 /* HomeThemePartyRoom.swift in Sources */,
-				F3E2EA6622FA04C80021239E /* HomePopDetailTableViewCell.swift in Sources */,
 				614F66AE22F24AF8007BDA03 /* ReservationButtonviewTableViewCell.swift in Sources */,
 				F39B7F3122F6E9D500186E61 /* HomeThemeSpa.swift in Sources */,
 				1FB5A8B422DC5A9E009057F4 /* RecentlyCell.swift in Sources */,
 				614F66B822F2F053007BDA03 /* MapTableViewCell.swift in Sources */,
 				61CDB9F622E0436400C6C21B /* DefaultCollectionViewCell.swift in Sources */,
 				F339FE0022DF1CFC003D5F71 /* HomePopCollectionViewCell.swift in Sources */,
+				F3E2EA6E22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift in Sources */,
 				61F91F1F22E6C4320090ED8F /* CALayerBorder.swift in Sources */,
 				F3C47F4C22F044D900E722D4 /* RegisterViewController.swift in Sources */,
 				610423D222DE4AA20087E719 /* CustomMenuBar.swift in Sources */,

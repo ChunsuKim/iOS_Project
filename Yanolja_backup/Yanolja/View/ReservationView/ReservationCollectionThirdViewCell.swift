@@ -10,7 +10,7 @@ import UIKit
 
 class ReservationCollectionThirdViewCell: UICollectionViewCell {
     
-    var amount = "246,000"
+    var amount = singleTon.money
     
     let finalPaymentAmountTitle = UILabel()
     let finalPaymentAmount = UILabel()

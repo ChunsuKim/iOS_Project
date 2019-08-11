@@ -21,7 +21,6 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     static let identifier = "HomeThemeTableViewCell"
     
-    
     // TitleView
     private let titleView = UIView()
     private let titleLabel = UILabel()
@@ -30,6 +29,8 @@ class HomeThemeTableViewCell: UITableViewCell {
     
     private var homeThemeCollectionViewCell = HomeThemeCollectionViewCell()
     private var isState = true
+//    private var poolList = themeMenus[0].items
+//    private var poolListDiff = themeMenusDiff[0].items
     
     private var groupBigSale = [HomeThemeGroup]()
     private var groupPartyRoom = [HomeThemeGroup]()
@@ -40,7 +41,9 @@ class HomeThemeTableViewCell: UITableViewCell {
     private var themeSwimmingPoolArray = [HomeThemeGroup]()
     private var themeSpaArray = [HomeThemeGroup]()
     
+    private var selectedIndexPath = 0
     
+    var didSelectHandler: (() -> ())?
     
     // CollectionView
     private let homeViewCollectionView : UICollectionView = {
@@ -57,9 +60,9 @@ class HomeThemeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
         self.selectionStyle = .none
         menuBar.delegate = self
+        
         fetchData()
         
         configureTitleView()
@@ -297,10 +300,32 @@ extension HomeThemeTableViewCell: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HomeThemeTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectHandler?()
+        print(indexPath.item)
+        
+        if isState {
+            let totalFirstThemeGroup = [groupBigSale, groupPartyRoom, groupSwimmingPool, groupSpa]
+            let passStayId = totalFirstThemeGroup[selectedIndexPath][indexPath.item]
+            print(totalFirstThemeGroup[selectedIndexPath][indexPath.item].stayId)
+            singleTon.stayID = passStayId.stayId
+            print(singleTon.stayID)
+        } else {
+            let totalSecondThemeGroup = [groupSwimmingPool, groupSpa, groupBigSale, groupPartyRoom]
+            let passStayId = totalSecondThemeGroup[selectedIndexPath][indexPath.item]
+            print(totalSecondThemeGroup[selectedIndexPath][indexPath.item].stayId)
+            singleTon.stayID = passStayId.stayId
+            print(singleTon.stayID)
+        }
+    }
+}
+
 // MARK: - HomeThemeCollectionViewMenuBar Delegate
 extension HomeThemeTableViewCell: MenuBarDelegate {
     func menuBarDidSelected(_ indexPath: IndexPath) {
         homeViewCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        selectedIndexPath = indexPath.item
         
         let totalFirstThemeGroup = [groupBigSale, groupPartyRoom, groupSwimmingPool, groupSpa]
         let firstTheme = totalFirstThemeGroup[indexPath.item]

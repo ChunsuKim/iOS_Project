@@ -37,7 +37,7 @@ class CheckInOutTableViewCell: UITableViewCell {
     let checkInDate: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "7월 26일(금)"
+        label.text = singleTon.checkInDateString
         label.textColor = #colorLiteral(red: 0, green: 0.4470588235, blue: 0.6980392157, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
@@ -64,7 +64,7 @@ class CheckInOutTableViewCell: UITableViewCell {
     let checkOutDate: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "7월 26일(금)"
+        label.text = singleTon.checkOutDateString
         label.textColor = #colorLiteral(red: 0, green: 0.4470588235, blue: 0.6980392157, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         

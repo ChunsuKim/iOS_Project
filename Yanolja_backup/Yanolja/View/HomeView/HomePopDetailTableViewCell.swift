@@ -9,7 +9,7 @@
 import UIKit
 
 class HomePopDetailTableViewCell: UITableViewCell {
-    
+
     static let identifier = "HomePopDetailTableViewCell"
     
     private let detailImageView = UIImageView()
@@ -27,7 +27,7 @@ class HomePopDetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -50,5 +50,5 @@ class HomePopDetailTableViewCell: UITableViewCell {
     func configurePopDetail(image: UIImage?) {
         detailImageView.image = image
     }
-
+    
 }

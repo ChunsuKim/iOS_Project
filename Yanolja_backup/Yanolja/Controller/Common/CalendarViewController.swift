@@ -203,7 +203,7 @@ class CalendarViewController: UIViewController {
         let date = selectDateComponets.day!
         let dayInt = defaultCal.dateComponents([.weekday], from: calendar.selectedDates[num]).weekday!
         
-        return "\(month)"+"월 "+"\(date)"+"일 "+"("+day(of: dayInt)+")"
+        return "\(month)"+"월 "+"\(date)"+"일"+"("+day(of: dayInt)+")"
     }
     func onePickSendString(input:Date) -> String {
         let selectDateComponets = defaultCal.dateComponents([.month,.day], from: input)
@@ -211,7 +211,7 @@ class CalendarViewController: UIViewController {
         let date = selectDateComponets.day!
         let dayInt = defaultCal.dateComponents([.weekday], from: input).weekday!
         
-        return "\(month)"+"월 "+"\(date)"+"일 "+"("+day(of: dayInt)+")"
+        return "\(month)"+"월 "+"\(date)"+"일"+"("+day(of: dayInt)+")"
     }
     
     
@@ -253,7 +253,26 @@ class CalendarViewController: UIViewController {
     }
     @objc private func sendDate() {
         singleTon.saveDate = calendar.selectedDates
-        print("저장되는 날짜들",self.formatter.string(from: calendar.selectedDates[0]))
+        //체크인 저장
+        singleTon.checkInDate = self.formatter.string(from: calendar.selectedDates[0])
+        if calendar.selectedDates.count > 1 {
+           // 체크아웃 저장
+            singleTon.checkOutDate = self.formatter.string(from: calendar.selectedDates[1])
+            
+            let tempDateFormatter = DateFormatter()
+            tempDateFormatter.dateFormat = "M월 d일"
+            let checkInWeek = defaultCal.component(.weekday, from: calendar.selectedDates[0])
+            let checkOutWeek = defaultCal.component(.weekday, from: calendar.selectedDates[1])
+
+            let checkInDateString = tempDateFormatter.string(from: calendar.selectedDates[0])
+            let checkOutDateString = tempDateFormatter.string(from: calendar.selectedDates[1])
+            singleTon.checkInDateString = checkInDateString+"(\(day(of: checkInWeek)))"
+            singleTon.checkOutDateString = checkOutDateString+"(\(day(of: checkOutWeek)))"
+            print("체크인 체크아웃 스트링 요일까지",singleTon.checkInDateString , singleTon.checkOutDateString)
+            
+        }
+        singleTon.selectDateButtonCurrentTitle = self.bottomCheckInSearchButton.currentTitle!
+        print("체크인 체크아웃 몇박 까지",singleTon.selectDateButtonCurrentTitle)
         if let vc = presentingViewController as? SearchViewController {
             vc.dismiss(animated: true) {
                 guard let title = self.bottomCheckInSearchButton.currentTitle else {return}
@@ -267,6 +286,9 @@ class CalendarViewController: UIViewController {
                 self.buttonSetTitle(button: vc.calendarButton)
                 vc.calendarButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .ultraLight)
             }
+        } else {
+            dismissAction()
+
         }
         
     }

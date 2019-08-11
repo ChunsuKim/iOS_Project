@@ -99,6 +99,7 @@ extension ConvenienceTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FacilitiesCollectionViewCell.reusableIdentifier, for: indexPath) as! FacilitiesCollectionViewCell
         
         cell.icon.image = UIImage(named: "star")
+//        cell.cont.text = "편의시설"
         
         return cell
     }

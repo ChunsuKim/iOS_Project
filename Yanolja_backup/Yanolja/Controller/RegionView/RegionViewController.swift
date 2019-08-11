@@ -26,9 +26,15 @@ class RegionViewController: UIViewController {
     let mainRegionTableView = UITableView()
     let subRegionTableView = UITableView()
     
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
+//        navigationController?.isNavigationBarHidden = true
         configure()
         tapUI()
         
@@ -44,26 +50,26 @@ class RegionViewController: UIViewController {
         
         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 25).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.text = "지역"
+        titleLabel.text = ""
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .center
         
-        searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 25).isActive = true
-        searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -15).isActive = true
-        searchButton.setImage(UIImage(named: "grasses"), for: .normal)
-        searchButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        searchButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        searchButton.addTarget(self, action: #selector(presentSearchViewController), for: .touchUpInside)
+//        searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 25).isActive = true
+//        searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -15).isActive = true
+//        searchButton.setImage(UIImage(named: "grasses"), for: .normal)
+//        searchButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+//        searchButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+//        searchButton.addTarget(self, action: #selector(presentSearchViewController), for: .touchUpInside)
         
         
-        regionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 25).isActive = true
+        regionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         regionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 55).isActive = true
         
-        stationButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 25).isActive = true
+        stationButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         stationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         
-        mapButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 25).isActive = true
+        mapButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         mapButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -55).isActive = true
         
         
@@ -133,6 +139,7 @@ class RegionViewController: UIViewController {
         mapButton.setTitleColor(.darkGray, for: .selected)
         mapButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         mapButton.addTarget(self, action: #selector(categoryButtonAnimateAction), for: .touchUpInside)
+        mapButton.addTarget(self, action: #selector(mapButtonDidtap(_:)), for: .touchUpInside)
     }
     
     @objc private func presentSearchViewController() {
@@ -156,7 +163,14 @@ class RegionViewController: UIViewController {
             
         }
     }
+
+    
+    @objc private func mapButtonDidtap(_ sender: UIButton) {
+        let mapController = MapViewController()
+        navigationController?.pushViewController(mapController, animated: true)
+    }
  
+
     
    
     
@@ -202,12 +216,23 @@ extension RegionViewController :UITableViewDataSource {
 extension RegionViewController :UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == mainRegionTableView {
-            
            saveIndex = indexPath.row
             tableView.cellForRow(at: indexPath)?.textLabel?.textColor = .black
             subRegionTableView.reloadData()
+        } else {
+            singleTon.saveRegionSearchList.removeAll()
+            let vc = RegionDetailViewController()
+            regionSearch(selectRegion: locations[saveIndex].sub[indexPath.row], category: "모텔", personnel: 2,  requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime) {
+                DispatchQueue.main.async {
+                    vc.stayTableView.reloadData()
+                }
+            }
+//            singleTon.saveDate.removeAll()
+            vc.titleLabel.text = locations[saveIndex].sub[indexPath.row]
+            self.present(vc, animated: true, completion: nil)
         }
     }
+
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if tableView == mainRegionTableView {
             saveIndex = indexPath.row

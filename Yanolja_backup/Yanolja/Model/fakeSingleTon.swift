@@ -15,34 +15,58 @@ class SingleTon {
     
     
     var recentlyArrInDetailView:[SearchClass] = []
-    
-    var region: String?
-    var date: String?
-    var numberOfPeople: String?
-    
+ 
+    // 날짜 관련
+    //오늘 날짜
     var todayString = ""
     var tomorrowString = ""
-
+    var saveDate: [Date] = []
+    var selectDateButtonCurrentTitle = ""
+    
+    
+    //사람수 관련!
     var adultCount = 2
     var childCount = 0
-    
-    
+    var numberOfPeople = 2
+    var selectNumberOfPeopleButtonCurrentTitle = ""
 
-    
-    var saveDate: [Date] = []
+    // 체크인 체크아웃
+    var checkInDate = ""
+    var checkOutDate = ""
     let checkInTime = "+22:00:00"
     let checkOutTime = "+11:00:00"
-
     
-    var saveSearchList: [SearchStruct] = []
+    var checkInDateString = "8월 13일 (화)"
+    var checkOutDateString = "8월 15일 (목)"
     
+    var saveDetailSearchList: [SearchStruct] = []
+    
+    // 돈관련
+    var money = "70000"
+    
+    //지역검색시..
+    var saveRegionSearchList: [SearchStruct] = []
     var stayID: Int = 0
+    var roomID: Int = 0
 
+//예약할때 필요한거 booker , phoneNumber(loginUserl.last?.phoneNumber),wayToGo,requestCheckIn,requestCheckOut,requestHours,requestDays,finalPrice
+    
+    
+    //로그인시..
+    // 회원가입
 
-
+    var loginUser: [UserID] = [UserID(email: "qed@naver.com", phoneNumber: "01011110000", password: "0000")]
+    
+    var walkToGo = "도보"
+    var token = ""
+    
     
 }
-
+struct UserID {
+    let email: String
+    let phoneNumber: String
+    let password: String
+}
 
 // 요일 체크 함수
 func day(of:Int) -> String {

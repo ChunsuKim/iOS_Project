@@ -1,15 +1,14 @@
 //
-//  SearchDetailViewController.swift
+//  RegionDetailViewController.swift
 //  Yanolja
 //
-//  Created by brian은석 on 05/08/2019.
+//  Created by brian은석 on 07/08/2019.
 //  Copyright © 2019 Chunsu Kim. All rights reserved.
 //
 
 import UIKit
 
-class SearchDetailViewController: UIViewController {
-
+class RegionDetailViewController: UIViewController {
     let backButton = UIButton()
     let homeViewButton = UIButton()
     let searchViewButton = UIButton()
@@ -54,7 +53,7 @@ class SearchDetailViewController: UIViewController {
         homeViewButton.heightAnchor.constraint(equalToConstant: widthHeightConstant).isActive = true
         homeViewButton.setImage(#imageLiteral(resourceName: "homed"), for: .normal)
         homeViewButton.addTarget(self, action: #selector(moveToHomeView), for: .touchUpInside)
-
+        
         titleView.topAnchor.constraint(equalTo: backButton.bottomAnchor,constant: 5).isActive = true
         titleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: leadingConstant).isActive = true
         titleView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -leadingConstant).isActive = true
@@ -69,9 +68,9 @@ class SearchDetailViewController: UIViewController {
         titleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor,constant: leadingConstant).isActive = true
         titleLabel.backgroundColor = #colorLiteral(red: 0.9555117488, green: 0.9596166015, blue: 0.9658421874, alpha: 1)
-//        titleLabel.text = "강남역"
+        //        titleLabel.text = "강남역"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
-
+        
         calendarButton.topAnchor.constraint(equalTo: titleView.bottomAnchor,constant: 15).isActive = true
         calendarButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: leadingConstant).isActive = true
         calendarButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
@@ -83,16 +82,16 @@ class SearchDetailViewController: UIViewController {
         calendarButton.setTitle(singleTon.todayString+"~"+singleTon.tomorrowString+",1박", for: .normal)
         calendarButton.setTitleColor(.black, for: .normal)
         calendarButton.titleLabel?.font = UIFont.systemFont(ofSize: 12,weight: .ultraLight)
-
+        
         calendarButton.addTarget(self, action: #selector(calendarPresent), for: .touchUpInside)
         
         numberOfPeopleButton.topAnchor.constraint(equalTo: titleView.bottomAnchor,constant: 15).isActive = true
         numberOfPeopleButton.leadingAnchor.constraint(equalTo: calendarButton.trailingAnchor,constant: 10).isActive = true
         numberOfPeopleButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         numberOfPeopleButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-    numberOfPeopleButton.setTitle("성인\(singleTon.adultCount), 아동\(singleTon.childCount)", for: .normal)
+        numberOfPeopleButton.setTitle("성인\(singleTon.adultCount), 아동\(singleTon.childCount)", for: .normal)
         numberOfPeopleButton.titleLabel?.font = UIFont.systemFont(ofSize: 13,weight: .ultraLight)
-
+        
         numberOfPeopleButton.layer.borderWidth = 2
         numberOfPeopleButton.layer.borderColor = #colorLiteral(red: 0.9555117488, green: 0.9596166015, blue: 0.9658421874, alpha: 1)
         numberOfPeopleButton.setTitleColor(.black, for: .normal)
@@ -103,7 +102,7 @@ class SearchDetailViewController: UIViewController {
         segMentView.topAnchor.constraint(equalTo: calendarButton.bottomAnchor,constant: 30).isActive = true
         segMentView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         segMentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
+        segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
         segMentView.backgroundColor = #colorLiteral(red: 0.9555117488, green: 0.9596166015, blue: 0.9658421874, alpha: 1)
         
         stayTableView.topAnchor.constraint(equalTo: segMentView.bottomAnchor,constant: 2).isActive = true
@@ -112,7 +111,7 @@ segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
         stayTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         stayTableView.register(MotelTableViewCell.self, forCellReuseIdentifier: MotelTableViewCell.identifier)
         stayTableView.register(SearchDetailDefaultTableViewCell.self, forCellReuseIdentifier: "default")
-
+        
         stayTableView.dataSource = self
     }
 //    private func saveTodayInSingleTon() {
@@ -124,7 +123,6 @@ segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
 //        guard let homeViewTabBarController = presentingViewController?.presentingViewController as? CustomTabBarController else {return print("homeView 못뜸..ㅠㅠ")}
 //        homeViewTabBarController.dismiss(animated: true, completion: nil)
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-
     }
     
     @objc private func dismissAction() {
@@ -134,47 +132,35 @@ segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
         let vc = CalendarViewController()
         present(vc, animated: true, completion: nil)
     }
-
+    
 }
 
 
-extension SearchDetailViewController: UITableViewDataSource {
+extension RegionDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if singleTon.saveDetailSearchList.count == 0 {
+        if singleTon.saveRegionSearchList.count == 0 {
             return 1
         } else {
-        return singleTon.saveDetailSearchList.count
+            return singleTon.saveRegionSearchList.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if singleTon.saveDetailSearchList.count == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        if singleTon.saveRegionSearchList.count == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
             tableView.rowHeight = tableView.frame.height
-            return cell
             
+            return cell
         } else {
             tableView.rowHeight = UITableView.automaticDimension
 
-            switch singleTon.saveDetailSearchList[indexPath.row].category {
-            case "모텔":
-                let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! MotelTableViewCell
-                let data = singleTon.saveDetailSearchList[indexPath.row]
-                cell.puts(mainImage: data.mainImage, stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, hoursAvailable: data.hoursAvailable, daysPrice: data.daysPrice, saleDaysPrice: data.saleDaysPrice)
-                return cell
-            case "호텔/리조트":
-                let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! HotelTableViewCell
-                let data = singleTon.saveDetailSearchList[indexPath.row]
-                cell.put(mainImage: data.mainImage, stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice)
-            default:
-                return UITableViewCell()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! MotelTableViewCell
+            let data = singleTon.saveRegionSearchList[indexPath.row]
+            cell.puts(mainImage: data.mainImage, stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, hoursAvailable: data.hoursAvailable, daysPrice: data.daysPrice, saleDaysPrice: data.saleDaysPrice)
+            return cell
         }
-        return UITableViewCell()
     }
     
-  
+    
     
 }
-
-//진배

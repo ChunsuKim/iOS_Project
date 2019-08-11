@@ -44,6 +44,8 @@ class FacilitiesCollectionViewCell: UICollectionViewCell {
             icon.topAnchor.constraint(equalTo: contentView.topAnchor),
             icon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             icon.bottomAnchor.constraint(equalTo: cont.topAnchor, constant: -10),
+            icon.widthAnchor.constraint(equalToConstant: 50),
+            icon.heightAnchor.constraint(equalToConstant: 50),
             cont.centerXAnchor.constraint(equalTo: icon.centerXAnchor),
             cont.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])

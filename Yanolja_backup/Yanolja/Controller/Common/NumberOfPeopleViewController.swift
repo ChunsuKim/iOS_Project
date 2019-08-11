@@ -329,13 +329,18 @@ class NumberOfPeopleViewController: UIViewController {
         dismiss(animated: true, completion: nil) }
     
     @objc private func okAction() {
-        let vc = presentingViewController as! SearchViewController
-        vc.numberOfPeopleLabel.text = "성인 \(adultCount), 아동 \(childCount)"
-        vc.numberOfPeopleLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
-        vc.saveStringNumberOfAdult = adultCount
-        vc.saveStringNumberOfKids = childCount
+        singleTon.selectNumberOfPeopleButtonCurrentTitle = "성인 \(adultCount), 아동 \(childCount)"
+        singleTon.adultCount = adultCount
+        singleTon.childCount = childCount
+        singleTon.numberOfPeople = adultCount + childCount
 
-        dismissAction()
+        if let vc = presentingViewController as? SearchViewController {
+            vc.numberOfPeopleLabel.text = singleTon.selectNumberOfPeopleButtonCurrentTitle
+            vc.dismiss(animated: true, completion: nil)
+        } else {
+            dismissAction()
+
+        }
     }
     
     enum Metric {

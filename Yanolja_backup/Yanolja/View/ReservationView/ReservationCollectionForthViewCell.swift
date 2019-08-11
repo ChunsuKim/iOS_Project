@@ -32,7 +32,7 @@ class ReservationCollectionForthViewCell: UICollectionViewCell {
     let paymentButton = UIButton()
     
     let cautionInfoBottomLabel = UILabel()
-    var amount = "246,000"
+    var amount = singleTon.money
 
     
     override init(frame: CGRect) {

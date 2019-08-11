@@ -80,8 +80,6 @@ class SearchViewController: UIViewController{
     
     var saveStringSearchTitle = ""
     var saveStringDate = singleTon.todayString+" ~ "+singleTon.tomorrowString
-    var saveStringNumberOfAdult = 2
-    var saveStringNumberOfKids = 0
     
 
     let defaultCal = Calendar(identifier: .gregorian)
@@ -343,7 +341,7 @@ class SearchViewController: UIViewController{
         numberOfPeopleView.layer.borderColor = #colorLiteral(red: 0.9315651655, green: 0.9356709123, blue: 0.9419475794, alpha: 1)
         numberOfPeopleView.layer.borderWidth = 2
         
-        numberOfPeopleLabel.text = "성인 \(saveStringNumberOfAdult),아동 \(saveStringNumberOfKids)"
+        numberOfPeopleLabel.text = "성인 \(singleTon.adultCount),아동 \(singleTon.childCount)"
         numberOfPeopleLabel.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
     }
     
@@ -602,12 +600,10 @@ class SearchViewController: UIViewController{
     }
     
     func initLabelTitle() {
-        saveStringNumberOfAdult = 2
-        saveStringNumberOfKids = 0
         searchTextField.text = ""
         saveStringDate = singleTon.todayString+" ~ "+singleTon.tomorrowString
         dateLabel.text = saveStringDate
-        numberOfPeopleLabel.text = "성인 \(saveStringNumberOfAdult),아동 \(saveStringNumberOfKids)"
+        numberOfPeopleLabel.text = "성인 \(singleTon.adultCount),아동 \(singleTon.checkInDate)"
 
     }
     
@@ -685,33 +681,31 @@ class SearchViewController: UIViewController{
         
         if singleTon.recentlyArrInMainView.count == 5 {
             singleTon.recentlyArrInMainView.remove(at: 4)
-            singleTon.recentlyArrInMainView.insert(SearchClass(searchPointName: saveStringSearchTitle, date: saveStringDate, adultsNumber: saveStringNumberOfAdult, kidsNumber: saveStringNumberOfKids), at: 0)
+            singleTon.recentlyArrInMainView.insert(SearchClass(searchPointName: saveStringSearchTitle, date: saveStringDate, adultsNumber: singleTon.adultCount, kidsNumber: singleTon.childCount), at: 0)
             
         } else {
-            singleTon.recentlyArrInMainView.insert(SearchClass(searchPointName: saveStringSearchTitle, date: saveStringDate, adultsNumber: saveStringNumberOfAdult, kidsNumber: saveStringNumberOfKids), at: 0)
+            singleTon.recentlyArrInMainView.insert(SearchClass(searchPointName: saveStringSearchTitle, date: saveStringDate, adultsNumber: singleTon.adultCount, kidsNumber: singleTon.childCount), at: 0)
             
         }
-        print("singleTon.saveDate.count :",singleTon.saveDate.count)
         
         
         // FIXME: - 나중에 대실할때 고쳐야함 카운트 1일때 처리해줘야함..
         if singleTon.saveDate.count > 1 {
             // 검색후에 여기로 다시 들어오면 singleTon 에들어간 정보들 다시 다 삭제된 후에 다운로드 되고 파싱하는 순간
             // 추가해주기때문에 밑에 singleTon.saveSearchList.removeAll() 들어감.
-            singleTon.saveSearchList.removeAll()
+            singleTon.saveDetailSearchList.removeAll()
             
-            detailRegionSearch(searchKeyword: self.searchTextField.text!, personnel: self.saveStringNumberOfAdult+self.saveStringNumberOfKids, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime) {
+            detailRegionSearch(searchKeyword: self.searchTextField.text!, personnel: singleTon.adultCount+singleTon.childCount, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime) {
                 DispatchQueue.main.async {
                     vc.stayTableView.reloadData()
                 }
                 
             }
             vc.titleLabel.text = searchTextField.text
-            singleTon.saveDate.removeAll()
             self.present(vc, animated: true)
             
         } else {
-            singleTon.saveDate.removeAll()
+//            singleTon.saveDate.removeAll()
             
         }
         resultButton.isEnabled = false

@@ -24,7 +24,7 @@ class HomePopDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         configureNavigationView()
         configureTableView()
@@ -78,7 +78,7 @@ class HomePopDetailViewController: UIViewController {
     }
     
     private func configureTableView() {
-    
+        
         popDetailTableView.dataSource = self
         popDetailTableView.estimatedRowHeight = 20  // 대충의 높이값
         popDetailTableView.rowHeight = UITableView.automaticDimension
@@ -95,7 +95,7 @@ class HomePopDetailViewController: UIViewController {
         popDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         popDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-
+    
     
     // MARK: - Action Methods
     

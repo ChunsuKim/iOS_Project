@@ -371,8 +371,23 @@ class RegisterSecondViewController: UIViewController {
     
     @objc private func nextButtonDidTap(_ sender: UIButton) {
         print(1)
-        loginRegister(realname: nameTextField.text ?? "제이", phoneNumber: cellphoneTextField.text ?? "01099991111", email: idTextField.text ?? "qed@naver.com", password: passwordTextField.text ?? "0000",completion: {
-            print(33)
+        loginRegister(realname: nameTextField.text ?? "제이", phoneNumber: cellphoneTextField.text ?? "01099991111", email: idTextField.text ?? "qed@naver.com", password: passwordTextField.text ?? "0000",completion: {(message) in
+            if message == "성공" {
+                guard let vc = self.presentingViewController?.presentingViewController as? LoginViewController else {return print("디스미스 못해 ㅠ")}
+                vc.dismiss(animated: true, completion: nil)
+            } else if message == "사용자의 phoneNumber은/는 이미 존재합니다." {
+                print(message)
+                DispatchQueue.main.async {
+                    self.cellphoneTextField.text = ""
+                    self.cellphoneTextField.becomeFirstResponder()
+                }
+            } else {
+                print(message)
+                DispatchQueue.main.async {
+                    self.idTextField.text = ""
+                    self.idTextField.becomeFirstResponder()
+                }
+            }
         })
         
     }

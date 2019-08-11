@@ -8,10 +8,11 @@
 
 import UIKit
 
+
 // 회원가입
-func loginRegister(realname:String, phoneNumber:String, email:String, password:String, completion: @escaping () -> ()) {
-    print("\n---------- [ Post Method ] ----------\n")
-    let todoEndpoint = "http://yanoljamvp.com/api/accounts/signup/"
+func loginRegister(realname:String, phoneNumber:String, email:String, password:String, completion: @escaping (String) -> ()) {
+    print("\n---------- [ 회원가입 ] ----------\n")
+    let todoEndpoint = "http://api.yanoljamvp.com/api/accounts/signup/"
     let urlComp = URLComponents(string: todoEndpoint)
     
     guard let url = urlComp?.url else {
@@ -30,24 +31,33 @@ func loginRegister(realname:String, phoneNumber:String, email:String, password:S
             print(error!.localizedDescription)
             return
         }
-        guard let response = response as? HTTPURLResponse,
-            200..<300 ~= response.statusCode ,
-            response.mimeType == "application/json"
-            else {
-                print("StatusCode is not valid")
-                return
-        }
+        //        guard let response = response as? HTTPURLResponse,
+        //            200..<300 ~= response.statusCode ,
+        //            response.mimeType == "application/json"
+        //            else {
+        //                print("StatusCode is not valid")
+        //                return
+        //        }
         guard let data = data else {
             print("Error: did not receive data")
             return
         }
-        guard let todo = try? JSONSerialization.jsonObject(with: data) as? [String:String] else {
+        guard let userInfo = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else {
             print("Could not get parsed data")
             return
         }
-        print(response.statusCode) // print 201 나옴.
-        print("nickname",todo["nickname"])
-        completion()
+        if let email = userInfo["email"] as? String,
+            let phoneNumber = userInfo["phoneNumber"] as? String{
+            singleTon.loginUser.append(UserID(email: email, phoneNumber: phoneNumber, password: password))
+            completion("성공")
+            
+        } else if let errorArr = userInfo["email"] as? [String]
+        {   let error = errorArr[0]
+            completion(error)
+        } else if let errorArr = userInfo["phoneNumber"] as? [String]
+        {let error = errorArr[0]
+            completion(error)
+        }
     }
     task.resume()
 }
@@ -55,9 +65,10 @@ func loginRegister(realname:String, phoneNumber:String, email:String, password:S
 
 
 
+
 // 토큰 받기
 func getToken(email:String, password:String, completion: @escaping (String) -> (String)) {
-    let todoEndpoint = "http://yanoljamvp.com/api/email/get_token/"
+    let todoEndpoint = "http://api.yanoljamvp.com/api/email/get_token/"
     let urlComp = URLComponents(string: todoEndpoint)
     var token = ""
     guard let url = urlComp?.url else {
@@ -76,22 +87,21 @@ func getToken(email:String, password:String, completion: @escaping (String) -> (
     
     let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
         guard error == nil else { return print(error!.localizedDescription)}
-        guard let response = response as? HTTPURLResponse,
-            200..<300 ~= response.statusCode ,
-            response.mimeType == "application/json"
-            else { return print("StatusCode is not valid")}
+        //        guard let response = response as? HTTPURLResponse,
+        //            200..<300 ~= response.statusCode ,
+        //            response.mimeType == "application/json"
+        //            else { return print("StatusCode is not valid")}
         guard let data = data else {
             return print("Error: did not receive data")
         }
-        guard let tokenJson = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else { return print("Could not get parsed data")}
+        guard let tokenJson = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else {completion("실패"); return print("Could not get parsed data")}
         //        print(response.statusCode) // print 201 나옴.
         
-        let tokenInfo = tokenJson["token"] as? String
-        token = "Token \(tokenInfo!)"
-//        print(token)
-        completion(token)
+        if let tokenInfo = tokenJson["token"] as? String {
+            token = "Token \(tokenInfo)"
+            completion(token)
+        }
     }
     task.resume()
 }
-
 

@@ -47,6 +47,38 @@ class MotelTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let gradeIcon: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = #imageLiteral(resourceName: "star")
+        
+        return image
+    }()
+    
+    private let commentIcon: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = #imageLiteral(resourceName: "comment")
+        
+        return image
+    }()
+    
+    private let bossCommentIcon: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = #imageLiteral(resourceName: "comment")
+        
+        return image
+    }()
+    
+    private let locationIcon: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = #imageLiteral(resourceName: "regiond")
+        
+        return image
+    }()
+    
     private let gradeRate: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +157,8 @@ class MotelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "30,000원")
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         
@@ -139,7 +173,7 @@ class MotelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "16%~"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
         
         return label
@@ -149,7 +183,7 @@ class MotelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "25,000"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         
         return label
     }()
@@ -206,7 +240,7 @@ class MotelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "16%~"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1)
         
         return label
@@ -216,7 +250,7 @@ class MotelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "50,000"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         
         return label
     }()
@@ -285,7 +319,7 @@ class MotelTableViewCell: UITableViewCell {
     
     
     func configureObject(data: StayListElement) {
-        put(mainImage: data.mainImage , stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice)
+        put(mainImage: data.mainImage , stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice, hoursAvailable: data.hoursAvailable, hoursPrice: data.hoursPrice, daysCheckIn: data.daysCheckIn, saleHoursPrice: data.saleHoursPrice, saleDaysPrice: data.saleDaysPrice)
     }
     
     
@@ -298,6 +332,12 @@ class MotelTableViewCell: UITableViewCell {
         wrapMotel.addSubview(hotelImage)
         wrapMotel.addSubview(hotelCellArea)
         hotelCellArea.addSubview(hotelTitle)
+        
+        hotelCellArea.addSubview(gradeIcon)
+        hotelCellArea.addSubview(commentIcon)
+        hotelCellArea.addSubview(locationIcon)
+        hotelCellArea.addSubview(bossCommentIcon)
+        
         hotelCellArea.addSubview(gradeRate)
         hotelCellArea.addSubview(commentLabel)
         hotelCellArea.addSubview(bossComment)
@@ -325,8 +365,8 @@ class MotelTableViewCell: UITableViewCell {
     private func configureAutoLayout() {
         NSLayoutConstraint.activate([
             wrapMotel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            wrapMotel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            wrapMotel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            wrapMotel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            wrapMotel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             wrapMotel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             hotelImage.topAnchor.constraint(equalTo: wrapMotel.topAnchor),
             hotelImage.leadingAnchor.constraint(equalTo: wrapMotel.leadingAnchor),
@@ -339,16 +379,32 @@ class MotelTableViewCell: UITableViewCell {
             hotelTitle.topAnchor.constraint(equalTo: hotelCellArea.topAnchor),
             hotelTitle.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
             hotelTitle.trailingAnchor.constraint(equalTo: hotelCellArea.trailingAnchor, constant: -20),
-            hotelTitle.bottomAnchor.constraint(equalTo: gradeRate.topAnchor),
-            gradeRate.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
-            gradeRate.bottomAnchor.constraint(equalTo: hotelLocation.topAnchor),
-            commentLabel.leadingAnchor.constraint(equalTo: gradeRate.trailingAnchor, constant: 10),
-            commentLabel.centerYAnchor.constraint(equalTo: gradeRate.centerYAnchor),
-            bossComment.leadingAnchor.constraint(equalTo: commentLabel.trailingAnchor, constant: 10),
-            bossComment.centerYAnchor.constraint(equalTo: commentLabel.centerYAnchor),
-            hotelLocation.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
+            hotelTitle.bottomAnchor.constraint(equalTo: gradeIcon.topAnchor),
             
-            rentableRoomView.topAnchor.constraint(equalTo: hotelLocation.bottomAnchor, constant: 40),
+            gradeIcon.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
+            gradeIcon.bottomAnchor.constraint(equalTo: locationIcon.topAnchor),
+            gradeIcon.trailingAnchor.constraint(equalTo: gradeRate.leadingAnchor, constant: -3),
+            gradeIcon.widthAnchor.constraint(equalToConstant: 18),
+            gradeIcon.heightAnchor.constraint(equalToConstant: 18),
+            gradeRate.centerYAnchor.constraint(equalTo: gradeIcon.centerYAnchor),
+            gradeRate.trailingAnchor.constraint(equalTo: commentIcon.leadingAnchor, constant: -10),
+            commentIcon.centerYAnchor.constraint(equalTo: gradeIcon.centerYAnchor),
+            commentIcon.trailingAnchor.constraint(equalTo: commentLabel.leadingAnchor, constant: -3),
+            commentIcon.widthAnchor.constraint(equalToConstant: 18),
+            commentIcon.heightAnchor.constraint(equalToConstant: 18),
+            commentLabel.centerYAnchor.constraint(equalTo: gradeIcon.centerYAnchor),
+            commentLabel.trailingAnchor.constraint(equalTo: bossCommentIcon.leadingAnchor, constant: -10),
+            bossCommentIcon.trailingAnchor.constraint(equalTo: bossComment.leadingAnchor, constant: -3),
+            bossCommentIcon.centerYAnchor.constraint(equalTo: gradeIcon.centerYAnchor),
+            bossCommentIcon.widthAnchor.constraint(equalToConstant: 18),
+            bossCommentIcon.heightAnchor.constraint(equalToConstant: 18),
+            bossComment.centerYAnchor.constraint(equalTo: gradeIcon.centerYAnchor),
+            
+            locationIcon.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
+            locationIcon.trailingAnchor.constraint(equalTo: hotelLocation.leadingAnchor),
+            hotelLocation.centerYAnchor.constraint(equalTo: locationIcon.centerYAnchor),
+            
+            rentableRoomView.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: 40),
             rentableRoomView.leadingAnchor.constraint(equalTo: hotelCellArea.leadingAnchor),
             rentableRoomView.bottomAnchor.constraint(equalTo: divideLine.bottomAnchor, constant: -20),
             rentableRoomView.widthAnchor.constraint(equalTo: hotelCellArea.widthAnchor, multiplier: 0.5),
@@ -403,13 +459,34 @@ class MotelTableViewCell: UITableViewCell {
             print("false")
         }
     }
-    func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String) {
+    func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String, hoursAvailable: Int, hoursPrice: String, daysCheckIn: Int, saleHoursPrice: String, saleDaysPrice: String) {
+        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+        hotelTitle.text = stay
+        rentableRoomSubTitle.text = "최대 \(hoursAvailable)시간"
+        rentableRoomCancelPrice.text = "\(saleHoursPrice)원"
+        stayRoomSubTitle.text = "\(daysCheckIn):00 ~"
+        stayRoomCancelPrice.text = "\(daysPrice)원"
+        gradeRate.text = "\(averageGrade)"
+        commentLabel.text = "\(totalComments)"
+        bossComment.text = "\(ownerComments)"
+        hotelLocation.text = "\(directions)"
+        rentableRoomPrice.text = "\(hoursPrice)"
+        stayRoomPrice.text = "\(saleDaysPrice)"
+    }
+    
+    
+    func puts(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String ,hoursAvailable:Int, daysPrice:String,saleDaysPrice:String) {
         hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
         self.hotelTitle.text = stay
         gradeRate.text = "\(averageGrade)"
         commentLabel.text = "\(totalComments)"
         bossComment.text = "\(ownerComments)"
         hotelLocation.text = directions
-        stayRoomPrice.text = daysPrice
+        rentableRoomSubTitle.text = "\(hoursAvailable)"
+        stayRoomCancelPrice.text = daysPrice+"원"
+        stayRoomPrice.text = saleDaysPrice+"원"
+        stayRoomPercent.text = String(Int((Double(daysPrice)!-Double(saleDaysPrice)!)/Double(daysPrice)! * 100)) + "%~"
     }
+    
+    
 }

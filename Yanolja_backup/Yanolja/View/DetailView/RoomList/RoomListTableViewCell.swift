@@ -16,7 +16,8 @@ class RoomListTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 10
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
+        view.image = #imageLiteral(resourceName: "pool2")
         
         return view
     }()
@@ -225,7 +226,7 @@ class RoomListTableViewCell: UITableViewCell {
             roomImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             roomImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             roomImage.trailingAnchor.constraint(equalTo: roomRightView.leadingAnchor, constant: -10),
-            roomImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -40),
+            roomImage.heightAnchor.constraint(equalToConstant: 200),
             roomImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             roomImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35),
             
@@ -282,6 +283,36 @@ class RoomListTableViewCell: UITableViewCell {
             rentableRoomPercent.bottomAnchor.constraint(equalTo: rentableRoomPriceWon.bottomAnchor),
             rentableRoomPercent.trailingAnchor.constraint(equalTo: rentableRoomPrice.leadingAnchor, constant: -5),
         ])
+    }
+    
+//     cell.rentableRoomTitle.text = "대실"
+//     cell.rentableRoomPercent.text = "25%"
+//     
+//     cell.stayRoomTitle.text = "숙박"
+//     cell.stayRoomPercent.text = "5%"
+
+    func fetchRoomListData(
+        name: String,
+        standardPersonnel: Int,
+        maximumPersonnel: Int,
+        hoursAvailable: Int,
+        daysCheckIn: Int,
+        hoursPrice: String,
+        saleHoursPrice: String,
+        daysPrice: String,
+        saleDaysPrice: String,
+        basicInfo: [String],
+        urlImage: String
+        ) {
+        roomImage.downloadImageFrom(urlImage, contentMode: .scaleAspectFill)
+        roomTitle.text = name
+        roomPeople.text = "기준 \(standardPersonnel) / 최대 \(maximumPersonnel)"
+        rentableRoomTimeLabel.text = "최대 \(hoursAvailable)시간"
+        rentableRoomDefaultPrice.text = "\(hoursPrice)원"
+        rentableRoomPrice.text = "\(saleHoursPrice)"
+        stayRoomTimeLabel.text = "\(daysCheckIn):00 ~"
+        stayRoomDefaultPrice.text = "\(daysPrice)원"
+        stayRoomPrice.text = "\(saleDaysPrice)"
     }
     
 }

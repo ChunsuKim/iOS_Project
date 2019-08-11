@@ -27,6 +27,15 @@ class MyLocationViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         configureViewComponents()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        moveDetailVC()
+        topNaviView.selectDateButton.setTitle(singleTon.selectDateButtonCurrentTitle, for: .normal)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        notiCenter.removeObserver(self)
+    }
     
     private func reloadCollectionView() {
         listCollectionView.reloadData()
@@ -55,8 +64,6 @@ class MyLocationViewController: UIViewController {
             listCollectionView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
             listCollectionView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
             ])
-        
-        moveDetailVC()
     }
     
     // MARK: - addObserver
@@ -68,11 +75,7 @@ class MyLocationViewController: UIViewController {
     @objc private func moveDetailEvent(_ sender: Any) {
         let detailVC = DetailViewController()
         
-        show(detailVC, sender: nil)
-    }
-    
-    deinit {
-        notiCenter.removeObserver(self)
+        present(detailVC, animated: true, completion: nil)
     }
     
 }

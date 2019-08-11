@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     // TableView
     private let homeTableView = UITableView()
     
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class HomeViewController: UIViewController {
         
         configureHeaderViewConstraints()
         configureTableViewConstraints()
+        
     }
     
     // MARK: - Configuration User Interface
@@ -165,10 +167,34 @@ extension HomeViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTopButtonTableViewCell.identifier, for: indexPath) as! HomeTopButtonTableViewCell
             
+            cell.buttonsAction = {
+                if cell.motelButton.isTouchInside {
+                    print("모텔 은석")
+                }
+                
+                if cell.hotelButton.isTouchInside {
+                    print("호텔 은석")
+                }
+                
+                if cell.pensionButton.isTouchInside {
+                    print("팬션 은석")
+                }
+                
+                if cell.guestButton.isTouchInside {
+                    print("게스트 은석")
+                }
+            }
+            
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
+            
+            cell.didSelectHandler = {
+//                print("collection view click")
+                let detailViewController = DetailViewController()
+                self.present(detailViewController, animated: true, completion: nil)
+            }
             
             homeThemeCollectionView = cell
             
@@ -208,10 +234,20 @@ extension HomeViewController: UITableViewDataSource {
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomePopTableViewCell.identifier, for: indexPath) as! HomePopTableViewCell
             
+            cell.collectionViewTouchAction = {
+                let popDetailViewController = HomePopDetailViewController()
+                self.present(popDetailViewController, animated: true, completion: nil)
+            }
+            
             return cell
             
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeSecondTableViewCell.identifier, for: indexPath) as! HomeThemeSecondTableViewCell
+            
+            cell.secondCollectionViewDidSelectHandler = {
+                let detailViewController = DetailViewController()
+                self.present(detailViewController, animated: true, completion: nil)
+            }
             
             homeThemeSecondCollectionView = cell
             
@@ -224,6 +260,8 @@ extension HomeViewController: UITableViewDataSource {
             
         case 7:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeThemeTableViewCell.identifier, for: indexPath) as! HomeThemeTableViewCell
+            
+            cell.reloadTitleLabel(themeTitle: themeTitleFifth, themeTitleDiff: themeTitleSixth)
             
             return cell
             
@@ -243,7 +281,7 @@ extension HomeViewController: UITableViewDelegate {
             
             homeThemeCollectionView.reloadCollectionView()
             homeThemeCollectionView.reloadMenuBar()
-            homeThemeCollectionView.reloadTitleLabel(themeTitle: themeTitleFirst, themeTitleDiff: themeTitleSecond)
+            homeThemeCollectionView.reloadTitleLabel(themeTitle: themeTitle, themeTitleDiff: themeTitleDiff)
             homeThemeCollectionView.reloadTitleButton()
             isThemeDiffStateToggle()
             if let cell = homeTableView.cellForRow(at: indexPath) as? HomeThemeDiffTableViewCell {
@@ -268,7 +306,7 @@ extension HomeViewController: UITableViewDelegate {
                     cell.changeSecondCollectionViewPageNumberLabel(currentPageNumber: "2", totalPageNumber: "2")
                 }
             }
-
+            
         default:
             break
         }

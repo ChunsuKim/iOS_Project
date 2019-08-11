@@ -34,7 +34,8 @@ class HomeThemeSecondTableViewCell: UITableViewCell {
     private var themeSwimmingPoolArray = [HomeThemeGroup]()
     private var themeSpaArray = [HomeThemeGroup]()
     
-    
+    private var selectedIndexPath = 0
+    var secondCollectionViewDidSelectHandler: (() -> ())?
     
     // CollectionView
     private let homeViewSecondCollectionView : UICollectionView = {
@@ -296,6 +297,26 @@ extension HomeThemeSecondTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 5
+    }
+}
+
+extension HomeThemeSecondTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        secondCollectionViewDidSelectHandler?()
+        
+        if isState {
+            let totalThirdThemeGroup = [groupSwimmingPool, groupBigSale, groupSpa, groupPartyRoom]
+            let passStayId = totalThirdThemeGroup[selectedIndexPath][indexPath.item]
+            print(totalThirdThemeGroup[selectedIndexPath][indexPath.item].stayId)
+            singleTon.stayID = passStayId.stayId
+            print(singleTon.stayID)
+        } else {
+            let totalFourthThemeGroup = [groupSpa, groupPartyRoom, groupSwimmingPool, groupBigSale]
+            let passStayId = totalFourthThemeGroup[selectedIndexPath][indexPath.item]
+            print(totalFourthThemeGroup[selectedIndexPath][indexPath.item].stayId)
+            singleTon.stayID = passStayId.stayId
+            print(singleTon.stayID)
+        }
     }
 }
 

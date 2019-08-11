@@ -10,6 +10,8 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     
+    var cellMoveAction: (() -> ())?
+    
     var refreshControl: UIRefreshControl!
     let notiCenter = NotificationCenter.default
     let detailVC = DetailViewController()
@@ -97,9 +99,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
 extension CustomCollectionViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notiCenter.post(name: Notification.Name("moveDetailVC"), object: nil)
-//        detailVC.stayID = saveStayList[indexPath.row].stayID
+        
+
         singleTon.stayID = saveStayList[indexPath.row].stayID
-        print("@@@@@ :", singleTon.stayID)
     }
 }
 
@@ -122,7 +124,6 @@ extension CustomCollectionViewCell: UITableViewDataSource {
             
             return cell
         case .호텔리조트:
-            print("##### :", data.stay)
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: data)

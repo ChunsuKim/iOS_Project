@@ -156,11 +156,30 @@ extension LoginViewController: UICollectionViewDataSource {
             
             cell.loginButtonAction = {
                 if cell.loginButton.isTouchInside {
-                    print(11232131)
-                    print(cell.idTextField.text!)
-                    print(cell.passwordTextField.text!)
+                    print("로그인합니다")
                     getToken(email: cell.idTextField.text! , password: cell.passwordTextField.text!, completion: { (token) -> (String) in
-                        print("token :", token)
+                        if token == "실패" {
+                            let alertController = UIAlertController(
+                                title: "ID 또는 비밀번호를 다시 입력해주세요.", message: nil , preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "확인", style: .cancel)
+                            
+                            alertController.addAction(okAction)
+                            self.present(alertController, animated: true)
+                        } else {
+                            
+                        // FIXME: - 디스미스할때, 그 뷰 리로드 시켜야함.. 왜냐 셀 바꿔야함.
+                            
+                            singleTon.token = token
+                            print("token:", token)
+                            
+                            DispatchQueue.main.async {
+                                let vc = UserViewController()
+                                vc.userViewTableView.reloadData()
+                                print("reload")
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                            
+                        }
                         return token
                     })
                 }

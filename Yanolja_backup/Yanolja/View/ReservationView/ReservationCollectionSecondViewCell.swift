@@ -90,7 +90,7 @@ class ReservationCollectionSecondViewCell: UICollectionViewCell {
         reservedNumberTextField.topAnchor.constraint(equalTo: reservedName.bottomAnchor,constant: 30).isActive = true
         reservedNumberTextField.leadingAnchor.constraint(equalTo: reservedNumber.trailingAnchor,constant: 15).isActive = true
         reservedNumberTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -60).isActive = true
-        reservedNumberTextField.placeholder = "로그인 시 핸드폰번호 받아와야 함"
+        reservedNumberTextField.placeholder = singleTon.loginUser.last?.phoneNumber
         reservedNumberTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         reservedNumberTextField.isEnabled = false
         
@@ -165,6 +165,7 @@ class ReservationCollectionSecondViewCell: UICollectionViewCell {
 
         button.isSelected = true
         button.backgroundColor = #colorLiteral(red: 0.9985510707, green: 0.2026679814, blue: 0.493085146, alpha: 1)
+        singleTon.walkToGo = button.currentTitle!
         
     }
     

@@ -10,7 +10,12 @@ import UIKit
 
 class ImageCollectionView: UITableViewCell {
     
-    private var popList = PopDataManager.shared.pops
+    var saveImageList: [String] = []{
+        didSet{
+            totalCount = self.saveImageList.count
+            reloadImageList()
+        }
+    }
     
     var totalCount = 0
     var currentCount = 0
@@ -76,11 +81,15 @@ class ImageCollectionView: UITableViewCell {
         configureAutoLayout()
     }
     
+    func reloadImageList() {
+        collectionView.reloadData()
+    }
+    
     private func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        totalCount = popList.count
+        totalCount = saveImageList.count
         
         currentIndexByTotalCount.text = "\(currentCount + 1)/\(totalCount)"
         
@@ -132,12 +141,12 @@ class ImageCollectionView: UITableViewCell {
 
 extension ImageCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popList.count
+        return saveImageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCollectionViewCell.reusableIdentifier, for: indexPath) as! DetailImageCollectionViewCell
-        cell.configureCellContent(image: UIImage(named: popList[indexPath.row].imageName))
+        cell.imageView.downloadImageFrom(saveImageList[indexPath.row], contentMode: .scaleAspectFill)
         
         return cell
     }
@@ -154,7 +163,7 @@ extension ImageCollectionView: UICollectionViewDataSource {
         
         currentCount = indexPath.row
         
-        totalCount = popList.count
+        totalCount = saveImageList.count
         
         currentIndexByTotalCount.text = "\(currentCount + 1)/\(totalCount)"
     }

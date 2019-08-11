@@ -12,7 +12,7 @@ class DetailImageCollectionViewCell: UICollectionViewCell {
     
     let detailVC = DetailViewController()
     
-    private let imageView = UIImageView()
+    let imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

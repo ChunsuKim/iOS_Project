@@ -100,7 +100,7 @@ class ListCollectionView: UIView {
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        return menuTitles.count
-        return 7
+        return listMenuTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,7 +113,7 @@ extension ListCollectionView: UICollectionViewDataSource {
                 cell.configureObject(data: listSenderData)
             }
             return cell
-        case 5:
+        case 5...7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
             if !listSenderData.isEmpty {
                 cell.configureObject(data: listSenderData)

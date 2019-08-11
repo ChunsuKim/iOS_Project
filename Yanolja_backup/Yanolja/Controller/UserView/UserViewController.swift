@@ -11,7 +11,7 @@ import UIKit
 class UserViewController: UIViewController {
     
     // MARK: - Properties
-    private let userViewTableView = UITableView()
+    let userViewTableView = UITableView()
     
     
     // MARK: - View Life Cycle
@@ -19,6 +19,10 @@ class UserViewController: UIViewController {
         super.viewDidLoad()
         
         configureUserViewTableView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userViewTableView.reloadData()
     }
     
     // MARK: - Configuration
@@ -31,6 +35,7 @@ class UserViewController: UIViewController {
         
         userViewTableView.register(UserViewLoginTableViewCell.self, forCellReuseIdentifier: UserViewLoginTableViewCell.identifier)
         userViewTableView.register(UserViewLoginStampTableViewCell.self, forCellReuseIdentifier: UserViewLoginStampTableViewCell.identifier)
+        userViewTableView.register(UserViewAfterLoginTableViewCell.self, forCellReuseIdentifier: UserViewAfterLoginTableViewCell.identifier)
         
         view.addSubview(userViewTableView)
         
@@ -57,10 +62,21 @@ extension UserViewController: UITableViewDataSource {
             
             switch indexPath.row {
             case 0:
-                cell.configureInputValue(text: "로그인 및 회원가입", textColor: #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1), image: nil)
-                cell.separatorInset = UIEdgeInsets(top: 0, left: view.frame.midX, bottom: 0, right: view.frame.midX)
-                
-                return cell
+                if singleTon.token == "" {
+                    
+                    cell.configureInputValue(text: "로그인 및 회원가입", textColor: #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1), image: nil)
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: view.frame.midX, bottom: 0, right: view.frame.midX)
+                    print("no login")
+                    return cell
+                } else {
+                    if let loginAfterCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewAfterLoginTableViewCell.identifier
+                        , for: indexPath) as? UserViewAfterLoginTableViewCell {
+                        
+                        loginAfterCell.configureLoginInputValue(nickName: "추카추카멍뭉이", email: "admin@gmail.com", image: #imageLiteral(resourceName: "login"))
+                        print("login")
+                        return loginAfterCell
+                    }
+                }
                 
             case 1:
                 if let stampCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewLoginStampTableViewCell.identifier, for: indexPath) as? UserViewLoginStampTableViewCell {
@@ -108,6 +124,7 @@ extension UserViewController: UITableViewDataSource {
                 return cell
                 
             //
+                
             default:
                 cell.configureInputValue(text: "default", textColor: .black, image: nil)
                 

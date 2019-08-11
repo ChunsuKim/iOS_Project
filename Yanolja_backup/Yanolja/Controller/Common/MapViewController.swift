@@ -18,6 +18,8 @@ class MapViewController: UIViewController {
     
     private let mapSearchView = MapSearchView(frame: .zero)
     private let confirmButtonView = ConfirmButtonView(frame: .zero)
+    
+    private var saveLocation: String = "강남구"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,12 @@ class MapViewController: UIViewController {
         marker.map = mapView
         print(marker.snippet!)
         mapSearchView.currentLocationLabel.text = place.formattedAddress
+//        print("place.formattedAddress :", place.formattedAddress)
+//        if let passAddress = place.formattedAddress {
+//            MapSearch.shared.currentAddress = passAddress
+//            print("passAddress: ", passAddress)
+        
+//        }
         
     }
     
@@ -74,6 +82,7 @@ class MapViewController: UIViewController {
     
     private func configureViews() {
         mapSearchView.delegate = self
+        confirmButtonView.confirmButton.addTarget(self, action: #selector(confirmButtonDidTap(_:)), for: .touchUpInside)
         
         var searchViewHeight: CGFloat = 0
         var confirmButtonViewHeight: CGFloat = 0
@@ -132,13 +141,27 @@ class MapViewController: UIViewController {
             }
         }
     }
-
+    
+    @objc private func confirmButtonDidTap(_ sender: UIButton) {
+        let regionDetailViewController = RegionDetailViewController()
+        print("confirm button")
+        MapSearch.shared.currentRegionSearch(currentAddress: saveLocation, personnel: 2, requestCheckIn: "2019-09-01+22:00:00", requestCheckOut: "2019-09-02+11:00:00", completion: {
+            print("위치 파싱")
+            DispatchQueue.main.async {
+                
+                regionDetailViewController.stayTableView.reloadData()
+            }
+        })
+        present(regionDetailViewController, animated: true, completion: nil)
+    }
 }
 
 extension MapViewController: GMSAutocompleteViewControllerDelegate {
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         updateLocation(place: place)
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -173,12 +196,45 @@ extension MapViewController: GMSMapViewDelegate, CLLocationManagerDelegate {
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         let camera = GMSCameraPosition.camera(withLatitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude, zoom: defaultZoom)
         
+        let myLocation = CLLocation(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
+        let geoCoder = CLGeocoder()
+        
+        geoCoder.reverseGeocodeLocation(myLocation) { (placeMark, error) in
+            if error != nil {
+                return print(error!.localizedDescription)
+            }
+            
+            guard let address = placeMark?.first,
+                //                let country = address.country,
+                let administrativeArea = address.administrativeArea,
+                let locality = address.locality,
+                let name = address.name
+                
+                else { return }
+            
+            let addr = "\(administrativeArea) \(locality) \(name)"
+            let passData = "\(locality)"
+            geoCoder.geocodeAddressString(addr, completionHandler: { (placeMark, error) in
+                print(placeMark ?? placeMark as Any)
+                print("admin :", locality )
+                self.mapSearchView.currentLocationLabel.text = addr
+                
+                let marker = GMSMarker(position: center)
+                marker.map = self.mapView
+                marker.title = addr
+//                self.saveLocation = passData
+                print("passData: ", passData)
+                
+            })
+        }
+        
         mapView?.camera = camera
         mapView?.isMyLocationEnabled = true
+//        print("camera :", camera)
+//        print("location :", location)
         
-        let marker = GMSMarker(position: center)
-        marker.map = mapView
-        marker.title = "내 위치"
+        
+        
         
         locationManager.stopUpdatingLocation()
     }

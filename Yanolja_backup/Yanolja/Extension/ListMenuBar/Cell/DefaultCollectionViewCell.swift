@@ -12,6 +12,8 @@ class DefaultCollectionViewCell: UICollectionViewCell {
     
     var refreshControl = UIRefreshControl()
     let notiCenter = NotificationCenter.default
+    var cnt = 0
+    var listCount = 0
     
     let topBandNavi: UIView = {
         let view = UIView()
@@ -51,9 +53,22 @@ class DefaultCollectionViewCell: UICollectionViewCell {
     }
     
     var saveStayList: [StayListElement] = []
+    var hotelSaveList: [StayListElement] = []
+    var gestSaveList: [StayListElement] = []
+    var pension: [StayListElement] = []
     
     func configureObject(data: [StayListElement]) {
         saveStayList = data
+        
+//        for i in 0 ... saveStayList.map({$0.category}).count {
+//            if saveStayList[i].category.rawValue == "호텔리조트" {
+//                hotelSaveList.append(saveStayList[i])
+//            } else if saveStayList[i].category.rawValue == "펜션풀빌라" {
+//                pension.append(saveStayList[i])
+//            } else if saveStayList[i].category.rawValue == "게스트하우스" {
+//                gestSaveList.append(saveStayList[i])
+//            }
+//        }
         
         motelListTableView.reloadData()
     }
@@ -104,9 +119,13 @@ extension DefaultCollectionViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 해당 카테고리의 카운트 개수
-        var cnt = saveStayList.filter({ $0.category.rawValue == "호텔" })
-        print("$$$$ :", cnt.count)
-        return cnt.count
+//        var test = saveStayList.filter({ $0.category.rawValue == "호텔" })
+//        hotelSaveList.append(test)
+//        print("@@@@@ :", saveStayList.filter({ $0.category.rawValue == "호텔" }))
+        
+//        print("@#### :", hotelSaveList.count)
+        
+        return listCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,14 +133,28 @@ extension DefaultCollectionViewCell: UITableViewDataSource {
         let category = data.category
         
         switch category {
-        case .모텔:
+        case .호텔리조트:
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
-            cell.configureObject(data: data)
+            cell.configureObject(data: hotelSaveList[indexPath.row])
+            /// VIEW ->
+            tableView.reloadData()
+            
+            return cell
+        case .펜션풀빌라:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
+            cell.selectionStyle = .none
+            cell.configureObject(data: pension[indexPath.row])
             /// VIEW ->
             
             return cell
+        case .게스트하우스:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
+            cell.selectionStyle = .none
+            cell.configureObject(data: gestSaveList[indexPath.row])
+            /// VIEW ->
             
+            return cell
             
         default:
             return UITableViewCell()

@@ -11,9 +11,8 @@ import UIKit
 class DetailRoomImageTableViewCell: UITableViewCell {
 
     // MARK: - Properties
-    private var popList = PopDataManager.shared.pops
     
-    var totalCount = 0
+    var totalCount = 5
     var currentCount = 1
     
     let collectionView: UICollectionView = {
@@ -46,16 +45,32 @@ class DetailRoomImageTableViewCell: UITableViewCell {
         return label
     }()
     
+    var saveImageList: [String] = []{
+        didSet{
+            totalCount = self.saveImageList.count
+            reloadImageList()
+        }
+    }
+    var saveRoomImage: [RoomDetailElement] = []
+    
+    func configureObject(data: [RoomDetailElement]) {
+        saveRoomImage = data
+        
+        collectionView.reloadData()
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.selectionStyle = .none
         
-        totalCount = popList.count
+        totalCount = saveImageList.count
         
         contentView.addSubview(collectionView)
         contentView.addSubview(countView)
         countView.addSubview(countLabel)
+        
+        collectionView.reloadData()
         
         configureCollectionView()
         configureConstraints()
@@ -63,6 +78,10 @@ class DetailRoomImageTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reloadImageList() {
+        collectionView.reloadData()
     }
     
     private func configureCollectionView() {
@@ -93,12 +112,12 @@ class DetailRoomImageTableViewCell: UITableViewCell {
 
 extension DetailRoomImageTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popList.count
+        return saveImageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCollectionViewCell.reusableIdentifier, for: indexPath) as! DetailImageCollectionViewCell
-        cell.configureCellContent(image: UIImage(named: popList[indexPath.row].imageName))
+        cell.imageView.downloadImageFrom(saveImageList[indexPath.row], contentMode: .scaleAspectFill)
         
         return cell
     }
@@ -115,7 +134,7 @@ extension DetailRoomImageTableViewCell: UICollectionViewDataSource {
         
         currentCount = indexPath.row
 //
-        totalCount = popList.count
+        totalCount = saveImageList.count
 //
         countLabel.text = "\(currentCount + 1)/\(totalCount)"
     }

@@ -21,10 +21,10 @@ class HomeTopButtonTableViewCell: UITableViewCell {
     private let buttonHorizontalLine = UIView()
     private let buttonVerticalLine = UIView()
     private let buttonStackView = UIStackView()
-    private let motelButton = UIButton(type: .custom)
-    private let hotelButton = UIButton(type: .custom)
-    private let pensionButton = UIButton(type: .custom)
-    private let guestButton = UIButton(type: .custom)
+    let motelButton = UIButton(type: .custom)
+    let hotelButton = UIButton(type: .custom)
+    let pensionButton = UIButton(type: .custom)
+    let guestButton = UIButton(type: .custom)
     
     private let eventButtonStackView = UIStackView()
     private let foreignButton = UIButton(type: .custom)
@@ -34,6 +34,7 @@ class HomeTopButtonTableViewCell: UITableViewCell {
     private let infiniteCouponButton = UIButton(type: .custom)
     private let specialCouponButton = UIButton(type: .custom)
     
+    var buttonsAction: (() -> ())?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -85,12 +86,16 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         
         motelButton.setImage(#imageLiteral(resourceName: "moteld"), for: .normal)
         motelButton.contentMode = .scaleAspectFit
+        motelButton.addTarget(self, action: #selector(buttonsDidTap(_:)), for: .touchUpInside)
         hotelButton.setImage(#imageLiteral(resourceName: "hoteld"), for: .normal)
         hotelButton.contentMode = .scaleAspectFit
+        hotelButton.addTarget(self, action: #selector(buttonsDidTap(_:)), for: .touchUpInside)
         pensionButton.setImage(#imageLiteral(resourceName: "pensiond"), for: .normal)
         pensionButton.contentMode = .scaleAspectFit
+        pensionButton.addTarget(self, action: #selector(buttonsDidTap(_:)), for: .touchUpInside)
         guestButton.setImage(#imageLiteral(resourceName: "guestd"), for: .normal)
         guestButton.contentMode = .scaleAspectFit
+        guestButton.addTarget(self, action: #selector(buttonsDidTap(_:)), for: .touchUpInside)
         
         foreignButton.setImage(#imageLiteral(resourceName: "foreign"), for: .normal)
         foreignButton.contentMode = .scaleAspectFit
@@ -203,6 +208,10 @@ class HomeTopButtonTableViewCell: UITableViewCell {
         specialCouponButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -20).isActive = true
         specialCouponButton.widthAnchor.constraint(equalTo: orderofCouponButton.widthAnchor).isActive = true
         specialCouponButton.heightAnchor.constraint(equalTo: orderofCouponButton.heightAnchor).isActive = true
+    }
+    
+    @objc func buttonsDidTap(_ sender: UIButton) {
+        buttonsAction?()
     }
 
 }
