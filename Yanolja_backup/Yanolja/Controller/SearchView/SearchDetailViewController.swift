@@ -26,9 +26,13 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeView()
-//        saveTodayInSingleTon()
-        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        calendarButton.setTitle(singleTon.selectDateButtonCurrentTitle, for: .normal)
+    }
+    
     private func makeView() {
         let tempArr = [backButton,homeViewButton,searchViewButton,titleView,calendarButton,numberOfPeopleButton,segMentView,stayTableView]
         tempArr.forEach{view.addSubview($0);$0.translatesAutoresizingMaskIntoConstraints = false}
@@ -111,6 +115,7 @@ segMentView.heightAnchor.constraint(equalToConstant: 3).isActive = true
         stayTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         stayTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         stayTableView.register(MotelTableViewCell.self, forCellReuseIdentifier: MotelTableViewCell.identifier)
+        stayTableView.register(HotelTableViewCell.self, forCellReuseIdentifier: HotelTableViewCell.reusableIdentifier)
         stayTableView.register(SearchDetailDefaultTableViewCell.self, forCellReuseIdentifier: "default")
 
         stayTableView.dataSource = self
@@ -163,7 +168,7 @@ extension SearchDetailViewController: UITableViewDataSource {
                 cell.puts(mainImage: data.mainImage, stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, hoursAvailable: data.hoursAvailable, daysPrice: data.daysPrice, saleDaysPrice: data.saleDaysPrice)
                 return cell
             case "호텔/리조트":
-                let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! HotelTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
                 let data = singleTon.saveDetailSearchList[indexPath.row]
                 cell.put(mainImage: data.mainImage, stay: data.stay, averageGrade: data.averageGrade, totalComments: data.totalComments, ownerComments: data.ownerComments, directions: data.directions, daysPrice: data.daysPrice)
             default:

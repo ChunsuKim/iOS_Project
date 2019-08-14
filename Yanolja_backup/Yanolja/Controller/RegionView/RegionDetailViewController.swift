@@ -79,7 +79,7 @@ class RegionDetailViewController: UIViewController {
         calendarButton.layer.borderColor = #colorLiteral(red: 0.9555117488, green: 0.9596166015, blue: 0.9658421874, alpha: 1)
         calendarButton.layer.masksToBounds = true
         calendarButton.layer.cornerRadius = 20
-        calendarButton.setTitle(singleTon.todayString+"~"+singleTon.tomorrowString+",1박", for: .normal)
+        calendarButton.setTitle(singleTon.selectDateButtonCurrentTitle, for: .normal)
         calendarButton.setTitleColor(.black, for: .normal)
         calendarButton.titleLabel?.font = UIFont.systemFont(ofSize: 12,weight: .ultraLight)
         

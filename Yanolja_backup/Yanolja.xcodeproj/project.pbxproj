@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F11FF2C22FA73A600148BA3 /* RegionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */; };
+		1F11FF5423013DDE00148BA3 /* HomeCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FF5323013DDE00148BA3 /* HomeCategoryViewController.swift */; };
 		1F37D05422F02F71006D397A /* NetworkRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05322F02F71006D397A /* NetworkRegister.swift */; };
 		1F37D05822F054B8006D397A /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05722F054B8006D397A /* ReservationViewController.swift */; };
 		1F37D05A22F05AE7006D397A /* ReservationCollectionFirstViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */; };
@@ -136,6 +137,7 @@
 
 /* Begin PBXFileReference section */
 		1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDetailViewController.swift; sourceTree = "<group>"; };
+		1F11FF5323013DDE00148BA3 /* HomeCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryViewController.swift; sourceTree = "<group>"; };
 		1F37D05322F02F71006D397A /* NetworkRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRegister.swift; sourceTree = "<group>"; };
 		1F37D05722F054B8006D397A /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCollectionFirstViewCell.swift; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 			children = (
 				F33F27BE22D0AA10000656DD /* HomeViewController.swift */,
 				F3E2EA6F22FA18730021239E /* HomePopDetailViewController.swift */,
+				1F11FF5323013DDE00148BA3 /* HomeCategoryViewController.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -944,6 +947,7 @@
 				F3C8171222D36DFE009CF7AC /* HomeTopButtonTableViewCell.swift in Sources */,
 				F3B185F522D081B500B01C6C /* CustomTabBarController.swift in Sources */,
 				61E72F0622D31D49001B8A59 /* TopNaviView.swift in Sources */,
+				1F11FF5423013DDE00148BA3 /* HomeCategoryViewController.swift in Sources */,
 				F3E20AD122FAA7F0002DF2D4 /* HomePopSecondTableViewCell.swift in Sources */,
 				614F66B422F2CDE7007BDA03 /* ReservationNoticeTableViewCell.swift in Sources */,
 				614F66A622F1F976007BDA03 /* RoomInfoTableViewCell.swift in Sources */,

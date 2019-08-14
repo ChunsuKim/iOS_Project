@@ -314,7 +314,7 @@ extension DetailViewController: UITableViewDataSource {
         // 이미지 컬렉션뷰
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: ImageCollectionView.reusableIdentifier, for: indexPath) as! ImageCollectionView
-            cell.saveImageList = roomListData[0].urlImage
+            cell.saveImageList = roomListData.first?.urlImage ?? []
             return cell
             
         // 숙소 정보 (체크인, 체크아웃 포함)

@@ -16,6 +16,7 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
     private let nickNameLabel = UILabel()
     private let emailLabel = UILabel()
     private let leftImageView = UIImageView()
+    private let modifyImageView = UIImageView()
     
     
     // MARK: - Init Method
@@ -53,9 +54,13 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         
         leftImageView.contentMode = .scaleAspectFit
         
+        modifyImageView.image = UIImage(named: "modify")
+        modifyImageView.contentMode = .scaleAspectFit
+        
         contentView.addSubview(nickNameLabel)
         contentView.addSubview(emailLabel)
         contentView.addSubview(leftImageView)
+        contentView.addSubview(modifyImageView)
         
         leftImageView.translatesAutoresizingMaskIntoConstraints = false
         leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
@@ -75,6 +80,12 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         emailLabel.leadingAnchor.constraint(equalTo: nickNameLabel.leadingAnchor).isActive = true
         emailLabel.trailingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor).isActive = true
         emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+        
+        modifyImageView.translatesAutoresizingMaskIntoConstraints = false
+        modifyImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -20).isActive = true
+        modifyImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        modifyImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        modifyImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     // MARK: - Globar Input Method
@@ -82,6 +93,10 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         nickNameLabel.text = nickName
         emailLabel.text = email
         leftImageView.image = image
+    }
+    
+    @objc private func selectModifyCell(_ sender: UIButton) {
+        
     }
 }
 

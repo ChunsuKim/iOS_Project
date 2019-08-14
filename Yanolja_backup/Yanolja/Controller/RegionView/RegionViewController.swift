@@ -10,7 +10,6 @@ import UIKit
 
 class RegionViewController: UIViewController {
 
-    let titleLabel = UILabel()
     let searchButton = UIButton()
     
     
@@ -41,18 +40,16 @@ class RegionViewController: UIViewController {
         
     }
     func configure() {
-        let temp = [titleLabel,searchButton,regionButton,stationButton,mapButton,mainRegionTableView,subRegionTableView,barView,horizontalLineView,verticalLineView]
+        let temp = [regionButton,stationButton,mapButton,mainRegionTableView,subRegionTableView,barView,horizontalLineView,verticalLineView]
         for x in temp {
             view.addSubview(x)
             x.translatesAutoresizingMaskIntoConstraints = false
         }
-
         
-        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 25).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.text = ""
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textAlignment = .center
+        let searchButton = UIBarButtonItem(image: #imageLiteral(resourceName: "search"), style: .plain, target: self, action: #selector(presentSearchViewController))
+        navigationItem.rightBarButtonItems = [searchButton]
+        
+
         
 //        searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 25).isActive = true
 //        searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -15).isActive = true
@@ -62,14 +59,14 @@ class RegionViewController: UIViewController {
 //        searchButton.addTarget(self, action: #selector(presentSearchViewController), for: .touchUpInside)
         
         
-        regionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        regionButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
         regionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 55).isActive = true
         
-        stationButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        stationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
         stationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         
-        mapButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        mapButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
         mapButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -55).isActive = true
         
         

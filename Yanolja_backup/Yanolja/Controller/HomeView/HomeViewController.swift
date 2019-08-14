@@ -169,19 +169,27 @@ extension HomeViewController: UITableViewDataSource {
             
             cell.buttonsAction = {
                 if cell.motelButton.isTouchInside {
-                    print("모텔 은석")
+                    let vc = HomeCategoryViewController()
+                    vc.titleLabel.text = "모텔"
+                    self.present(vc, animated: true, completion: nil)
                 }
                 
                 if cell.hotelButton.isTouchInside {
-                    print("호텔 은석")
+                    let vc = HomeCategoryViewController()
+                    vc.titleLabel.text = "호텔/리조트"
+                    self.present(vc, animated: true, completion: nil)
                 }
                 
                 if cell.pensionButton.isTouchInside {
-                    print("팬션 은석")
+                    let vc = HomeCategoryViewController()
+                    vc.titleLabel.text = "펜션/풀빌라"
+                    self.present(vc, animated: true, completion: nil)
                 }
                 
                 if cell.guestButton.isTouchInside {
-                    print("게스트 은석")
+                    let vc = HomeCategoryViewController()
+                    vc.titleLabel.text = "게스트하우스"
+                    self.present(vc, animated: true, completion: nil)
                 }
             }
             
