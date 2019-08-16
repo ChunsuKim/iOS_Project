@@ -63,13 +63,13 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         contentView.addSubview(modifyImageView)
         
         leftImageView.translatesAutoresizingMaskIntoConstraints = false
-        leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17).isActive = true
         leftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         leftImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         leftImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
         nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nickNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        nickNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17).isActive = true
         nickNameLabel.leadingAnchor.constraint(equalTo: leftImageView.trailingAnchor, constant: 20).isActive = true
 //        nickNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         nickNameLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
@@ -79,7 +79,7 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         emailLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: 2).isActive = true
         emailLabel.leadingAnchor.constraint(equalTo: nickNameLabel.leadingAnchor).isActive = true
 //        emailLabel.trailingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor).isActive = true
-        emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+        emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -17).isActive = true
         
         modifyImageView.translatesAutoresizingMaskIntoConstraints = false
         modifyImageView.leadingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor, constant: 10).isActive = true
