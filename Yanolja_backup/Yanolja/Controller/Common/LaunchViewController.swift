@@ -70,8 +70,8 @@ class LaunchViewController: UIViewController {
         dateFormatter.dateFormat = "M월 d일"
         
         
-        var todayString = dateFormatter.string(from: today)
-        var tomorrowString = dateFormatter.string(from: today+86400)
+        let todayString = dateFormatter.string(from: today)
+        let tomorrowString = dateFormatter.string(from: today+86400)
         
         let todayWeek = defaultCal.component(.weekday, from: today)
         let tomorrowWeek = defaultCal.component(.weekday, from: today+86400)

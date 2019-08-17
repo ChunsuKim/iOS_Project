@@ -14,7 +14,7 @@ class MapSearch {
     private init() {}
     
     var currentAddress: String = ""
-    var mapSearchList = [SearchStruct]()
+    var mapSearchList = [StayListElement]()
     
     
     func currentRegionSearch(currentAddress:String, personnel:Int,requestCheckIn:String,requestCheckOut:String ,completion: @escaping () -> ()) {
@@ -55,12 +55,11 @@ class MapSearch {
                     let daysCheckIn = x["daysCheckIn"] as? Int,
                     let daysPrice = x["daysPrice"] as? String,
                     let saleDaysPrice = x["saleDaysPrice"] as? String else {return}
-                let temp = SearchStruct(directions: directions, mainImage: mainImage, category: category, stay: stay, stayId: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
+                let temp = StayListElement(directions: directions, mainImage: mainImage, category: category, stay: stay, stayID: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
                 singleTon.saveRegionSearchList.append(temp)
                 print("temp: ", temp)
             }
             completion()
-//            print(singleTon.saveRegionSearchList[0])
         }
         task.resume()
     }

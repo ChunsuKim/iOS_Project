@@ -204,8 +204,7 @@ extension ReservationViewController: ForthCellCheckBoxDelegate {
 
 extension ReservationViewController: ForthCellCompleteDelegate {
     func resultButton(sender: UIButton) {
-        guard let indexPath = indexPathForthCell else {return print("indexPath4번째 셀관련 오류인가?")}
-        let cell = collectionView.cellForItem(at: indexPath) as! ReservationCollectionForthViewCell
+
         reserve(roomNumber: singleTon.roomID, booker: singleTon.loginUser.last!.email, phoneNumber: singleTon.loginUser.last!.phoneNumber, wayToGo: singleTon.walkToGo, requestCheckIn: singleTon.checkInDate+singleTon.checkInTime, requestCheckOut: singleTon.checkOutDate+singleTon.checkOutTime, requestHours: false, requestDays: true, finalPrice: Int(singleTon.money)!) {(boolValue) in
             print("예약 :",boolValue)
             DispatchQueue.main.async {

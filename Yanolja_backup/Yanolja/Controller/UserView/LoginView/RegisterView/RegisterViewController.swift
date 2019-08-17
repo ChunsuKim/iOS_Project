@@ -452,6 +452,18 @@ class RegisterViewController: UIViewController {
             nextButton.backgroundColor = .lightGray
             totalCheckBox.isSelected = false
         }
+        let checkboxButtonArray = [ageCheckBox, serviceCheckBox, privacyCheckBox, locationCheckBox, privacySelectiveCheckBox, longTermIdPossessionCheckBox]
+        var count = 0
+        for x in checkboxButtonArray {
+            if x.isSelected {
+                count += 1
+            } else {
+                count -= 1
+            }
+            if count == 6 {
+                totalCheckBox.isSelected = true
+            }
+        }
     }
     
     private func isSelectedTotalCheckbox() {

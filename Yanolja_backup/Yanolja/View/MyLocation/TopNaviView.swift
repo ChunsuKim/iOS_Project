@@ -14,6 +14,7 @@ import UIKit
     @objc optional func backButton()
     @objc optional func calendarButton()
     @objc optional func selectPeopleButton()
+    @objc optional func presentFilterViewController()
 }
 class TopNaviView: UIView {
     
@@ -107,7 +108,7 @@ class TopNaviView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
-        
+        button.addTarget(self, action: #selector(presentVC), for: .touchUpInside)
         return button
     }()
     
@@ -185,11 +186,17 @@ class TopNaviView: UIView {
             filterButton.centerYAnchor.constraint(equalTo: possibleChkButton.centerYAnchor),
             filterButton.trailingAnchor.constraint(equalTo: mapButton.leadingAnchor, constant: -20),
             filterButton.bottomAnchor.constraint(equalTo: divideLine.topAnchor, constant: -17),
+            
             divideLine.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             divideLine.widthAnchor.constraint(equalTo: self.widthAnchor),
             divideLine.heightAnchor.constraint(equalToConstant: 1),
         ])
     }
+    
+    @objc func presentVC() {
+        delegate?.presentFilterViewController?()
+    }
+    
     
     @objc private func checkboxTap() {
         delegate?.possibleChkButton()

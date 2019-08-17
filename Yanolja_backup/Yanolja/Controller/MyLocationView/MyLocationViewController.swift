@@ -14,15 +14,45 @@ class MyLocationViewController: UIViewController {
     var topNaviView = TopNaviView()
     var listCollectionView = ListCollectionView()
     let notiCenter = NotificationCenter.default
-    
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        WebAPI.shared.getTestAPI { [weak self] (listData) in
-            self?.reloadCollectionView()
-            self?.listCollectionView.listSenderData = listData
-        }
+//        WebAPI.shared.getTestAPI { [weak self] (listData) in
+//            self?.reloadCollectionView()
+//            self?.listCollectionView.listSenderData = listData
+//          self?.listCollectionView.listMotelData = listData.filter {
+//            $0.category == "모텔"
+//            }
+//            self?.listCollectionView.listHotelData = listData.filter {
+//                $0.category == "호텔/리조트"
+//            }
+//
+//        }
+//
+        
+        
+        detailRegionSearch(searchKeyword: singleTon.searchKeyword, personnel: singleTon.numberOfPeople, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime, filter: singleTon.filter,category:singleTon.category , completion: {
+            self.listCollectionView.listTotalStayData = singleTon.saveDetailSearchList
+            self.listCollectionView.listMotelData = self.listCollectionView.listTotalStayData.filter {
+                $0.category == "모텔"
+            }
+            self.listCollectionView.listHotelData = self.listCollectionView.listTotalStayData.filter {
+                $0.category == "호텔/리조트"
+            }
+            self.listCollectionView.listPensionData = self.listCollectionView.listTotalStayData.filter {
+                $0.category == "펜션/풀빌라"
+            }
+            self.listCollectionView.listGuestHouseData = self.listCollectionView.listTotalStayData.filter {
+                $0.category == "게스트하우스"
+            }
+        })
+        
         
         navigationController?.isNavigationBarHidden = true
         configureViewComponents()
@@ -107,5 +137,9 @@ extension MyLocationViewController: checkBoxDelegate {
     
     func selectPeopleButton() {
         self.present(NumberOfPeopleViewController(), animated: true)
+    }
+    
+    func presentFilterViewController() {
+        self.present(FilterViewController(), animated: true, completion: nil)
     }
 }

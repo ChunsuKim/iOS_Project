@@ -22,8 +22,10 @@ class SingleTon {
     var tomorrowString = ""
     var saveDate: [Date] = []
     var selectDateButtonCurrentTitle = ""
-    
-    
+    // 위치
+    var searchKeyword = "서울특별시 강남구"
+    //
+    var category = ""
     //사람수 관련!
     var adultCount = 2
     var childCount = 0
@@ -39,18 +41,18 @@ class SingleTon {
     var checkInDateString = "8월 13일 (화)"
     var checkOutDateString = "8월 15일 (목)"
     
-    var saveDetailSearchList: [SearchStruct] = []
+    var saveDetailSearchList: [StayListElement] = []
     
     // 돈관련
     var money = "70000"
     
     //지역검색시..
-    var saveRegionSearchList: [SearchStruct] = []
+    var saveRegionSearchList: [StayListElement] = []
     var stayID: Int = 0
     var roomID: Int = 0
 
-//예약할때 필요한거 booker , phoneNumber(loginUserl.last?.phoneNumber),wayToGo,requestCheckIn,requestCheckOut,requestHours,requestDays,finalPrice
-    
+    // filter
+    var filter = ""
     
     //로그인시..
     // 회원가입
@@ -60,7 +62,7 @@ class SingleTon {
     var walkToGo = "도보"
     var token = ""
     
-    
+    var mainColor = #colorLiteral(red: 0.9797077775, green: 0.07226980478, blue: 0.4098213315, alpha: 1)
 }
 struct UserID {
     let email: String

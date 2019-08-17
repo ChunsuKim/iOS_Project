@@ -104,7 +104,10 @@ class HomeCategoryViewController: UIViewController {
     }
     
     @objc private func moveToMyLocationController() {
-        print("눌린다")
+        if let homeTabBarController = presentingViewController as? CustomTabBarController {
+            homeTabBarController.selectedIndex = 2
+            homeTabBarController.dismiss(animated: true, completion: nil)
+        }
     }
     
     var saveIndex :Int = 0

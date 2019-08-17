@@ -102,7 +102,7 @@ class SearchViewController: UIViewController{
         
         //검색 텍스트 필드 누른후!!! (detailUI)
         detailSearchUI()
-        //        scrollView.alwaysBounceVertical = true
+        //scrollView.alwaysBounceVertical = true
         
         
     }
@@ -715,11 +715,11 @@ class SearchViewController: UIViewController{
             // 추가해주기때문에 밑에 singleTon.saveSearchList.removeAll() 들어감.
             singleTon.saveDetailSearchList.removeAll()
             
-            detailRegionSearch(searchKeyword: self.searchTextField.text!, personnel: singleTon.adultCount+singleTon.childCount, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime) {
+            detailRegionSearch(searchKeyword: self.searchTextField.text!, personnel: singleTon.adultCount+singleTon.childCount, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime, filter: singleTon.filter) {
                 DispatchQueue.main.async {
                     vc.stayTableView.reloadData()
                 }
-                
+            
             }
             vc.titleLabel.text = searchTextField.text
             self.present(vc, animated: true)

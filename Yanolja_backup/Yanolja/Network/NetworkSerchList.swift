@@ -9,9 +9,9 @@
 import Foundation
 
 // 돋보기 눌렀을때 서치할 수 있는
-func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:String,requestCheckOut:String ,completion: @escaping () -> ()) {
+func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:String,requestCheckOut:String,filter:String="",category:String="" ,completion: @escaping () -> ()) {
     let todoEndpoint = "http://api.yanoljamvp.com/api/stay/"
-    let query = "searchKeyword=\(searchKeyword)&personnel=\(personnel)&requestCheckIn=\(requestCheckIn)&requestCheckOut=\(requestCheckOut)"
+    let query = "searchKeyword=\(searchKeyword)&personnel=\(personnel)&requestCheckIn=\(requestCheckIn)&requestCheckOut=\(requestCheckOut)&\(filter)=\(filter)&category=\(category)"
     var urlComp = URLComponents(string: todoEndpoint)
     urlComp?.query = query
     guard let url = urlComp?.url else {
@@ -31,7 +31,8 @@ func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:Strin
             return print("Error: did not receive data")
         }
         guard let regionData = try? JSONSerialization.jsonObject(with: data) as? [[String:Any]] else { return print("Could not get parsed data")}
-        //                print(response.statusCode) // print 201 나옴.
+        singleTon.saveDetailSearchList.removeAll()
+        
         for x in regionData {
             
             guard let directions = x["directions"] as? String ,
@@ -48,7 +49,7 @@ func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:Strin
                 let daysCheckIn = x["daysCheckIn"] as? Int,
                 let daysPrice = x["daysPrice"] as? String,
                 let saleDaysPrice = x["saleDaysPrice"] as? String else {return}
-            let temp = SearchStruct(directions: directions, mainImage: mainImage, category: category, stay: stay, stayId: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
+            let temp = StayListElement(directions: directions, mainImage: mainImage, category: category, stay: stay, stayID: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
             singleTon.saveDetailSearchList.append(temp)
         }
         completion()
@@ -58,9 +59,9 @@ func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:Strin
 
 // 지역 버튼 눌렀을때 가능..
 
-func regionSearch(selectRegion:String, category:String,personnel:Int,requestCheckIn:String,requestCheckOut:String ,completion: @escaping () -> ()) {
+func regionSearch(selectRegion:String, category:String,personnel:Int,requestCheckIn:String,requestCheckOut:String,filter:String="" ,completion: @escaping () -> ()) {
     let todoEndpoint = "http://api.yanoljamvp.com/api/stay/"
-    let query = "selectRegion=\(selectRegion)&category=\(category)&personnel=\(personnel)&requestCheckIn=\(requestCheckIn)&requestCheckOut=\(requestCheckOut)"
+    let query = "selectRegion=\(selectRegion)&category=\(category)&personnel=\(personnel)&requestCheckIn=\(requestCheckIn)&requestCheckOut=\(requestCheckOut)&\(filter)=\(filter)"
     var urlComp = URLComponents(string: todoEndpoint)
     urlComp?.query = query
     guard let url = urlComp?.url else {
@@ -98,7 +99,7 @@ func regionSearch(selectRegion:String, category:String,personnel:Int,requestChec
                 let daysCheckIn = x["daysCheckIn"] as? Int,
                 let daysPrice = x["daysPrice"] as? String,
                 let saleDaysPrice = x["saleDaysPrice"] as? String else {return}
-            let temp = SearchStruct(directions: directions, mainImage: mainImage, category: category, stay: stay, stayId: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
+            let temp = StayListElement(directions: directions, mainImage: mainImage, category: category, stay: stay, stayID: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
             singleTon.saveRegionSearchList.append(temp)
         }
         completion()

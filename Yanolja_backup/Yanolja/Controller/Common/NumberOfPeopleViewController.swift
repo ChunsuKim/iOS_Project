@@ -454,7 +454,7 @@ extension NumberOfPeopleViewController: UIPickerViewDelegate {
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         saveAge = pickerValue[row]
-        
+        print(1)
     }
     
     

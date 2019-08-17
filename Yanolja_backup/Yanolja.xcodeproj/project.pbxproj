@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1F11FF2C22FA73A600148BA3 /* RegionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */; };
 		1F11FF5423013DDE00148BA3 /* HomeCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FF5323013DDE00148BA3 /* HomeCategoryViewController.swift */; };
+		1F11FFAE2301ACF600148BA3 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFAD2301ACF600148BA3 /* FilterViewController.swift */; };
+		1F11FFB72301B3AF00148BA3 /* FilterSortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFB62301B3AF00148BA3 /* FilterSortCell.swift */; };
+		1F11FFB92301B3D900148BA3 /* FilterThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFB82301B3D900148BA3 /* FilterThemeCell.swift */; };
+		1F11FFBB2301B40D00148BA3 /* FilterCharacteristicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFBA2301B40D00148BA3 /* FilterCharacteristicCell.swift */; };
+		1F11FFBD2301B42A00148BA3 /* FilterPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFBC2301B42A00148BA3 /* FilterPriceCell.swift */; };
+		1F11FFC02302388900148BA3 /* FilterThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FFBF2302388900148BA3 /* FilterThemeCollectionViewCell.swift */; };
 		1F37D05422F02F71006D397A /* NetworkRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05322F02F71006D397A /* NetworkRegister.swift */; };
 		1F37D05822F054B8006D397A /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05722F054B8006D397A /* ReservationViewController.swift */; };
 		1F37D05A22F05AE7006D397A /* ReservationCollectionFirstViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */; };
@@ -97,6 +103,7 @@
 		F364AE4122FC2FAF00665C4E /* MapNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364AE4022FC2FAF00665C4E /* MapNetwork.swift */; };
 		F364AE4322FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364AE4222FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift */; };
 		F36B942522E9CDC0002E999A /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36B942422E9CDC0002E999A /* SampleViewController.swift */; };
+		F36D3A392306C60F00E51898 /* UserChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36D3A382306C60F00E51898 /* UserChangeInfoViewController.swift */; };
 		F3729DE622E87814002738FE /* UserViewLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */; };
 		F37D6E4522F44CDA007E4D59 /* HomeThemeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D6E4422F44CDA007E4D59 /* HomeThemeNetwork.swift */; };
 		F3919B1922D45FB00093DB24 /* HomeThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */; };
@@ -138,6 +145,12 @@
 /* Begin PBXFileReference section */
 		1F11FF2B22FA73A600148BA3 /* RegionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDetailViewController.swift; sourceTree = "<group>"; };
 		1F11FF5323013DDE00148BA3 /* HomeCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryViewController.swift; sourceTree = "<group>"; };
+		1F11FFAD2301ACF600148BA3 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		1F11FFB62301B3AF00148BA3 /* FilterSortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortCell.swift; sourceTree = "<group>"; };
+		1F11FFB82301B3D900148BA3 /* FilterThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterThemeCell.swift; sourceTree = "<group>"; };
+		1F11FFBA2301B40D00148BA3 /* FilterCharacteristicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacteristicCell.swift; sourceTree = "<group>"; };
+		1F11FFBC2301B42A00148BA3 /* FilterPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPriceCell.swift; sourceTree = "<group>"; };
+		1F11FFBF2302388900148BA3 /* FilterThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterThemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F37D05322F02F71006D397A /* NetworkRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRegister.swift; sourceTree = "<group>"; };
 		1F37D05722F054B8006D397A /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		1F37D05922F05AE7006D397A /* ReservationCollectionFirstViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCollectionFirstViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +259,7 @@
 		F364AE4022FC2FAF00665C4E /* MapNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNetwork.swift; sourceTree = "<group>"; };
 		F364AE4222FC6A0B00665C4E /* UserViewAfterLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewAfterLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F36B942422E9CDC0002E999A /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		F36D3A382306C60F00E51898 /* UserChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeInfoViewController.swift; sourceTree = "<group>"; };
 		F3729DE522E87814002738FE /* UserViewLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewLoginTableViewCell.swift; sourceTree = "<group>"; };
 		F37D6E4422F44CDA007E4D59 /* HomeThemeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeNetwork.swift; sourceTree = "<group>"; };
 		F3919B1822D45FB00093DB24 /* HomeThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeThemeTableViewCell.swift; sourceTree = "<group>"; };
@@ -313,6 +327,27 @@
 				C6825F77A4995BC74A42701C /* Pods-Yanolja.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		1F11FFAF2301AFDB00148BA3 /* FilterView */ = {
+			isa = PBXGroup;
+			children = (
+				1F11FFAD2301ACF600148BA3 /* FilterViewController.swift */,
+				1F11FFB62301B3AF00148BA3 /* FilterSortCell.swift */,
+				1F11FFB82301B3D900148BA3 /* FilterThemeCell.swift */,
+				1F11FFBA2301B40D00148BA3 /* FilterCharacteristicCell.swift */,
+				1F11FFBC2301B42A00148BA3 /* FilterPriceCell.swift */,
+				1F11FFBE2302385300148BA3 /* FilterThemeCollectionViewCell */,
+			);
+			path = FilterView;
+			sourceTree = "<group>";
+		};
+		1F11FFBE2302385300148BA3 /* FilterThemeCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1F11FFBF2302388900148BA3 /* FilterThemeCollectionViewCell.swift */,
+			);
+			path = FilterThemeCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		1F37D05222EFFBD6006D397A /* Network */ = {
@@ -633,6 +668,7 @@
 		F3B185F122D0812D00B01C6C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F11FFAF2301AFDB00148BA3 /* FilterView */,
 				1F37D08322F83ADD006D397A /* SearchView */,
 				F3C47F4822F0441200E722D4 /* Common */,
 				F3C47F4422F0437A00E722D4 /* HomeView */,
@@ -715,6 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				F33F27C222D0AA7C000656DD /* UserViewController.swift */,
+				F36D3A382306C60F00E51898 /* UserChangeInfoViewController.swift */,
 				F3C47F4922F0448F00E722D4 /* LoginView */,
 			);
 			path = UserView;
@@ -977,6 +1014,7 @@
 				1FD3A45722E58D7E00417F1C /* fakeSingleTon.swift in Sources */,
 				614F66A822F201C1007BDA03 /* DetailRoomImageTableViewCell.swift in Sources */,
 				F31F334722DDC679003A2C06 /* HomeThemeButton.swift in Sources */,
+				1F11FFBB2301B40D00148BA3 /* FilterCharacteristicCell.swift in Sources */,
 				F3DB558322E6EB55002C3041 /* LoginMenuBar.swift in Sources */,
 				614F669F22F1B5F4007BDA03 /* IntroduceStayTableViewCell.swift in Sources */,
 				614F669B22F1909C007BDA03 /* ConvenienceTableViewCell.swift in Sources */,
@@ -994,15 +1032,20 @@
 				F3C8171022D33294009CF7AC /* HomeThemeCollectionViewCell.swift in Sources */,
 				F344C03B22F8C31E00D41442 /* HomeThemeGroup.swift in Sources */,
 				F3C47F4E22F0452A00E722D4 /* RegisterSecondViewController.swift in Sources */,
+				1F11FFB72301B3AF00148BA3 /* FilterSortCell.swift in Sources */,
 				F3E2EA6822FA15FA0021239E /* HomeThemeSecondTableViewCell.swift in Sources */,
 				F39C843722DC6A680024BBDB /* HomeThemeMenuCollectionCell.swift in Sources */,
+				1F11FFB92301B3D900148BA3 /* FilterThemeCell.swift in Sources */,
+				1F11FFAE2301ACF600148BA3 /* FilterViewController.swift in Sources */,
 				F39B7F2D22F6E9A900186E61 /* HomeThemePartyRoom.swift in Sources */,
 				614F66AE22F24AF8007BDA03 /* ReservationButtonviewTableViewCell.swift in Sources */,
 				F39B7F3122F6E9D500186E61 /* HomeThemeSpa.swift in Sources */,
 				1FB5A8B422DC5A9E009057F4 /* RecentlyCell.swift in Sources */,
 				614F66B822F2F053007BDA03 /* MapTableViewCell.swift in Sources */,
 				61CDB9F622E0436400C6C21B /* DefaultCollectionViewCell.swift in Sources */,
+				F36D3A392306C60F00E51898 /* UserChangeInfoViewController.swift in Sources */,
 				F339FE0022DF1CFC003D5F71 /* HomePopCollectionViewCell.swift in Sources */,
+				1F11FFC02302388900148BA3 /* FilterThemeCollectionViewCell.swift in Sources */,
 				F3E2EA6E22FA16F20021239E /* HomeThemeSecondCollectionViewMenuBar.swift in Sources */,
 				61F91F1F22E6C4320090ED8F /* CALayerBorder.swift in Sources */,
 				F3C47F4C22F044D900E722D4 /* RegisterViewController.swift in Sources */,
@@ -1013,6 +1056,7 @@
 				F3D6790022E1CAC90037F5F1 /* HomeThemeDiffTableViewCell.swift in Sources */,
 				614F66A322F1F413007BDA03 /* RoomDetailViewController.swift in Sources */,
 				1F37D08022F7EF2B006D397A /* ImageView.swift in Sources */,
+				1F11FFBD2301B42A00148BA3 /* FilterPriceCell.swift in Sources */,
 				1FB5C8A122E19A1500044D94 /* regionData.swift in Sources */,
 				1FB5C89F22E0EA4B00044D94 /* DefaultCell.swift in Sources */,
 				F3B2A09222F197D7003997AF /* MapSearchView.swift in Sources */,

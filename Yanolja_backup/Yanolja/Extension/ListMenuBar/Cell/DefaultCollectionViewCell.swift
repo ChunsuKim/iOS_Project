@@ -133,7 +133,7 @@ extension DefaultCollectionViewCell: UITableViewDataSource {
         let category = data.category
         
         switch category {
-        case .호텔리조트:
+        case "호텔/리조트":
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: hotelSaveList[indexPath.row])
@@ -141,14 +141,14 @@ extension DefaultCollectionViewCell: UITableViewDataSource {
             tableView.reloadData()
             
             return cell
-        case .펜션풀빌라:
+        case "펜션/풀빌라":
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: pension[indexPath.row])
             /// VIEW ->
             
             return cell
-        case .게스트하우스:
+        case "게스트하우스":
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: gestSaveList[indexPath.row])

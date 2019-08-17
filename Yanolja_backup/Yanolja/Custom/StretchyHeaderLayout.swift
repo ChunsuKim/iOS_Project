@@ -21,8 +21,8 @@ class StretchyHeaderLayout: UICollectionViewFlowLayout {
                     return
                 }
                 
-                let width = collectionView.frame.width
-                let height = attributes.frame.height - contentOffsetY
+//                let width = collectionView.frame.width
+//                let height = attributes.frame.height - contentOffsetY
                 
                 // header
 //                attributes.frame = CGRect(x: 0, y: contentOffsetY, width: width, height: height)

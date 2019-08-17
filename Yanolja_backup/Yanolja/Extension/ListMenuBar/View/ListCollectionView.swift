@@ -13,12 +13,16 @@ class ListCollectionView: UIView {
     var sum: CGFloat = 0
     var space: CGFloat = 10
     
-    var listSenderData = [StayListElement]() {
+    var listTotalStayData = [StayListElement]()
+    var listMotelData = [StayListElement]()
+    var listHotelData = [StayListElement]()
+    var listPensionData = [StayListElement]()
+    var listGuestHouseData = [StayListElement]() {
         didSet {
-            //            pageCollectionView.cellForItem(at: IndexPath(item: 0, section: 0) as? )
             reloadData()
         }
     }
+    
     
     
     let pageCollectionView: UICollectionView = {
@@ -55,7 +59,9 @@ class ListCollectionView: UIView {
     }
     
     func reloadData() {
-        pageCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.pageCollectionView.reloadData()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,76 +112,96 @@ extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // 여기서 카테고리 나눠야할듯?
-        switch indexPath.item {
-        case 0...1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
-            if !listSenderData.isEmpty {
-                cell.configureObject(data: listSenderData)
+        if let stayType = StayType.init(rawValue: indexPath.item) {
+            switch stayType {
+            case .모든숙소:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                if !listTotalStayData.isEmpty {
+                    cell.configureObject(data: listTotalStayData)
+                }
+                return cell
+            case .모텔:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                if !listMotelData.isEmpty {
+                    cell.configureObject(data: listMotelData)
+                }
+                return cell
+            case .호텔리조트:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                if !listHotelData.isEmpty {
+                    cell.configureObject(data: listHotelData)
+                }
+                return cell
+            case .펜션풀빌라:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                if !listHotelData.isEmpty {
+                    cell.configureObject(data: listPensionData)
+                }
+                return cell
+            case .게스트하우스:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                if !listHotelData.isEmpty {
+                    cell.configureObject(data: listGuestHouseData)
+                }
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
+                
+                if !listTotalStayData.isEmpty {
+                    cell.configureObject(data: listTotalStayData)
+                }
+                
+                return cell
             }
-            return cell
-        case 5...7:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
-            if !listSenderData.isEmpty {
-                cell.configureObject(data: listSenderData)
-            }
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
-            
-            if !listSenderData.isEmpty {
-                cell.configureObject(data: listSenderData)
-            }
-            
-            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+        
+    }
+}
+    enum StayType: Int {
+        case 모든숙소 = 0
+        case 모텔
+        case 호텔리조트
+        case 펜션풀빌라
+        case 게스트하우스
+        case 무한쿠폰룸
+        case 프렌차이즈
+        case 신축리모델링
+        case 초특가호텔
+        case 인기숙소
+        case 파티룸
+        case 무료영화
+        case 스파펜션
+    }
+    
+    extension ListCollectionView: UICollectionViewDelegate{
+        
+        func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
+            customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        }
+        
+    }
+    
+    extension ListCollectionView: UICollectionViewDelegateFlowLayout{
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: self.frame.width, height: self.frame.height - customMenuBar.frame.height )
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 0
         }
     }
     
-    
-}
-
-enum StayType: Int {
-    case 모든숙소 = 0
-    case 모텔
-    case 호텔리조트
-    case 펜션풀빌라
-    case 게스트하우스
-    case 무한쿠폰룸
-    case 프렌차이즈
-    case 신축리모델링
-    case 초특가호텔
-    case 인기숙소
-    case 파티룸
-    case 무료영화
-    case 스파펜션
-}
-
-extension ListCollectionView: UICollectionViewDelegate{
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let itemAt = Int(targetContentOffset.pointee.x / self.frame.width)
-        customMenuBar.menuCollectionView.selectItem(at: IndexPath(item: itemAt, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-    }
-    
-}
-
-extension ListCollectionView: UICollectionViewDelegateFlowLayout{
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: self.frame.height - customMenuBar.frame.height )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
-
-// 메뉴 클릭시 뷰 스크롤 이동
-extension ListCollectionView: CustomMenuBarDelegate{
-    func menuBarDidSelected(_ indexPath: IndexPath) {
-        pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-    }
+    // 메뉴 클릭시 뷰 스크롤 이동
+    extension ListCollectionView: CustomMenuBarDelegate{
+        func menuBarDidSelected(_ indexPath: IndexPath) {
+            pageCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        }
 }

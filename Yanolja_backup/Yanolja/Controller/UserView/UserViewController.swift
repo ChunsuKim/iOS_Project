@@ -140,10 +140,18 @@ extension UserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let loginViewController = LoginViewController()
         let mapViewController = MapViewController()
+        let changeUserInfoController = UserChangeInfoViewController()
+//        let cell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewLoginTableViewCell.identifier, for: indexPath) as! UserViewLoginTableViewCell
         
         switch indexPath.row {
         case 0:
-            present(loginViewController, animated: true, completion: nil)
+            if singleTon.token == "" {
+                print("before login")
+                present(loginViewController, animated: true, completion: nil)
+            } else {
+                print("after login")
+                present(changeUserInfoController, animated: true, completion: nil)
+            }
         
         // TODO: - test sample
         case 6:

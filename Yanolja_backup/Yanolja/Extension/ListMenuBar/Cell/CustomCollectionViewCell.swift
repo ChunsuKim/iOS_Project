@@ -116,14 +116,14 @@ extension CustomCollectionViewCell: UITableViewDataSource {
         let category = data.category
         
         switch category {
-        case .모텔:
+        case "모텔":
             let cell = tableView.dequeueReusableCell(withIdentifier: MotelTableViewCell.identifier, for: indexPath) as! MotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: data)
             /// VIEW ->
             
             return cell
-        case .호텔리조트:
+        case "호텔/리조트","펜션/풀빌라","게스트하우스":
             let cell = tableView.dequeueReusableCell(withIdentifier: HotelTableViewCell.reusableIdentifier, for: indexPath) as! HotelTableViewCell
             cell.selectionStyle = .none
             cell.configureObject(data: data)

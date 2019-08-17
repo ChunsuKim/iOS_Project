@@ -116,7 +116,7 @@ class HomePopTableViewCell: UITableViewCell, UICollectionViewDataSource {
         
     }
     
-    @objc private func touchesCollectionView(_ sender: UICollectionView) {
+    @objc func touchesCollectionView(_ sender: UICollectionView) {
         collectionViewTouchAction?()
     }
 
