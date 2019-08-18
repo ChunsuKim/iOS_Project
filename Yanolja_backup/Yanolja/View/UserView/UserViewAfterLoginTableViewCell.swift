@@ -24,6 +24,7 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.selectionStyle = .none
+        
         configureViews()
     }
     
@@ -63,22 +64,19 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         contentView.addSubview(modifyImageView)
         
         leftImageView.translatesAutoresizingMaskIntoConstraints = false
-        leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17).isActive = true
         leftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        leftImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        leftImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        leftImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        leftImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        leftImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
         
         nickNameLabel.translatesAutoresizingMaskIntoConstraints = false
         nickNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17).isActive = true
         nickNameLabel.leadingAnchor.constraint(equalTo: leftImageView.trailingAnchor, constant: 20).isActive = true
-//        nickNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         nickNameLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-//        nickNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -22).isActive = true
         
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         emailLabel.topAnchor.constraint(equalTo: nickNameLabel.bottomAnchor, constant: 2).isActive = true
         emailLabel.leadingAnchor.constraint(equalTo: nickNameLabel.leadingAnchor).isActive = true
-//        emailLabel.trailingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor).isActive = true
         emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -17).isActive = true
         
         modifyImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,10 +91,6 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         nickNameLabel.text = nickName
         emailLabel.text = email
         leftImageView.image = image
-    }
-    
-    @objc private func selectModifyCell(_ sender: UIButton) {
-        
     }
 }
 

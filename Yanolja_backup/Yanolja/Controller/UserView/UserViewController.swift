@@ -66,14 +66,14 @@ extension UserViewController: UITableViewDataSource {
                     
                     cell.configureInputValue(text: "로그인 및 회원가입", textColor: #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1), image: nil)
                     cell.separatorInset = UIEdgeInsets(top: 0, left: view.frame.midX, bottom: 0, right: view.frame.midX)
-                    print("no login")
+                    
                     return cell
                 } else {
                     if let loginAfterCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewAfterLoginTableViewCell.identifier
                         , for: indexPath) as? UserViewAfterLoginTableViewCell {
                         
                         loginAfterCell.configureLoginInputValue(nickName: "추카추카멍뭉이", email: "admin@gmail.com", image: #imageLiteral(resourceName: "login"))
-                        print("login")
+                        
                         return loginAfterCell
                     }
                 }
@@ -146,10 +146,10 @@ extension UserViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             if singleTon.token == "" {
-                print("before login")
+                
                 present(loginViewController, animated: true, completion: nil)
             } else {
-                print("after login")
+                
                 present(changeUserInfoController, animated: true, completion: nil)
             }
         
