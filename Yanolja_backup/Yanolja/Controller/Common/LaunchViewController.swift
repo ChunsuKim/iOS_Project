@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class LaunchViewController: UIViewController {
 
@@ -18,6 +19,12 @@ class LaunchViewController: UIViewController {
     private let statusLabel = UILabel()
     private let copyRightLabel = UILabel()
     private let airplaneImage = UIImageView()
+    
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        return locationManager
+    }()
    
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +107,6 @@ class LaunchViewController: UIViewController {
     
     
     
-    
     // MARK: - Configuration
     private func configureUserInterface() {
         backgroundImageView.image = #imageLiteral(resourceName: "Launch")
@@ -162,12 +168,12 @@ class LaunchViewController: UIViewController {
         super.viewDidAppear(animated)
         
         let str = "야!, 너두 놀 수 있어!"
-        let privacyAgreeAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: str)
-        privacyAgreeAttributedString.setColorForText(textForAttribute: "야!", withColor: #colorLiteral(red: 0.8543364406, green: 0, blue: 0.3139223754, alpha: 1))
-        privacyAgreeAttributedString.setFontForText(textForAttribute: "야!", withFont: UIFont.systemFont(ofSize: 60, weight: .light))
-        privacyAgreeAttributedString.setColorForText(textForAttribute: ", 너두 놀 수 있어!", withColor: #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1))
-        privacyAgreeAttributedString.setFontForText(textForAttribute: ", 너두 놀 수 있어!", withFont: UIFont.systemFont(ofSize: 28, weight: .semibold))
-        titleLabel.attributedText = privacyAgreeAttributedString
+        let titleAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: str)
+        titleAttributedString.setColorForText(textForAttribute: "야!", withColor: #colorLiteral(red: 0.8543364406, green: 0, blue: 0.3139223754, alpha: 1))
+        titleAttributedString.setFontForText(textForAttribute: "야!", withFont: UIFont.systemFont(ofSize: 60, weight: .light))
+        titleAttributedString.setColorForText(textForAttribute: ", 너두 놀 수 있어!", withColor: #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1))
+        titleAttributedString.setFontForText(textForAttribute: ", 너두 놀 수 있어!", withFont: UIFont.systemFont(ofSize: 28, weight: .semibold))
+        titleLabel.attributedText = titleAttributedString
         
 //        let str = "야!, 너두 놀 수 있어!"
 //        for x in str {
@@ -195,5 +201,58 @@ class LaunchViewController: UIViewController {
         }
         activityIndicatorView.stopAnimating()
         activityIndicatorView.hidesWhenStopped = true
+    }
+}
+
+extension LaunchViewController: CLLocationManagerDelegate {
+    
+    func updateCurrentLocation() {
+        let status = CLLocationManager.authorizationStatus()
+        guard status == .authorizedAlways || status == .authorizedWhenInUse,
+            CLLocationManager.locationServicesEnabled() else { return }
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let myLocation = locations.first {
+            
+            let geoCoder = CLGeocoder()
+            geoCoder.reverseGeocodeLocation(myLocation) { [weak self] (placemarks, error) in
+                if let place = placemarks?.first {
+                    if let locality = place.locality,
+                        let subLocality = place.subLocality {
+                        print("\(locality) \(subLocality)")
+                    }
+                }
+            }
+        }
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        show(message: error.localizedDescription)
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            updateCurrentLocation()
+        default:
+            break
+        }
+    }
+}
+
+// MARK: - AlertController
+extension UIViewController {
+    func show(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
