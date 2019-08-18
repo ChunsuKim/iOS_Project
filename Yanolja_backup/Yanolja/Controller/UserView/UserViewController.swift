@@ -72,7 +72,7 @@ extension UserViewController: UITableViewDataSource {
                     if let loginAfterCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewAfterLoginTableViewCell.identifier
                         , for: indexPath) as? UserViewAfterLoginTableViewCell {
                         
-                        loginAfterCell.configureLoginInputValue(nickName: "추카추카멍뭉이", email: "admin@gmail.com", image: #imageLiteral(resourceName: "login"))
+                        loginAfterCell.configureLoginInputValue(nickName: singleTon.nickName, email: "admin@gmail.com", image: #imageLiteral(resourceName: "login"))
                         
                         return loginAfterCell
                     }

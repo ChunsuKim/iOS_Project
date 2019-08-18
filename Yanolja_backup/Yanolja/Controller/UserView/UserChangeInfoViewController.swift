@@ -32,6 +32,7 @@ class UserChangeInfoViewController: UIViewController {
         configureButton()
         configureTextFieldConstraints()
         configureButtonConstraints()
+        hideKeyboard()
     }
     
     // MARK: - Configuration
@@ -60,6 +61,7 @@ class UserChangeInfoViewController: UIViewController {
     private func configureTextField() {
         nicknameTextField.font = UIFont.systemFont(ofSize: 16, weight: .light)
         nicknameTextField.placeholder = "변경할 닉네임을 입력해주세요"
+        nicknameTextField.text = singleTon.nickName
         nicknameTextField.enablesReturnKeyAutomatically = true
         nicknameTextField.borderStyle = .none
 //        nicknameTextField.returnKeyType = .next
@@ -144,9 +146,9 @@ class UserChangeInfoViewController: UIViewController {
     }
     
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
-        let id = nicknameTextField.text
+        let nickName = nicknameTextField.text
         let string = String()
-        if !(id!.isEmpty) && (id?.count)! + string.count > 1 {
+        if !(nickName!.isEmpty) && (nickName?.count)! + string.count > 1 {
             savingButton.isEnabled = true
             savingButton.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.2039215686, blue: 0.4705882353, alpha: 1)
         } else {
@@ -155,8 +157,10 @@ class UserChangeInfoViewController: UIViewController {
         }
     }
     
+    // TODO: - will create feature
     @objc private func savingButtonDidTap(_ sender: UIButton) {
-        
+        singleTon.nickName = nicknameTextField.text ?? ""
+        dismiss(animated: true, completion: nil)
     }
 
 }

@@ -81,8 +81,8 @@ class UserViewAfterLoginTableViewCell: UITableViewCell {
         
         modifyImageView.translatesAutoresizingMaskIntoConstraints = false
         modifyImageView.leadingAnchor.constraint(equalTo: nickNameLabel.trailingAnchor, constant: 10).isActive = true
-        modifyImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        modifyImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        modifyImageView.centerYAnchor.constraint(equalTo: nickNameLabel.centerYAnchor).isActive = true
+        modifyImageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         modifyImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
     }
     

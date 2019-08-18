@@ -63,6 +63,8 @@ class SingleTon {
     var token = ""
     
     var mainColor = #colorLiteral(red: 0.9797077775, green: 0.07226980478, blue: 0.4098213315, alpha: 1)
+    
+    var nickName = "추카추카멍뭉이"
 }
 struct UserID {
     let email: String
