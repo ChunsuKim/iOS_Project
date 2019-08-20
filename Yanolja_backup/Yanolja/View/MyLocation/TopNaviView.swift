@@ -132,10 +132,21 @@ class TopNaviView: UIView {
         super.init(frame: frame)
         
         configureNavi()
+        showCurrentLocation()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func showCurrentLocation() {
+        if singleTon.currentLocation == "" {
+            locationText.text = "강남구 대치동"
+            
+        } else {
+            locationText.text = singleTon.currentLocation
+            
+        }
     }
     
     private func configureNavi() {

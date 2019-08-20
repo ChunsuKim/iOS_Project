@@ -20,11 +20,10 @@ class LaunchViewController: UIViewController {
     private let copyRightLabel = UILabel()
     private let airplaneImage = UIImageView()
     
-    lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        return locationManager
-    }()
+    
+    private let locationManager = CLLocationManager()
+    
+    
    
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +56,7 @@ class LaunchViewController: UIViewController {
         configureUserInterface()
         configureConstraints()
         operateActivitiIndicator()
+        locationManager.delegate = self
         
         // 4초 뒤에 뷰 컨트롤러를 띄우는거
         timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { _ in
@@ -180,6 +180,22 @@ class LaunchViewController: UIViewController {
 //            titleLabel.text! += "\(x)"
 //            RunLoop.current.run(until: Date()+0.2)
 //        }
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                updateCurrentLocation()
+                break
+            case .denied, .restricted:
+                show(message: "위치 서비스 사용 불가")
+            @unknown default:
+                break
+            }
+        } else {
+            show(message: "위치 서비스 사용 불가")
+        }
     }
     
     
@@ -219,11 +235,13 @@ extension LaunchViewController: CLLocationManagerDelegate {
         if let myLocation = locations.first {
             
             let geoCoder = CLGeocoder()
-            geoCoder.reverseGeocodeLocation(myLocation) { [weak self] (placemarks, error) in
+            geoCoder.reverseGeocodeLocation(myLocation) { (placemarks, error) in
                 if let place = placemarks?.first {
-                    if let locality = place.locality,
-                        let subLocality = place.subLocality {
-                        print("\(locality) \(subLocality)")
+                    if let locality = place.locality, let subLocality = place.subLocality {
+                        singleTon.currentLocation = "\(locality) \(subLocality)"
+                        print(singleTon.currentLocation)
+                    } else {
+                        singleTon.currentLocation = place.name ?? ""
                     }
                 }
             }
