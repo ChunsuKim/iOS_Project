@@ -83,6 +83,7 @@
 		614F66B822F2F053007BDA03 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F66B722F2F053007BDA03 /* MapTableViewCell.swift */; };
 		614FD46A22F8951100572FC0 /* StayDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FD46922F8951100572FC0 /* StayDetailModel.swift */; };
 		6179322922F42BC900B2AE13 /* ParsingTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6179322822F42BC900B2AE13 /* ParsingTimeViewController.swift */; };
+		619ED4812306BF8A008A8DB4 /* EmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619ED4802306BF8A008A8DB4 /* EmptyCollectionViewCell.swift */; };
 		61CDB9F622E0436400C6C21B /* DefaultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDB9F522E0436400C6C21B /* DefaultCollectionViewCell.swift */; };
 		61CDB9F822E1954900C6C21B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CDB9F722E1954900C6C21B /* DetailViewController.swift */; };
 		61E72F0622D31D49001B8A59 /* TopNaviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E72F0522D31D49001B8A59 /* TopNaviView.swift */; };
@@ -236,6 +237,7 @@
 		614F66B722F2F053007BDA03 /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		614FD46922F8951100572FC0 /* StayDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StayDetailModel.swift; sourceTree = "<group>"; };
 		6179322822F42BC900B2AE13 /* ParsingTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTimeViewController.swift; sourceTree = "<group>"; };
+		619ED4802306BF8A008A8DB4 /* EmptyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		61CDB9F522E0436400C6C21B /* DefaultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCollectionViewCell.swift; sourceTree = "<group>"; };
 		61CDB9F722E1954900C6C21B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		61E72F0522D31D49001B8A59 /* TopNaviView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNaviView.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				610423CA22DE44EB0087E719 /* CustomCollectionViewCell.swift */,
 				610423D122DE4AA20087E719 /* CustomMenuBar.swift */,
 				610423DB22DE61270087E719 /* CustomMenuCell.swift */,
+				619ED4802306BF8A008A8DB4 /* EmptyCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				F31F334722DDC679003A2C06 /* HomeThemeButton.swift in Sources */,
 				1F11FFBB2301B40D00148BA3 /* FilterCharacteristicCell.swift in Sources */,
 				F3DB558322E6EB55002C3041 /* LoginMenuBar.swift in Sources */,
+				619ED4812306BF8A008A8DB4 /* EmptyCollectionViewCell.swift in Sources */,
 				614F669F22F1B5F4007BDA03 /* IntroduceStayTableViewCell.swift in Sources */,
 				614F669B22F1909C007BDA03 /* ConvenienceTableViewCell.swift in Sources */,
 				6104239B22DC65FB0087E719 /* MotelTableViewCell.swift in Sources */,

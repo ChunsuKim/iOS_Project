@@ -23,7 +23,8 @@ class SingleTon {
     var saveDate: [Date] = []
     var selectDateButtonCurrentTitle = ""
     // 위치
-    var searchKeyword = "서울특별시 강남구"
+    var searchKeyword = ""
+    //서울특별시 강남구
     //
     var category = ""
     //사람수 관련!
@@ -65,7 +66,8 @@ class SingleTon {
     var mainColor = #colorLiteral(red: 0.9797077775, green: 0.07226980478, blue: 0.4098213315, alpha: 1)
     
     var nickName = "추카추카멍뭉이"
-    var currentLocation = ""
+    var emailAdd = ""
+//    var currentLocation = ""
 }
 struct UserID {
     let email: String

@@ -92,6 +92,8 @@ class ListCollectionView: UIView {
         pageCollectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.reusableIdentifier)
         // default CollectionView Cell
         pageCollectionView.register(DefaultCollectionViewCell.self, forCellWithReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier)
+        // empty CollectionView Cell
+        pageCollectionView.register(EmptyCollectionViewCell.self, forCellWithReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier)
         
         // layout
         pageCollectionView.topAnchor.constraint(equalTo: customMenuBar.bottomAnchor).isActive = true
@@ -106,7 +108,7 @@ class ListCollectionView: UIView {
 extension ListCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        return menuTitles.count
-        return listMenuTitles.count
+            return listMenuTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -115,35 +117,122 @@ extension ListCollectionView: UICollectionViewDataSource {
         if let stayType = StayType.init(rawValue: indexPath.item) {
             switch stayType {
             case .모든숙소:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                 if !listTotalStayData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                     cell.configureObject(data: listTotalStayData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
                 }
-                return cell
             case .모텔:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                 if !listMotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                     cell.configureObject(data: listMotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
                 }
-                return cell
             case .호텔리조트:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                 if !listHotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                     cell.configureObject(data: listHotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
                 }
-                return cell
             case .펜션풀빌라:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
-                if !listHotelData.isEmpty {
+                if !listPensionData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                     cell.configureObject(data: listPensionData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
                 }
-                return cell
             case .게스트하우스:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
-                if !listHotelData.isEmpty {
+                if !listGuestHouseData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
                     cell.configureObject(data: listGuestHouseData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
                 }
-                return cell
+            case .무한쿠폰룸:
+                if !listMotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listMotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .프렌차이즈:
+                if !listMotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listMotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .신축리모델링:
+                if !listTotalStayData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listTotalStayData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .초특가호텔:
+                if !listHotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listHotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .인기숙소:
+                if !listTotalStayData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listTotalStayData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .파티룸:
+                if !listMotelData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listMotelData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .무료영화:
+                if !listTotalStayData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listTotalStayData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
+            case .스파펜션:
+                if !listPensionData.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+                    cell.configureObject(data: listPensionData)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCollectionViewCell.reusableIdentifier, for: indexPath) as! EmptyCollectionViewCell
+                    return cell
+                }
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.reusableIdentifier, for: indexPath) as! DefaultCollectionViewCell
                 

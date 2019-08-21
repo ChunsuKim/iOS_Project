@@ -98,8 +98,11 @@ func getToken(email:String, password:String, completion: @escaping (String) -> (
         guard let tokenJson = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else {completion("실패"); return print("Could not get parsed data")}
         //        print(response.statusCode) // print 201 나옴.
         
-        if let tokenInfo = tokenJson["token"] as? String {
+        if let tokenInfo = tokenJson["token"] as? String,
+            let nickname = tokenJson["nickname"] as? String {
             token = "Token \(tokenInfo)"
+            singleTon.nickName = nickname
+            print("nickName :" , nickname)
             completion(token)
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class FilterPriceCell: UITableViewCell {
     private let searchLabel = UILabel()
-     let slider = UISlider()
+    let slider = UISlider()
     private let lowMoneyLabel = UILabel()
     private let highMoneyLabel = UILabel()
     var moneyPrice: Int = 50 {

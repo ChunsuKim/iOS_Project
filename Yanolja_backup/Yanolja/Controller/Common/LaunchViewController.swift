@@ -68,6 +68,40 @@ class LaunchViewController: UIViewController {
       
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let str = "야!, 너두 놀 수 있어!"
+        let titleAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: str)
+        titleAttributedString.setColorForText(textForAttribute: "야!", withColor: #colorLiteral(red: 0.8543364406, green: 0, blue: 0.3139223754, alpha: 1))
+        titleAttributedString.setFontForText(textForAttribute: "야!", withFont: UIFont.systemFont(ofSize: 60, weight: .light))
+        titleAttributedString.setColorForText(textForAttribute: ", 너두 놀 수 있어!", withColor: #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1))
+        titleAttributedString.setFontForText(textForAttribute: ", 너두 놀 수 있어!", withFont: UIFont.systemFont(ofSize: 28, weight: .semibold))
+        titleLabel.attributedText = titleAttributedString
+        
+        //        let str = "야!, 너두 놀 수 있어!"
+        //        for x in str {
+        //            titleLabel.text! += "\(x)"
+        //            RunLoop.current.run(until: Date()+0.2)
+        //        }
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                updateCurrentLocation()
+                break
+            case .denied, .restricted:
+                show(message: "위치 서비스 사용 불가")
+            @unknown default:
+                break
+            }
+        } else {
+            show(message: "위치 서비스 사용 불가")
+        }
+    }
+    
     // MARK: - 여기는 오늘과 내일의 날짜를 싱글톤에 저장시키는 함수입니다!
     
     private func todayAndTomorrowDate() {
@@ -164,39 +198,7 @@ class LaunchViewController: UIViewController {
         copyRightLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let str = "야!, 너두 놀 수 있어!"
-        let titleAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: str)
-        titleAttributedString.setColorForText(textForAttribute: "야!", withColor: #colorLiteral(red: 0.8543364406, green: 0, blue: 0.3139223754, alpha: 1))
-        titleAttributedString.setFontForText(textForAttribute: "야!", withFont: UIFont.systemFont(ofSize: 60, weight: .light))
-        titleAttributedString.setColorForText(textForAttribute: ", 너두 놀 수 있어!", withColor: #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1))
-        titleAttributedString.setFontForText(textForAttribute: ", 너두 놀 수 있어!", withFont: UIFont.systemFont(ofSize: 28, weight: .semibold))
-        titleLabel.attributedText = titleAttributedString
-        
-//        let str = "야!, 너두 놀 수 있어!"
-//        for x in str {
-//            titleLabel.text! += "\(x)"
-//            RunLoop.current.run(until: Date()+0.2)
-//        }
-        
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                updateCurrentLocation()
-                break
-            case .denied, .restricted:
-                show(message: "위치 서비스 사용 불가")
-            @unknown default:
-                break
-            }
-        } else {
-            show(message: "위치 서비스 사용 불가")
-        }
-    }
+    
     
     
     private func operateActivitiIndicator() {
@@ -238,10 +240,10 @@ extension LaunchViewController: CLLocationManagerDelegate {
             geoCoder.reverseGeocodeLocation(myLocation) { (placemarks, error) in
                 if let place = placemarks?.first {
                     if let locality = place.locality, let subLocality = place.subLocality {
-                        singleTon.currentLocation = "\(locality) \(subLocality)"
-                        print(singleTon.currentLocation)
+                        singleTon.searchKeyword = "\(locality) \(subLocality)"
+                        print(singleTon.searchKeyword)
                     } else {
-                        singleTon.currentLocation = place.name ?? ""
+                        singleTon.searchKeyword = place.name ?? ""
                     }
                 }
             }

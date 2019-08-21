@@ -72,7 +72,7 @@ extension UserViewController: UITableViewDataSource {
                     if let loginAfterCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewAfterLoginTableViewCell.identifier
                         , for: indexPath) as? UserViewAfterLoginTableViewCell {
                         
-                        loginAfterCell.configureLoginInputValue(nickName: singleTon.nickName, email: "admin@gmail.com", image: #imageLiteral(resourceName: "login"))
+                        loginAfterCell.configureLoginInputValue(nickName: singleTon.nickName, email: singleTon.emailAdd, image: #imageLiteral(resourceName: "login"))
                         
                         return loginAfterCell
                     }
@@ -88,31 +88,60 @@ extension UserViewController: UITableViewDataSource {
                 }
                 
             case 2:
+                
                 if let couponCell = userViewTableView.dequeueReusableCell(withIdentifier: UserViewLoginStampTableViewCell.identifier, for: indexPath) as? UserViewLoginStampTableViewCell {
                     
-                    couponCell.configureStampImageInput(image: UIImage(named: "couponregister"))
-                    couponCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-                    print("couponcell:", couponCell.frame.height)
-                    
+                    if singleTon.token == "" {
+                        
+                        couponCell.configureStampImageInput(image: UIImage(named: "couponregister"))
+                        couponCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                        print("couponcell:", couponCell.frame.height)
+                        
+                    } else {
+                        self.userViewTableView.beginUpdates()
+                        couponCell.configureStampImageInput(image: UIImage(named: "pointCoupon"))
+                        couponCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                        couponCell.stampImageHeight?.isActive = false
+                        couponCell.loginStampImageHeight?.isActive = true
+                        self.userViewTableView.endUpdates()
+                    }
                     return couponCell
                 }
                 
             case 3:
-                cell.configureInputValue(text: "비회원 국내숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-                print("cell", cell.frame.height)
+                
+                if singleTon.token == "" {
+                    cell.configureInputValue(text: "비회원 국내숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                    print("cell", cell.frame.height)
+                } else {
+                    cell.configureInputValue(text: "국내 숙소이용 내역", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                }
                 
                 return cell
                 
             case 4:
-                cell.configureInputValue(text: "비회원 해외숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                
+                if singleTon.token == "" {
+                    cell.configureInputValue(text: "비회원 해외숙소 예약조회", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                } else {
+                    cell.configureInputValue(text: "해외 숙소이용 내역", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                }
                 
                 return cell
                 
             case 5:
-                cell.configureInputValue(text: "비회원 레저/티켓 구매내역", textColor: .black, image: UIImage(named: "right"))
-                cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                
+                if singleTon.token == "" {
+                    cell.configureInputValue(text: "비회원 레저/티켓 구매내역", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                } else {
+                    cell.configureInputValue(text: "레저/티켓 구매내역", textColor: .black, image: UIImage(named: "right"))
+                    cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                }
                 
                 return cell
                 

@@ -173,6 +173,7 @@ extension LoginViewController: UICollectionViewDataSource {
                             print("token:", token)
                             
                             DispatchQueue.main.async {
+                                singleTon.emailAdd = cell.idTextField.text ?? ""
                                 let vc = UserViewController()
                                 vc.userViewTableView.reloadData()
                                 print("reload")

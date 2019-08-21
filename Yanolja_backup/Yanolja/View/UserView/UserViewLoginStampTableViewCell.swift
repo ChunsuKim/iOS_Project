@@ -41,6 +41,10 @@ class UserViewLoginStampTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configuration
+    
+    var stampImageHeight: NSLayoutConstraint?
+    var loginStampImageHeight: NSLayoutConstraint?
+    
     private func configureStampImageView() {
         stampImageView.contentMode = .scaleAspectFit
         
@@ -50,7 +54,16 @@ class UserViewLoginStampTableViewCell: UITableViewCell {
         stampImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         stampImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         stampImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        stampImageView.heightAnchor.constraint(equalToConstant: 63).isActive = true
+        
+        stampImageHeight = stampImageView.heightAnchor.constraint(equalToConstant: 63)
+        stampImageHeight?.priority = UILayoutPriority(1000)
+        stampImageHeight?.isActive = true
+        
+        loginStampImageHeight = stampImageView.heightAnchor.constraint(equalToConstant: 120)
+        loginStampImageHeight?.priority = UILayoutPriority(750)
+        loginStampImageHeight?.isActive = true
+        
+//        stampImageView.heightAnchor.constraint(equalToConstant: 63).isActive = true
         stampImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     

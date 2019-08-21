@@ -140,11 +140,11 @@ class TopNaviView: UIView {
     }
     
     private func showCurrentLocation() {
-        if singleTon.currentLocation == "" {
+        if singleTon.searchKeyword == "" {
             locationText.text = "강남구 대치동"
             
         } else {
-            locationText.text = singleTon.currentLocation
+            locationText.text = singleTon.searchKeyword
             
         }
     }
